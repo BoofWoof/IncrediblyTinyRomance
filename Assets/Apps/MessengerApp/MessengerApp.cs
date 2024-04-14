@@ -1,3 +1,4 @@
+using DS;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,53 +24,67 @@ public class MessengerApp : MonoBehaviour
     public float default_time_between_message = 1.0f;
 
     private float conversation_height;
-    private List<string> textLines;
+    private DSDialogue dialogue;
 
     // Start is called before the first frame update
     void Start()
     {
         conversation_height = start_buffer;
-        textLines = message.text.Split('\n').ToList();
+
+        dialogue = GetComponent<DSDialogue>();
 
         StartCoroutine(MessageProgression());
     }
 
     public IEnumerator MessageProgression()
     {
-        while (textLines.Count > 0) {
-            GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
-            new_message.transform.parent = content_rect;
-            new_message.transform.localScale = Vector3.one;
-            new_message.transform.localPosition = new Vector2(left_buffer, -conversation_height);
-
-            string message_text = textLines[0];
-            string pattern = @"\[(.*?)\]";
-            string pfp_name = Regex.Match(message_text, pattern).Value;
-            if(pfp_name.Length > 0)
+        while (!dialogue.isDone())
+        {
+            if (dialogue.isSingleOption())
             {
-                message_text = message_text.Replace(pfp_name, "");
+                GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
+                new_message.transform.parent = content_rect;
+                new_message.transform.localScale = Vector3.one;
+                new_message.transform.localPosition = new Vector2(left_buffer, -conversation_height);
+
+                string message_text = dialogue.getText();
+                string pattern = @"\[(.*?)\]";
+                string pfp_name = Regex.Match(message_text, pattern).Value;
+                if (pfp_name.Length > 0)
+                {
+                    message_text = message_text.Replace(pfp_name, "");
+                }
+                pfp_name = pfp_name.Replace("[", "").Replace("]", "");
+
+                MessageBoxScript message_info = new_message.GetComponent<MessageBoxScript>();
+                float final_message_height = message_info.GetFinalHeight(message_text);
+                conversation_height += final_message_height;
+                content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
+
+                //message_info.SetSprite(pfp_name);
+
+                yield return StartCoroutine(message_info.CharacterProgression(message_text));
+                yield return new WaitForSeconds(default_time_between_message);
+                dialogue.setChoice("Next Dialogue");
+                continue;
             }
-            pfp_name = pfp_name.Replace("[", "").Replace("]", "");
+            if (dialogue.isMultipleOptions())
+            {
+                //MOVE THIS TO AN ACTUAL WORKING LOCATION
+                GameObject option_message = Instantiate(message_options, content_rect);
+                option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
+                option_message.transform.localScale = Vector3.one;
+                MessageOptionsScript messageOptionScript = option_message.GetComponent<MessageOptionsScript>();
+                messageOptionScript.options = dialogue.getChoices();
+                messageOptionScript.CreateButtons();
+                conversation_height += messageOptionScript.height;
+                content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
 
-            MessageBoxScript message_info = new_message.GetComponent<MessageBoxScript>();
-            textLines.RemoveAt(0);
-            float final_message_height = message_info.GetFinalHeight(message_text);
-            conversation_height += final_message_height;
-            content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
-
-            message_info.SetSprite(pfp_name);
-
-            yield return StartCoroutine(message_info.CharacterProgression(message_text));
-            yield return new WaitForSeconds(default_time_between_message);
+                yield return StartCoroutine(messageOptionScript.WaitForResponse());
+                yield return new WaitForSeconds(default_time_between_message);
+                dialogue.setChoice(messageOptionScript.message);
+                continue;
+            }
         }
-
-        //MOVE THIS TO AN ACTUAL WORKING LOCATION
-        GameObject option_message = Instantiate(message_options, content_rect);
-        option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
-        option_message.transform.localScale = Vector3.one;
-        conversation_height += option_message.GetComponent<MessageOptionsScript>().height;
-        Debug.Log(content_rect.rect.width);
-        content_rect.sizeDelta = new Vector2(content_rect.rect.width, conversation_height + end_buffer);
-
     }
-    }
+}

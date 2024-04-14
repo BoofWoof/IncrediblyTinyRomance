@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class MessageOptionsScript : MonoBehaviour
 {
@@ -20,11 +21,15 @@ public class MessageOptionsScript : MonoBehaviour
 
     [HideInInspector]
     public float height = 0;
+    public bool message_selected = false;
+    public string message = "";
 
     private float line_height = 500;
+    private List<GameObject> buttons = new List<GameObject>();
+    private Color selected_color = Color.blue;
+    private Color deselected_color = Color.red;
 
-    // Start is called before the first frame update
-    void Awake()
+    public void CreateButtons()
     {
         foreach (string option in options)
         {
@@ -50,7 +55,28 @@ public class MessageOptionsScript : MonoBehaviour
         float text_height = button_text.GetRenderedValues().y;
 
         text_rect.sizeDelta = new Vector2(text_width, text_height);
-        button_back.sizeDelta = new Vector2(text_width + border_width*2, text_height + border_height*2);
+        button_back.sizeDelta = new Vector2(text_width + border_width * 2, text_height + border_height * 2);
         height += text_height + border_height * 2;
+
+        new_button.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(new_button, text));
+        buttons.Add(new_button);
+    }
+    public void OnButtonClick(GameObject chosen_button, string text)
+    {
+        foreach (GameObject button in buttons)
+        {
+            button.GetComponentInChildren<Image>().color = deselected_color;
+            button.GetComponentInChildren<Button>().interactable = false;
+        }
+        chosen_button.GetComponentInChildren<Image>().color = selected_color;
+        message_selected = true;
+        message = text;
+    }
+    public IEnumerator WaitForResponse()
+    {
+        while (!message_selected)
+        {
+            yield return null;
+        }
     }
 }
