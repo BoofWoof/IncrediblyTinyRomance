@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e7edf01a28bb04497852f34e4b6aa6, type: 3}
+  m_Name: TestOption
+  m_EditorClassIdentifier: 
+  VariableName: Test Options
+  StartingUuid: 2564282f-b8bf-4227-a577-92b89ae0ff43
+  VariableStates:
+  - Test 1
+  - Test 2
+  - Test 3
+  - Test 4
+  StateUuids:
+  - 79b041d8-4e4b-4695-8e79-48ea76be18af
+  - 2564282f-b8bf-4227-a577-92b89ae0ff43
+  - bfc60cfa-2508-4a03-9d7e-5bf8ac8e369c
+  - 9c5002c0-038f-4700-b48d-d1bbaa09f8c3

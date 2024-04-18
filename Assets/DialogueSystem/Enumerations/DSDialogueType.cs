@@ -3,6 +3,9 @@ namespace DS.Enumerations
     public enum DSDialogueType
     {
         SingleChoice,
-        MultipleChoice
+        MultipleChoice,
+        ValueReturn,
+        SaveVariable,
+        CheckVariable
     }
 }

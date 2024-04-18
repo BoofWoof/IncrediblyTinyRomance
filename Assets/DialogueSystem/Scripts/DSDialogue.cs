@@ -52,6 +52,19 @@ namespace DS
             Debug.LogWarning("No matching choice found.");
         }
 
+        public Sprite getSprite()
+        {
+            CharacterInfo characterInfo = dialogue.SpeakerInfo.CharacterInfoSO;
+            if (characterInfo == null || !characterInfo.spriteUuid.Contains(dialogue.SpeakerInfo.SpriteUid)) return null;
+            return characterInfo.emotionSprites[characterInfo.spriteUuid.IndexOf(dialogue.SpeakerInfo.SpriteUid)];
+        }
+        public AudioClip getNoise()
+        {
+            CharacterInfo characterInfo = dialogue.SpeakerInfo.CharacterInfoSO;
+            if (characterInfo == null || !characterInfo.noiseUuid.Contains(dialogue.SpeakerInfo.NoiseUid)) return null;
+            return characterInfo.emotionNoises[characterInfo.noiseUuid.IndexOf(dialogue.SpeakerInfo.NoiseUid)];
+        }
+
         public bool isDone()
         {
             return dialogue == null;

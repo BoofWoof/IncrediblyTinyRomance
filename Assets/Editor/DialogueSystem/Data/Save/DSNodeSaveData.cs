@@ -17,5 +17,6 @@ namespace DS.Data.Save
         [field: SerializeField] public string GroupID {  get; set; }
         [field: SerializeField] public DSDialogueType DialogueType { get; set; }
         [field: SerializeField] public Vector2 Position { get; set; }
+        [field: SerializeField] public DSSpeakerData SpeakerInfo { get; set; }
     }
 }

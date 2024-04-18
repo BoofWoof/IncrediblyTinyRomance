@@ -117,6 +117,7 @@ namespace DS.Utilities
                 node.ID = nodeData.ID;
                 node.Choices = choices;
                 node.Text = nodeData.Text;
+                node.SpeakerInfo = nodeData.SpeakerInfo;
 
                 node.Draw();
 
@@ -262,7 +263,8 @@ namespace DS.Utilities
                 Text = node.Text,
                 GroupID = node.Group?.ID,
                 DialogueType = node.DialogueType,
-                Position = node.GetPosition().position
+                Position = node.GetPosition().position,
+                SpeakerInfo = node.SpeakerInfo
             };
 
             graphData.Nodes.Add(nodeData);
@@ -284,12 +286,26 @@ namespace DS.Utilities
                 dialogueContainer.UngroupedDialogues.Add(dialogue);
             }
 
+            DSSpeakerInfo speakerInfo = null;
+            if (node.SpeakerInfo != null)
+            {
+                string characterInfoAssetPath = AssetDatabase.GUIDToAssetPath(node.SpeakerInfo.CharacterInfoGUID);
+                CharacterInfo characterInfoAsset = AssetDatabase.LoadAssetAtPath<CharacterInfo>(characterInfoAssetPath);
+                speakerInfo = new DSSpeakerInfo()
+                {
+                    CharacterInfoSO = characterInfoAsset,
+                    SpriteUid = node.SpeakerInfo.SpriteUid,
+                    NoiseUid = node.SpeakerInfo.NoiseUid,
+                };
+            }
+
             dialogue.Initialize(
                 node.DialogueName,
                 node.Text,
                 ConvertNodeChoicesToDialogueChoices(node.Choices),
                 node.DialogueType,
-                node.IsStartingNode()
+                node.IsStartingNode(),
+                speakerInfo
                 );
 
             createdDialogues.Add(node.ID, dialogue);

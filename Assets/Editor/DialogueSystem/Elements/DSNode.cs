@@ -20,6 +20,7 @@ namespace DS.Elements
         public string Text { get; set; }
         public DSDialogueType DialogueType { get; set; }
         public DSGroup Group { get; set; }
+        public DSSpeakerData SpeakerInfo { get; set; }
 
         protected DSGraphView graphView;
         private Color defaultBackgroundColor;

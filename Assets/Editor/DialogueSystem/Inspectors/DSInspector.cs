@@ -5,8 +5,6 @@ namespace DS.Inspectors
     using ScriptableObjects;
     using Utilities;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using static Codice.Client.Common.Connection.AskCredentialsToUser;
 
     [CustomEditor(typeof(DSDialogue))]
     public class DSInspector : Editor
