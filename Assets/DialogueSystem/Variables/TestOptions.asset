@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44e7edf01a28bb04497852f34e4b6aa6, type: 3}
-  m_Name: TestOption
+  m_Name: TestOptions
   m_EditorClassIdentifier: 
-  VariableName: Test Options
-  StartingUuid: 2564282f-b8bf-4227-a577-92b89ae0ff43
+  VariableName: TestVariable
+  VariableType: 1
+  StartingValue: 2
+  StartingUuid: 8b823b12-3789-4e3e-8ea0-e63d8102e188
   VariableStates:
-  - Test 1
-  - Test 2
-  - Test 3
-  - Test 4
+  - Kobold Graked
+  - Pet The Kobold
+  - Kobold did a lil rollie
+  - Kobold fucking died
   StateUuids:
-  - 79b041d8-4e4b-4695-8e79-48ea76be18af
-  - 2564282f-b8bf-4227-a577-92b89ae0ff43
-  - bfc60cfa-2508-4a03-9d7e-5bf8ac8e369c
-  - 9c5002c0-038f-4700-b48d-d1bbaa09f8c3
+  - 2f2701b8-a6b0-4244-82c0-eb9919ee5df5
+  - 960626c0-b13f-4720-8294-0850bb41826e
+  - 8b823b12-3789-4e3e-8ea0-e63d8102e188
+  - 884b695e-64d1-4469-8b7d-c8f4e4c8ccc0

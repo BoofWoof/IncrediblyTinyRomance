@@ -11,6 +11,7 @@ namespace DS.Windows
     using DS.Data.Save;
     using Elements;
     using Enumerations;
+    using Unity.VisualScripting.YamlDotNet.Core.Tokens;
     using Utilities;
 
     public class DSGraphView : GraphView
@@ -109,6 +110,9 @@ namespace DS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", DSDialogueType.SingleChoice));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)",DSDialogueType.MultipleChoice));
 
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Save Variable)", DSDialogueType.SaveVariable));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Check Variable)", DSDialogueType.CheckVariable));
+
             this.AddManipulator(CreateGroupContextualMenu());
         }
 
@@ -123,9 +127,29 @@ namespace DS.Windows
 
         private IManipulator CreateNodeContextualMenu(string actionTitle, DSDialogueType dialogueType)
         {
+            string defaultName;
+            switch (dialogueType)
+            {
+                case DSDialogueType.SaveVariable:
+                    {
+                        defaultName = "SaveNode";
+                        break;
+                    }
+                case DSDialogueType.CheckVariable:
+                    {
+                        defaultName = "CheckNode";
+                        break;
+                    }
+                default:
+                    {
+                        defaultName = "DialogueNode";
+                        break;
+                    }
+            }
+
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
-                    menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode("DialogueNode", dialogueType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
-                );
+            menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode(defaultName, dialogueType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
+            );
 
             return contextualMenuManipulator;
         }
@@ -157,7 +181,34 @@ namespace DS.Windows
 
         public DSNode CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 position, bool shouldDraw = true)
         {
-            Type nodeType = Type.GetType($"DS.Elements.DS{dialogueType}Node");
+            Type nodeType = null;
+            switch (dialogueType)
+            {
+                case DSDialogueType.SaveVariable:
+                    {
+                        nodeType = typeof(DSSaveNode);
+                        break;
+                    }
+                case DSDialogueType.CheckVariable:
+                    {
+                        nodeType = typeof(DSCheckNode);
+                        break;
+                    }
+                case DSDialogueType.SingleChoice:
+                    {
+                        nodeType = typeof(DSSingleChoiceNode);
+                        break;
+                    }
+                case DSDialogueType.MultipleChoice:
+                    {
+                        nodeType = typeof(DSMultipleChoiceNode);
+                        break;
+                    }
+                default:
+                    {
+                        throw new InvalidOperationException($"No matching node type.");
+                    }
+            }
             DSNode node = (DSNode) Activator.CreateInstance(nodeType);
 
             node.Initialize(nodeName, this, position);

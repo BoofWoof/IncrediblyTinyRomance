@@ -40,8 +40,6 @@ public class MessengerApp : MonoBehaviour
     {
         while (!dialogue.isDone())
         {
-            Debug.Log(dialogue.getSprite());
-            Debug.Log(dialogue.getNoise());
             if (dialogue.isSingleOption())
             {
                 GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);

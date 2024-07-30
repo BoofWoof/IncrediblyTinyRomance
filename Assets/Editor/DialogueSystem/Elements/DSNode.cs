@@ -21,6 +21,8 @@ namespace DS.Elements
         public DSDialogueType DialogueType { get; set; }
         public DSGroup Group { get; set; }
         public DSSpeakerData SpeakerInfo { get; set; }
+        public DSVariableData DialogueVariableInfo = null;
+        public DSCheckVariableData DialogueCheckVariableInfo = null;
 
         protected DSGraphView graphView;
         private Color defaultBackgroundColor;

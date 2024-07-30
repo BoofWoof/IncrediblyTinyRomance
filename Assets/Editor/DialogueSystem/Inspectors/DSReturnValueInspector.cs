@@ -1,6 +1,5 @@
 using DS.Utilities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -8,13 +7,10 @@ using UnityEngine;
 
 namespace DS.DialogueVariables
 {
-    [CustomEditor(typeof(DialogueOptionsVariable))]
-    public class DSOptionVariableInspector : Editor
+    [CustomEditor(typeof(DialogueReturnValue))]
+    public class DSReturnValueInspector : Editor
     {
-        DialogueOptionsVariable dialogueOptionsVariable;
-
-        private SerializedProperty VariableName;
-        private string StartingUuid;
+        DialogueReturnValue dialogueOptionsVariable;
 
         public List<string> VariableStates;
         public List<string> StateUuids;
@@ -23,15 +19,11 @@ namespace DS.DialogueVariables
 
         private void OnEnable()
         {
-            //Default Values
-            VariableName = serializedObject.FindProperty("VariableName");
+            dialogueOptionsVariable = (DialogueReturnValue)target;
 
-            //Pseudo Dictionaries
-            dialogueOptionsVariable = (DialogueOptionsVariable)target;
-
+            //Option Type
             VariableStates = dialogueOptionsVariable.VariableStates;
             StateUuids = dialogueOptionsVariable.StateUuids;
-            StartingUuid = dialogueOptionsVariable.StartingUuid;
             if (VariableStates == null)
             {
                 VariableStates = new List<string>();
@@ -40,13 +32,7 @@ namespace DS.DialogueVariables
         }
         public override void OnInspectorGUI()
         {
-            DSInspectorUtility.DrawHeader("Naming");
-            VariableName.DrawPropertyField();
-
             DrawOptionArea();
-            dialogueOptionsVariable.StartingUuid = StartingUuid;
-
-            DrawDefaultOptionArea();
 
             EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();
@@ -114,27 +100,5 @@ namespace DS.DialogueVariables
                 }
             }
         }
-
-        private void DrawDefaultOptionArea()
-        {
-            if (VariableStates.Count == 0)
-            {
-                return;
-            }
-
-            DSInspectorUtility.DrawSpace();
-
-            DSInspectorUtility.DrawHeader("Default Variable");
-
-            int popUpIdx = 0;
-            if (StateUuids.Contains(StartingUuid))
-            {
-                popUpIdx = StateUuids.IndexOf(StartingUuid);
-            }
-
-            int newPopUpIdx = EditorGUILayout.Popup("Default Variable", popUpIdx, VariableStates.ToArray());
-
-            StartingUuid = StateUuids[newPopUpIdx];
-        }
     }
- }
+}

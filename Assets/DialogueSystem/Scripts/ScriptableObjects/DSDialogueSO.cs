@@ -13,8 +13,10 @@ namespace DS.ScriptableObjects
         [field: SerializeField] public DSDialogueType DialogueType { get; set; }
         [field: SerializeField] public bool IsStartingDialogue { get; set; }
         [field: SerializeField] public DSSpeakerInfo SpeakerInfo { get; set; }
+        [field: SerializeField] public DSVariableInfo VariableInfo { get; set; }
+        [field: SerializeField] public DSCheckInfo CheckInfo { get; set; }
 
-    public void Initialize(string dialogueName, string text, List<DSDialogueChoiceData> choices, DSDialogueType dialogueType, bool isStartingDialogue, DSSpeakerInfo speakerInfo)
+        public void Initialize(string dialogueName, string text, List<DSDialogueChoiceData> choices, DSDialogueType dialogueType, bool isStartingDialogue, DSSpeakerInfo speakerInfo, DSVariableInfo variableInfo, DSCheckInfo checkInfo)
         {
             DialogueName = dialogueName;
             Text = text;
@@ -22,6 +24,8 @@ namespace DS.ScriptableObjects
             DialogueType = dialogueType;
             IsStartingDialogue = isStartingDialogue;
             SpeakerInfo = speakerInfo;
+            VariableInfo = variableInfo;
+            CheckInfo = checkInfo;
         }
     }
 }

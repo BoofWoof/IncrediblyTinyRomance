@@ -118,6 +118,8 @@ namespace DS.Utilities
                 node.Choices = choices;
                 node.Text = nodeData.Text;
                 node.SpeakerInfo = nodeData.SpeakerInfo;
+                node.DialogueVariableInfo = nodeData.VariableInfo;
+                node.DialogueCheckVariableInfo = nodeData.CheckVariableInfo;
 
                 node.Draw();
 
@@ -264,7 +266,9 @@ namespace DS.Utilities
                 GroupID = node.Group?.ID,
                 DialogueType = node.DialogueType,
                 Position = node.GetPosition().position,
-                SpeakerInfo = node.SpeakerInfo
+                SpeakerInfo = node.SpeakerInfo,
+                VariableInfo = node.DialogueVariableInfo,
+                CheckVariableInfo = node.DialogueCheckVariableInfo
             };
 
             graphData.Nodes.Add(nodeData);
@@ -298,6 +302,30 @@ namespace DS.Utilities
                     NoiseUid = node.SpeakerInfo.NoiseUid,
                 };
             }
+            DSVariableInfo variableInfo = null;
+            if (node.DialogueVariableInfo != null)
+            {
+                string variableInfoAssetPath = AssetDatabase.GUIDToAssetPath(node.DialogueVariableInfo.VariableInfoGUID);
+                DialogueOptionsVariable variableInfoAsset = AssetDatabase.LoadAssetAtPath<DialogueOptionsVariable>(variableInfoAssetPath);
+                variableInfo = new DSVariableInfo()
+                {
+                    VariableInfoSO = variableInfoAsset,
+                    OperandType = node.DialogueVariableInfo.OperandType,
+                    OperandValue = node.DialogueVariableInfo.OperandValue,
+                    OptionUid = node.DialogueVariableInfo.OptionUid,
+                };
+            }
+            DSCheckInfo checkInfo = null;
+            if (node.DialogueCheckVariableInfo != null)
+            {
+                string variableInfoAssetPath = AssetDatabase.GUIDToAssetPath(node.DialogueCheckVariableInfo.VariableInfoGUID);
+                DialogueOptionsVariable variableInfoAsset = AssetDatabase.LoadAssetAtPath<DialogueOptionsVariable>(variableInfoAssetPath);
+                checkInfo = new DSCheckInfo()
+                {
+                    VariableInfoSO = variableInfoAsset,
+                    ThresholdValue = node.DialogueCheckVariableInfo.ThresholdValue
+                };
+            }
 
             dialogue.Initialize(
                 node.DialogueName,
@@ -305,7 +333,9 @@ namespace DS.Utilities
                 ConvertNodeChoicesToDialogueChoices(node.Choices),
                 node.DialogueType,
                 node.IsStartingNode(),
-                speakerInfo
+                speakerInfo,
+                variableInfo,
+                checkInfo
                 );
 
             createdDialogues.Add(node.ID, dialogue);
@@ -486,7 +516,8 @@ namespace DS.Utilities
                 DSChoiceSaveData choiceData = new DSChoiceSaveData()
                 {
                     Text = choice.Text,
-                    NodeID = choice.NodeID
+                    NodeID = choice.NodeID,
+                    OptionUUID = choice.OptionUUID
                 };
 
                 choices.Add(choiceData);

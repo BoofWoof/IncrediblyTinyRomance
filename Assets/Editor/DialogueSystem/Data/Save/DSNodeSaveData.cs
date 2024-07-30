@@ -18,5 +18,7 @@ namespace DS.Data.Save
         [field: SerializeField] public DSDialogueType DialogueType { get; set; }
         [field: SerializeField] public Vector2 Position { get; set; }
         [field: SerializeField] public DSSpeakerData SpeakerInfo { get; set; }
+        [field: SerializeField] public DSVariableData VariableInfo { get; set; }
+        [field: SerializeField] public DSCheckVariableData CheckVariableInfo { get; set; }
     }
 }
