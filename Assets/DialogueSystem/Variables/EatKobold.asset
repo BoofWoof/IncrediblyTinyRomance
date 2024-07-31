@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e7edf01a28bb04497852f34e4b6aa6, type: 3}
+  m_Name: EatKobold
+  m_EditorClassIdentifier: 
+  VariableName: Kobold Treatment
+  VariableType: 1
+  StartingValue: 0
+  StartingUuid: dfd3ace4-eb3c-4e12-bd7c-48f97b49766c
+  VariableStates:
+  - KoboldEaten
+  - KoboldPet
+  StateUuids:
+  - dfd3ace4-eb3c-4e12-bd7c-48f97b49766c
+  - b83b5081-66c7-4627-8faf-690ec61064f7

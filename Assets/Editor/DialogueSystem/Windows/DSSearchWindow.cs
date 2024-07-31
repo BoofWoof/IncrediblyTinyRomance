@@ -44,11 +44,6 @@ namespace DS.Windows
                     userData = new Group()
                 },
                 new SearchTreeGroupEntry(new GUIContent("Save Group"), 1),
-                new SearchTreeEntry(new GUIContent("Save Variable", indentationIcon))
-                {
-                    level = 2,
-                    userData = DSDialogueType.SaveVariable
-                },
                 new SearchTreeEntry(new GUIContent("Check Variable", indentationIcon))
                 {
                     level = 2,
@@ -76,13 +71,6 @@ namespace DS.Windows
                         DSMultipleChoiceNode multipleChoiceNode = (DSMultipleChoiceNode)graphView.CreateNode("DialogueNode", DSDialogueType.MultipleChoice, localMousePosition);
 
                         graphView.AddElement(multipleChoiceNode);
-                        return true;
-                    }
-                case DSDialogueType.SaveVariable:
-                    {
-                        DSSaveNode saveVariableNode = (DSSaveNode)graphView.CreateNode("SaveNode", DSDialogueType.SaveVariable, localMousePosition);
-
-                        graphView.AddElement(saveVariableNode);
                         return true;
                     }
                 case DSDialogueType.CheckVariable:

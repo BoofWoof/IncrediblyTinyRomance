@@ -13,6 +13,7 @@ namespace DS.Data.Save
         [field: SerializeField] public string ID {  get; set; }
         [field: SerializeField] public string Name { get; set; }
         [field: SerializeField] public string Text {  get; set; }
+        [field: SerializeField] public bool SkipText { get; set; }
         [field: SerializeField] public List<DSChoiceSaveData> Choices { get; set; }
         [field: SerializeField] public string GroupID {  get; set; }
         [field: SerializeField] public DSDialogueType DialogueType { get; set; }
@@ -20,5 +21,6 @@ namespace DS.Data.Save
         [field: SerializeField] public DSSpeakerData SpeakerInfo { get; set; }
         [field: SerializeField] public DSVariableData VariableInfo { get; set; }
         [field: SerializeField] public DSCheckVariableData CheckVariableInfo { get; set; }
+        [field: SerializeField] public DSReturnVariableData ReturnValueInfo { get; set; }
     }
 }

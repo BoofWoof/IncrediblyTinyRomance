@@ -110,7 +110,6 @@ namespace DS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", DSDialogueType.SingleChoice));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)",DSDialogueType.MultipleChoice));
 
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Save Variable)", DSDialogueType.SaveVariable));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Check Variable)", DSDialogueType.CheckVariable));
 
             this.AddManipulator(CreateGroupContextualMenu());
@@ -184,11 +183,6 @@ namespace DS.Windows
             Type nodeType = null;
             switch (dialogueType)
             {
-                case DSDialogueType.SaveVariable:
-                    {
-                        nodeType = typeof(DSSaveNode);
-                        break;
-                    }
                 case DSDialogueType.CheckVariable:
                     {
                         nodeType = typeof(DSCheckNode);

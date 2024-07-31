@@ -166,18 +166,35 @@ namespace DS.Elements
 
         private void addValuePorts(DialogueOptionsVariable dialogueVariableAsset)
         {
-            DSChoiceSaveData choice = new DSChoiceSaveData()
+            //Make Choices
+            if (Choices.Count != 2 || Choices[0].Text != "<" || Choices[1].Text != ">=")
             {
-                Text = "<"
-            };
-            Choices.Add(choice);
+                List<DSChoiceSaveData> newChoices = new List<DSChoiceSaveData>();
+                DSChoiceSaveData choice1 = new DSChoiceSaveData()
+                {
+                    Text = "<"
+                };
+                newChoices.Add(choice1);
 
-            Port choicePort = this.CreatePort(choice.Text);
+                DSChoiceSaveData choice2 = new DSChoiceSaveData()
+                {
+                    Text = ">="
+                };
+                newChoices.Add(choice2);
 
-            choicePort.userData = choice;
+                Choices = newChoices;
+            }
 
-            outputContainer.Add(choicePort);
+            //Add choice ports.
+            Port choicePort1 = this.CreatePort(Choices[0].Text);
 
+            choicePort1.userData = Choices[0];
+
+            Port choicePort2 = this.CreatePort(Choices[1].Text);
+
+            choicePort2.userData = Choices[1];
+
+            //Threatshold
             FloatField threshold = new FloatField("Threshold:")
             {
                 value = DialogueCheckVariableInfo.ThresholdValue
@@ -188,19 +205,12 @@ namespace DS.Elements
                     DialogueCheckVariableInfo.ThresholdValue = evt.newValue;
                 }
             );
+
+            outputContainer.Add(choicePort1);
+
             outputContainer.Add(threshold);
 
-            choice = new DSChoiceSaveData()
-            {
-                Text = ">="
-            };
-            Choices.Add(choice);
-
-            choicePort = this.CreatePort(choice.Text);
-
-            choicePort.userData = choice;
-
-            outputContainer.Add(choicePort);
+            outputContainer.Add(choicePort2);
 
             RefreshExpandedState();
         }

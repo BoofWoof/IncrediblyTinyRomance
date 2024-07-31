@@ -9,4 +9,15 @@ public class DSVariableData
     [field: SerializeField] public float OperandValue { get; set; }
     [field: SerializeField] public string OptionUid { get; set; }
 
+    public DSVariableData clone()
+    {
+        return new DSVariableData()
+        {
+            VariableInfoGUID = VariableInfoGUID,
+            OperandType = OperandType,
+            OperandValue = OperandValue,
+            OptionUid = OptionUid
+        };
+    }
+
 }

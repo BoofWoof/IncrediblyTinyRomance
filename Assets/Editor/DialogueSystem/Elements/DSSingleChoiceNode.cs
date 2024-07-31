@@ -69,95 +69,25 @@ namespace DS.Elements
 
             extensionContainer.Add(customDataContainer);
 
-            //Add Character Data
-            CharacterInfo characterInfoAsset = null;
-            if (SpeakerInfo != null)
-            {
-                string characterInfoAssetPath = AssetDatabase.GUIDToAssetPath(SpeakerInfo.CharacterInfoGUID);
-                characterInfoAsset = AssetDatabase.LoadAssetAtPath<CharacterInfo>(characterInfoAssetPath);
-            }
-            ObjectField characterField = new ObjectField()
-            {
-                value = characterInfoAsset,
-                objectType = typeof(CharacterInfo),
-                allowSceneObjects = false
-            };
+            DrawHorizontalLine();
 
-            PopupField<string> popupSpriteField = null;
-            PopupField<string> popupNoiseField = null;
+            AddSkipBoolean();
 
-                characterField.RegisterValueChangedCallback(
-                evt =>
-                {
-                    CharacterInfo characterInfo = (CharacterInfo)evt.newValue;
-                    if (characterInfo == null)
-                    {
-                        if (popupSpriteField != null) extensionContainer.Remove(popupSpriteField);
-                        if (popupNoiseField != null) extensionContainer.Remove(popupNoiseField);
-                        SpeakerInfo.CharacterInfoGUID = null;
-                        SpeakerInfo.SpriteUid = null;
-                        SpeakerInfo.NoiseUid = null;
-                        return;
-                    }
+            DrawHorizontalLine();
 
-                    SpeakerInfo.CharacterInfoGUID = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(evt.newValue));
-                    Debug.Log(SpeakerInfo.CharacterInfoGUID);
+            AddCharacterFoldout();
 
-                    if (popupSpriteField != null) extensionContainer.Remove(popupSpriteField);
-                    popupSpriteField = CreatePopupField("Sprite", characterInfo.emotionSpriteNames, characterInfo.spriteUuid);
-                    popupSpriteField.RegisterValueChangedCallback(evt2 =>
-                    {
-                        int uuidIdx = popupSpriteField.choices.IndexOf(evt2.newValue) - 1;
-                        SpeakerInfo.SpriteUid = uuidIdx != -1 ? characterInfo.spriteUuid[uuidIdx] : null;
-                    });
-                    extensionContainer.Add(popupSpriteField);
+            DrawHorizontalLine();
 
-                    if (popupNoiseField != null) extensionContainer.Remove(popupNoiseField);
-                    popupNoiseField = CreatePopupField("Noise", characterInfo.emotionNoiseNames, characterInfo.noiseUuid);
-                    popupNoiseField.RegisterValueChangedCallback(evt2 =>
-                    {
-                        int uuidIdx = popupNoiseField.choices.IndexOf(evt2.newValue) - 1;
-                        SpeakerInfo.NoiseUid = uuidIdx != -1 ? characterInfo.noiseUuid[uuidIdx] : null;
-                    });
-                    extensionContainer.Add(popupNoiseField);
-                }
-                );
+            MakeVariableFoldout();
 
-            extensionContainer.Add(characterField);
+            DrawHorizontalLine();
 
-            if (characterInfoAsset != null)
-            {
-                popupSpriteField = CreatePopupField("Sprite", characterInfoAsset.emotionSpriteNames, characterInfoAsset.spriteUuid, SpeakerInfo.SpriteUid);
-                popupSpriteField.RegisterValueChangedCallback(evt2 =>
-                {
-                    int uuidIdx = popupSpriteField.choices.IndexOf(evt2.newValue) - 1;
-                    SpeakerInfo.SpriteUid = uuidIdx != -1 ? characterInfoAsset.spriteUuid[uuidIdx] : null;
-                });
-                extensionContainer.Add(popupSpriteField);
-                popupNoiseField = CreatePopupField("Noise", characterInfoAsset.emotionNoiseNames, characterInfoAsset.noiseUuid, SpeakerInfo.NoiseUid);
-                popupNoiseField.RegisterValueChangedCallback(evt2 =>
-                {
-                    int uuidIdx = popupNoiseField.choices.IndexOf(evt2.newValue) - 1;
-                    SpeakerInfo.NoiseUid = uuidIdx != -1 ? characterInfoAsset.noiseUuid[uuidIdx] : null;
-                });
-                extensionContainer.Add(popupNoiseField);
-            }
+            AddReturnValue();
+
+            DrawHorizontalLine();
 
             RefreshExpandedState();
-        }
-
-        private PopupField<string> CreatePopupField(string label, List<string> options, List<string> uuids, string startingUuid = null)
-        {
-            int startingIdx = 0;
-            if (startingUuid != null && uuids.Contains(startingUuid))
-            {
-                startingIdx = uuids.IndexOf(startingUuid) + 1;
-            }
-            PopupField<string> popupField;
-            List<string> optionList = new List<string>(options);
-            optionList.Insert(0, "Default");
-            popupField = new PopupField<string>(label, optionList, startingIdx);
-            return popupField;
         }
     }
 }

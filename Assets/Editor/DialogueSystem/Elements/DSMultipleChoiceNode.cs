@@ -60,6 +60,20 @@ namespace DS.Elements
                 outputContainer.Add(choicePort);
             }
 
+            DrawHorizontalLine();
+
+            AddSkipBoolean();
+
+            DrawHorizontalLine();
+
+            AddCharacterFoldout();
+
+            DrawHorizontalLine();
+
+            MakeVariableFoldout();
+
+            DrawHorizontalLine();
+
             RefreshExpandedState();
         }
 

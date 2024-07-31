@@ -117,9 +117,11 @@ namespace DS.Utilities
                 node.ID = nodeData.ID;
                 node.Choices = choices;
                 node.Text = nodeData.Text;
-                node.SpeakerInfo = nodeData.SpeakerInfo;
-                node.DialogueVariableInfo = nodeData.VariableInfo;
-                node.DialogueCheckVariableInfo = nodeData.CheckVariableInfo;
+                node.SkipText = nodeData.SkipText;
+                node.SpeakerInfo = nodeData.SpeakerInfo.clone();
+                node.DialogueVariableInfo = nodeData.VariableInfo.clone();
+                node.DialogueCheckVariableInfo = nodeData.CheckVariableInfo.clone();
+                node.DialogueReturnVariableInfo = nodeData.ReturnValueInfo.clone();
 
                 node.Draw();
 
@@ -144,8 +146,15 @@ namespace DS.Utilities
         {
             foreach (KeyValuePair<string, DSNode> loadedNode in loadedNodes)
             {
-                foreach (Port choicePort in loadedNode.Value.outputContainer.Children())
+                foreach (var child in loadedNode.Value.outputContainer.Children())
                 {
+                    if (!(child is Port))
+                    {
+                        continue;
+                    }
+
+                    Port choicePort = (Port)child;
+
                     DSChoiceSaveData choiceData = (DSChoiceSaveData) choicePort.userData;
 
                     if (string.IsNullOrEmpty(choiceData.NodeID)) {
@@ -263,12 +272,14 @@ namespace DS.Utilities
                 Name = node.DialogueName,
                 Choices = choices,
                 Text = node.Text,
+                SkipText = node.SkipText,
                 GroupID = node.Group?.ID,
                 DialogueType = node.DialogueType,
                 Position = node.GetPosition().position,
                 SpeakerInfo = node.SpeakerInfo,
                 VariableInfo = node.DialogueVariableInfo,
-                CheckVariableInfo = node.DialogueCheckVariableInfo
+                CheckVariableInfo = node.DialogueCheckVariableInfo,
+                ReturnValueInfo = node.DialogueReturnVariableInfo
             };
 
             graphData.Nodes.Add(nodeData);
@@ -326,16 +337,30 @@ namespace DS.Utilities
                     ThresholdValue = node.DialogueCheckVariableInfo.ThresholdValue
                 };
             }
+            DSReturnValueInfo returnValueInfo = null;
+            if (node.DialogueReturnVariableInfo != null)
+            {
+                string returnValueInfoAssetPath = AssetDatabase.GUIDToAssetPath(node.DialogueReturnVariableInfo.ReturnValueInfoGUID);
+                DialogueReturnValue returnValueInfoAsset = AssetDatabase.LoadAssetAtPath<DialogueReturnValue>(returnValueInfoAssetPath);
+                returnValueInfo = new DSReturnValueInfo()
+                {
+                    ReturnValueObject = returnValueInfoAsset,
+                    ReturnValue = node.DialogueReturnVariableInfo.ReturnValue,
+                    TypeUuid = node.DialogueReturnVariableInfo.TypeUuid
+                };
+            }
 
             dialogue.Initialize(
                 node.DialogueName,
                 node.Text,
+                node.SkipText,
                 ConvertNodeChoicesToDialogueChoices(node.Choices),
                 node.DialogueType,
                 node.IsStartingNode(),
                 speakerInfo,
                 variableInfo,
-                checkInfo
+                checkInfo,
+                returnValueInfo
                 );
 
             createdDialogues.Add(node.ID, dialogue);
