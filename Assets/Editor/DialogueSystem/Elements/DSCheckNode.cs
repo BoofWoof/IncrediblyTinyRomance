@@ -30,6 +30,8 @@ namespace DS.Elements
             Text = "Make notes here. This text does not show up in game.";
 
             DialogueCheckVariableInfo = new DSCheckVariableData();
+
+            SkipText = true;
         }
         public override void Draw()
         {

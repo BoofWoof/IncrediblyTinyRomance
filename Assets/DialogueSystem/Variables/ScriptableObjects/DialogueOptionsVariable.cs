@@ -19,5 +19,14 @@ public class DialogueOptionsVariable : ScriptableObject
     //OPTIONS
     [SerializeField] public string StartingUuid;
     [SerializeField] public List<string> VariableStates = new List<string>();
-    [SerializeField] public List<string> StateUuids = new List<string>();
+    [SerializeField] public List<string> StateUuids = new List<string>(); 
+    [SerializeField] public string uniqueID;
+
+    private void OnValidate()
+    {
+        if (string.IsNullOrEmpty(uniqueID))
+        {
+            uniqueID = System.Guid.NewGuid().ToString();
+        }
+    }
 }

@@ -62,10 +62,6 @@ namespace DS.Elements
 
             DrawHorizontalLine();
 
-            AddSkipBoolean();
-
-            DrawHorizontalLine();
-
             AddCharacterFoldout();
 
             DrawHorizontalLine();

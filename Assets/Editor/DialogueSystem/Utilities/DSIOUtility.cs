@@ -57,7 +57,7 @@ namespace DS.Utilities
 
             DSGraphSaveDataSO graphData = CreateAsset<DSGraphSaveDataSO>("Assets/Editor/DialogueSystem/Graphs", $"{graphFileName}Graph");
 
-            graphData.Initialize(graphFileName);
+            graphData.Initialize(graphFileName, graphView.totalNodesMade);
 
             DSDialogueContainerSO dialogueContainer = CreateAsset<DSDialogueContainerSO>(containerFolderPath, graphFileName);
 
@@ -88,11 +88,12 @@ namespace DS.Utilities
                 return;
             }
 
-            DSEditorWindow.UpdateFileName(graphData.fileName);
+            DSEditorWindow.UpdateFileName(graphData.FileName);
 
             LoadGroups(graphData.Groups);
             LoadNodes(graphData.Nodes);
             LoadNodesConnections();
+            graphView.totalNodesMade = graphData.NodesMade;
         }
 
         private static void LoadGroups(List<DSGroupSaveData> groups)
@@ -112,7 +113,7 @@ namespace DS.Utilities
             foreach (DSNodeSaveData nodeData in nodes)
             {
                 List<DSChoiceSaveData> choices = CloneNodeChoices(nodeData.Choices);
-                DSNode node = graphView.CreateNode(nodeData.Name, nodeData.DialogueType, nodeData.Position, false);
+                DSNode node = graphView.CreateNode(nodeData.Name, nodeData.DialogueType, nodeData.Position, false, true);
 
                 node.ID = nodeData.ID;
                 node.Choices = choices;
@@ -377,6 +378,7 @@ namespace DS.Utilities
                 DSDialogueChoiceData choiceData = new DSDialogueChoiceData()
                 {
                     Text = nodeChoice.Text,
+                    NextDialogueUuid = nodeChoice.OptionUUID
                 };
 
                 dialogueChoices.Add(choiceData);

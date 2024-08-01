@@ -9,41 +9,98 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 2150ccb2cf910604687be7077f61f988, type: 3}
   m_Name: DialogueFileNameGraph
-  m_EditorClassIdentifier: Assembly-CSharp-Editor:DS.Data.Save:DSGraphSaveDataSO
-  <fileName>k__BackingField: 
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: DialogueFileName
+  <NodesMade>k__BackingField: 3
   <Groups>k__BackingField: []
   <Nodes>k__BackingField:
-  - <ID>k__BackingField: a8e57971-4655-4d83-b854-363829a0a848
-    <Name>k__BackingField: DialogueNode
-    <Text>k__BackingField: Dialogue text.
-    <SkipText>k__BackingField: 1
+  - <ID>k__BackingField: 360607f9-a088-402c-98fd-e4631ef32e59
+    <Name>k__BackingField: DialogueNode1
+    <Text>k__BackingField: Oh hey, I need to check something real quick.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: af1296d5-a888-4091-a4b3-024831fb8623
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 113, y: 165}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: af1296d5-a888-4091-a4b3-024831fb8623
+    <Name>k__BackingField: DialogueNode2
+    <Text>k__BackingField: Brb
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: e4e8579d-2387-449d-9ecd-4336558a7f3d
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 524, y: 165}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: e4e8579d-2387-449d-9ecd-4336558a7f3d
+    <Name>k__BackingField: DialogueNode3
+    <Text>k__BackingField: Back!
+    <SkipText>k__BackingField: 0
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
       <NodeID>k__BackingField: 
       <OptionUUID>k__BackingField: 
     <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 467, y: 81}
+    <Position>k__BackingField: {x: 893, y: 165}
     <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 94a60c23385567947938c1e8be922468
-      <SpriteUid>k__BackingField: 48f9c178-3700-4c03-947c-a521a811a86c
-      <NoiseUid>k__BackingField: 39cd5da8-0354-428b-bfdc-4d551d1aba96
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
     <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: a52e20946044d134884de668c1e4c951
+      <VariableInfoGUID>k__BackingField: 
       <OperandType>k__BackingField: 0
       <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 2f2701b8-a6b0-4244-82c0-eb9919ee5df5
+      <OptionUid>k__BackingField: 
     <CheckVariableInfo>k__BackingField:
       <VariableInfoGUID>k__BackingField: 
       <ThresholdValue>k__BackingField: 0
     <ReturnValueInfo>k__BackingField:
       <ReturnValueInfoGUID>k__BackingField: f98df602d0b80ab4d891164b3c6389ce
       <TypeUuid>k__BackingField: 83ae755d-4c38-4501-8916-7e01db4658a8
-      <ReturnValue>k__BackingField: 3
+      <ReturnValue>k__BackingField: 5
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNames>k__BackingField:
-  - DialogueNode
+  - DialogueNode1
+  - DialogueNode2
+  - DialogueNode3
   <OldGroupNodeNames>k__BackingField:
     list: []

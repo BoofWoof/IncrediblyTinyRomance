@@ -40,6 +40,15 @@ public class MessengerApp : MonoBehaviour
     {
         while (!dialogue.isDone())
         {
+            DSReturnValueInfo returnValue = dialogue.getReturnValue();
+            if (returnValue.ReturnValueObject != null)
+            {
+                if (returnValue.TypeUuid == returnValue.ReturnValueObject.StateUuids[0])
+                {
+                    yield return new WaitForSeconds(returnValue.ReturnValue);
+                }
+            }
+            yield return new WaitForSeconds(default_time_between_message);
             if (dialogue.isSingleOption())
             {
                 GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
@@ -67,8 +76,7 @@ public class MessengerApp : MonoBehaviour
                 yield return new WaitForSeconds(default_time_between_message);
                 dialogue.setChoice("Next Dialogue");
                 continue;
-            }
-            if (dialogue.isMultipleOptions())
+            }else if (dialogue.isMultipleOptions())
             {
                 //MOVE THIS TO AN ACTUAL WORKING LOCATION
                 GameObject option_message = Instantiate(message_options, content_rect);
@@ -84,6 +92,9 @@ public class MessengerApp : MonoBehaviour
                 yield return new WaitForSeconds(default_time_between_message);
                 dialogue.setChoice(messageOptionScript.message);
                 continue;
+            } else
+            {
+                break;
             }
         }
     }

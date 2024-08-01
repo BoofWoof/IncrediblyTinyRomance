@@ -229,9 +229,12 @@ namespace DS.Elements
                 evt =>
                 {
                     DialogueReturnValue returnValueAsset = (DialogueReturnValue)evt.newValue;
-                    DialogueReturnVariableInfo.TypeUuid = returnValueAsset.StateUuids[0];
-                    DialogueReturnVariableInfo.ReturnValueInfoGUID = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(evt.newValue));
-                    updateReturnValueFoldout(returnValueAsset);
+                    if (returnValueAsset != null)
+                    {
+                        DialogueReturnVariableInfo.TypeUuid = returnValueAsset.StateUuids[0];
+                        DialogueReturnVariableInfo.ReturnValueInfoGUID = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(evt.newValue));
+                        updateReturnValueFoldout(returnValueAsset);
+                    }
                 }
             );
 
@@ -368,6 +371,7 @@ namespace DS.Elements
             {
                 popup_idx = dialogueoptionsVariable.StateUuids.IndexOf(DialogueVariableInfo.OptionUid);
             }
+            DialogueVariableInfo.OptionUid = dialogueoptionsVariable.StateUuids[popup_idx];
             PopupField<string> popupField = new PopupField<string>(
                 "Memory Setting",
                 dialogueoptionsVariable.VariableStates,

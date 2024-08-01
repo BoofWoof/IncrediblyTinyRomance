@@ -6,6 +6,8 @@ namespace DS
 {
     using DS.Data;
     using ScriptableObjects;
+    using System;
+
     public class DSDialogue : MonoBehaviour
     {
         /* Dialogue Scriptable Objects */
@@ -34,11 +36,16 @@ namespace DS
             }
             return choices;
         }
+        public DSReturnValueInfo getReturnValue()
+        {
+            return dialogue.ReturnValueInfo;
+        }
         public void setChoice(string selected_choice)
         {
             if (dialogue.Choices.Count == 1)
             {
                 dialogue = dialogue.Choices[0].NextDialogue;
+                dialogueChecks();
                 return;
             }
             foreach (DSDialogueChoiceData choice in dialogue.Choices)
@@ -46,10 +53,97 @@ namespace DS
                 if (selected_choice == choice.Text)
                 {
                     dialogue = choice.NextDialogue;
+                    dialogueChecks();
                     return;
                 }
             }
             Debug.LogWarning("No matching choice found.");
+        }
+
+        private void dialogueChecks()
+        {
+            if (dialogue == null) return;
+            memoryUpdateCheck();
+            autoProgressNodeCheck();
+        }
+
+        private void memoryUpdateCheck()
+        {
+            if(dialogue.VariableInfo.VariableInfoSO == null)
+            {
+                return;
+            }
+            DialogueOptionsVariable targetVariable = dialogue.VariableInfo.VariableInfoSO;
+            DSVariableInfo variableSettings = dialogue.VariableInfo;
+            string variableID = targetVariable.uniqueID;
+
+            DSMemory.InitializeVariable(targetVariable);
+
+            switch (targetVariable.VariableType)
+            {
+                case VariableTypeEnum.Value:
+                    {
+                        switch (variableSettings.OperandType)
+                        {
+                            case OperandTypeEnum.Set:
+                                {
+                                    DSMemory.ValueMemory[variableID] = variableSettings.OperandValue;
+                                    break;
+                                }
+                            case OperandTypeEnum.Add:
+                                {
+                                    DSMemory.ValueMemory[variableID] += variableSettings.OperandValue;
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case VariableTypeEnum.Option:
+                    {
+                        DSMemory.OptionMemory[variableID] = variableSettings.OptionUid;
+                        break;
+                    }
+            }
+        }
+
+        public void autoProgressNodeCheck()
+        {
+            if(dialogue.DialogueType == Enumerations.DSDialogueType.CheckVariable)
+            {
+                Debug.Log("A");
+                DialogueOptionsVariable targetVariable = dialogue.CheckInfo.VariableInfoSO;
+                DSMemory.InitializeVariable(targetVariable);
+                DSMemory.PrintMemory();
+                switch (targetVariable.VariableType)
+                {
+                    case VariableTypeEnum.Value:
+                        {
+                            if (DSMemory.ValueMemory[targetVariable.uniqueID] < dialogue.CheckInfo.ThresholdValue)
+                            {
+                                dialogue = dialogue.Choices[0].NextDialogue;
+                            } else
+                            {
+                                dialogue = dialogue.Choices[1].NextDialogue;
+                            }
+                            dialogueChecks();
+                            break;
+                        }
+                    case VariableTypeEnum.Option:
+                        {
+                            foreach (DSDialogueChoiceData choice in dialogue.Choices)
+                            {
+                                if (choice.NextDialogueUuid == DSMemory.OptionMemory[targetVariable.uniqueID])
+                                {
+                                    Debug.Log("You did it!");
+                                    dialogue = choice.NextDialogue;
+                                    dialogueChecks();
+                                    return;
+                                }
+                            }
+                            break;
+                        }
+                }
+            }
         }
 
         public Sprite getSprite()

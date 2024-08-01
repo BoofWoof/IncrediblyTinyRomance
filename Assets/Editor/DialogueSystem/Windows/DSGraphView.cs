@@ -24,6 +24,7 @@ namespace DS.Windows
         private SerializableDictionary<string, DSNodeErrorData> ungroupedNodes;
         private SerializableDictionary<string, DSGroupErrorData> groups;
         private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> groupedNodes;
+        public int totalNodesMade = 0;
 
         private int nameErrorsAmount;
 
@@ -178,8 +179,13 @@ namespace DS.Windows
             return group;
         }
 
-        public DSNode CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 position, bool shouldDraw = true)
+        public DSNode CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 position, bool shouldDraw = true, bool loadedNode = false)
         {
+            if (!loadedNode)
+            {
+                totalNodesMade++;
+                nodeName = nodeName + totalNodesMade.ToString();
+            }
             Type nodeType = null;
             switch (dialogueType)
             {
@@ -648,6 +654,7 @@ namespace DS.Windows
 
         public void ClearGraph()
         {
+            totalNodesMade = 0;
             graphElements.ForEach(graphElement => RemoveElement(graphElement));
 
             groups.Clear();
