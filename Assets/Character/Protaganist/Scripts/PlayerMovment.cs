@@ -51,12 +51,30 @@ public class PlayerMovment : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        PhonePositionScript.PhoneToggled += PhoneToggle;
+    }
+
+    private void OnDestroy()
+    {
+        PhonePositionScript.PhoneToggled -= PhoneToggle;
+    }
+
+    private void PhoneToggle(bool raised)
+    {
+        if (raised)
+        {
+            inputs.Disable();
+        }
+        else
+        {
+            inputs.Enable();
+        }
     }
 
     private void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f));
 
         MyInput();
 

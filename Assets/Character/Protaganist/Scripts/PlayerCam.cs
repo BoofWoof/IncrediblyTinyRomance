@@ -40,6 +40,29 @@ public class PlayerCam : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        PhonePositionScript.PhoneToggled += PhoneToggle;
+    }
+
+    private void OnDestroy()
+    {
+        PhonePositionScript.PhoneToggled -= PhoneToggle;
+    }
+
+    private void PhoneToggle(bool raised)
+    {
+        if (raised)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            inputs.Disable();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            inputs.Enable();
+        }
     }
 
     public void Update()
