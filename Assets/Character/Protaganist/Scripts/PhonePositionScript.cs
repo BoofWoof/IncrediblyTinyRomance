@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PhonePositionScript : MonoBehaviour
 {
@@ -21,7 +23,30 @@ public class PhonePositionScript : MonoBehaviour
 
     [HideInInspector]
     public bool moving = false;
+    private bool raised = true;
 
+    PlayerControls input;
+
+    private void Awake()
+    {
+        input = new PlayerControls();
+    }
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Overworld.TogglePhone.performed += TogglePhone;
+    }
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Overworld.TogglePhone.performed -= TogglePhone;
+    }
+
+    private void TogglePhone(InputAction.CallbackContext ctx)
+    {
+        if (raised) StartCoroutine(LowerPhone());
+        else StartCoroutine(RaisePhone());
+    }
     public IEnumerator RaisePhone()
     {
         if (moving)
