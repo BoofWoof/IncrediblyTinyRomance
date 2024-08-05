@@ -71,7 +71,6 @@ public class PhonePositionScript : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.2f);
-        screen.transform.localPosition = new Vector2(2.02f, 1.57f);
         moving = false;
     }
 
@@ -84,7 +83,6 @@ public class PhonePositionScript : MonoBehaviour
         PhoneToggled.Invoke(false);
         moving = true;
         raised = false;
-        screen.transform.localPosition = new Vector2(0,-100000); 
         yield return new WaitForSeconds(0.2f);
         while (phone.localPosition != lowered_transform.localPosition || phone.localRotation != lowered_transform.localRotation)
         {

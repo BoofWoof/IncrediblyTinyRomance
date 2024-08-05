@@ -110,10 +110,8 @@ namespace DS
         {
             if(dialogue.DialogueType == Enumerations.DSDialogueType.CheckVariable)
             {
-                Debug.Log("A");
                 DialogueOptionsVariable targetVariable = dialogue.CheckInfo.VariableInfoSO;
                 DSMemory.InitializeVariable(targetVariable);
-                DSMemory.PrintMemory();
                 switch (targetVariable.VariableType)
                 {
                     case VariableTypeEnum.Value:

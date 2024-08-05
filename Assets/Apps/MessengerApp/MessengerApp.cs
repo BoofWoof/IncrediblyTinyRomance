@@ -1,11 +1,12 @@
 using DS;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class MessengerApp : MonoBehaviour
+public class MessengerApp : AppScript
 {
     [Header("Objects")]
     public GameObject message_box;
@@ -34,6 +35,8 @@ public class MessengerApp : MonoBehaviour
         dialogue = GetComponent<DSDialogue>();
 
         StartCoroutine(MessageProgression());
+
+        Hide();
     }
 
     public IEnumerator MessageProgression()
@@ -55,6 +58,7 @@ public class MessengerApp : MonoBehaviour
                 new_message.transform.parent = content_rect;
                 new_message.transform.localScale = Vector3.one;
                 new_message.transform.localPosition = new Vector2(left_buffer, -conversation_height);
+                new_message.transform.localRotation = Quaternion.identity;
 
                 string message_text = dialogue.getText();
                 string pattern = @"\[(.*?)\]";
@@ -82,6 +86,7 @@ public class MessengerApp : MonoBehaviour
                 GameObject option_message = Instantiate(message_options, content_rect);
                 option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
                 option_message.transform.localScale = Vector3.one;
+                option_message.transform.localRotation = Quaternion.identity;
                 MessageOptionsScript messageOptionScript = option_message.GetComponent<MessageOptionsScript>();
                 messageOptionScript.options = dialogue.getChoices();
                 messageOptionScript.CreateButtons();
