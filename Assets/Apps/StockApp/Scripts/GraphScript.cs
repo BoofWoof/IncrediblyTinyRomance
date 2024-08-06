@@ -67,6 +67,7 @@ public class GraphScript : MonoBehaviour
             );
         CreateAverageValueLine();
         GenerateGraph();
+        UpdateStocksOwnedText();
     }
 
     private void Update()
@@ -131,13 +132,18 @@ public class GraphScript : MonoBehaviour
     private void UpdateStocksOwned(float change, bool updateAverageValue = true)
     {
         StocksOwned += change;
-        StocksOwnedText.text = "STOCK OWNED: " + StocksOwned.ToString("G3");
+        UpdateStocksOwnedText();
         if (change > 0 && updateAverageValue)
         {
             AverageValue = (change / StocksOwned * GetLatestStockValue()) + ((StocksOwned - change) / StocksOwned * AverageValue);
             UpdateAveragePriceText();
         }
         //Debug.Log(GameData.Money);
+    }
+
+    private void UpdateStocksOwnedText()
+    {
+        StocksOwnedText.text = StocksOwned.ToString("G3");
     }
 
     private void UpdateAveragePriceText()
