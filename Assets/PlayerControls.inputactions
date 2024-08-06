@@ -189,6 +189,45 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Phone",
+            "id": "48ae4da3-9622-48f4-ab53-ab6523fdba37",
+            "actions": [
+                {
+                    "name": "AppReturn",
+                    "type": "Button",
+                    "id": "11cdad70-8c6e-407a-b152-7c7c386d745b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "613f7230-d374-4394-ac23-5491c24ac349",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AppReturn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d655cf9e-148e-49b6-86d3-8d1a8c515b45",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AppReturn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

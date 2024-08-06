@@ -28,7 +28,7 @@ public class MessengerApp : AppScript
     private DSDialogue dialogue;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         conversation_height = start_buffer;
 
@@ -36,7 +36,8 @@ public class MessengerApp : AppScript
 
         StartCoroutine(MessageProgression());
 
-        Hide();
+        Hide(true);
+        RegisterInputActions();
     }
 
     public IEnumerator MessageProgression()

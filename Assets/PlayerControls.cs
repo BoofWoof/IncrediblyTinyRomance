@@ -211,6 +211,45 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Phone"",
+            ""id"": ""48ae4da3-9622-48f4-ab53-ab6523fdba37"",
+            ""actions"": [
+                {
+                    ""name"": ""AppReturn"",
+                    ""type"": ""Button"",
+                    ""id"": ""11cdad70-8c6e-407a-b152-7c7c386d745b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""613f7230-d374-4394-ac23-5491c24ac349"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AppReturn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d655cf9e-148e-49b6-86d3-8d1a8c515b45"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AppReturn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -220,6 +259,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Overworld_Camera = m_Overworld.FindAction("Camera", throwIfNotFound: true);
         m_Overworld_TogglePhone = m_Overworld.FindAction("TogglePhone", throwIfNotFound: true);
         m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
+        // Phone
+        m_Phone = asset.FindActionMap("Phone", throwIfNotFound: true);
+        m_Phone_AppReturn = m_Phone.FindAction("AppReturn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -324,10 +366,47 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public OverworldActions @Overworld => new OverworldActions(this);
+
+    // Phone
+    private readonly InputActionMap m_Phone;
+    private IPhoneActions m_PhoneActionsCallbackInterface;
+    private readonly InputAction m_Phone_AppReturn;
+    public struct PhoneActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PhoneActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AppReturn => m_Wrapper.m_Phone_AppReturn;
+        public InputActionMap Get() { return m_Wrapper.m_Phone; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PhoneActions set) { return set.Get(); }
+        public void SetCallbacks(IPhoneActions instance)
+        {
+            if (m_Wrapper.m_PhoneActionsCallbackInterface != null)
+            {
+                @AppReturn.started -= m_Wrapper.m_PhoneActionsCallbackInterface.OnAppReturn;
+                @AppReturn.performed -= m_Wrapper.m_PhoneActionsCallbackInterface.OnAppReturn;
+                @AppReturn.canceled -= m_Wrapper.m_PhoneActionsCallbackInterface.OnAppReturn;
+            }
+            m_Wrapper.m_PhoneActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AppReturn.started += instance.OnAppReturn;
+                @AppReturn.performed += instance.OnAppReturn;
+                @AppReturn.canceled += instance.OnAppReturn;
+            }
+        }
+    }
+    public PhoneActions @Phone => new PhoneActions(this);
     public interface IOverworldActions
     {
         void OnCamera(InputAction.CallbackContext context);
         void OnTogglePhone(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IPhoneActions
+    {
+        void OnAppReturn(InputAction.CallbackContext context);
     }
 }

@@ -69,6 +69,6 @@ public class AppMenuScript : AppScript
     {
         if (Apps.Count <= appIdx) return;
         Apps[appIdx].GetComponent<AppScript>().Show(gameObject);
-        Hide();
+        Hide(false);
     }
 }
