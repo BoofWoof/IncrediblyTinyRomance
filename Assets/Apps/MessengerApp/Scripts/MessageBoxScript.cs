@@ -25,6 +25,7 @@ public class MessageBoxScript : MonoBehaviour
     public int minimum_width = 200;
     public int maximum_width = 750;
     public float time_per_character = 0.04f; //Make this a setting eventually.
+    public float stem_height = 200;
 
     private string displayed_message = "";
     private float line_height = 500;
@@ -95,10 +96,10 @@ public class MessageBoxScript : MonoBehaviour
             float background_width = Math.Max(text_object.GetRenderedValues().x, minimum_width);
             if(line_count <= 1)
             {
-                message_background.sizeDelta = new Vector2(background_width + 2 * border_width, line_count * line_height + 2 * border_height);
+                message_background.sizeDelta = new Vector2(background_width + 2 * border_width, line_count * line_height + 2 * border_height + stem_height);
             } else
             {
-                message_background.sizeDelta = new Vector2(largest_width + 2 * border_width, line_count * line_height + 2 * border_height);
+                message_background.sizeDelta = new Vector2(largest_width + 2 * border_width, line_count * line_height + 2 * border_height + stem_height);
             }
 
             yield return new WaitForSeconds(time_per_character);

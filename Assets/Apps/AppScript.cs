@@ -53,6 +53,6 @@ public void Show(GameObject previousApp)
     public void Hide(bool revealLast)
     {
         if (PreviousApp != null && revealLast) PreviousApp.GetComponent<AppScript>().Show(gameObject);
-        AppRoot.transform.position = new Vector3(0, -10000, 0);
+        AppRoot.transform.position = new Vector3(0, -100, 0);
     }
 }

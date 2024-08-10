@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e0954b634135a54eaade7f062d2fb08
+guid: e93b077c798dc68488bc7e2614c64601
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,62 +139,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: MessagingAppFrames_0
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 503
-        width: 969
-        height: 490
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 110, y: 185, z: 88, w: 88}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e0c548c2fd91e941808118f9cf1a4a4
-      internalID: 165107740
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MessagingAppFrames_1
-      rect:
-        serializedVersion: 2
-        x: 30
-        y: 34
-        width: 967
-        height: 396
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 96, y: 96, z: 88, w: 88}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b0c012472c2fc7845b8250bfce1ec364
-      internalID: 1119815488
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ec867e17ee4cd6946b7d0f1455af7e78
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      MessagingAppFrames_0: 165107740
-      MessagingAppFrames_1: 1119815488
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

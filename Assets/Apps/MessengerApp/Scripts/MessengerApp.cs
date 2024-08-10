@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MessengerApp : AppScript
 {
@@ -74,6 +75,7 @@ public class MessengerApp : AppScript
                 float final_message_height = message_info.GetFinalHeight(message_text);
                 conversation_height += final_message_height;
                 content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
+                GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
 
                 //message_info.SetSprite(pfp_name);
 
@@ -93,6 +95,7 @@ public class MessengerApp : AppScript
                 messageOptionScript.CreateButtons();
                 conversation_height += messageOptionScript.height;
                 content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
+                GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
 
                 yield return StartCoroutine(messageOptionScript.WaitForResponse());
                 yield return new WaitForSeconds(default_time_between_message);

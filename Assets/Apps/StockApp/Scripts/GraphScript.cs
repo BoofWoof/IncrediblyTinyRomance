@@ -48,6 +48,11 @@ public class GraphScript : MonoBehaviour
     public TextMeshProUGUI FloorText;
     public TextMeshProUGUI StocksOwnedText;
     public TextMeshProUGUI AveragePriceText;
+    public TextMeshProUGUI Money;
+
+    [Header("BuyQuantity")]
+    public float BuyQuantity = 0.000_000_001f;
+    public TextMeshProUGUI BuyQuantityText;
 
     private void Start()
     {
@@ -68,6 +73,7 @@ public class GraphScript : MonoBehaviour
         CreateAverageValueLine();
         GenerateGraph();
         UpdateStocksOwnedText();
+        UpdateBuyQuantityText();
     }
 
     private void Update()
@@ -88,6 +94,28 @@ public class GraphScript : MonoBehaviour
 
             UpdateAverageValueLine();
         }
+
+        Money.text = "$" + GameData.Money.NumberToString();
+    }
+
+    private void UpdateBuyQuantityText()
+    {
+        BuyQuantityText.text = BuyQuantity.NumberToString() + "S";
+    }
+
+    public void IncreaseBuyQuantity()
+    {
+        if (BuyQuantity >= 1_000_000_000_000) return;
+        BuyQuantity *= 10;
+        BuyQuantity = BuyQuantity.RoundToSignificantFigures(1);
+        UpdateBuyQuantityText();
+    }
+    public void DecreaseBuyQuantity()
+    {
+        if (BuyQuantity <= 0.000_000_001) return;
+        BuyQuantity /= 10;
+        BuyQuantity = BuyQuantity.RoundToSignificantFigures(1);
+        UpdateBuyQuantityText();
     }
 
     private void CreateAverageValueLine()
@@ -117,16 +145,16 @@ public class GraphScript : MonoBehaviour
 
     public void BuyStock()
     {
-        if (GameData.Money < GetLatestStockValue()) return;
-        UpdateStocksOwned(1);
-        GameData.Money -= GetLatestStockValue();
+        if (GameData.Money < GetLatestStockValue() * BuyQuantity) return;
+        UpdateStocksOwned(BuyQuantity);
+        GameData.Money -= GetLatestStockValue() * BuyQuantity;
     }
 
     public void SellStock()
     {
-        if (StocksOwned < 1) return;
-        UpdateStocksOwned(-1);
-        GameData.Money += GetLatestStockValue();
+        if (StocksOwned <= BuyQuantity) return;
+        UpdateStocksOwned(-BuyQuantity);
+        GameData.Money += GetLatestStockValue() * BuyQuantity;
     }
 
     private void UpdateStocksOwned(float change, bool updateAverageValue = true)
@@ -138,17 +166,18 @@ public class GraphScript : MonoBehaviour
             AverageValue = (change / StocksOwned * GetLatestStockValue()) + ((StocksOwned - change) / StocksOwned * AverageValue);
             UpdateAveragePriceText();
         }
+        StocksOwned = StocksOwned.RoundToSignificantFigures(6);
         //Debug.Log(GameData.Money);
     }
 
     private void UpdateStocksOwnedText()
     {
-        StocksOwnedText.text = StocksOwned.ToString("G3");
+        StocksOwnedText.text = StocksOwned.NumberToString() + "S";
     }
 
     private void UpdateAveragePriceText()
     {
-        AveragePriceText.text = "AVG PRICE: " + AverageValue.ToString("G3");
+        AveragePriceText.text = "PURCHASED AVG: " + AverageValue.NumberToString();
     }
 
     virtual public float GenerateNextValue()
