@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ActivateObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""62673f5b-582d-4d17-9d62-9ea5eb760216"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -209,6 +218,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3c474c0-ae83-4f09-a040-3ac6aa1b826e"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -259,6 +279,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Overworld_Camera = m_Overworld.FindAction("Camera", throwIfNotFound: true);
         m_Overworld_TogglePhone = m_Overworld.FindAction("TogglePhone", throwIfNotFound: true);
         m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
+        m_Overworld_ActivateObject = m_Overworld.FindAction("ActivateObject", throwIfNotFound: true);
         // Phone
         m_Phone = asset.FindActionMap("Phone", throwIfNotFound: true);
         m_Phone_AppReturn = m_Phone.FindAction("AppReturn", throwIfNotFound: true);
@@ -324,6 +345,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Overworld_Camera;
     private readonly InputAction m_Overworld_TogglePhone;
     private readonly InputAction m_Overworld_Move;
+    private readonly InputAction m_Overworld_ActivateObject;
     public struct OverworldActions
     {
         private @PlayerControls m_Wrapper;
@@ -331,6 +353,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_Overworld_Camera;
         public InputAction @TogglePhone => m_Wrapper.m_Overworld_TogglePhone;
         public InputAction @Move => m_Wrapper.m_Overworld_Move;
+        public InputAction @ActivateObject => m_Wrapper.m_Overworld_ActivateObject;
         public InputActionMap Get() { return m_Wrapper.m_Overworld; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -349,6 +372,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnMove;
+                @ActivateObject.started -= m_Wrapper.m_OverworldActionsCallbackInterface.OnActivateObject;
+                @ActivateObject.performed -= m_Wrapper.m_OverworldActionsCallbackInterface.OnActivateObject;
+                @ActivateObject.canceled -= m_Wrapper.m_OverworldActionsCallbackInterface.OnActivateObject;
             }
             m_Wrapper.m_OverworldActionsCallbackInterface = instance;
             if (instance != null)
@@ -362,6 +388,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @ActivateObject.started += instance.OnActivateObject;
+                @ActivateObject.performed += instance.OnActivateObject;
+                @ActivateObject.canceled += instance.OnActivateObject;
             }
         }
     }
@@ -404,6 +433,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnTogglePhone(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnActivateObject(InputAction.CallbackContext context);
     }
     public interface IPhoneActions
     {

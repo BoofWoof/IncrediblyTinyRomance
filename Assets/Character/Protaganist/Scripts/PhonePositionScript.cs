@@ -20,7 +20,7 @@ public class PhonePositionScript : MonoBehaviour
 
     [HideInInspector]
     public bool moving = false;
-    private bool raised = false;
+    public static bool raised = false;
 
     PlayerControls input;
 

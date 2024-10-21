@@ -66,7 +66,11 @@ public class AppMenuScript : AppScript
             {
                 eventID = EventTriggerType.PointerUp
             };
-            entry.callback.AddListener((eventData) => { OnAppRelease(appIdx); });
+            entry.callback.AddListener((eventData) => { 
+                PointerEventData pointerData = (PointerEventData)eventData;
+                if (pointerData.button != PointerEventData.InputButton.Left) return;
+                OnAppRelease(appIdx); 
+            });
             eventTrigger.triggers.Add(entry);
         }
 

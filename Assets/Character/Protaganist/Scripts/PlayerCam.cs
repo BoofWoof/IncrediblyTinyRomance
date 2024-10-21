@@ -16,6 +16,16 @@ public class PlayerCam : MonoBehaviour
     private Vector2 CameraInput = Vector2.zero;
     private PlayerControls inputs;
 
+    public AudioSource PhoneShiftAudioSource;
+    public AudioClip RaisePhoneClip;
+    public AudioClip LowerPhoneClip;
+
+    public ScreenMaskScript ScreenMask;
+
+    [Header("Activation")]
+    public float MaxActivationDistance = 2f;
+
+
     private void Awake()
     {
         inputs = new PlayerControls();
@@ -26,6 +36,29 @@ public class PlayerCam : MonoBehaviour
     {
         inputs.Overworld.Camera.performed += context => CameraInput = context.ReadValue<Vector2>();
         inputs.Overworld.Camera.canceled += context => CameraInput = Vector2.zero;
+        inputs.Overworld.ActivateObject.performed += context => ActivateObjects();
+    }
+
+    private void ActivateObjects()
+    {
+        if (PhonePositionScript.raised)
+        {
+            return;
+        }
+        // Create a ray from the center of the screen
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        // Perform the raycast
+        if (Physics.Raycast(ray, out hit, MaxActivationDistance))
+        {
+            // Call a function on the object (like an Activate method)
+            ActivatableObjectScript aos = hit.collider.gameObject.GetComponent<ActivatableObjectScript>();
+            if (aos != null)
+            {
+                aos.Activate();
+            }
+        }
     }
     private void OnEnable()
     {
@@ -53,12 +86,20 @@ public class PlayerCam : MonoBehaviour
     {
         if (raised)
         {
+            PhoneShiftAudioSource.clip = RaisePhoneClip;
+            PhoneShiftAudioSource.Play();
+            ScreenMask.StartScreen();
+
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             inputs.Disable();
         }
         else
         {
+            PhoneShiftAudioSource.clip = LowerPhoneClip;
+            PhoneShiftAudioSource.Play();
+            ScreenMask.ShutDownScreen();
+
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             inputs.Enable();

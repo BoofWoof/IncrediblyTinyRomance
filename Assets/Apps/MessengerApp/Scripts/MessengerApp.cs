@@ -28,6 +28,10 @@ public class MessengerApp : AppScript
     private float conversation_height;
     private DSDialogue dialogue;
 
+    [Header("NotificationSounds")]
+    public AudioSource notification_source;
+    public AudioClip new_message_notification;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -52,10 +56,14 @@ public class MessengerApp : AppScript
                 {
                     yield return new WaitForSeconds(returnValue.ReturnValue);
                 }
+                continue;
             }
             yield return new WaitForSeconds(default_time_between_message);
             if (dialogue.isSingleOption())
             {
+                notification_source.clip = new_message_notification;
+                notification_source.Play();
+
                 GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
                 new_message.transform.parent = content_rect;
                 new_message.transform.localScale = Vector3.one;
