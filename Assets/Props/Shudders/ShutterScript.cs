@@ -20,6 +20,9 @@ public class ShutterScript : MonoBehaviour
     public AudioClip ShudderRaiseClip;
     public AudioClip SudderDropClip;
 
+    public delegate void ShutterStateCallback(bool raised);
+    static public event ShutterStateCallback ShutterToggled;
+
     public void ActivateShutters()
     {
         Debug.Log("Shutters Raising");
@@ -39,6 +42,7 @@ public class ShutterScript : MonoBehaviour
             StartCoroutine(ShutterHeightChange(RaisedHeight, LiftDuration));
             ShudderAudioSource.clip = ShudderRaiseClip;
             ShudderAudioSource.Play();
+            ShutterToggled.Invoke(true);
             return true;
         }
         return false;
@@ -51,6 +55,7 @@ public class ShutterScript : MonoBehaviour
             StartCoroutine(ShutterHeightChange(LoweredHeight, DropDuration));
             ShudderAudioSource.clip = SudderDropClip;
             ShudderAudioSource.Play();
+            ShutterToggled.Invoke(false);
             return true;
         }
         return false;

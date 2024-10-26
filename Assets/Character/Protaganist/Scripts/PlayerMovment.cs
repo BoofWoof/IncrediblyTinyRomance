@@ -27,6 +27,9 @@ public class PlayerMovment : MonoBehaviour
     Vector2 MovementInput = Vector2.zero;
     PlayerControls inputs;
 
+    [Header("Audio")]
+    public AudioSource WalkingSounds;
+
     private void Awake()
     {
         inputs = new PlayerControls();
@@ -103,6 +106,13 @@ public class PlayerMovment : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        if(moveDirection.magnitude > 0)
+        {
+            if(!WalkingSounds.isPlaying) WalkingSounds.Play();
+        } else
+        {
+            if (WalkingSounds.isPlaying) WalkingSounds.Stop();
+        }
     }
 
     private void SpeedControl()
