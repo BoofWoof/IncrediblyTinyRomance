@@ -29,7 +29,10 @@ public class TDEnemyManagerScript : MonoBehaviour
 
             enemyMap[enemy.AssociatedLetter] = enemy;
         }
+    }
 
+    public void StartLevel()
+    {
         foreach (TDRoadBuilderScript roadBuilderScript in routeScripts)
         {
             StartCoroutine(roadBuilderScript.SpawnWave(currentWave, enemyMap));

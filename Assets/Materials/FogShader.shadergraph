@@ -124,6 +124,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "2a6e6493ae334e919823f8036ce6140a"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "bf03feaba0b848c68bd0b575c8fc85b2"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "5def937f951a4798a4270eec31faeb7b"
                 },
                 "m_SlotId": 3
@@ -222,8 +236,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 0.0
+            "x": 74.00001525878906,
+            "y": -71.0
         },
         "m_Blocks": [
             {
@@ -239,8 +253,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 0.0,
-            "y": 200.0
+            "x": 74.00001525878906,
+            "y": 126.99998474121094
         },
         "m_Blocks": [
             {
@@ -1084,7 +1098,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Occlusion",
     "m_StageCapability": 2,
-    "m_Value": 1.0,
+    "m_Value": 0.0,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }
@@ -1259,10 +1273,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
+            "x": 86.0000228881836,
+            "y": 160.00001525878907,
+            "width": 199.99993896484376,
+            "height": 41.0
         }
     },
     "m_Slots": [

@@ -21,7 +21,6 @@ public class TDTowerTargets : MonoBehaviour
         {
             targets.Add(other.gameObject);
         }
-        Debug.Log(targets.Count);
     }
 
     private void OnTriggerExit(Collider other)
@@ -30,6 +29,5 @@ public class TDTowerTargets : MonoBehaviour
         {
             targets.Remove(other.gameObject);
         }
-        Debug.Log(targets.Count);
     }
 }

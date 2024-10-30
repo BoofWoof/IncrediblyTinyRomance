@@ -10,6 +10,8 @@ public class TDTowerScript : MonoBehaviour
 
     public float AttackSpeed = 0.25f;
 
+    public bool TowerActivated = false;
+
     [Header("Gun Info")]
     public GameObject ProjectileSource;
     public GameObject Projectile;
@@ -17,8 +19,16 @@ public class TDTowerScript : MonoBehaviour
 
     private float Cooldown = 0f;
 
+    public void ActivateTower()
+    {
+        TowerActivated = true;
+        transform.parent = TDAppScript.Level.transform;
+    }
+
     public void Update()
     {
+        if (!TowerActivated) return;
+
         if (Cooldown >= 0f) Cooldown -= Time.deltaTime;
         TargetsScript.CheckDestroyed();
         if (TargetsScript.targets.Count > 0)

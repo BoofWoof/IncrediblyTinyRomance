@@ -17,6 +17,8 @@ public class TDRoadBuilderScript : MonoBehaviour
 
     public IEnumerator SpawnWave(int waveNumber, Dictionary<char, TDEnemyScriptableObject> enemyMap)
     {
+        //Include bonus enemy so wave doesn't end early.
+        TDAppScript.EnemyCount++;
         string currentWaveData = waveData[waveNumber];
 
         string[] waveStepsData = currentWaveData.Split(",");
@@ -45,10 +47,13 @@ public class TDRoadBuilderScript : MonoBehaviour
                 yield return new WaitForSeconds(int.Parse(waveStep));
             }
         }
+        //Removes Bonus Enemy
+        TDAppScript.EnemyCount--;
         yield return null;
     }
     public IEnumerator SpawnEnemy(TDEnemyScriptableObject enemyStats)
     {
+        TDAppScript.EnemyCount++;
         GameObject newEnemy = Instantiate(enemyStats.PrefabModel, posList[0], Quaternion.identity);
         newEnemy.tag = "TDEnemy";
         newEnemy.transform.parent = transform;
@@ -65,12 +70,19 @@ public class TDRoadBuilderScript : MonoBehaviour
                 newEnemy.transform.localPosition = Vector3.Lerp(prevPos, nextPos, (progress - finishedLength)/length);
                 newEnemy.transform.rotation = Quaternion.Euler(0, Quaternion.LookRotation(nextPos - prevPos).eulerAngles.y, 0);
                 yield return null;
-                if (newEnemy == null) yield break;
+                if (newEnemy == null)
+                {
+                    TDAppScript.EnemyCount--;
+                    yield break;
+                }
             }
             prevPos = nextPos;
             finishedLength += length;
         }
 
+        TDAppScript.TDLives--;
+        TDAppScript.EnemyCount--;
+        Destroy(newEnemy);
         yield return null;
     }
 
@@ -322,6 +334,8 @@ public class TDRoadBuilderScript : MonoBehaviour
         roadMesh.RecalculateNormals();
 
         meshFilter.mesh = roadMesh;
+
+        newMesh.transform.parent = transform;
     }
     void OnDrawGizmos()
     {
