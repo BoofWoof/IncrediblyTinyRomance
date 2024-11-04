@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -24,6 +26,8 @@ public class PlayerCam : MonoBehaviour
 
     [Header("Activation")]
     public float MaxActivationDistance = 2f;
+
+    private Button currentButton;
 
 
     private void Awake()
@@ -118,5 +122,38 @@ public class PlayerCam : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        //WorldSpaceButtonCast();
+    }
+
+    private void WorldSpaceButtonCast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            var button = hit.collider.GetComponent<Button>();
+
+            if (button != null)
+            {
+                // Check if this is a new button being hovered
+                if (button != currentButton)
+                {
+                    // Exiting hover on previous button, entering hover on new one
+                    if (currentButton != null)
+                        ExecuteEvents.Execute(currentButton.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerExitHandler);
+
+                    ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerEnterHandler);
+                    currentButton = button;
+                }
+            }
+            else if (currentButton != null)
+            {
+                // Exiting hover if we move away from any button
+                ExecuteEvents.Execute(currentButton.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerExitHandler);
+                currentButton = null;
+            }
+        }
     }
 }
