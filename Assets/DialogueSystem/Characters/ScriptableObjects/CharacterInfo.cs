@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewCharacter", menuName = "Custom/Make New Character")]
 public class CharacterInfo : ScriptableObject
 {
-    [SerializeField] private string characterName;
-    [SerializeField] private Sprite defaultCharacterSprite;
-    [SerializeField] private AudioClip defaultCharacterNoise;
+    [SerializeField] public string characterName;
+    [SerializeField] public Sprite defaultCharacterSprite;
+    [SerializeField] public AudioClip defaultCharacterNoise;
 
     [SerializeField] public List<string> spriteUuid;
     [SerializeField] public List<string> emotionSpriteNames;

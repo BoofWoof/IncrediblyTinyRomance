@@ -16,6 +16,8 @@ public class MessageBoxScript : MonoBehaviour
     public RectTransform message_background;
     public Image profile_image;
 
+    public bool left_facing = false;
+
     [Header("Data")]
     public string default_message_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel nisi nec diam dignissim dictum lobortis ac dolor. Phasellus vitae felis tortor.";
 
@@ -31,6 +33,8 @@ public class MessageBoxScript : MonoBehaviour
     private float line_height = 500;
     private AsyncOperationHandle<Sprite> sprite_load_handle;
 
+    public Sprite secondary_backing;
+
     private void Start()
     {
         if (start_automatically)
@@ -38,40 +42,76 @@ public class MessageBoxScript : MonoBehaviour
             StartCoroutine(CharacterProgression(default_message_text));
         }
     }
-        public float GetFinalHeight(string message_text)
+    public float GetFinalHeight(string message_text)
     {
         string previous_text = text_object.text;
         text_object.text = message_text;
         text_object.ForceMeshUpdate();
         text_object.text = previous_text;
-        return text_object.GetRenderedValues().y + 2 * border_height;
+        return text_object.GetRenderedValues().y + 2 * border_height + stem_height;
     }
 
-    public void SetSprite(string pfp_name)
+    public void UseSecondaryBacking()
     {
-        if (pfp_name == null)
-        {
-            return;
-        }
-        if (pfp_name.Length == 0)
-        {
-            return;
-        }
-        string character = "Kobold";
-        sprite_load_handle = Addressables.LoadAssetAsync<Sprite>("Assets/Sprites/PFPs/" + character + "/" + pfp_name + ".png");
-        sprite_load_handle.Completed += SpriteLoadCompleted;
+        message_background.GetComponent<Image>().sprite = secondary_backing;
+        stem_height = 0;
+
+        Destroy(profile_image.gameObject.transform.parent.gameObject);
     }
 
-    private void SpriteLoadCompleted(AsyncOperationHandle<Sprite> sprite_load_handle)
+    public void SwitchLeft()
     {
-        //sprite_load_handle.ToString();
-        if (sprite_load_handle.Status != AsyncOperationStatus.Succeeded)
+        left_facing = true;
+
+        RectTransform backTransform = message_background.GetComponent<RectTransform>();
+        backTransform.pivot = new Vector2(1, 1);
+        backTransform.position = Vector3.zero;
+
+        text_object.alignment = TextAlignmentOptions.TopRight;
+        text_rect.pivot = new Vector2(1, 1);
+        text_rect.anchorMax = new Vector2(1, 1);
+        text_rect.anchorMin = new Vector2(1, 1);
+
+        text_rect.sizeDelta = new Vector2(maximum_width, line_height);
+        text_rect.localPosition = new Vector2(-border_width, -border_height);
+
+        UseSecondaryBacking();
+    }
+
+    public void SetSprite(Sprite pfp_image)
+    {
+        profile_image.sprite = pfp_image;
+    }
+
+    public void InstantComplete(string message_text)
+    {
+        text_object.text = message_text;
+        UpdateBackingSize();
+        UpdatePFPPosition();
+    }
+
+    public void UpdatePFPPosition()
+    {
+        float pfpdrop = text_object.GetRenderedValues().y;
+        profile_image.transform.parent.localPosition = message_background.localPosition + (Vector3.left * 90f) + (Vector3.down * (pfpdrop + stem_height));
+    }
+
+    public void UpdateBackingSize()
+    {
+        text_object.ForceMeshUpdate();
+
+        text_rect.sizeDelta = new Vector2(maximum_width, line_height);
+        if (left_facing)
         {
-            Debug.LogError("No sprite exists for "  + ".");
-            return;
+            text_rect.localPosition = new Vector2(-border_width, -border_height);
+        } else
+        {
+            text_rect.localPosition = new Vector2(border_width, -border_height);
         }
-        profile_image.sprite = sprite_load_handle.Result;
-        profile_image.enabled = true;
+
+        float largest_width = text_object.GetRenderedValues().x;
+        float largest_height = text_object.GetRenderedValues().y;
+        message_background.sizeDelta = new Vector2(largest_width + 2 * border_width, largest_height + 2 * border_height + stem_height);
     }
 
     public IEnumerator CharacterProgression(string message_text)
@@ -101,6 +141,7 @@ public class MessageBoxScript : MonoBehaviour
             {
                 message_background.sizeDelta = new Vector2(largest_width + 2 * border_width, line_count * line_height + 2 * border_height + stem_height);
             }
+            UpdatePFPPosition();
 
             yield return new WaitForSeconds(time_per_character);
         }
@@ -114,19 +155,6 @@ public class MessageBoxScript : MonoBehaviour
         text_object.text = displayed_message;
         text_object.ForceMeshUpdate();
 
-        if (new_letter == '<')
-        {
-            while (new_letter != '>') { new_letter = AdvanceLetter(ref message_text); }
-        }
-
         return new_letter;
-    }
-
-    private void OnDestroy()
-    {
-        if (sprite_load_handle.IsValid() && sprite_load_handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            Addressables.Release(sprite_load_handle);
-        }
     }
 }

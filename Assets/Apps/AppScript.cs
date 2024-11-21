@@ -9,6 +9,17 @@ public class AppScript : MonoBehaviour
 
     private PlayerControls inputs;
 
+    public bool HideOnStart = true;
+
+    public void Start()
+    {
+        if (HideOnStart)
+        {
+            Hide(false);
+            RegisterInputActions();
+        }
+    }
+
     public void RegisterInputActions()
     {
         inputs = new PlayerControls();
@@ -44,7 +55,7 @@ public class AppScript : MonoBehaviour
 
 
 
-public void Show(GameObject previousApp)
+    public void Show(GameObject previousApp)
     {
         PreviousApp = previousApp;
         AppRoot.transform.localPosition = new Vector3(0, 0, 0);

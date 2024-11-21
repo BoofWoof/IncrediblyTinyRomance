@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3a58b8cbe8ce845a21d249d52af313, type: 3}
+  m_Name: SilverHelm
+  m_EditorClassIdentifier: 
+  EquipmentSprite: {fileID: 728123831, guid: 54d00849c6afcbe4fb4fed118a76d173, type: 3}
+  DefenseLambda: 50
+  MinDefense: 1
+  Defense: 0

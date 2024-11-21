@@ -6,7 +6,6 @@ namespace DS
 {
     using DS.Data;
     using ScriptableObjects;
-    using System;
 
     public class DSDialogue : MonoBehaviour
     {
@@ -22,7 +21,10 @@ namespace DS
         /* Indexes */
         [SerializeField] private int selectedDialogueGroupIndex;
         [SerializeField] private int selectedDialogueIndex;
-
+        public void SubmitDialogue()
+        {
+            MessageQueue.addDialogue(GetComponent<DSDialogue>());
+        }
         public string getText()
         {
             return dialogue.Text;
@@ -147,13 +149,17 @@ namespace DS
         public Sprite getSprite()
         {
             CharacterInfo characterInfo = dialogue.SpeakerInfo.CharacterInfoSO;
-            if (characterInfo == null || !characterInfo.spriteUuid.Contains(dialogue.SpeakerInfo.SpriteUid)) return null;
+            if (characterInfo == null) return null;
+            if (dialogue.SpeakerInfo.SpriteUid == "") return characterInfo.defaultCharacterSprite;
+            if (!characterInfo.spriteUuid.Contains(dialogue.SpeakerInfo.SpriteUid)) return null;
             return characterInfo.emotionSprites[characterInfo.spriteUuid.IndexOf(dialogue.SpeakerInfo.SpriteUid)];
         }
         public AudioClip getNoise()
         {
             CharacterInfo characterInfo = dialogue.SpeakerInfo.CharacterInfoSO;
-            if (characterInfo == null || !characterInfo.noiseUuid.Contains(dialogue.SpeakerInfo.NoiseUid)) return null;
+            if (characterInfo == null) return null;
+            if (dialogue.SpeakerInfo.NoiseUid == null) return characterInfo.defaultCharacterNoise;
+            if (!characterInfo.noiseUuid.Contains(dialogue.SpeakerInfo.NoiseUid)) return null;
             return characterInfo.emotionNoises[characterInfo.noiseUuid.IndexOf(dialogue.SpeakerInfo.NoiseUid)];
         }
 
@@ -169,6 +175,11 @@ namespace DS
         public bool isMultipleOptions()
         {
             return dialogue.DialogueType == Enumerations.DSDialogueType.MultipleChoice;
+        }
+
+        public Enumerations.DSDialogueType getType()
+        {
+            return dialogue.DialogueType;
         }
     }
 }

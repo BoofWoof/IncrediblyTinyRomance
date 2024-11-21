@@ -32,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 4803754402720948579}
   - {fileID: 4803754403882918724}
-  - {fileID: 4803754402744249001}
   - {fileID: 4803754403464072800}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -148,7 +147,7 @@ MonoBehaviour:
   Shutters:
   - {fileID: 5323691820001459161}
   - {fileID: 5323691821146618366}
-  - {fileID: 5323691820012171283}
+  - {fileID: 0}
   - {fileID: 5323691820457235674}
   RaisedHeight: 2.638
   LoweredHeight: 0
@@ -250,7 +249,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -406,87 +405,4 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
   m_PrefabInstance: {fileID: 4981232224228329096}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &4981232224238521666
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4981232223998461767}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.39
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -0.57997406
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -0.57997406
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.2409558
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.0684936
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.49999976
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.50000054
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.49999925
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.5000005
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_CastShadows
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-      propertyPath: m_Name
-      value: Shutters (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
---- !u!4 &4803754402744249001 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-  m_PrefabInstance: {fileID: 4981232224238521666}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5323691820012171283 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a96d4faebe5149749a372ab14b7846f2, type: 3}
-  m_PrefabInstance: {fileID: 4981232224238521666}
   m_PrefabAsset: {fileID: 0}

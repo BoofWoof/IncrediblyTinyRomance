@@ -100,33 +100,6 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: 
       <TypeUuid>k__BackingField: 
       <ReturnValue>k__BackingField: 0
-  - <ID>k__BackingField: e4959cd1-2fc3-48d7-96e9-7b137e845e6f
-    <Name>k__BackingField: DialogueNode1
-    <Text>k__BackingField: The kobold looks eager.
-    <SkipText>k__BackingField: 0
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 0b7223ca-f039-4ad0-821b-1ad62be5df34
-      <OptionUUID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 241, y: 221}
-    <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 
-      <SpriteUid>k__BackingField: 
-      <NoiseUid>k__BackingField: 
-    <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <OperandType>k__BackingField: 0
-      <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 
-    <CheckVariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <ThresholdValue>k__BackingField: 0
-    <ReturnValueInfo>k__BackingField:
-      <ReturnValueInfoGUID>k__BackingField: 
-      <TypeUuid>k__BackingField: 
-      <ReturnValue>k__BackingField: 0
   - <ID>k__BackingField: 0049372b-2498-4a1b-91af-d8ee8249f989
     <Name>k__BackingField: CheckNode5
     <Text>k__BackingField: Make notes here. This text does not show up in game.
@@ -185,13 +158,40 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: 
       <TypeUuid>k__BackingField: 
       <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: e4959cd1-2fc3-48d7-96e9-7b137e845e6f
+    <Name>k__BackingField: DialogueNode1
+    <Text>k__BackingField: The kobold looks eager.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 0b7223ca-f039-4ad0-821b-1ad62be5df34
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 241, y: 221}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 15e118edaec080d43804cfa6c5a9963b
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNames>k__BackingField:
   - DialogueNode2
   - DialogueNode3
   - DialogueNode4
-  - DialogueNode1
   - CheckNode5
   - DialogueNode6
+  - DialogueNode1
   <OldGroupNodeNames>k__BackingField:
     list: []

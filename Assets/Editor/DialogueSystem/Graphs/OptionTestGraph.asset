@@ -100,33 +100,6 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: 
       <TypeUuid>k__BackingField: 
       <ReturnValue>k__BackingField: 0
-  - <ID>k__BackingField: 655c87ae-e44f-44ca-ae51-a5a21d9c1732
-    <Name>k__BackingField: DialogueNode4
-    <Text>k__BackingField: A kobold stands before you.
-    <SkipText>k__BackingField: 0
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: 845a6a48-ac01-4a81-a0bb-d3f0d2972afa
-      <OptionUUID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: -38, y: 338}
-    <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 
-      <SpriteUid>k__BackingField: 
-      <NoiseUid>k__BackingField: 
-    <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <OperandType>k__BackingField: 0
-      <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 
-    <CheckVariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <ThresholdValue>k__BackingField: 0
-    <ReturnValueInfo>k__BackingField:
-      <ReturnValueInfoGUID>k__BackingField: 
-      <TypeUuid>k__BackingField: 
-      <ReturnValue>k__BackingField: 0
   - <ID>k__BackingField: f3899ab1-2d07-4dd8-8e76-eff7cf69725a
     <Name>k__BackingField: DialogueNode5
     <Text>k__BackingField: Checking memory now.
@@ -265,16 +238,43 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: 
       <TypeUuid>k__BackingField: 
       <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 655c87ae-e44f-44ca-ae51-a5a21d9c1732
+    <Name>k__BackingField: DialogueNode4
+    <Text>k__BackingField: A kobold stands before you.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 845a6a48-ac01-4a81-a0bb-d3f0d2972afa
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: -38, y: 338}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 15e118edaec080d43804cfa6c5a9963b
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNames>k__BackingField:
   - DialogueNode1
   - DialogueNode2
   - DialogueNode3
-  - DialogueNode4
   - DialogueNode5
   - CheckNode6
   - DialogueNode7
   - DialogueNode8
   - DialogueNode9
+  - DialogueNode4
   <OldGroupNodeNames>k__BackingField:
     list: []

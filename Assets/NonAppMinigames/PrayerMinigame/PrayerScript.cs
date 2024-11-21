@@ -18,6 +18,12 @@ public class PrayerScript : MonoBehaviour
     public List<TMP_Text> ButtonText;
     public TMP_Text AngyDebug;
 
+    public delegate void PrayerSubmittedCallback(bool GoodPrayer);
+    public static event PrayerSubmittedCallback PrayerSubmitted;
+
+    public static int GoodPrayerCount = 0;
+    public static int BadPrayerCount = 0;
+    public static int TotalPrayerCount = 0;
 
     private void Start()
     {
@@ -32,17 +38,22 @@ public class PrayerScript : MonoBehaviour
     }
     public void SubmitAnswer(int answerIdx)
     {
+        TotalPrayerCount += 1;
         if (GoodIdx == answerIdx)
         {
             Debug.Log("You win!");
             RamAngyLevel -= 30f;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
+            PrayerSubmitted.Invoke(true);
+            GoodPrayerCount++;
         }
         else
         {
             Debug.Log("Ram be angy! >:C");
             RamAngyLevel += 30f;
             if (RamAngyLevel > 100) RamAngyLevel = 100;
+            PrayerSubmitted.Invoke(false);
+            BadPrayerCount++;
         }
         GenerateNewPrayers();
     }
