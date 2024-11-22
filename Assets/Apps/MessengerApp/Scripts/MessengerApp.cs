@@ -1,4 +1,5 @@
 using DS;
+using DS.Data;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -19,10 +20,14 @@ namespace DS
         public RectTransform content_rect;
 
         [Header("Data")]
-        private string MessageHistory = "";
+        private Dictionary<CharacterInfo, string> MessageHistorys = new Dictionary<CharacterInfo, string>();
         public MessageBoxScript LastMessage = null;
         public bool LastLeft = false;
-        public Sprite CurrentCharacterSprite;
+
+        public CharacterInfo CurrentCharacter;
+
+        public List<string> Choices;
+        public bool WaitingForChoice = false;
 
         [Header("Tuning")]
         public float message_buffer = 25;
@@ -30,10 +35,8 @@ namespace DS
         public float end_buffer = 25;
         public float left_buffer = 200;
         public float right_buffer = 200;
-        public float default_time_between_message = 1.0f;
 
         private float conversation_height;
-        private DSDialogue dialogue;
 
         [Header("NotificationSounds")]
         public AudioSource notification_source;
@@ -44,75 +47,54 @@ namespace DS
         {
             conversation_height = start_buffer;
 
-            StartCoroutine(WaitForNextMessage());
-
             Hide(true);
             RegisterInputActions();
         }
 
-        public IEnumerator MessageProgression()
+        public void SetTextChoices(List<string> choices)
         {
-            while (!dialogue.isDone())
+            WaitingForChoice = true;
+            Choices = choices;
+            LastLeft = false;
+        }
+
+        public IEnumerator RevealOptions(DSDialogue dialogue, CharacterInfo speakingCharacter)
+        {
+            GameObject option_message = Instantiate(message_options, content_rect);
+            option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
+            option_message.transform.localScale = Vector3.one;
+            option_message.transform.localRotation = Quaternion.identity;
+            MessageOptionsScript messageOptionScript = option_message.GetComponent<MessageOptionsScript>();
+            messageOptionScript.options = Choices;
+            messageOptionScript.CreateButtons();
+            conversation_height += messageOptionScript.height + message_buffer;
+            content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
+            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
+
+            yield return StartCoroutine(messageOptionScript.WaitForResponse());
+            WaitingForChoice = false;
+            dialogue.setChoice(messageOptionScript.message);
+            UpdateTextHistory(speakingCharacter, "<b>" + messageOptionScript.message + "\n");
+        }
+        public IEnumerator WaitForChoiceSelection()
+        {
+            while (WaitingForChoice)
             {
-                DSReturnValueInfo returnValue = dialogue.getReturnValue();
-                if (returnValue.ReturnValueObject != null)
-                {
-                    if (returnValue.TypeUuid == returnValue.ReturnValueObject.StateUuids[0])
-                    {
-                        yield return new WaitForSeconds(returnValue.ReturnValue);
-                    }
-                    continue;
-                }
-                yield return new WaitForSeconds(default_time_between_message);
-                if (dialogue.isSingleOption())
-                {
-                    RecreateFromText();
-
-                    notification_source.clip = new_message_notification;
-                    notification_source.Play();
-
-                    Sprite newSprite = dialogue.getSprite();
-                    if (newSprite != null)
-                    {
-                        CurrentCharacterSprite = newSprite;
-                    }
-
-                    string message_text = dialogue.getText();
-                    MessageBoxScript message_info = MakeLeftMessage(message_text);
-
-                    yield return StartCoroutine(message_info.CharacterProgression(message_text));
-                    yield return new WaitForSeconds(default_time_between_message);
-                    MessageHistory += "<a>" + message_text + "\n";
-                    dialogue.setChoice("Next Dialogue");
-                    continue;
-                }
-                else if (dialogue.isMultipleOptions())
-                {
-                    //MOVE THIS TO AN ACTUAL WORKING LOCATION
-                    GameObject option_message = Instantiate(message_options, content_rect);
-                    option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
-                    option_message.transform.localScale = Vector3.one;
-                    option_message.transform.localRotation = Quaternion.identity;
-                    MessageOptionsScript messageOptionScript = option_message.GetComponent<MessageOptionsScript>();
-                    messageOptionScript.options = dialogue.getChoices();
-                    messageOptionScript.CreateButtons();
-                    conversation_height += messageOptionScript.height + message_buffer;
-                    content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
-                    GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-
-                    yield return StartCoroutine(messageOptionScript.WaitForResponse());
-                    dialogue.setChoice(messageOptionScript.message);
-                    MessageHistory += "<b>" + messageOptionScript.message + "\n";
-
-                    LastLeft = false;
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
+                yield return null;
             }
-            StartCoroutine(WaitForNextMessage());
+        }
+
+        public void NotificationPing()
+        {
+            notification_source.clip = new_message_notification;
+            notification_source.Play();
+        }
+        public void UpdateTextHistory(CharacterInfo targetCharacter, string newText)
+        {
+            if(!MessageHistorys.Keys.Contains(targetCharacter)){
+                MessageHistorys.Add(targetCharacter, "");
+            }
+            MessageHistorys[targetCharacter] += newText;
         }
 
         private MessageBoxScript MakeRightMessage(string message_text)
@@ -136,7 +118,7 @@ namespace DS
             return message_info;
         }
 
-        private MessageBoxScript MakeLeftMessage(string message_text)
+        public MessageBoxScript MakeLeftMessage(string message_text)
         {
             GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
 
@@ -154,7 +136,7 @@ namespace DS
             new_message.transform.localPosition = new Vector2(left_buffer, -conversation_height);
             new_message.transform.localRotation = Quaternion.identity;
 
-            message_info.SetSprite(CurrentCharacterSprite);
+            message_info.SetSprite(CurrentCharacter.defaultCharacterSprite);
             conversation_height += message_info.GetFinalHeight(message_text) + message_buffer;
             content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
@@ -167,12 +149,14 @@ namespace DS
         public void RecreateFromText()
         {
             ResetMessanger();
-            RecreateMessages();
+            RecreateMessages(CurrentCharacter);
         }
 
-        private void RecreateMessages()
+        private void RecreateMessages(CharacterInfo selectedCharacter)
         {
-            string[] messageHistory = MessageHistory.Split("\n");
+            if (!MessageHistorys.Keys.Contains(selectedCharacter)) return;
+
+            string[] messageHistory = MessageHistorys[selectedCharacter].Split("\n");
 
             foreach (string message in messageHistory)
             {
@@ -201,18 +185,6 @@ namespace DS
                 Destroy(child.gameObject);
             }
             conversation_height = start_buffer;
-        }
-
-        public IEnumerator WaitForNextMessage()
-        {
-            do
-            {
-                yield return new WaitForSeconds(10f);
-            } while (MessageQueue.GetQueueLength() == 0);
-
-            dialogue = MessageQueue.getNextDialogue();
-
-            StartCoroutine(MessageProgression());
         }
     }
 }

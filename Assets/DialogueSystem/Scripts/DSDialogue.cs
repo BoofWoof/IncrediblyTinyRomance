@@ -146,6 +146,10 @@ namespace DS
             }
         }
 
+        public CharacterInfo getCharacter()
+        {
+            return dialogue.SpeakerInfo.CharacterInfoSO;
+        }
         public Sprite getSprite()
         {
             CharacterInfo characterInfo = dialogue.SpeakerInfo.CharacterInfoSO;

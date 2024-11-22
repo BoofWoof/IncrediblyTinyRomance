@@ -11,6 +11,11 @@ public class AppScript : MonoBehaviour
 
     public bool HideOnStart = true;
 
+    public delegate void HideApp();
+    public event HideApp OnHideApp;
+    public delegate void ShowApp();
+    public event ShowApp OnShowApp;
+
     public void Start()
     {
         if (HideOnStart)
@@ -53,17 +58,37 @@ public class AppScript : MonoBehaviour
         }
     }
 
-
+    public void Swap(AppScript newApp)
+    {
+        newApp.Show(AppRoot);
+        Hide(false);
+    }
 
     public void Show(GameObject previousApp)
     {
-        PreviousApp = previousApp;
+        if (previousApp != null)
+        {
+            PreviousApp = previousApp;
+        }
         AppRoot.transform.localPosition = new Vector3(0, 0, 0);
+
+        if (inputs != null) inputs.Enable();
+
+        OnShowApp?.Invoke();
     }
 
     public void Hide(bool revealLast)
     {
-        if (PreviousApp != null && revealLast) PreviousApp.GetComponent<AppScript>().Show(gameObject);
+        if (PreviousApp != null && revealLast)
+        {
+            Debug.Log(gameObject.name);
+            PreviousApp.GetComponent<AppScript>().Show(null);
+            PreviousApp = null;
+        }
         AppRoot.transform.position = new Vector3(0, -100, 0);
+
+        if (inputs != null) inputs.Disable();
+
+        OnHideApp?.Invoke();
     }
 }
