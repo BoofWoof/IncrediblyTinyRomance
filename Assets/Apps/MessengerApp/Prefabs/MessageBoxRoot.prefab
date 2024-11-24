@@ -186,6 +186,7 @@ MonoBehaviour:
   text_rect: {fileID: 5419704007947491074}
   message_background: {fileID: 5419704009643616127}
   profile_image: {fileID: 4491593600368431392}
+  left_facing: 0
   default_message_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Fusce vel nisi nec diam dignissim dictum lobortis ac dolor. Phasellus vitae felis
     tortor.
@@ -193,7 +194,7 @@ MonoBehaviour:
   border_height: 15
   minimum_width: 200
   maximum_width: 750
-  time_per_character: 0.04
+  time_per_character: 0.01
   stem_height: 35
   secondary_backing: {fileID: 1119815488, guid: 7e0954b634135a54eaade7f062d2fb08, type: 3}
 --- !u!1 &5419704009643616126

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8a4cf67e2c5204a960037fd026b602, type: 3}
+  m_Name: DialogueNode3
+  m_EditorClassIdentifier: 
+  <DialogueName>k__BackingField: DialogueNode3
+  <Text>k__BackingField: Dialogue text.
+  <SkipText>k__BackingField: 0
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: Don't you mean HR?
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 1b532c8918792114694d2adc3bbf9137, type: 2}
+    <NextDialogueUuid>k__BackingField: 
+  - <Text>k__BackingField: Oh! Nice to meet you.
+    <NextDialogue>k__BackingField: {fileID: 11400000, guid: d6e4af7acf1e3d147a255a83aec3c252, type: 2}
+    <NextDialogueUuid>k__BackingField: 
+  <DialogueType>k__BackingField: 1
+  <IsStartingDialogue>k__BackingField: 0
+  <SpeakerInfo>k__BackingField:
+    <CharacterInfoSO>k__BackingField: {fileID: 0}
+    <SpriteUid>k__BackingField: 
+    <NoiseUid>k__BackingField: 
+  <VariableInfo>k__BackingField:
+    <VariableInfoSO>k__BackingField: {fileID: 0}
+    <OperandType>k__BackingField: 0
+    <OperandValue>k__BackingField: 0
+    <OptionUid>k__BackingField: 
+  <CheckInfo>k__BackingField:
+    <VariableInfoSO>k__BackingField: {fileID: 0}
+    <ThresholdValue>k__BackingField: 0
+  <ReturnValueInfo>k__BackingField:
+    <ReturnValueObject>k__BackingField: {fileID: 0}
+    <TypeUuid>k__BackingField: 
+    <ReturnValue>k__BackingField: 0

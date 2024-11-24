@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class AppMenuScript : AppScript
 {
+    public int RevealedApps = 1;
+
     public List<Sprite> AppSprites;
     public Sprite EmptyAppSprite;
     public List<GameObject> Apps;
@@ -20,6 +23,7 @@ public class AppMenuScript : AppScript
     public float horizontal_buffer = 0;
 
     private List<GameObject> appButtons = new List<GameObject>();
+    private List<GameObject> UIElements = new List<GameObject>();
 
     private void OnEnable()
     {
@@ -32,17 +36,32 @@ public class AppMenuScript : AppScript
             {
                 float horizontal_position = app_width/2f + horizontal_buffer + (horizontal_gap + app_width) * x - parent_panel.sizeDelta.x / 2f;
                 float vertical_position = vertical_buffer - vertical_gap * y;
-                if (appsAdded < AppSprites.Count)
+                if (appsAdded < AppSprites.Count && appsAdded < RevealedApps)
                 {
                     GameObject newButton = CreateButton(AppSprites[appsAdded], new Vector2(horizontal_position, vertical_position), appsAdded);
                     appButtons.Add(newButton);
+                    UIElements.Add(newButton);
                     appsAdded++;
                 } else
                 {
                     GameObject newEmpty = CreateButton(EmptyAppSprite, new Vector2(horizontal_position, vertical_position), -1);
+                    UIElements.Add(newEmpty);
                 }
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        foreach (GameObject obj in UIElements)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+        appButtons.Clear();
+        UIElements.Clear();
     }
 
     private GameObject CreateButton(Sprite sprite, Vector2 position, int appIdx)

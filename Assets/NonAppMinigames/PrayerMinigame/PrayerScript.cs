@@ -25,6 +25,8 @@ public class PrayerScript : MonoBehaviour
     public static int BadPrayerCount = 0;
     public static int TotalPrayerCount = 0;
 
+    public static bool IncreaseAnger = false;
+
     private void Start()
     {
         ProcessPrayers();
@@ -33,6 +35,7 @@ public class PrayerScript : MonoBehaviour
 
     private void Update()
     {
+        if (!IncreaseAnger) return;
         RamAngyLevel += Time.deltaTime * AngerRate;
         AngyDebug.text = "RamAngyLevel: " + RamAngyLevel.ToString("0");
     }

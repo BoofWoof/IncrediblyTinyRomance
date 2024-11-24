@@ -23,16 +23,30 @@ public class ShutterScript : MonoBehaviour
     public delegate void ShutterStateCallback(bool raised);
     static public event ShutterStateCallback ShutterToggled;
 
+    private bool FirstRaise = true;
+
     public void ActivateShutters()
     {
+        if (FirstRaise)
+        {
+            FirstRaise = false;
+            HudScript.SetContinueTutorial();
+        }
+
         Debug.Log("Shutters Raising");
         if (ShuttersLowered)
         {
-            if (RaiseShutters()) ShuttersLowered = false;
+            if (RaiseShutters()) {
+                ShuttersLowered = false;
+                PhonePositionScript.AllowPhoneToggle = true;
+            } 
         }
         else
         {
-            if (LowerShutters()) ShuttersLowered = true;
+            if (LowerShutters()) {
+                ShuttersLowered = true;
+                PhonePositionScript.AllowPhoneToggle = false;
+            } 
         }
     }
     private bool RaiseShutters()

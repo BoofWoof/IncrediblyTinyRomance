@@ -19,13 +19,17 @@ public class PrayerEventsScript : MonoBehaviour
 
     public void OnPrayerSubmission(bool GoodPrayer)
     {
-        if(PrayerScript.TotalPrayerCount == 1)
+        if(PrayerScript.TotalPrayerCount == 5)
         {
             StartEvent.SubmitDialogue();
         }
-        if (PrayerScript.TotalPrayerCount == 10)
+        if (PrayerScript.TotalPrayerCount == 30)
         {
             StartEvent2.SubmitDialogue();
+        }
+        if (PrayerScript.TotalPrayerCount == 60)
+        {
+            //StartEvent2.SubmitDialogue();
         }
     }
 }

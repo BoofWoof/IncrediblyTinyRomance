@@ -21,6 +21,10 @@ namespace DS
         /* Indexes */
         [SerializeField] private int selectedDialogueGroupIndex;
         [SerializeField] private int selectedDialogueIndex;
+
+        public delegate void MessageComplete();
+        public event MessageComplete OnMessageComplete;
+
         public void SubmitDialogue()
         {
             MessageQueue.addDialogue(GetComponent<DSDialogue>());
@@ -169,6 +173,8 @@ namespace DS
 
         public bool isDone()
         {
+            if (dialogue == null) OnMessageComplete?.Invoke();
+
             return dialogue == null;
         }
 

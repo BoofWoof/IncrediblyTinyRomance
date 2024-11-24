@@ -27,6 +27,9 @@ public class PhonePositionScript : MonoBehaviour
     public delegate void PhoneStateCallback(bool raised);
     static public event PhoneStateCallback PhoneToggled;
 
+    public static bool AllowPhoneToggle = false;
+    public static bool FirstPhoneRaise = true;
+
     private void Awake()
     {
         input = new PlayerControls();
@@ -44,11 +47,18 @@ public class PhonePositionScript : MonoBehaviour
 
     private void TogglePhone(InputAction.CallbackContext ctx)
     {
+        if (!AllowPhoneToggle) return;
         if (raised) StartCoroutine(LowerPhone());
         else StartCoroutine(RaisePhone());
     }
     public IEnumerator RaisePhone()
     {
+        if (FirstPhoneRaise)
+        {
+            HudScript.SetContinueTutorial();
+            FirstPhoneRaise = false;
+        }
+
         if (moving)
         {
             yield break;
