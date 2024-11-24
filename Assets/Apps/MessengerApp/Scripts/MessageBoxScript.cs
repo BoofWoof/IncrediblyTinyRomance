@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class MessageBoxScript : MonoBehaviour
 {
@@ -31,7 +29,6 @@ public class MessageBoxScript : MonoBehaviour
 
     private string displayed_message = "";
     private float line_height = 500;
-    private AsyncOperationHandle<Sprite> sprite_load_handle;
 
     public Sprite secondary_backing;
 

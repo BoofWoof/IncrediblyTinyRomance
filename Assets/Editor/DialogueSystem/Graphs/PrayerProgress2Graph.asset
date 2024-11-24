@@ -129,7 +129,7 @@ MonoBehaviour:
       <ReturnValue>k__BackingField: 0
   - <ID>k__BackingField: 38a8b2e2-eec9-4f8b-904f-24314f1594fc
     <Name>k__BackingField: DialogueNode5
-    <Text>k__BackingField: Sorry, can't! Everyone is relying on you Boss! I super
+    <Text>k__BackingField: Sorry, can't! Everyone is relying on you, Boss! I super
       appreciate your work though!
     <SkipText>k__BackingField: 0
     <Choices>k__BackingField:
@@ -239,88 +239,6 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: 
       <TypeUuid>k__BackingField: 
       <ReturnValue>k__BackingField: 0
-  - <ID>k__BackingField: 20e53368-633c-48b2-b6ce-ffd9459aa102
-    <Name>k__BackingField: DialogueNode9
-    <Text>k__BackingField: Hah hah, that's great to hear!
-    <SkipText>k__BackingField: 0
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: a05e4b0f-9cca-45ef-a926-b9d10aef2d3b
-      <OptionUUID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 2924, y: 544}
-    <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 
-      <SpriteUid>k__BackingField: 
-      <NoiseUid>k__BackingField: 
-    <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <OperandType>k__BackingField: 0
-      <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 
-    <CheckVariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <ThresholdValue>k__BackingField: 0
-    <ReturnValueInfo>k__BackingField:
-      <ReturnValueInfoGUID>k__BackingField: 
-      <TypeUuid>k__BackingField: 
-      <ReturnValue>k__BackingField: 0
-  - <ID>k__BackingField: a05e4b0f-9cca-45ef-a926-b9d10aef2d3b
-    <Name>k__BackingField: DialogueNode10
-    <Text>k__BackingField: Also, brb. I have to do something quick.
-    <SkipText>k__BackingField: 0
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: a0c7167b-199c-4451-bc8b-fa2cf38b759a
-      <OptionUUID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 3214, y: 544}
-    <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 
-      <SpriteUid>k__BackingField: 
-      <NoiseUid>k__BackingField: 
-    <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <OperandType>k__BackingField: 0
-      <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 
-    <CheckVariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <ThresholdValue>k__BackingField: 0
-    <ReturnValueInfo>k__BackingField:
-      <ReturnValueInfoGUID>k__BackingField: f98df602d0b80ab4d891164b3c6389ce
-      <TypeUuid>k__BackingField: 83ae755d-4c38-4501-8916-7e01db4658a8
-      <ReturnValue>k__BackingField: 20
-  - <ID>k__BackingField: a0c7167b-199c-4451-bc8b-fa2cf38b759a
-    <Name>k__BackingField: DialogueNode11
-    <Text>k__BackingField: Hey... just a quick question... For any reason, did you
-      change your opinions on God?
-    <SkipText>k__BackingField: 0
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Next Dialogue
-      <NodeID>k__BackingField: d612d8a7-8602-4861-bc1a-a19fe91bc9a2
-      <OptionUUID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1951, y: -51}
-    <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 
-      <SpriteUid>k__BackingField: 
-      <NoiseUid>k__BackingField: 
-    <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <OperandType>k__BackingField: 0
-      <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 
-    <CheckVariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <ThresholdValue>k__BackingField: 0
-    <ReturnValueInfo>k__BackingField:
-      <ReturnValueInfoGUID>k__BackingField: f98df602d0b80ab4d891164b3c6389ce
-      <TypeUuid>k__BackingField: 83ae755d-4c38-4501-8916-7e01db4658a8
-      <ReturnValue>k__BackingField: 20
   - <ID>k__BackingField: dfafb97d-ba42-4009-8e0f-09b05b7ecac3
     <Name>k__BackingField: DialogueNode12
     <Text>k__BackingField: Awesome! Everyone reaches this point eventually!
@@ -692,7 +610,7 @@ MonoBehaviour:
       <ReturnValue>k__BackingField: 0
   - <ID>k__BackingField: 3409d76a-52a4-4052-a489-853bab741a28
     <Name>k__BackingField: DialogueNode26
-    <Text>k__BackingField: Althought, to be more accurate...
+    <Text>k__BackingField: Although, to be more accurate...
     <SkipText>k__BackingField: 0
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
@@ -1217,6 +1135,88 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: 
       <TypeUuid>k__BackingField: 
       <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 20e53368-633c-48b2-b6ce-ffd9459aa102
+    <Name>k__BackingField: DialogueNode9
+    <Text>k__BackingField: Hah hah, that's great to hear!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: a05e4b0f-9cca-45ef-a926-b9d10aef2d3b
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 2924, y: 544}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: a0c7167b-199c-4451-bc8b-fa2cf38b759a
+    <Name>k__BackingField: DialogueNode11
+    <Text>k__BackingField: Hey... just a quick question... For any reason, did you
+      change your opinions on God?
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: d612d8a7-8602-4861-bc1a-a19fe91bc9a2
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1951, y: -51}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: f98df602d0b80ab4d891164b3c6389ce
+      <TypeUuid>k__BackingField: 83ae755d-4c38-4501-8916-7e01db4658a8
+      <ReturnValue>k__BackingField: 20
+  - <ID>k__BackingField: a05e4b0f-9cca-45ef-a926-b9d10aef2d3b
+    <Name>k__BackingField: DialogueNode10
+    <Text>k__BackingField: Also, brb. I have to do something quick.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: a0c7167b-199c-4451-bc8b-fa2cf38b759a
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 3213, y: 544}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: f98df602d0b80ab4d891164b3c6389ce
+      <TypeUuid>k__BackingField: 83ae755d-4c38-4501-8916-7e01db4658a8
+      <ReturnValue>k__BackingField: 0
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNames>k__BackingField:
   - DialogueNode1
@@ -1227,9 +1227,6 @@ MonoBehaviour:
   - DialogueNode6
   - DialogueNode7
   - DialogueNode8
-  - DialogueNode9
-  - DialogueNode10
-  - DialogueNode11
   - DialogueNode12
   - DialogueNode13
   - DialogueNode14
@@ -1262,5 +1259,8 @@ MonoBehaviour:
   - DialogueNode43
   - DialogueNode44
   - DialogueNode45
+  - DialogueNode9
+  - DialogueNode11
+  - DialogueNode10
   <OldGroupNodeNames>k__BackingField:
     list: []

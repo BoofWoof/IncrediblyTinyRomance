@@ -18,6 +18,7 @@ namespace DS
         public GameObject message_box;
         public GameObject message_options;
         public RectTransform content_rect;
+        public GameObject chat_break;
 
         [Header("Data")]
         private Dictionary<CharacterInfo, string> MessageHistorys = new Dictionary<CharacterInfo, string>();
@@ -58,6 +59,31 @@ namespace DS
             LastLeft = false;
         }
 
+        public void MakeDivisionBar()
+        {
+            conversation_height += 50;
+            GameObject breakBar = Instantiate(chat_break, Vector2.zero, Quaternion.identity);
+
+            breakBar.transform.parent = content_rect;
+            breakBar.transform.localScale = Vector3.one;
+            breakBar.transform.localRotation = Quaternion.identity;
+            breakBar.transform.localPosition = new Vector2(content_rect.rect.width/2f, -conversation_height);
+
+            conversation_height += breakBar.GetComponent<RectTransform>().rect.height + message_buffer;
+            conversation_height += 50;
+            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
+            LastMessage = null;
+        }
+        public void ResetMessanger()
+        {
+            LastMessage = null;
+            foreach (Transform child in content_rect.transform)
+            {
+                // Destroy the child GameObject
+                Destroy(child.gameObject);
+            }
+            conversation_height = start_buffer;
+        }
         public IEnumerator RevealOptions(DSDialogue dialogue, CharacterInfo speakingCharacter)
         {
             GameObject option_message = Instantiate(message_options, content_rect);
@@ -173,18 +199,11 @@ namespace DS
                     MessageBoxScript message_info = MakeRightMessage(trimmed_message);
                     message_info.InstantComplete(trimmed_message);
                 }
+                else if (message_source == "c")
+                {
+                    MakeDivisionBar();
+                }
             }
-        }
-
-        public void ResetMessanger()
-        {
-            LastMessage = null;
-            foreach (Transform child in content_rect.transform)
-            {
-                // Destroy the child GameObject
-                Destroy(child.gameObject);
-            }
-            conversation_height = start_buffer;
         }
     }
 }

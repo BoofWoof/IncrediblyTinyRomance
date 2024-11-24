@@ -117,7 +117,6 @@ public class ContactsScript : MonoBehaviour
                 {
                     yield return new WaitForSeconds(returnValue.ReturnValue);
                 }
-                continue;
             }
             if (dialogue.isSingleOption())
             {
@@ -165,6 +164,8 @@ public class ContactsScript : MonoBehaviour
                 break;
             }
         }
+        messengerApp.MakeDivisionBar();
+        messengerApp.UpdateTextHistory(speakingCharacter, "<c>" + "\n");
         StartCoroutine(WaitForNextMessage());
     }
     public IEnumerator WaitForNextMessage()
