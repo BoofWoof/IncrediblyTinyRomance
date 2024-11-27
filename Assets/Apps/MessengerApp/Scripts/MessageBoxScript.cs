@@ -24,7 +24,6 @@ public class MessageBoxScript : MonoBehaviour
     public int border_height = 15;
     public int minimum_width = 200;
     public int maximum_width = 750;
-    public float time_per_character = 0.04f; //Make this a setting eventually.
     public float stem_height = 200;
 
     private string displayed_message = "";
@@ -140,7 +139,7 @@ public class MessageBoxScript : MonoBehaviour
             }
             UpdatePFPPosition();
 
-            yield return new WaitForSeconds(time_per_character);
+            yield return new WaitForSeconds(MessagingVariables.TimePerCharacter);
         }
     }
 

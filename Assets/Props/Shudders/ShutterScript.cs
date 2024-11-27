@@ -25,6 +25,8 @@ public class ShutterScript : MonoBehaviour
 
     private bool FirstRaise = true;
 
+    public AudioSource Siren;
+
     public void ActivateShutters()
     {
         if (FirstRaise)
@@ -36,14 +38,20 @@ public class ShutterScript : MonoBehaviour
         Debug.Log("Shutters Raising");
         if (ShuttersLowered)
         {
-            if (RaiseShutters()) {
+            if (RaiseShutters())
+            {
+                CrossfadeScript.ResumeMusic();
+                Siren.Pause();
                 ShuttersLowered = false;
                 PhonePositionScript.AllowPhoneToggle = true;
             } 
         }
         else
         {
-            if (LowerShutters()) {
+            if (LowerShutters())
+            {
+                CrossfadeScript.PauseMusic();
+                Siren.Play();
                 ShuttersLowered = true;
                 PhonePositionScript.AllowPhoneToggle = false;
             } 

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class AppMenuScript : AppScript
 {
-    public int RevealedApps = 1;
+    public static AppMenuScript Instance;
+    public static int RevealedApps = 1;
 
     public List<Sprite> AppSprites;
     public Sprite EmptyAppSprite;
@@ -27,14 +28,32 @@ public class AppMenuScript : AppScript
 
     private void OnEnable()
     {
+        Instance = this;
+        MakeButtons();
+    }
+
+    private void OnDisable()
+    {
+        DeleteButtons();
+    }
+
+    public static void SetAppsRevealed(int AppRevealed)
+    {
+        Instance.DeleteButtons();
+        RevealedApps = AppRevealed;
+        Instance.MakeButtons();
+    }
+
+    private void MakeButtons()
+    {
         int appsAdded = 0;
 
         float horizontal_gap = (parent_panel.sizeDelta.x - horizontal_buffer * 2f - app_width * horizontal_count_max) / (horizontal_count_max - 1f);
-        for (int y = 0;  y < vertical_count_max; y++)
+        for (int y = 0; y < vertical_count_max; y++)
         {
             for (int x = 0; x < horizontal_count_max; x++)
             {
-                float horizontal_position = app_width/2f + horizontal_buffer + (horizontal_gap + app_width) * x - parent_panel.sizeDelta.x / 2f;
+                float horizontal_position = app_width / 2f + horizontal_buffer + (horizontal_gap + app_width) * x - parent_panel.sizeDelta.x / 2f;
                 float vertical_position = vertical_buffer - vertical_gap * y;
                 if (appsAdded < AppSprites.Count && appsAdded < RevealedApps)
                 {
@@ -42,7 +61,8 @@ public class AppMenuScript : AppScript
                     appButtons.Add(newButton);
                     UIElements.Add(newButton);
                     appsAdded++;
-                } else
+                }
+                else
                 {
                     GameObject newEmpty = CreateButton(EmptyAppSprite, new Vector2(horizontal_position, vertical_position), -1);
                     UIElements.Add(newEmpty);
@@ -50,8 +70,7 @@ public class AppMenuScript : AppScript
             }
         }
     }
-
-    private void OnDisable()
+    private void DeleteButtons()
     {
         foreach (GameObject obj in UIElements)
         {

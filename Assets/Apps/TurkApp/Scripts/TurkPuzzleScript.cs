@@ -6,7 +6,20 @@ using UnityEngine.UI;
 public class TurkPuzzleScript : MonoBehaviour
 {
     [Header("Grid Settings")]
-    public PuzzleShapeSO GridData;
+    public List<PuzzleShapeSO> VeryEasyPuzzles = new List<PuzzleShapeSO>();
+    public List<PuzzleShapeSO> EasyPuzzles = new List<PuzzleShapeSO>();
+    public List<PuzzleShapeSO> MediumPuzzles = new List<PuzzleShapeSO>();
+    public List<PuzzleShapeSO> HardPuzzles = new List<PuzzleShapeSO>();
+    public List<PuzzleShapeSO> VeryHardPuzzles = new List<PuzzleShapeSO>();
+    public List<PuzzleShapeSO> TitanPuzzles = new List<PuzzleShapeSO>();
+    public List<PuzzleShapeSO> GodPuzzles = new List<PuzzleShapeSO>();
+
+    public static List<List<PuzzleShapeSO>> PuzzlesList = new List<List<PuzzleShapeSO>>();
+
+    public List<Color> ColorsList = new List<Color>();
+
+    private static int CurrentDifficutly = 0;
+
     private static PuzzleShapeSO selectedGridData;
     public static float squareSize = 50f;      // Size of each square
     public Sprite squareSprite;         // Sprite to use for the grid squares
@@ -23,26 +36,52 @@ public class TurkPuzzleScript : MonoBehaviour
 
     [Header("Piece Storage")]
     public RectTransform PieceHolder;
+    public delegate void PuzzleCompleteCallback(int PuzzlesComplete);
+    public static PuzzleCompleteCallback OnPuzzleComplete;
+
+    //Stats
+    public static float MoneyPerPuzzle = 0.000_000_001f;
+    public static int PuzzlesSolved = 0;
 
 
+    public void IncreaseDifficulty()
+    {
+        CurrentDifficutly++;
+        if (CurrentDifficutly > 1) CurrentDifficutly = 1;
+        puzzleScript.GeneratePuzzle();
+    }
+    public void DecreaseDifficulty()
+    {
+        CurrentDifficutly--;
+        if (CurrentDifficutly < 0) CurrentDifficutly = 0;
+        puzzleScript.GeneratePuzzle();
+    }
     void Start()
     {
-        selectedGridData = GridData;
+        PuzzlesList.Add(VeryEasyPuzzles);
+        PuzzlesList.Add(EasyPuzzles);
+        PuzzlesList.Add(MediumPuzzles);
+        PuzzlesList.Add(HardPuzzles);
+        PuzzlesList.Add(VeryHardPuzzles);
+        PuzzlesList.Add(TitanPuzzles);
+        PuzzlesList.Add(GodPuzzles);
+
         PuzzleCenter = gameObject;
         puzzleScript = this;
 
-        if (selectedGridData != null)
-        {
-            GeneratePuzzle();
-        }
-        else
-        {
-            Debug.LogError("Missing references. Ensure GridData is set.");
-        }
+        GeneratePuzzle();
+    }
+
+    public static PuzzleShapeSO SamplePuzzles()
+    {
+        List<PuzzleShapeSO> PuzzleSamples = PuzzlesList[CurrentDifficutly];
+        int sampledPuzzleIdx = Random.Range(0, PuzzleSamples.Count);
+        return PuzzleSamples[sampledPuzzleIdx];
     }
 
     private void GeneratePuzzle()
     {
+        selectedGridData = SamplePuzzles();
         GenerateGrid();
         GeneratePuzzlePieces();
         GroupPuzzlePieces();
@@ -57,6 +96,11 @@ public class TurkPuzzleScript : MonoBehaviour
             if(!gridSquare.GetComponent<TurkHoleScript>().isFilled()) return false;
         }
         Debug.Log("You win!");
+
+        PuzzlesSolved += 1;
+        GameData.Money += MoneyPerPuzzle;
+        OnPuzzleComplete?.Invoke(PuzzlesSolved);
+
         puzzleScript.GeneratePuzzle();
         return true;
     }
@@ -97,7 +141,7 @@ public class TurkPuzzleScript : MonoBehaviour
         Vector2 offset = Pos - PuzzleCenter.GetComponent<RectTransform>().anchoredPosition;
         offset += puzzleScript.GetComponent<RectTransform>().anchoredPosition;
 
-        Vector2 center_idx = new Vector2(selectedGridData.width / 2f, selectedGridData.height / 2f);
+        Vector2 center_idx = new Vector2(selectedGridData.GetWidth() / 2f, selectedGridData.GetHeight() / 2f);
         Vector2Int gridIdx = Vector2Int.FloorToInt(offset / squareSize + center_idx);
 
         return gridIdx;
@@ -105,7 +149,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public static Vector2 GridIdxToPos(Vector2Int GridIdx)
     {
-        Vector2 center_idx = new Vector2(selectedGridData.width / 2f - 0.5f, selectedGridData.height / 2f - 0.5f);
+        Vector2 center_idx = new Vector2(selectedGridData.GetWidth() / 2f - 0.5f, selectedGridData.GetHeight() / 2f - 0.5f);
         return new Vector2(
             (GridIdx.x - center_idx.x) * squareSize,
             (GridIdx.y - center_idx.y) * squareSize
@@ -117,11 +161,13 @@ public class TurkPuzzleScript : MonoBehaviour
     {
         puzzlePiece = SelectRandomSquares(UnityEngine.Random.Range(selectedGridData.min_pieces, selectedGridData.max_pieces+1));
 
+        int GroupIdx = 0;
         foreach (GameObject pieceRoot in puzzlePiece)
         {
-            pieceRoot.GetComponent<Image>().color = RandomExtensions.RandomColor();
+            pieceRoot.GetComponent<Image>().color = ColorsList[GroupIdx];
             pieceRoot.GetComponent<TurkCubeScript>().Linked = true;
             pieceRoot.GetComponent<TurkCubeScript>().PieceRoot = true;
+            GroupIdx++;
         }
 
         int linkedPieces = puzzlePiece.Count;
@@ -168,7 +214,7 @@ public class TurkPuzzleScript : MonoBehaviour
         }
         puzzlePieceSquares.Clear();
 
-        puzzlePieceGrid = new GameObject[selectedGridData.width, selectedGridData.height];
+        puzzlePieceGrid = new GameObject[selectedGridData.GetWidth(), selectedGridData.GetHeight()];
 
         foreach (GameObject hole in gridSquares)
         {
@@ -207,12 +253,12 @@ public class TurkPuzzleScript : MonoBehaviour
         }
         gridSquares.Clear();
 
-        holeGrid = new GameObject[selectedGridData.width, selectedGridData.height];
+        holeGrid = new GameObject[selectedGridData.GetWidth(), selectedGridData.GetHeight()];
 
-        Vector2 center_idx = new Vector2(selectedGridData.width/2f - 0.5f, selectedGridData.height/2f - 0.5f); 
-        for (int y = 0; y < selectedGridData.height; y++)
+        Vector2 center_idx = new Vector2(selectedGridData.GetWidth()/2f - 0.5f, selectedGridData.GetHeight()/2f - 0.5f); 
+        for (int y = 0; y < selectedGridData.GetHeight(); y++)
         {
-            for (int x = 0; x < selectedGridData.width; x++)
+            for (int x = 0; x < selectedGridData.GetWidth(); x++)
             {
                 // Skip hole positions
                 if (selectedGridData.IsHole(x, y))

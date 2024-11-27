@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CrossfadeScript : MonoBehaviour
 {
+    public static CrossfadeScript MusicPlayer;
+
     public AudioSource currentTrack;   // AudioSource for the current track
     public float currentVolume;
     public AudioSource newTrack;       // AudioSource for the new track
@@ -13,13 +15,30 @@ public class CrossfadeScript : MonoBehaviour
 
     // Start playing the new track with crossfade
 
+
+
     public void Start()
     {
+        MusicPlayer = this;
+        PauseMusic();
+
         PhonePositionScript.PhoneToggled += StartCrossFadeTracks;
         currentTrack.volume = currentVolume;
         newTrack.volume = 0;
-
     }
+
+    public static void PauseMusic()
+    {
+        MusicPlayer.currentTrack.Pause();
+        MusicPlayer.newTrack.Pause();
+    }
+
+    public static void ResumeMusic()
+    {
+        MusicPlayer.currentTrack.Play();
+        MusicPlayer.newTrack.Play();
+    }
+
     private void OnDestroy()
     {
         PhonePositionScript.PhoneToggled -= StartCrossFadeTracks;

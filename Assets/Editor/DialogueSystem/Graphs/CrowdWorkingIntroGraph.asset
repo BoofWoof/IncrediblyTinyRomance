@@ -1,0 +1,1234 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2150ccb2cf910604687be7077f61f988, type: 3}
+  m_Name: CrowdWorkingIntroGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: CrowdWorkingIntro
+  <NodesMade>k__BackingField: 46
+  <Groups>k__BackingField: []
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 7a7e2387-0ddc-4eff-bda7-b6eea42a940b
+    <Name>k__BackingField: DialogueNode1
+    <Text>k__BackingField: Install is about to finish!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: b46952c4-8a37-4f01-ab16-109af5e01bab
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 86, y: 189}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 0ed14a448da0c6942b2ddd2b268e31ea
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: b46952c4-8a37-4f01-ab16-109af5e01bab
+    <Name>k__BackingField: DialogueNode4
+    <Text>k__BackingField: Guess what you are about to get?
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: d4f4b07f-d678-4ec0-a4f3-b5e408b11488
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 360, y: 189}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: d4f4b07f-d678-4ec0-a4f3-b5e408b11488
+    <Name>k__BackingField: DialogueNode6
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Something that will make God self destruct?
+      <NodeID>k__BackingField: 521fcee1-4475-444f-9d37-b3b42902f629
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: Something that will let me control God's cybernetics?
+      <NodeID>k__BackingField: 521fcee1-4475-444f-9d37-b3b42902f629
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: A hologram projector to hide our people?
+      <NodeID>k__BackingField: 521fcee1-4475-444f-9d37-b3b42902f629
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 655, y: 189}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 521fcee1-4475-444f-9d37-b3b42902f629
+    <Name>k__BackingField: DialogueNode7
+    <Text>k__BackingField: Nope, guess again!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: a0140656-15c0-4722-a3c5-ba2d65bd743f
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1244, y: 189}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: a0140656-15c0-4722-a3c5-ba2d65bd743f
+    <Name>k__BackingField: DialogueNode8
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: ...
+      <NodeID>k__BackingField: ef24b095-2e60-4bcc-a2e7-65dd8555d3fe
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: No.
+      <NodeID>k__BackingField: ef24b095-2e60-4bcc-a2e7-65dd8555d3fe
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 1567, y: 189}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: ef24b095-2e60-4bcc-a2e7-65dd8555d3fe
+    <Name>k__BackingField: DialogueNode9
+    <Text>k__BackingField: Alright, fine.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 65889531-ca64-4f1f-aafa-06d6d2203e59
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1834, y: 209}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 65889531-ca64-4f1f-aafa-06d6d2203e59
+    <Name>k__BackingField: DialogueNode10
+    <Text>k__BackingField: To be honest, the install has been at 99% for a bit and
+      I was trying to stall for time.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: bba411ef-8c5d-46b4-ad19-3307cab5a6cb
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 2122, y: 209}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: bba411ef-8c5d-46b4-ad19-3307cab5a6cb
+    <Name>k__BackingField: DialogueNode11
+    <Text>k__BackingField: Let me change the subject quick, do you want to know God's
+      real name?
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: b279c1fb-8d5c-4c25-b351-095ab06c9b06
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 2692, y: 209}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: b279c1fb-8d5c-4c25-b351-095ab06c9b06
+    <Name>k__BackingField: DialogueNode12
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: If I use it will he smite me?
+      <NodeID>k__BackingField: 9dab918f-c571-4ea8-ac93-abef04e8503f
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: What is it?
+      <NodeID>k__BackingField: 64937198-2b2e-4ad7-864c-2f364bcb527d
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 3197, y: 184}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 64937198-2b2e-4ad7-864c-2f364bcb527d
+    <Name>k__BackingField: DialogueNode13
+    <Text>k__BackingField: Aries!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 4236d463-4161-4431-b0f9-431676b51b2b
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 3581, y: 317}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 4236d463-4161-4431-b0f9-431676b51b2b
+    <Name>k__BackingField: DialogueNode14
+    <Text>k__BackingField: Kind of anti-climatic, but doesn't he seem less terrifying
+      now that you know?
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: dae66c85-b1f7-41ce-814e-5384c28e16be
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 3867, y: 317}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 9dab918f-c571-4ea8-ac93-abef04e8503f
+    <Name>k__BackingField: DialogueNode15
+    <Text>k__BackingField: Nah, he doesn't care what you call him, as long as you
+      bend to his every whim.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: b4a8449a-879b-43e9-9b11-fe6665344576
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 3609, y: -101}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: b4a8449a-879b-43e9-9b11-fe6665344576
+    <Name>k__BackingField: DialogueNode16
+    <Text>k__BackingField: Honestly, pretty generous of him as far as megalomaniacs
+      go.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: ce692f14-81d7-488e-ae95-6467c205f024
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 4148, y: -101}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: ce692f14-81d7-488e-ae95-6467c205f024
+    <Name>k__BackingField: DialogueNode17
+    <Text>k__BackingField: Anyways, his name is...
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 64937198-2b2e-4ad7-864c-2f364bcb527d
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 4609, y: -101}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: dae66c85-b1f7-41ce-814e-5384c28e16be
+    <Name>k__BackingField: DialogueNode18
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: He's still has the record for most war crimes committed
+        by several magnitudes.
+      <NodeID>k__BackingField: 6c498e64-9446-4b70-a9f1-4ea8a1593e34
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: I guess a little...
+      <NodeID>k__BackingField: 416aa877-400b-4ce4-a76a-93328b05a780
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 4461, y: 366}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 6c498e64-9446-4b70-a9f1-4ea8a1593e34
+    <Name>k__BackingField: DialogueNode19
+    <Text>k__BackingField: Think of it this way! First, we're not at war, so it's
+      not a war crime.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 403b53ca-0fef-40ab-8cae-cbaa41c04235
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 5130, y: 100}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 403b53ca-0fef-40ab-8cae-cbaa41c04235
+    <Name>k__BackingField: DialogueNode20
+    <Text>k__BackingField: And two, now they're (not) war crimes commited by someone
+      named Aries.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 793ed6c3-726b-4f6a-8699-021d71073436
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 5607, y: 100}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 793ed6c3-726b-4f6a-8699-021d71073436
+    <Name>k__BackingField: DialogueNode21
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: ...
+      <NodeID>k__BackingField: 64f211ff-3d30-47e3-adaf-ef281b820a3e
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 6128, y: 83}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 64f211ff-3d30-47e3-adaf-ef281b820a3e
+    <Name>k__BackingField: DialogueNode22
+    <Text>k__BackingField: Give me this, it helps me cope!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 416aa877-400b-4ce4-a76a-93328b05a780
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 6399, y: 100}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 416aa877-400b-4ce4-a76a-93328b05a780
+    <Name>k__BackingField: DialogueNode23
+    <Text>k__BackingField: Oh, the install is basically done!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 20a29643-f8c9-4699-a3db-27f6f581e057
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 5162, y: 518}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 20a29643-f8c9-4699-a3db-27f6f581e057
+    <Name>k__BackingField: DialogueNode24
+    <Text>k__BackingField: You are about to be the proud owner of a...
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 558e4c29-6ee6-4fc2-bd28-ace5473ebda2
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 5479, y: 518}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 558e4c29-6ee6-4fc2-bd28-ace5473ebda2
+    <Name>k__BackingField: DialogueNode25
+    <Text>k__BackingField: '*Drum Roll*'
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 950a53c0-e9d5-4df5-8ed7-5296e586062f
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 5810, y: 518}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 950a53c0-e9d5-4df5-8ed7-5296e586062f
+    <Name>k__BackingField: DialogueNode26
+    <Text>k__BackingField: Crowd Working App!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 8e705130-5667-4bab-80c9-2d22e898631e
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 6086, y: 518}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 8e705130-5667-4bab-80c9-2d22e898631e
+    <Name>k__BackingField: DialogueNode27
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Is that... to organize our people to work against Aries?
+      <NodeID>k__BackingField: 42821b69-dddd-477b-ba69-2e444d2a3148
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: Does that help us call the big police in some way?
+      <NodeID>k__BackingField: 42821b69-dddd-477b-ba69-2e444d2a3148
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 6399, y: 518}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 42821b69-dddd-477b-ba69-2e444d2a3148
+    <Name>k__BackingField: DialogueNode28
+    <Text>k__BackingField: Wow that would be great!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 1c5b99fe-0e35-4530-8d8f-bc4c321f400f
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 6939, y: 549}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 1c5b99fe-0e35-4530-8d8f-bc4c321f400f
+    <Name>k__BackingField: DialogueNode29
+    <Text>k__BackingField: But no...
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 0a615f90-127a-4be5-b057-7517d29aaef8
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 7214, y: 549}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 0a615f90-127a-4be5-b057-7517d29aaef8
+    <Name>k__BackingField: DialogueNode30
+    <Text>k__BackingField: It's a... well it's a type of labor where people do repetitive
+      'microtasks' to prepare data.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 33e317db-4a1d-42cf-8c8a-44b2c3ee9b52
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 7491, y: 549}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 33e317db-4a1d-42cf-8c8a-44b2c3ee9b52
+    <Name>k__BackingField: DialogueNode32
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: You're fired.
+      <NodeID>k__BackingField: 268369ba-7afe-4dc7-871c-86f88147865c
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: Oh boy, more mundane labor!
+      <NodeID>k__BackingField: 857a92c9-b105-406a-83ef-2b515f176b50
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 8067, y: 524}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 268369ba-7afe-4dc7-871c-86f88147865c
+    <Name>k__BackingField: DialogueNode33
+    <Text>k__BackingField: NO WAIT
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 9ff028f3-6b04-43ff-8771-e12b891da12e
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 8522, y: 320}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 9ff028f3-6b04-43ff-8771-e12b891da12e
+    <Name>k__BackingField: DialogueNode34
+    <Text>k__BackingField: I promise this will save us!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 857a92c9-b105-406a-83ef-2b515f176b50
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 8799, y: 320}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 857a92c9-b105-406a-83ef-2b515f176b50
+    <Name>k__BackingField: DialogueNode35
+    <Text>k__BackingField: The work may be mundane, but it makes us titan money!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 0f603908-5b98-4fa5-9ee8-19322b1a9fd8
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 8510, y: 714}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 0f603908-5b98-4fa5-9ee8-19322b1a9fd8
+    <Name>k__BackingField: DialogueNode36
+    <Text>k__BackingField: Money actually gives us a tool to manipulate the bigger
+      world!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 5d4c95fc-ceec-4535-a45a-c04ca775b27e
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 8917, y: 714}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 5d4c95fc-ceec-4535-a45a-c04ca775b27e
+    <Name>k__BackingField: DialogueNode37
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: I do want to be able to order around a titan...
+      <NodeID>k__BackingField: 1d10b99c-1e26-458a-91ac-e0a7815a90a8
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: Are you sure we're not going to be killed as heretics?
+      <NodeID>k__BackingField: a1a30092-9d11-4038-a0d8-0851eb691164
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 9387, y: 691}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: a1a30092-9d11-4038-a0d8-0851eb691164
+    <Name>k__BackingField: DialogueNode38
+    <Text>k__BackingField: I can not promise that...
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 240e7e24-dd48-4cb0-abd5-af4cd957ee40
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 9906, y: 818}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 240e7e24-dd48-4cb0-abd5-af4cd957ee40
+    <Name>k__BackingField: DialogueNode39
+    <Text>k__BackingField: But I'll do my best to avoid it!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 07f582a5-4ea9-44a8-8bb4-bd6b27a5902f
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 10175, y: 818}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 1d10b99c-1e26-458a-91ac-e0a7815a90a8
+    <Name>k__BackingField: DialogueNode40
+    <Text>k__BackingField: Don't get too excited!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: ea43ea96-32b1-4a60-8c84-e3f03b8113b6
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 9919, y: 420}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: ea43ea96-32b1-4a60-8c84-e3f03b8113b6
+    <Name>k__BackingField: DialogueNode41
+    <Text>k__BackingField: The work doesn't pay much... at all...
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 92bb5722-25c0-483d-ae1d-91ac9617d7d1
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 10187, y: 420}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 07f582a5-4ea9-44a8-8bb4-bd6b27a5902f
+    <Name>k__BackingField: DialogueNode42
+    <Text>k__BackingField: In the meantime, we can make the best out of a horrifying
+      situation!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 92bb5722-25c0-483d-ae1d-91ac9617d7d1
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 10450, y: 818}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 92bb5722-25c0-483d-ae1d-91ac9617d7d1
+    <Name>k__BackingField: DialogueNode43
+    <Text>k__BackingField: DOWNLOADS DONE
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: bf722a06-8ba4-463e-97a0-74ba378d23ae
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 10923, y: 420}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: bf722a06-8ba4-463e-97a0-74ba378d23ae
+    <Name>k__BackingField: DialogueNode44
+    <Text>k__BackingField: Go solve a few puzzles and I will come back to show you
+      how to spend the money!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 1fabf757-cb46-47dd-a27d-8fe56484e30d
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 11216, y: 420}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 1fabf757-cb46-47dd-a27d-8fe56484e30d
+    <Name>k__BackingField: DialogueNode45
+    <Text>k__BackingField: Just recreate the big shape with all of the tiny shapes!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: be019f00-cf4d-4046-bd70-00ecb25e32d8
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 11772, y: 420}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: be019f00-cf4d-4046-bd70-00ecb25e32d8
+    <Name>k__BackingField: DialogueNode46
+    <Text>k__BackingField: You'll know you did it right when money enters your account!
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeID>k__BackingField: 
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 12168, y: 420}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNames>k__BackingField:
+  - DialogueNode1
+  - DialogueNode4
+  - DialogueNode6
+  - DialogueNode7
+  - DialogueNode8
+  - DialogueNode9
+  - DialogueNode10
+  - DialogueNode11
+  - DialogueNode12
+  - DialogueNode13
+  - DialogueNode14
+  - DialogueNode15
+  - DialogueNode16
+  - DialogueNode17
+  - DialogueNode18
+  - DialogueNode19
+  - DialogueNode20
+  - DialogueNode21
+  - DialogueNode22
+  - DialogueNode23
+  - DialogueNode24
+  - DialogueNode25
+  - DialogueNode26
+  - DialogueNode27
+  - DialogueNode28
+  - DialogueNode29
+  - DialogueNode30
+  - DialogueNode32
+  - DialogueNode33
+  - DialogueNode34
+  - DialogueNode35
+  - DialogueNode36
+  - DialogueNode37
+  - DialogueNode38
+  - DialogueNode39
+  - DialogueNode40
+  - DialogueNode41
+  - DialogueNode42
+  - DialogueNode43
+  - DialogueNode44
+  - DialogueNode45
+  - DialogueNode46
+  <OldGroupNodeNames>k__BackingField:
+    list: []

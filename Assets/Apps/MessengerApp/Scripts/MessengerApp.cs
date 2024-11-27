@@ -96,11 +96,18 @@ namespace DS
             conversation_height += messageOptionScript.height + message_buffer;
             content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-
-            yield return StartCoroutine(messageOptionScript.WaitForResponse());
+            if (MessagingVariables.ForceSelect)
+            {
+                dialogue.setChoice(Choices[0]);
+                UpdateTextHistory(speakingCharacter, "<b>" + Choices[0] + "\n");
+            } else
+            {
+                yield return StartCoroutine(messageOptionScript.WaitForResponse());
+                dialogue.setChoice(messageOptionScript.message);
+                UpdateTextHistory(speakingCharacter, "<b>" + messageOptionScript.message + "\n");
+            }
+            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
             WaitingForChoice = false;
-            dialogue.setChoice(messageOptionScript.message);
-            UpdateTextHistory(speakingCharacter, "<b>" + messageOptionScript.message + "\n");
         }
         public IEnumerator WaitForChoiceSelection()
         {
@@ -183,6 +190,7 @@ namespace DS
             if (!MessageHistorys.Keys.Contains(selectedCharacter)) return;
 
             string[] messageHistory = MessageHistorys[selectedCharacter].Split("\n");
+            messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - 10)).ToArray();
 
             foreach (string message in messageHistory)
             {

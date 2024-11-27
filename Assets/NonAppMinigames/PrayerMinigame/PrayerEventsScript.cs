@@ -7,6 +7,8 @@ public class PrayerEventsScript : MonoBehaviour
 {
     public DSDialogue StartEvent;
     public DSDialogue StartEvent2;
+    public DSDialogue AriesMeeting;
+    public DSDialogue CrowdworkIntro;
 
     private void OnEnable()
     {
@@ -23,13 +25,23 @@ public class PrayerEventsScript : MonoBehaviour
         {
             StartEvent.SubmitDialogue();
         }
-        if (PrayerScript.TotalPrayerCount == 8)
+        if (PrayerScript.TotalPrayerCount == 10)
+        {
+            AriesMeeting.SubmitDialogue();
+        }
+        if (PrayerScript.TotalPrayerCount == 18)
         {
             StartEvent2.SubmitDialogue();
         }
-        if (PrayerScript.TotalPrayerCount == 15)
+        if (PrayerScript.TotalPrayerCount == 25)
         {
-            //StartEvent2.SubmitDialogue();
+            CrowdworkIntro.SubmitDialogue();
+            CrowdworkIntro.OnMessageComplete += UnlockApps;
         }
+    }
+
+    public void UnlockApps()
+    {
+        AppMenuScript.SetAppsRevealed(2);
     }
 }

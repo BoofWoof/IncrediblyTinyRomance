@@ -5,18 +5,27 @@ using UnityEngine;
 
 public class PuzzleShapeSO : ScriptableObject
 {
-    [Header("Grid Dimensions")]
-    public int width = 10;
-    public int height = 10;
+    public string Name;
+
+    public Texture2D puzzleTexture;
+
     public int min_pieces = 8;
     public int max_pieces = 10;
-
-    [Header("Hole Positions")]
-    public List<Vector2Int> holePositions = new List<Vector2Int>();
 
     // Method to check if a position is a hole
     public bool IsHole(int x, int y)
     {
-        return holePositions.Contains(new Vector2Int(x, y));
+        Color pixels = puzzleTexture.GetPixel(x, y);
+        return pixels.grayscale < 0.5f;
+    }
+
+    public int GetWidth()
+    {
+        return puzzleTexture.width;
+    }
+
+    public int GetHeight()
+    {
+        return puzzleTexture.height;
     }
 }

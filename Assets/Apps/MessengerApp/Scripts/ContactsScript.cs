@@ -13,7 +13,6 @@ public class ContactsScript : MonoBehaviour
     private MessengerApp messengerApp;
 
     private DSDialogue dialogue;
-    public float default_time_between_message = 1.0f;
 
     public CharacterInfo activeCharacter = null;
     public CharacterInfo speakingCharacter = null;
@@ -26,11 +25,29 @@ public class ContactsScript : MonoBehaviour
     public GameObject ContactListCenter;
     private List<GameObject> ContactList = new List<GameObject>();
 
+    private static bool QuickMessaging = false;
+
     public void Start()
     {
         StartCoroutine(WaitForNextMessage());
         messengerApp = MessagingApp.GetComponent<MessengerApp>();
         GetComponent<AppScript>().OnShowApp += DeselectCharacter;
+    }
+
+    public void InstantMessaging()
+    {
+        MessagingVariables.InstantMessaging();
+        Debug.Log("Quick messaging engaged.");
+    }
+    public void SemiInstantMessaging()
+    {
+        MessagingVariables.SemiInstantMessaging();
+        Debug.Log("Semi-Instant messaging engaged.");
+    }
+    public void DefaultMessaging()
+    {
+        MessagingVariables.DefaultMessaging();
+        Debug.Log("Slow messaging engaged.");
     }
 
     public void MakeContactButtons()
@@ -120,7 +137,7 @@ public class ContactsScript : MonoBehaviour
             }
             if (dialogue.isSingleOption())
             {
-                yield return new WaitForSeconds(default_time_between_message * dialogue.getText().Length/100f);
+                yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages * dialogue.getText().Length/100f);
                 messengerApp.NotificationPing();
                 string message_text = dialogue.getText();
                 CharacterInfo newSpeakingCharacter = dialogue.getCharacter();
@@ -136,20 +153,26 @@ public class ContactsScript : MonoBehaviour
 
                     messengerApp.UpdateTextHistory(speakingCharacter, "<a>" + message_text + "\n");
 
-                    DialogueCoroutine = StartCoroutine(message_info.CharacterProgression(message_text));
+                    if(MessagingVariables.TimeBetweenMessages > 0)
+                    {
+                        DialogueCoroutine = StartCoroutine(message_info.CharacterProgression(message_text));
+                    } else
+                    {
+                        message_info.InstantComplete(message_text);
+                    }
                     yield return DialogueCoroutine;
                 }
                 else
                 {
                     messengerApp.UpdateTextHistory(speakingCharacter, "<a>" + message_text + "\n");
                 }
-                yield return new WaitForSeconds(default_time_between_message);
+                yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
                 dialogue.setChoice("Next Dialogue");
                 continue;
             }
             else if (dialogue.isMultipleOptions())
             {
-                yield return new WaitForSeconds(default_time_between_message * dialogue.getText().Length / 100f);
+                yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages * dialogue.getText().Length / 100f);
                 messengerApp.SetTextChoices(dialogue.getChoices());
                 if (activeCharacter == speakingCharacter)
                 {
