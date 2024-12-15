@@ -637,8 +637,8 @@ MonoBehaviour:
       <ReturnValue>k__BackingField: 0
   - <ID>k__BackingField: 95d92c93-03e5-4d34-ad63-1d2c2b425979
     <Name>k__BackingField: DialogueNode27
-    <Text>k__BackingField: The blurry world beyond the horizon is just some assholes
-      living room.
+    <Text>k__BackingField: The blurry world beyond the horizon is just some jerks
+      home! Our researchers think it might be a basement...
     <SkipText>k__BackingField: 0
     <Choices>k__BackingField:
     - <Text>k__BackingField: Next Dialogue
@@ -647,36 +647,6 @@ MonoBehaviour:
     <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 0
     <Position>k__BackingField: {x: 7077, y: 311}
-    <SpeakerInfo>k__BackingField:
-      <CharacterInfoGUID>k__BackingField: 
-      <SpriteUid>k__BackingField: 
-      <NoiseUid>k__BackingField: 
-    <VariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <OperandType>k__BackingField: 0
-      <OperandValue>k__BackingField: 0
-      <OptionUid>k__BackingField: 
-    <CheckVariableInfo>k__BackingField:
-      <VariableInfoGUID>k__BackingField: 
-      <ThresholdValue>k__BackingField: 0
-    <ReturnValueInfo>k__BackingField:
-      <ReturnValueInfoGUID>k__BackingField: 
-      <TypeUuid>k__BackingField: 
-      <ReturnValue>k__BackingField: 0
-  - <ID>k__BackingField: 98c81336-5a9a-41a5-acf9-e4149fc3f378
-    <Name>k__BackingField: DialogueNode28
-    <Text>k__BackingField: Dialogue text.
-    <SkipText>k__BackingField: 0
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: No...
-      <NodeID>k__BackingField: 0504c416-5353-4771-983d-4102bf54a10f
-      <OptionUUID>k__BackingField: 
-    - <Text>k__BackingField: This is some test, isn't it?
-      <NodeID>k__BackingField: fd3e3e08-3863-489f-bda0-6f6c926349c7
-      <OptionUUID>k__BackingField: 
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 1
-    <Position>k__BackingField: {x: 7557, y: 287}
     <SpeakerInfo>k__BackingField:
       <CharacterInfoGUID>k__BackingField: 
       <SpriteUid>k__BackingField: 
@@ -1217,6 +1187,36 @@ MonoBehaviour:
       <ReturnValueInfoGUID>k__BackingField: f98df602d0b80ab4d891164b3c6389ce
       <TypeUuid>k__BackingField: 83ae755d-4c38-4501-8916-7e01db4658a8
       <ReturnValue>k__BackingField: 0
+  - <ID>k__BackingField: 98c81336-5a9a-41a5-acf9-e4149fc3f378
+    <Name>k__BackingField: DialogueNode28
+    <Text>k__BackingField: Dialogue text.
+    <SkipText>k__BackingField: 0
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: No...
+      <NodeID>k__BackingField: 0504c416-5353-4771-983d-4102bf54a10f
+      <OptionUUID>k__BackingField: 
+    - <Text>k__BackingField: This is some test, isn't it?
+      <NodeID>k__BackingField: fd3e3e08-3863-489f-bda0-6f6c926349c7
+      <OptionUUID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 7520, y: 27}
+    <SpeakerInfo>k__BackingField:
+      <CharacterInfoGUID>k__BackingField: 
+      <SpriteUid>k__BackingField: 
+      <NoiseUid>k__BackingField: 
+    <VariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <OperandType>k__BackingField: 0
+      <OperandValue>k__BackingField: 0
+      <OptionUid>k__BackingField: 
+    <CheckVariableInfo>k__BackingField:
+      <VariableInfoGUID>k__BackingField: 
+      <ThresholdValue>k__BackingField: 0
+    <ReturnValueInfo>k__BackingField:
+      <ReturnValueInfoGUID>k__BackingField: 
+      <TypeUuid>k__BackingField: 
+      <ReturnValue>k__BackingField: 0
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNames>k__BackingField:
   - DialogueNode1
@@ -1242,7 +1242,6 @@ MonoBehaviour:
   - DialogueNode25
   - DialogueNode26
   - DialogueNode27
-  - DialogueNode28
   - DialogueNode29
   - DialogueNode30
   - DialogueNode32
@@ -1262,5 +1261,6 @@ MonoBehaviour:
   - DialogueNode9
   - DialogueNode11
   - DialogueNode10
+  - DialogueNode28
   <OldGroupNodeNames>k__BackingField:
     list: []
