@@ -22,7 +22,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     private static PuzzleShapeSO selectedGridData;
     public static float squareSize = 50f;      // Size of each square
-    public Sprite squareSprite;         // Sprite to use for the grid squares
+    public TileSetSO constallationTiles;         // Sprite to use for the grid squares
 
     public static List<GameObject> gridSquares = new List<GameObject>();
     public static List<GameObject> puzzlePieceSquares = new List<GameObject>();
@@ -85,8 +85,23 @@ public class TurkPuzzleScript : MonoBehaviour
         GenerateGrid();
         GeneratePuzzlePieces();
         GroupPuzzlePieces();
+        UpdateTileSprites();
         PlacePieces();
         ScrambleCords();
+    }
+
+    private void UpdateTileSprites()
+    {
+        foreach (GameObject piece in puzzlePieceSquares)
+        {
+            TurkCubeScript tcs = piece.GetComponent<TurkCubeScript>();
+            piece.GetComponent<Image>().sprite = constallationTiles.GetSprite(
+                !tcs.ConnecteddUp,
+                !tcs.ConnectedDown,
+                !tcs.ConnectedLeft,
+                !tcs.ConnectedRight
+                );
+        }
     }
 
     public static bool CheckWin()
@@ -167,6 +182,7 @@ public class TurkPuzzleScript : MonoBehaviour
             pieceRoot.GetComponent<Image>().color = ColorsList[GroupIdx];
             pieceRoot.GetComponent<TurkCubeScript>().Linked = true;
             pieceRoot.GetComponent<TurkCubeScript>().PieceRoot = true;
+            pieceRoot.GetComponent<TurkCubeScript>().GroupID = GroupIdx;
             GroupIdx++;
         }
 
@@ -233,8 +249,8 @@ public class TurkPuzzleScript : MonoBehaviour
 
             // Add an Image component and set the sprite
             Image imageComponent = newSquare.AddComponent<Image>();
-            imageComponent.sprite = squareSprite;
-            imageComponent.color = Color.red;
+            imageComponent.sprite = constallationTiles.GetSprite(true, true, true, true);
+            imageComponent.color = Color.white;
 
             TurkCubeScript turkCubeScript = newSquare.AddComponent<TurkCubeScript>();
             turkCubeScript.cord = hole.GetComponent<TurkHoleScript>().cord;
@@ -284,8 +300,8 @@ public class TurkPuzzleScript : MonoBehaviour
 
                 // Add an Image component and set the sprite
                 Image imageComponent = newSquare.AddComponent<Image>();
-                imageComponent.sprite = squareSprite;
-                imageComponent.color = Color.white;
+                imageComponent.sprite = constallationTiles.GetSprite(true, true, true, true);
+                imageComponent.color = new Color(0, 0, 0, 0.3f);
 
                 // Add a collider.
                 newSquare.AddComponent<BoxCollider2D>();

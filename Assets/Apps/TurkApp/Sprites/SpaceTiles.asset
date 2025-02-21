@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f430da518b2532a4a9e4b165bf8e0dca, type: 3}
+  m_Name: SpaceTiles
+  m_EditorClassIdentifier: 
+  tileEntries:
+  - bitmaskValue: 0
+    tileSprite: {fileID: 921694329, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 1
+    tileSprite: {fileID: -1230013950, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 2
+    tileSprite: {fileID: -472556158, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 3
+    tileSprite: {fileID: 559767235, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 4
+    tileSprite: {fileID: -1680018196, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 5
+    tileSprite: {fileID: 162925653, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 6
+    tileSprite: {fileID: -1364392914, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 7
+    tileSprite: {fileID: -1000506702, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 8
+    tileSprite: {fileID: 1814938337, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 9
+    tileSprite: {fileID: 63406460, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 10
+    tileSprite: {fileID: -407131543, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 11
+    tileSprite: {fileID: 924319147, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 12
+    tileSprite: {fileID: -1407417744, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 13
+    tileSprite: {fileID: -93932314, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 14
+    tileSprite: {fileID: 1542551232, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}
+  - bitmaskValue: 15
+    tileSprite: {fileID: -113247407, guid: 9f9e0f9b807921d4babac399fd2e8ec8, type: 3}

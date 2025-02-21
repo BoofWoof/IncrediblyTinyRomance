@@ -14,6 +14,11 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public bool ExpandedLeft = false;
     public bool ExpandedRight = false;
 
+    public bool ConnecteddUp = false;
+    public bool ConnectedDown = false;
+    public bool ConnectedLeft = false;
+    public bool ConnectedRight = false;
+
     public bool FullyExpanded = false;
 
     public bool Linked = false;
@@ -23,6 +28,8 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private bool isDragging;
     private Vector2 offset;
+
+    public int GroupID = -1;
 
     private List<TurkCubeScript> ExpandedToScripts = new List<TurkCubeScript>();
 
@@ -277,9 +284,19 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y + 1];
         TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
+
+        if (expandToScript.Linked &&
+            expandToScript.GroupID != GroupID
+            ) return null;
+
+        ConnecteddUp = true;
+        expandToScript.ConnectedDown = true;
+
         if (expandToScript.Linked) return null;
+
         if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
         expandToScript.Linked = true;
+        expandToScript.GroupID = GroupID;
 
         return expandedTo;
     }
@@ -291,9 +308,19 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y - 1];
         TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
+
+        if (expandToScript.Linked &&
+            expandToScript.GroupID != GroupID
+            ) return null;
+
+        ConnectedDown = true;
+        expandToScript.ConnecteddUp = true;
+
         if (expandToScript.Linked) return null;
+
         if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
         expandToScript.Linked = true;
+        expandToScript.GroupID = GroupID;
 
         return expandedTo;
     }
@@ -305,9 +332,19 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x - 1, cord.y];
         TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
+
+        if (expandToScript.Linked &&
+            expandToScript.GroupID != GroupID
+            ) return null;
+
+        ConnectedLeft = true;
+        expandToScript.ConnectedRight = true;
+
         if (expandToScript.Linked) return null;
+
         if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
         expandToScript.Linked = true;
+        expandToScript.GroupID = GroupID;
 
         return expandedTo;
     }
@@ -319,9 +356,19 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x + 1, cord.y];
         TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
+
+        if (expandToScript.Linked &&
+            expandToScript.GroupID != GroupID
+            ) return null;
+
+        ConnectedRight = true;
+        expandToScript.ConnectedLeft = true;
+
         if (expandToScript.Linked) return null;
+
         if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
         expandToScript.Linked = true;
+        expandToScript.GroupID = GroupID;
 
         return expandedTo;
     }
