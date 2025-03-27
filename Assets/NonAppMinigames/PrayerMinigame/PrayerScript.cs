@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrayerScript : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PrayerScript : MonoBehaviour
 
     private int GoodIdx;
 
-    public List<TMP_Text> ButtonText;
+    public List<Button> ButtonText;
     public TMP_Text AngyDebug;
 
     public delegate void PrayerSubmittedCallback(bool GoodPrayer);
@@ -26,6 +27,8 @@ public class PrayerScript : MonoBehaviour
     public static int TotalPrayerCount = 0;
 
     public static bool IncreaseAnger = false;
+
+    public float WaitForNextPrayerSec = 2f;
 
     private void Start()
     {
@@ -40,6 +43,11 @@ public class PrayerScript : MonoBehaviour
         AngyDebug.text = "RamAngyLevel: " + RamAngyLevel.ToString("0");
     }
     public void SubmitAnswer(int answerIdx)
+    {
+        StartCoroutine(SubmitPrayer(answerIdx));
+    }
+
+    IEnumerator SubmitPrayer(int answerIdx)
     {
         TotalPrayerCount += 1;
         if (GoodIdx == answerIdx)
@@ -58,7 +66,18 @@ public class PrayerScript : MonoBehaviour
             PrayerSubmitted.Invoke(false);
             BadPrayerCount++;
         }
+        for (int i = 0; i < ButtonText.Count; i++)
+        {
+            ButtonText[i].interactable = false;
+        }
+
+        yield return new WaitForSeconds(WaitForNextPrayerSec);
+
         GenerateNewPrayers();
+        for (int i = 0; i < ButtonText.Count; i++)
+        {
+            ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
+        }
     }
 
     private void ProcessPrayers()
@@ -89,10 +108,10 @@ public class PrayerScript : MonoBehaviour
         {
             if (GoodIdx == i)
             {
-                ButtonText[i].text = selectedGoodLine[0];
+                ButtonText[i].GetComponentInChildren<TMP_Text>().text = selectedGoodLine[0];
                 continue;
             }
-            ButtonText[i].text = selectedBadLines[badCount];
+            ButtonText[i].GetComponentInChildren<TMP_Text>().text = selectedBadLines[badCount];
             badCount++;
         }
     }
