@@ -83,11 +83,11 @@ public class PlayerMovment : MonoBehaviour
 
         if (grounded)
         {
-            rb.drag = groundDrag;
+            rb.linearDamping = groundDrag;
         }
         else
         {
-            rb.drag = 0;
+            rb.linearDamping = 0;
         }
     }
 
@@ -117,11 +117,11 @@ public class PlayerMovment : MonoBehaviour
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.y);
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.y);
 
         if(flatVel.magnitude > moveSpeed){
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = limitedVel;
+            rb.linearVelocity = limitedVel;
         }
     }
 }
