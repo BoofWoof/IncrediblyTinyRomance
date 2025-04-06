@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
@@ -13,6 +14,10 @@ public class MoveCamera : MonoBehaviour
     public static MoveCamera moveCamera;
     public static float rumble;
 
+    public float targetRumbleQuantity;
+    public float currentRumbleQuantity = 0f;
+    public float falloffRate = 1f;
+
     public AudioSource earthquakeSoundSource;
     public AudioSource rumbleSoundSource;
 
@@ -23,6 +28,14 @@ public class MoveCamera : MonoBehaviour
     void Update()
     {
         transform.position = cameraPosition.position + cameraShakeOffset + Random.insideUnitSphere * rumble;
+
+
+        if (targetRumbleQuantity > currentRumbleQuantity) currentRumbleQuantity = targetRumbleQuantity;
+        currentRumbleQuantity = Mathf.MoveTowards(currentRumbleQuantity, targetRumbleQuantity, Time.deltaTime * falloffRate);
+
+        rumble = currentRumbleQuantity * 0.2f;
+        rumbleSoundSource.volume = currentRumbleQuantity * 10f;
+        rumbleSoundSource.pitch = 1 + currentRumbleQuantity * 2f;
     }
 
     public void TestShake(float durationSec)
@@ -31,9 +44,7 @@ public class MoveCamera : MonoBehaviour
     }
     public void SetRumble(float rumbleQuantity)
     {
-        rumble = rumbleQuantity * 0.2f;
-        rumbleSoundSource.volume = rumbleQuantity / 0.2f;
-        rumbleSoundSource.pitch = 1 + rumbleQuantity * 2f;
+        targetRumbleQuantity = rumbleQuantity;
     }
     public void ShakeScreen(float durationSec, float shakeAmplitude = 1)
     {

@@ -17,9 +17,12 @@ public class BalconyEventsScript : MonoBehaviour
 
     public List<PrayerStatueScript> PrayerStatues = new List<PrayerStatueScript>();
 
+    public AudioSource RaiseAudio;
+    public AudioSource LowerAudio;
+
     private void Update()
     {
-        if (!BalconyActivated)
+        if (!BalconyActivated && OnBalcony)
         {
             if (
                     DSMemory.OptionMemory.ContainsKey(MiloStartCheck.uniqueID) &&
@@ -28,7 +31,6 @@ public class BalconyEventsScript : MonoBehaviour
                 DSMemory.OptionMemory.Remove(MiloStartCheck.uniqueID);
                 PrayerTutorial.SubmitDialogue();
                 PrayerTutorial.OnMessageComplete += StartSystem;
-                BalconyActivated = true;
             }
         }
     }
@@ -54,6 +56,7 @@ public class BalconyEventsScript : MonoBehaviour
     public void StartSystem()
     {
         PrayerScript.IncreaseAnger = true;
+        BalconyActivated = true;
         if (OnBalcony)
         {
             RaiseStatues();
@@ -62,6 +65,9 @@ public class BalconyEventsScript : MonoBehaviour
 
     public void RaiseStatues()
     {
+        RaiseAudio.Stop();
+        LowerAudio.Stop();
+        RaiseAudio.Play();
         foreach (PrayerStatueScript prayerStatueScript in PrayerStatues)
         {
             prayerStatueScript.StatueOn();
@@ -70,6 +76,9 @@ public class BalconyEventsScript : MonoBehaviour
 
     public void LowerStatues()
     {
+        RaiseAudio.Stop();
+        LowerAudio.Stop();
+        LowerAudio.Play();
         foreach (PrayerStatueScript prayerStatueScript in PrayerStatues)
         {
             prayerStatueScript.StatueOff();

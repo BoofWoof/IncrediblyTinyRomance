@@ -19,6 +19,8 @@ public class PrayerFireworkTextScript : MonoBehaviour
     private Coroutine CurrentFirework;
     private ParticleSystem FireworkParticleSystem;
 
+    public AudioSource FireworkExplosion;
+
     public void Start()
     {
         FireworkParticleSystem = GetComponent<ParticleSystem>();
@@ -36,6 +38,8 @@ public class PrayerFireworkTextScript : MonoBehaviour
         TargetText.text = text;
 
         yield return new WaitForSeconds(ExplosionDelay);
+
+        FireworkExplosion.Play();
 
         Texture2D textTexture = ConvertRenderTextureToTexture2D(TextRenderTexture);
         Sprite textSprite = ConvertTexture2DToSprite(textTexture);

@@ -17,6 +17,7 @@ public class PrayerScript : MonoBehaviour
     private int GoodIdx;
 
     public List<Button> ButtonText;
+    public List<TMP_Text> AuthorText;
     public TMP_Text AngyDebug;
 
     public delegate void PrayerSubmittedCallback(bool GoodPrayer);
@@ -73,10 +74,13 @@ public class PrayerScript : MonoBehaviour
             PrayerSubmitted.Invoke(false);
             BadPrayerCount++;
         }
+
+        //DisableButtons
         for (int i = 0; i < ButtonText.Count; i++)
         {
             ButtonText[i].interactable = false;
         }
+        AuthorText[answerIdx].text = "";
 
         yield return new WaitForSeconds(WaitForNextPrayerSec);
 
@@ -113,12 +117,19 @@ public class PrayerScript : MonoBehaviour
         int badCount = 0;
         for (int i = 0; i < ButtonText.Count; i++)
         {
+            string[] split;
             if (GoodIdx == i)
             {
-                ButtonText[i].GetComponentInChildren<TMP_Text>().text = selectedGoodLine[0];
+                Debug.Log(selectedGoodLine[0]);
+                split = selectedGoodLine[0].Split(" @");
+                ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
+                AuthorText[i].text = split[1];
                 continue;
             }
-            ButtonText[i].GetComponentInChildren<TMP_Text>().text = selectedBadLines[badCount];
+            Debug.Log(selectedBadLines[badCount]);
+            split = selectedBadLines[badCount].Split(" @");
+            ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
+            AuthorText[i].text = split[1];
             badCount++;
         }
     }

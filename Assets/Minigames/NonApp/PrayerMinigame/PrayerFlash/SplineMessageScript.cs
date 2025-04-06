@@ -11,6 +11,8 @@ public class SplineMessageScript : MonoBehaviour
 
     public AnimationCurve speedCurve;
 
+    public AudioSource launchAudio;
+
     public void ActivateMessage()
     {
         if (splineContainer != null && messageObject != null)
@@ -22,6 +24,11 @@ public class SplineMessageScript : MonoBehaviour
     IEnumerator MoveAlongSpline()
     {
         yield return new WaitForSeconds(delay);
+
+        if(launchAudio != null )
+        {
+            launchAudio.Play();
+        }
 
         GameObject spawnedObject = Instantiate(messageObject, Vector3.zero, Quaternion.identity);
         MoveObject(0f, spawnedObject);  // Initialize position
@@ -36,6 +43,8 @@ public class SplineMessageScript : MonoBehaviour
         }
         Light light = spawnedObject.GetComponent<Light>();
         if (light != null) { light.enabled = false; }
+        AudioSource audioSource = spawnedObject.GetComponent<AudioSource>();
+        if (audioSource != null) { audioSource.Stop(); }
         spawnedObject.GetComponent<ParticleSystem>().Stop();
         yield return new WaitUntil(() => !spawnedObject.GetComponent<ParticleSystem>().IsAlive());
         Destroy(spawnedObject);
