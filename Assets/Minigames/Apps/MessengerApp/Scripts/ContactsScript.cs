@@ -18,6 +18,8 @@ public class ContactsScript : MonoBehaviour
 
     public Coroutine DialogueCoroutine = null;
 
+    public Transform[] ContactPositions;
+
     public float SeparationDistance = 400f;
     private Dictionary<int, PixelCrushers.DialogueSystem.CharacterInfo> ContactsFound = new Dictionary<int, PixelCrushers.DialogueSystem.CharacterInfo>();
     public GameObject ContactButtonPrefab;
@@ -37,22 +39,25 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationLine(Subtitle subtitle)
     {
-        PixelCrushers.DialogueSystem.CharacterInfo speakingCharacter = subtitle.speakerInfo;
-        if (speakingCharacter.Name == "Player") return;
+        PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
+        if (tempSpeakingCharacter.Name == "Player") return;
+        if (speakingCharacter != null && speakingCharacter.id != tempSpeakingCharacter.id) {
+            AddEndBar();
+        }
 
         string messageText = string.Format(subtitle.formattedText.text);
 
         Debug.Log("New message: " + messageText);
 
-        CheckContacts(speakingCharacter);
+        CheckContacts(tempSpeakingCharacter);
 
         string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
         if (voiceFilePath.Length < 5)
         {
-            StartCoroutine(SendSingleMessage(speakingCharacter, messageText));
+            StartCoroutine(SendSingleMessage(tempSpeakingCharacter, messageText));
         } else
         {
-            StartCoroutine(SendAudioMessage(speakingCharacter, voiceFilePath));
+            StartCoroutine(SendAudioMessage(tempSpeakingCharacter, voiceFilePath));
         }
     }
 
@@ -131,6 +136,12 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationEnd(Transform actor)
     {
+        AddEndBar();
+        speakingCharacter = null;
+    }
+
+    public void AddEndBar()
+    {
         messengerApp.MakeDivisionBar();
         messengerApp.UpdateTextHistory(speakingCharacter, "<c>" + "\n");
     }
@@ -157,11 +168,12 @@ public class ContactsScript : MonoBehaviour
         foreach (PixelCrushers.DialogueSystem.CharacterInfo characterInfo in ContactsFound.Values)
         {
             GameObject newContactButton = Instantiate(ContactButtonPrefab);
-            newContactButton.transform.parent = ContactListCenter.transform;
+
+
+            newContactButton.transform.parent = ContactPositions[idx].parent;
+            newContactButton.transform.localPosition = ContactPositions[idx].localPosition;
             newContactButton.transform.localRotation = Quaternion.identity;
             newContactButton.transform.localScale = Vector3.one;
-
-            newContactButton.transform.localPosition = Vector3.right * (SeparationDistance * idx - 0.5f * SeparationDistance * (ContactsFound.Count - 1));
 
             newContactButton.transform.GetChild(0).GetComponent<Image>().sprite = characterInfo.portrait;
 
@@ -210,7 +222,7 @@ public class ContactsScript : MonoBehaviour
 
         messengerApp.CurrentCharacter = selectCharacter;
         messengerApp.RecreateFromText();
-        if (activeCharacter != null && activeCharacter.id == speakingCharacter.id && messengerApp.WaitingForChoice)
+        if (activeCharacter != null && speakingCharacter != null && activeCharacter.id == speakingCharacter.id && messengerApp.WaitingForChoice)
         {
             DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter));
         }

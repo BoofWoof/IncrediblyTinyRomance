@@ -20,6 +20,7 @@ namespace DS
         public GameObject message_options;
         public RectTransform content_rect;
         public GameObject chat_break;
+        public GameObject audio_button_prefab;
 
         [Header("Data")]
         private Dictionary<int, string> MessageHistorys = new Dictionary<int, string>();
@@ -50,11 +51,24 @@ namespace DS
         public void MakeAudioMessage(string audioFileName)
         {
             audioFileName = audioFileName.CleanResourcePath();
-            Debug.Log(audioFileName);
             VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(audioFileName);
-            Debug.Log(voiceLine);
-            VoiceSource.clip = voiceLine.AudioData;
-            VoiceSource.Play();
+
+            GameObject audioButton = Instantiate(audio_button_prefab, Vector2.zero, Quaternion.identity);
+
+            MessageAudioScript messageAudioScript = audioButton.GetComponent<MessageAudioScript>();
+            messageAudioScript.MessageAudioSource = VoiceSource;
+            messageAudioScript.VoiceLine = voiceLine;
+
+            audioButton.transform.parent = content_rect;
+            audioButton.transform.localScale = Vector3.one;
+            audioButton.transform.localRotation = Quaternion.identity;
+
+            float buttonHeight = audioButton.GetComponent<RectTransform>().rect.height;
+            float buttonWidth = audioButton.GetComponent<RectTransform>().rect.width;
+            audioButton.transform.localPosition = new Vector2(left_buffer + buttonWidth/2f, -conversation_height - buttonHeight/2f);
+            conversation_height += buttonHeight + message_buffer;
+
+            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
         }
 
         // Start is called before the first frame update
@@ -228,6 +242,11 @@ namespace DS
                 else if (message_source == "c")
                 {
                     MakeDivisionBar();
+                }
+                else if (message_source == "v")
+                {
+                    string trimmed_message = message.Substring(3);
+                    MakeAudioMessage(trimmed_message);
                 }
             }
         }

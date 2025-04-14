@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7473808247845780568}
+  - component: {fileID: 4847874408450015824}
   - component: {fileID: 6176799277101012163}
   - component: {fileID: 5587635085444458708}
   m_Layer: 5
@@ -27,16 +28,29 @@ RectTransform:
   m_GameObject: {fileID: 1699217001452618496}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1627907, y: 1.1627907, z: 1.1627907}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1663343906360483067}
+  m_Father: {fileID: 5419704009429001592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 1.1628036}
+  m_AnchoredPosition: {x: -90.99997, y: -109.99999}
   m_SizeDelta: {x: 139.68, y: 160.56}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4847874408450015824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699217001452618496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa58240121c0494b93c884ce583575c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTransform: {fileID: 6556440803166940189}
 --- !u!222 &6176799277101012163
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +75,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -243,6 +257,7 @@ Transform:
   m_Children:
   - {fileID: 5419704009643616127}
   - {fileID: 6556440803166940189}
+  - {fileID: 7473808247845780568}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5419704009429001593
@@ -262,6 +277,7 @@ MonoBehaviour:
   text_rect: {fileID: 5419704007947491074}
   message_background: {fileID: 5419704009643616127}
   profile_image: {fileID: 4491593600368431392}
+  frame: {fileID: 1699217001452618496}
   left_facing: 0
   default_message_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Fusce vel nisi nec diam dignissim dictum lobortis ac dolor. Phasellus vitae felis
@@ -377,8 +393,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7473808247845780568}
+  m_Children: []
   m_Father: {fileID: 6556440803166940189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

@@ -13,6 +13,7 @@ public class MessageBoxScript : MonoBehaviour
     public RectTransform text_rect;
     public RectTransform message_background;
     public Image profile_image;
+    public GameObject frame;
 
     public bool left_facing = false;
 
@@ -53,6 +54,7 @@ public class MessageBoxScript : MonoBehaviour
         stem_height = 0;
 
         Destroy(profile_image.gameObject.transform.parent.gameObject);
+        Destroy(frame);
     }
 
     public void SwitchLeft()
