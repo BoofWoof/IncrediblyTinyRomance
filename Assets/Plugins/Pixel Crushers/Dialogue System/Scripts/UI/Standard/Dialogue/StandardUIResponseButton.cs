@@ -128,6 +128,7 @@ namespace PixelCrushers.DialogueSystem
         {
             if (target != null)
             {
+                Debug.Log(target);
                 SetCurrentResponse();
                 target.SendMessage("OnClick", response, SendMessageOptions.RequireReceiver);
             }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 struct RotationLimits
 {
@@ -40,7 +39,6 @@ public class LookScript : MonoBehaviour
 
     void LookAt(Transform lookObject, float xOffset, RotationLimits rotLimits)
     {
-
         Vector3 directionToTarget = Target.position - lookObject.position;
 
         // Create a rotation so that local up points toward the target
@@ -49,7 +47,6 @@ public class LookScript : MonoBehaviour
         lookObject.rotation = lookRotation;
 
         Vector3 localEulerAngles = lookObject.localRotation.eulerAngles;
-        Debug.Log(localEulerAngles);
 
         Vector3 limitedEulerAngles = LimitRotations(localEulerAngles, rotLimits);
 

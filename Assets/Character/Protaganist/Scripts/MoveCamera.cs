@@ -13,6 +13,7 @@ public class MoveCamera : MonoBehaviour
 
     public static MoveCamera moveCamera;
     public static float rumble;
+    public static float shake;
 
     public float targetRumbleQuantity;
     public float currentRumbleQuantity = 0f;
@@ -61,7 +62,8 @@ public class MoveCamera : MonoBehaviour
         {
             yield return null;
             timePassedSec += Time.deltaTime;
-            cameraShakeOffset = Random.insideUnitSphere * shakeAmplitude * amplitudeCurve.Evaluate(timePassedSec/durationSec);
+            shake = shakeAmplitude * amplitudeCurve.Evaluate(timePassedSec / durationSec);
+            cameraShakeOffset = Random.insideUnitSphere * shake;
         }
 
         cameraShakeOffset = Vector3.zero;

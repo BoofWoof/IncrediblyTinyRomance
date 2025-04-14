@@ -1,6 +1,7 @@
 using DS;
 using DS.Data;
 using JetBrains.Annotations;
+using PixelCrushers.DialogueSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,13 +22,13 @@ namespace DS
         public GameObject chat_break;
 
         [Header("Data")]
-        private Dictionary<CharacterInfo, string> MessageHistorys = new Dictionary<CharacterInfo, string>();
+        private Dictionary<int, string> MessageHistorys = new Dictionary<int, string>();
         public MessageBoxScript LastMessage = null;
         public bool LastLeft = false;
 
-        public CharacterInfo CurrentCharacter;
+        public PixelCrushers.DialogueSystem.CharacterInfo CurrentCharacter;
 
-        public List<string> Choices;
+        public Response[] Choices;
         public bool WaitingForChoice = false;
 
         [Header("Tuning")]
@@ -43,6 +44,19 @@ namespace DS
         public AudioSource notification_source;
         public AudioClip new_message_notification;
 
+        [Header("Voice")]
+        public AudioSource VoiceSource;
+
+        public void MakeAudioMessage(string audioFileName)
+        {
+            audioFileName = audioFileName.CleanResourcePath();
+            Debug.Log(audioFileName);
+            VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(audioFileName);
+            Debug.Log(voiceLine);
+            VoiceSource.clip = voiceLine.AudioData;
+            VoiceSource.Play();
+        }
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -52,10 +66,10 @@ namespace DS
             RegisterInputActions();
         }
 
-        public void SetTextChoices(List<string> choices)
+        public void SetTextChoices(Response[] responses)
         {
             WaitingForChoice = true;
-            Choices = choices;
+            Choices = responses;
             LastLeft = false;
         }
 
@@ -84,37 +98,41 @@ namespace DS
             }
             conversation_height = start_buffer;
         }
-        public IEnumerator RevealOptions(DSDialogue dialogue, CharacterInfo speakingCharacter)
+        public IEnumerator RevealOptions(PixelCrushers.DialogueSystem.CharacterInfo speakingCharacter)
         {
+            List<string> choiceText = new List<string>();
+            foreach (Response response in Choices)
+            {
+                choiceText.Add(response.formattedText.text);
+            }
+
             GameObject option_message = Instantiate(message_options, content_rect);
+            Debug.Log(option_message);
             option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
             option_message.transform.localScale = Vector3.one;
             option_message.transform.localRotation = Quaternion.identity;
             MessageOptionsScript messageOptionScript = option_message.GetComponent<MessageOptionsScript>();
-            messageOptionScript.options = Choices;
+            messageOptionScript.options = choiceText;
             messageOptionScript.CreateButtons();
             conversation_height += messageOptionScript.height + message_buffer;
             content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
+
+            int choiceIdx = 0;
             if (MessagingVariables.ForceSelect)
             {
-                dialogue.setChoice(Choices[0]);
-                UpdateTextHistory(speakingCharacter, "<b>" + Choices[0] + "\n");
+                UpdateTextHistory(speakingCharacter, "<b>" + choiceText[0] + "\n");
             } else
             {
                 yield return StartCoroutine(messageOptionScript.WaitForResponse());
-                dialogue.setChoice(messageOptionScript.message);
+                choiceIdx = messageOptionScript.OptionIdx;
                 UpdateTextHistory(speakingCharacter, "<b>" + messageOptionScript.message + "\n");
             }
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
             WaitingForChoice = false;
-        }
-        public IEnumerator WaitForChoiceSelection()
-        {
-            while (WaitingForChoice)
-            {
-                yield return null;
-            }
+
+            RecreateFromText();
+            (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(Choices[choiceIdx]);
         }
 
         public void NotificationPing()
@@ -122,12 +140,12 @@ namespace DS
             notification_source.clip = new_message_notification;
             notification_source.Play();
         }
-        public void UpdateTextHistory(CharacterInfo targetCharacter, string newText)
+        public void UpdateTextHistory(PixelCrushers.DialogueSystem.CharacterInfo targetCharacter, string newText)
         {
-            if(!MessageHistorys.Keys.Contains(targetCharacter)){
-                MessageHistorys.Add(targetCharacter, "");
+            if(!MessageHistorys.Keys.Contains(targetCharacter.id)){
+                MessageHistorys.Add(targetCharacter.id, "");
             }
-            MessageHistorys[targetCharacter] += newText;
+            MessageHistorys[targetCharacter.id] += newText;
         }
 
         private MessageBoxScript MakeRightMessage(string message_text)
@@ -169,7 +187,7 @@ namespace DS
             new_message.transform.localPosition = new Vector2(left_buffer, -conversation_height);
             new_message.transform.localRotation = Quaternion.identity;
 
-            message_info.SetSprite(CurrentCharacter.defaultCharacterSprite);
+            message_info.SetSprite(CurrentCharacter.portrait);
             conversation_height += message_info.GetFinalHeight(message_text) + message_buffer;
             content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
@@ -185,11 +203,11 @@ namespace DS
             RecreateMessages(CurrentCharacter);
         }
 
-        private void RecreateMessages(CharacterInfo selectedCharacter)
+        private void RecreateMessages(PixelCrushers.DialogueSystem.CharacterInfo selectedCharacter)
         {
-            if (!MessageHistorys.Keys.Contains(selectedCharacter)) return;
+            if (!MessageHistorys.Keys.Contains(selectedCharacter.id)) return;
 
-            string[] messageHistory = MessageHistorys[selectedCharacter].Split("\n");
+            string[] messageHistory = MessageHistorys[selectedCharacter.id].Split("\n");
             messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - 10)).ToArray();
 
             foreach (string message in messageHistory)

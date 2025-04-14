@@ -23,6 +23,7 @@ public class MessageOptionsScript : MonoBehaviour
     public float height = 0;
     public bool message_selected = false;
     public string message = "";
+    public int OptionIdx = -1;
 
     private float line_height = 500;
     private List<GameObject> buttons = new List<GameObject>();
@@ -31,13 +32,15 @@ public class MessageOptionsScript : MonoBehaviour
 
     public void CreateButtons()
     {
+        int buttionIdx = 0;
         foreach (string option in options)
         {
-            CreateButton(option);
+            CreateButton(option, buttionIdx);
+            buttionIdx++;
         }
     }
 
-    private void CreateButton(string text)
+    private void CreateButton(string text, int optionIdx)
     {
         GameObject new_button = Instantiate(button_template, transform);
         new_button.transform.localPosition = new Vector2(0, -height);
@@ -58,10 +61,10 @@ public class MessageOptionsScript : MonoBehaviour
         button_back.sizeDelta = new Vector2(text_width + border_width * 2, text_height + border_height * 2);
         height += text_height + border_height * 2;
 
-        new_button.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(new_button, text));
+        new_button.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(new_button, text, optionIdx));
         buttons.Add(new_button);
     }
-    public void OnButtonClick(GameObject chosen_button, string text)
+    public void OnButtonClick(GameObject chosen_button, string text, int optionIdx)
     {
         foreach (GameObject button in buttons)
         {
@@ -71,6 +74,7 @@ public class MessageOptionsScript : MonoBehaviour
         chosen_button.GetComponentInChildren<Image>().color = selected_color;
         message_selected = true;
         message = text;
+        OptionIdx = optionIdx;
     }
     public IEnumerator WaitForResponse()
     {

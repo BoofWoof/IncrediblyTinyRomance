@@ -72,6 +72,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Shirt
+    second: {fileID: 2100000, guid: 90a515474bcd9094584cc56865e4c6c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Teeth
     second: {fileID: 2100000, guid: f61c21fa9a589f247aaa6b43b34e550a, type: 2}
   - first:
@@ -83,37 +88,37 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: ArmDiffuse
-    second: {fileID: 2800000, guid: df6aa65b89d30434e912a9cfaccba49a, type: 3}
+    second: {fileID: 2800000, guid: 3f843668daa590e48a6a950af3690580, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: ArmNormal
-    second: {fileID: 2800000, guid: 1062c4ca93243964cbeab04c417f1533, type: 3}
+    second: {fileID: 2800000, guid: 3d9dc5349d9a2064aaa1d505c248c2d3, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideColorHead
-    second: {fileID: 2800000, guid: 4aecbe45297f4b64092bbb68230d1f73, type: 3}
+    second: {fileID: 2800000, guid: 7be53ea8efd4b73469dc3e2d3eb04577, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideNormalsBody
-    second: {fileID: 2800000, guid: bd7cb7c54eedebb488cdc12ca23cee91, type: 3}
+    second: {fileID: 2800000, guid: a4369492aa8bbc3439e4ba5ed4f3f6e2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideNormalsHead
-    second: {fileID: 2800000, guid: 1d5699e8b5667784fb74a39569d43de5, type: 3}
+    second: {fileID: 2800000, guid: 92cd1e47e0716304ca604ecce0a516f1, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideTextureBody
-    second: {fileID: 2800000, guid: 27d9127d80e362647aeec7244946d567, type: 3}
+    second: {fileID: 2800000, guid: 068086c87c115d942967c5000991ed07, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HornNormals
-    second: {fileID: 2800000, guid: 7d3414abb76e5c74da340ca1c66f0055, type: 3}
+    second: {fileID: 2800000, guid: cddc99436b9d67c44bc19380189a99c1, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -27,8 +27,6 @@ public class WordQuakes : MonoBehaviour
         float rmsValue = Mathf.Sqrt(sum / sampleSize); // root mean square (RMS)
         float amplitude = rmsValue; // RMS is a good approximation of "loudness"
 
-        Debug.Log(amplitude);
-
         MoveCamera.moveCamera.SetRumble(amplitude);
     }
 }

@@ -88,7 +88,7 @@ public class MessageBoxScript : MonoBehaviour
 
     public void UpdatePFPPosition()
     {
-        float pfpdrop = text_object.GetRenderedValues().y;
+        float pfpdrop = text_object.GetRenderedValues().y + 50f;
         profile_image.transform.parent.localPosition = message_background.localPosition + (Vector3.left * 90f) + (Vector3.down * (pfpdrop + stem_height));
     }
 
@@ -107,12 +107,12 @@ public class MessageBoxScript : MonoBehaviour
 
         float largest_width = text_object.GetRenderedValues().x;
         float largest_height = text_object.GetRenderedValues().y;
-        message_background.sizeDelta = new Vector2(largest_width + 2 * border_width, largest_height + 2 * border_height + stem_height);
+        message_background.sizeDelta = new Vector2(largest_width + 2f * border_width, largest_height + 2f * border_height + stem_height);
     }
 
     public IEnumerator CharacterProgression(string message_text)
     {
-        message_background.sizeDelta = new Vector2(minimum_width + 2 * border_width, line_height + 2 * border_height);
+        message_background.sizeDelta = new Vector2(minimum_width + 2f * border_width, line_height + 2f * border_height);
         text_rect.sizeDelta = new Vector2(maximum_width, line_height);
         text_rect.localPosition = new Vector2(border_width, -border_height);
 
@@ -127,15 +127,17 @@ public class MessageBoxScript : MonoBehaviour
         while (message_text.Length > 0)
         {
             AdvanceLetter(ref message_text);
+            text_object.ForceMeshUpdate();
+            float current_height = text_object.GetRenderedValues().y;
 
             int line_count = text_object.textInfo.lineCount;
             float background_width = Math.Max(text_object.GetRenderedValues().x, minimum_width);
             if(line_count <= 1)
             {
-                message_background.sizeDelta = new Vector2(background_width + 2 * border_width, line_count * line_height + 2 * border_height + stem_height);
+                message_background.sizeDelta = new Vector2(background_width + 2f * border_width, current_height + border_height * 2f + stem_height);
             } else
             {
-                message_background.sizeDelta = new Vector2(largest_width + 2 * border_width, line_count * line_height + 2 * border_height + stem_height);
+                message_background.sizeDelta = new Vector2(largest_width + 2f * border_width, current_height + border_height * 2f + stem_height);
             }
             UpdatePFPPosition();
 

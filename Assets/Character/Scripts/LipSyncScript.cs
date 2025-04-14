@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 enum PhenomeTypes
@@ -104,7 +103,6 @@ public class LipSyncScript : MonoBehaviour
         {
             if (PhenomesText[i].Length < 3) continue;
             PhenomeMarker newPhenomeMarker = TextToPhenomeMarker(PhenomesText[i]);
-            Debug.Log(newPhenomeMarker);
             PhenomeMarkers.Add(newPhenomeMarker);
         }
     }
