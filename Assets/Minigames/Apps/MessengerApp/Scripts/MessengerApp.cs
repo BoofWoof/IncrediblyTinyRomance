@@ -65,7 +65,7 @@ namespace DS
 
             float buttonHeight = audioButton.GetComponent<RectTransform>().rect.height;
             float buttonWidth = audioButton.GetComponent<RectTransform>().rect.width;
-            audioButton.transform.localPosition = new Vector2(left_buffer + buttonWidth/2f, -conversation_height - buttonHeight/2f);
+            audioButton.transform.localPosition = new Vector2(left_buffer + buttonWidth/2f, -conversation_height - 4 * message_buffer);
             conversation_height += buttonHeight + message_buffer;
 
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;

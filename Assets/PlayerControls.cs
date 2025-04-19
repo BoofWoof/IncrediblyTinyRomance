@@ -126,6 +126,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""38929ce3-3bac-4ddf-8ba0-3cc1f66042de"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ActivateObject"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a56a38f-2460-4306-aff0-6c660b616e67"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -304,7 +324,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""AppReturn"",
                     ""type"": ""Button"",
                     ""id"": ""11cdad70-8c6e-407a-b152-7c7c386d745b"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -344,6 +364,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Overworld_TogglePhone = m_Overworld.FindAction("TogglePhone", throwIfNotFound: true);
         m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
         m_Overworld_ActivateObject = m_Overworld.FindAction("ActivateObject", throwIfNotFound: true);
+        m_Overworld_Pause = m_Overworld.FindAction("Pause", throwIfNotFound: true);
         // Phone
         m_Phone = asset.FindActionMap("Phone", throwIfNotFound: true);
         m_Phone_AppReturn = m_Phone.FindAction("AppReturn", throwIfNotFound: true);
@@ -432,6 +453,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Overworld_TogglePhone;
     private readonly InputAction m_Overworld_Move;
     private readonly InputAction m_Overworld_ActivateObject;
+    private readonly InputAction m_Overworld_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Overworld".
     /// </summary>
@@ -459,6 +481,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Overworld/ActivateObject".
         /// </summary>
         public InputAction @ActivateObject => m_Wrapper.m_Overworld_ActivateObject;
+        /// <summary>
+        /// Provides access to the underlying input action "Overworld/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Overworld_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -497,6 +523,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ActivateObject.started += instance.OnActivateObject;
             @ActivateObject.performed += instance.OnActivateObject;
             @ActivateObject.canceled += instance.OnActivateObject;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -520,6 +549,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ActivateObject.started -= instance.OnActivateObject;
             @ActivateObject.performed -= instance.OnActivateObject;
             @ActivateObject.canceled -= instance.OnActivateObject;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -684,6 +716,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnActivateObject(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Phone" which allows adding and removing callbacks.

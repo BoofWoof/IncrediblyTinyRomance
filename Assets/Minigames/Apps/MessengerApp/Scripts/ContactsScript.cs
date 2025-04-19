@@ -34,7 +34,7 @@ public class ContactsScript : MonoBehaviour
         messengerApp = MessagingApp.GetComponent<MessengerApp>();
         GetComponent<AppScript>().OnShowApp += DeselectCharacter;
 
-        DialogueManager.StartConversation("Test Conversation");
+        DialogueManager.StartConversation("Test Conversation 2");
     }
 
     public void OnConversationLine(Subtitle subtitle)
@@ -121,6 +121,8 @@ public class ContactsScript : MonoBehaviour
     public void OnConversationResponseMenu(Response[] responses)
     {
         Debug.Log("Creating choices: " + responses.Length.ToString());
+        speakingCharacter = DialogueManager.CurrentConversationState.subtitle.speakerInfo;
+        Debug.Log(speakingCharacter.nameInDatabase);
         StartCoroutine(SendChoicesMessage(responses));
     }
 

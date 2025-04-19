@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -46,7 +47,7 @@ public class PlayerCam : MonoBehaviour
 
     private void ActivateObjects()
     {
-        if (PhonePositionScript.raised)
+        if (PhonePositionScript.raised || CursorStateControl.MenuUp)
         {
             return;
         }
@@ -76,9 +77,6 @@ public class PlayerCam : MonoBehaviour
     }
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         PhonePositionScript.PhoneToggled += PhoneToggle;
     }
 
@@ -95,8 +93,6 @@ public class PlayerCam : MonoBehaviour
             PhoneShiftAudioSource.Play();
             ScreenMask.StartScreen();
 
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
             inputs.Disable();
         }
         else
@@ -105,15 +101,25 @@ public class PlayerCam : MonoBehaviour
             PhoneShiftAudioSource.Play();
             ScreenMask.ShutDownScreen();
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             inputs.Enable();
+        }
+    }
+
+    public void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            AudioListener.pause = false; // Resume audio when gaining focus
+        }
+        else
+        {
+            AudioListener.pause = true; // Mute audio when losing focus
         }
     }
 
     public void Update()
     {
-        if (!EnableCameraMovement) return;
+        if (!EnableCameraMovement || CursorStateControl.MenuUp) return;
         float mouseX = CameraInput.x * Time.deltaTime * sensX;
         float mouseY = CameraInput.y * Time.deltaTime * sensY;
 
