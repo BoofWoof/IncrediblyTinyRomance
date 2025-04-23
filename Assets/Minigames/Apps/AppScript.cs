@@ -7,8 +7,6 @@ public class AppScript : MonoBehaviour
     public GameObject AppRoot;
     public GameObject PreviousApp;
 
-    private PlayerControls inputs;
-
     public bool HideOnStart = true;
 
     public delegate void HideApp();
@@ -27,35 +25,7 @@ public class AppScript : MonoBehaviour
 
     public void RegisterInputActions()
     {
-        inputs = new PlayerControls();
-        inputs.Phone.AppReturn.performed += context => Hide(true);
-        PhonePositionScript.PhoneToggled += PhoneToggle;
-    }
-    private void OnEnable()
-    {
-        if (inputs != null) inputs.Enable();
-    }
-
-    private void OnDisable()
-    {
-        if (inputs != null) inputs.Disable();
-    }
-
-    private void OnDestroy()
-    {
-        PhonePositionScript.PhoneToggled -= PhoneToggle;
-    }
-
-    private void PhoneToggle(bool raised)
-    {
-        if (raised)
-        {
-            inputs.Enable();
-        }
-        else
-        {
-            inputs.Disable();
-        }
+        InputManager.PlayerInputs.Phone.AppReturn.performed += context => Hide(true);
     }
 
     public void Swap(AppScript newApp)
@@ -72,8 +42,6 @@ public class AppScript : MonoBehaviour
         }
         AppRoot.transform.localPosition = new Vector3(0, 0, 0);
 
-        if (inputs != null) inputs.Enable();
-
         OnShowApp?.Invoke();
     }
 
@@ -86,8 +54,6 @@ public class AppScript : MonoBehaviour
             PreviousApp = null;
         }
         AppRoot.transform.position = new Vector3(0, -100, 0);
-
-        if (inputs != null) inputs.Disable();
 
         OnHideApp?.Invoke();
     }

@@ -75,9 +75,6 @@ namespace DS
         void Awake()
         {
             conversation_height = start_buffer;
-
-            Hide(true);
-            RegisterInputActions();
         }
 
         public void SetTextChoices(Response[] responses)

@@ -20,6 +20,13 @@ public class PPManagerScript : MonoBehaviour
         PhonePositionScript.PhoneToggled += AdjustPhonePPFilter;
     }
 
+    private void OnDisable()
+    {
+        ShutterScript.ShutterToggled -= AdjustEmergencyPPFilter;
+        PhonePositionScript.PhoneToggled -= AdjustPhonePPFilter;
+
+    }
+
     private void AdjustEmergencyPPFilter(bool raised)
     {
         if (raised)

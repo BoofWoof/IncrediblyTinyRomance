@@ -25,54 +25,25 @@ public class PlayerMovment : MonoBehaviour
     Rigidbody rb;
 
     Vector2 MovementInput = Vector2.zero;
-    PlayerControls inputs;
 
     [Header("Audio")]
     public AudioSource WalkingSounds;
 
     private void Awake()
     {
-        inputs = new PlayerControls();
         RegisterInputActions();
     }
 
     private void RegisterInputActions()
     {
-        inputs.Overworld.Move.performed += context => MovementInput = context.ReadValue<Vector2>();
-        inputs.Overworld.Move.canceled += context => MovementInput = Vector2.zero;
-    }
-    private void OnEnable()
-    {
-        inputs.Enable();
+        InputManager.PlayerInputs.Overworld.Move.performed += context => MovementInput = context.ReadValue<Vector2>();
+        InputManager.PlayerInputs.Overworld.Move.canceled += context => MovementInput = Vector2.zero;
     }
 
-    private void OnDisable()
-    {
-        inputs.Disable();
-    }
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
-        PhonePositionScript.PhoneToggled += PhoneToggle;
-    }
-
-    private void OnDestroy()
-    {
-        PhonePositionScript.PhoneToggled -= PhoneToggle;
-    }
-
-    private void PhoneToggle(bool raised)
-    {
-        if (raised)
-        {
-            inputs.Disable();
-        }
-        else
-        {
-            inputs.Enable();
-        }
     }
 
     private void Update()

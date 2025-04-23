@@ -26,6 +26,11 @@ public class HudScript : MonoBehaviour
         StartCoroutine(Tutorial());
     }
 
+    public void OnDisable()
+    {
+        PhonePositionScript.PhoneToggled -= ShowReticle;
+    }
+
     public void ShowReticle(bool show)
     {
         Reticle.SetActive(!show);

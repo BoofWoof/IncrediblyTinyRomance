@@ -15,8 +15,18 @@ public class LevelSelectScript : MonoBehaviour
     {
         StartingPos = transform.localPosition;
         MakeLevel();
+    }
+
+    public void OnEnable()
+    {
         TDAppScript.OnLivesChanged += CheckForDeath;
         TDAppScript.OnEnemyCountChanged += CheckForWin;
+    }
+
+    public void OnDisable()
+    {
+        TDAppScript.OnLivesChanged -= CheckForDeath;
+        TDAppScript.OnEnemyCountChanged -= CheckForWin;
     }
 
     public void CheckForWin(int newEnemyCount)

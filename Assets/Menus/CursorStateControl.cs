@@ -11,6 +11,8 @@ public class CursorStateControl : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        MenuUp = false;
+
         PhonePositionScript.PhoneToggled += PhoneToggle;
 
         foreach(ToggleActive pauseMenu in PauseMenus) {

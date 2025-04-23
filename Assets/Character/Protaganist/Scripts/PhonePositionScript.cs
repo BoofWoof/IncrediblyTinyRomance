@@ -22,27 +22,21 @@ public class PhonePositionScript : MonoBehaviour
     public bool moving = false;
     public static bool raised = false;
 
-    PlayerControls input;
-
     public delegate void PhoneStateCallback(bool raised);
     static public event PhoneStateCallback PhoneToggled;
 
     public static bool AllowPhoneToggle = false;
     public static bool FirstPhoneRaise = true;
 
-    private void Awake()
-    {
-        input = new PlayerControls();
-    }
     private void OnEnable()
     {
-        input.Enable();
-        input.Overworld.TogglePhone.performed += TogglePhone;
+        InputManager.PlayerInputs.Overworld.TogglePhone.performed += TogglePhone;
+        InputManager.PlayerInputs.Phone.TogglePhone.performed += TogglePhone;
     }
     private void OnDisable()
     {
-        input.Disable();
-        input.Overworld.TogglePhone.performed -= TogglePhone;
+        InputManager.PlayerInputs.Overworld.TogglePhone.performed -= TogglePhone;
+        InputManager.PlayerInputs.Phone.TogglePhone.performed -= TogglePhone;
     }
 
     private void TogglePhone(InputAction.CallbackContext ctx)

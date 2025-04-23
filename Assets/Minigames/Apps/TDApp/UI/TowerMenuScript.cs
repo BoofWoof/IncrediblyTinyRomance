@@ -17,8 +17,6 @@ public class TowerMenuScript : MonoBehaviour
     public List<GameObject> towersList;
 
     private bool raised = false;
-
-    PlayerControls inputs;
     public void BeginTowerPlace(int towerIdx)
     {
         LowerMenu();
@@ -32,7 +30,7 @@ public class TowerMenuScript : MonoBehaviour
         {
             yield return null;
             // Check for right click
-            if (Input.GetMouseButtonDown(1) || inputs.Overworld.TogglePhone.WasPressedThisFrame())
+            if (Input.GetMouseButtonDown(1) || InputManager.PlayerInputs.Overworld.TogglePhone.WasPressedThisFrame())
             {
                 Destroy(newTower);
                 Debug.Log("Breaking");
@@ -85,8 +83,6 @@ public class TowerMenuScript : MonoBehaviour
 
     private void Start()
     {
-        inputs = new PlayerControls();
-        inputs.Enable();
         LowerMenu();
     }
 

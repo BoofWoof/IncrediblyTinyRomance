@@ -9,7 +9,16 @@ public class PuzzleSolvedUI : MonoBehaviour
     void Start()
     {
         UpdatePuzzlesSolved(TurkPuzzleScript.PuzzlesSolved);
+    }
+
+    public void OnEnable()
+    {
         TurkPuzzleScript.OnPuzzleComplete += UpdatePuzzlesSolved;
+    }
+
+    public void OnDisable()
+    {
+        TurkPuzzleScript.OnPuzzleComplete -= UpdatePuzzlesSolved;
     }
 
     public void UpdatePuzzlesSolved(int newCount)

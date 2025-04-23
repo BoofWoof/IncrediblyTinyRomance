@@ -17,7 +17,6 @@ public class PlayerCam : MonoBehaviour
     public float yRotation;
 
     private Vector2 CameraInput = Vector2.zero;
-    private PlayerControls inputs;
 
     public AudioSource PhoneShiftAudioSource;
     public AudioClip RaisePhoneClip;
@@ -28,21 +27,21 @@ public class PlayerCam : MonoBehaviour
     [Header("Activation")]
     public float MaxActivationDistance = 2f;
 
-    private Button currentButton;
-
-    public static bool EnableCameraMovement = false;
+    public static bool EnableCameraMovement = true;
 
     private void Awake()
     {
-        inputs = new PlayerControls();
         RegisterInputActions();
     }
-
+    private void Start()
+    {
+        PhonePositionScript.PhoneToggled += PhoneToggle;
+    }
     private void RegisterInputActions()
     {
-        inputs.Overworld.Camera.performed += context => CameraInput = context.ReadValue<Vector2>();
-        inputs.Overworld.Camera.canceled += context => CameraInput = Vector2.zero;
-        inputs.Overworld.ActivateObject.performed += context => ActivateObjects();
+        InputManager.PlayerInputs.Overworld.Camera.performed += context => CameraInput = context.ReadValue<Vector2>();
+        InputManager.PlayerInputs.Overworld.Camera.canceled += context => CameraInput = Vector2.zero;
+        InputManager.PlayerInputs.Overworld.ActivateObject.performed += context => ActivateObjects();
     }
 
     private void ActivateObjects()
@@ -66,20 +65,6 @@ public class PlayerCam : MonoBehaviour
             }
         }
     }
-    private void OnEnable()
-    {
-        inputs.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputs.Disable();
-    }
-    private void Start()
-    {
-        PhonePositionScript.PhoneToggled += PhoneToggle;
-    }
-
     private void OnDestroy()
     {
         PhonePositionScript.PhoneToggled -= PhoneToggle;
@@ -92,16 +77,12 @@ public class PlayerCam : MonoBehaviour
             PhoneShiftAudioSource.clip = RaisePhoneClip;
             PhoneShiftAudioSource.Play();
             ScreenMask.StartScreen();
-
-            inputs.Disable();
         }
         else
         {
             PhoneShiftAudioSource.clip = LowerPhoneClip;
             PhoneShiftAudioSource.Play();
             ScreenMask.ShutDownScreen();
-
-            inputs.Enable();
         }
     }
 
@@ -119,6 +100,13 @@ public class PlayerCam : MonoBehaviour
 
     public void Update()
     {
+        xRotation = orientation.rotation.eulerAngles.x;
+        if (xRotation > 180f) xRotation -= 360f;
+        yRotation = orientation.rotation.eulerAngles.y;
+
+        Vector3 loadOrientation = new Vector3(xRotation, yRotation, 0);
+        transform.rotation = Quaternion.Euler(loadOrientation);
+
         if (!EnableCameraMovement || CursorStateControl.MenuUp) return;
         float mouseX = CameraInput.x * Time.deltaTime * sensX;
         float mouseY = CameraInput.y * Time.deltaTime * sensY;
@@ -130,6 +118,6 @@ public class PlayerCam : MonoBehaviour
 
         Vector3 newOrientation = new Vector3 (xRotation, yRotation, 0) + MoveCamera.rumble * Random.insideUnitSphere * 15f + MoveCamera.shake * Random.insideUnitSphere * 15f;
         transform.rotation = Quaternion.Euler(newOrientation);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        orientation.rotation = Quaternion.Euler(newOrientation);
     }
 }

@@ -120,13 +120,11 @@ public class PrayerScript : MonoBehaviour
             string[] split;
             if (GoodIdx == i)
             {
-                Debug.Log(selectedGoodLine[0]);
                 split = selectedGoodLine[0].Split(" @");
                 ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
                 AuthorText[i].text = split[1];
                 continue;
             }
-            Debug.Log(selectedBadLines[badCount]);
             split = selectedBadLines[badCount].Split(" @");
             ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
             AuthorText[i].text = split[1];
