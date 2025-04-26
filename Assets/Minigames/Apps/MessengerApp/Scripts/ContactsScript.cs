@@ -28,13 +28,44 @@ public class ContactsScript : MonoBehaviour
 
     private static bool QuickMessaging = false;
 
+    public static bool ConversationOngoing = false;
+
     public void Start()
     {
         //StartCoroutine(WaitForNextMessage());
         messengerApp = MessagingApp.GetComponent<MessengerApp>();
         GetComponent<AppScript>().OnShowApp += DeselectCharacter;
 
-        DialogueManager.StartConversation("Test Conversation 2");
+        MessageQueue.addDialogue("Introduction Milo");
+        Lua.RegisterFunction("QueueDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("")));
+        Lua.RegisterFunction("QueueWaitDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("", 0)));
+
+        StartCoroutine(WaitForNextConversation());
+    }
+
+    public void StartDialogue(string newConversation)
+    {
+        ConversationOngoing=true;
+        DialogueManager.StartConversation(newConversation);
+    }
+
+    public IEnumerator WaitForNextConversation()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(2f);
+            if(MessageQueue.GetQueueLength() > 0)
+            {
+                Dialogue nextDialogue = MessageQueue.getNextDialogue();
+                yield return new WaitForSeconds((float)nextDialogue.wait);
+                StartDialogue(nextDialogue.dialouge);
+            }
+        }
+    }
+
+    public void OnConversationStart(Transform actor)
+    {
+        messengerApp.NotificationPing();
     }
 
     public void OnConversationLine(Subtitle subtitle)
@@ -64,13 +95,13 @@ public class ContactsScript : MonoBehaviour
     public IEnumerator SendAudioMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string voiceFilePath)
     {
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
-        messengerApp.NotificationPing();
         if (newSpeaker != null)
         {
             speakingCharacter = newSpeaker;
         }
         if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
         {
+            messengerApp.NotificationPing();
             messengerApp.RecreateFromText();
 
             messengerApp.MakeAudioMessage(voiceFilePath);
@@ -88,13 +119,13 @@ public class ContactsScript : MonoBehaviour
     public IEnumerator SendSingleMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string message_text)
     {
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages * message_text.Length / 100f);
-        messengerApp.NotificationPing();
         if (newSpeaker != null)
         {
             speakingCharacter = newSpeaker;
         }
         if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
         {
+            messengerApp.NotificationPing();
             messengerApp.RecreateFromText();
 
             MessageBoxScript message_info = messengerApp.MakeLeftMessage(message_text);
@@ -140,6 +171,7 @@ public class ContactsScript : MonoBehaviour
     {
         AddEndBar();
         speakingCharacter = null;
+        ConversationOngoing = false;
     }
 
     public void AddEndBar()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using PixelCrushers.DialogueSystem;
 
 public class PrayerScript : MonoBehaviour
 {
@@ -53,6 +54,9 @@ public class PrayerScript : MonoBehaviour
 
     IEnumerator SubmitPrayer(int answerIdx)
     {
+        int allCount = DialogueLua.GetVariable("PrayersSubmitted").asInt;
+        DialogueLua.SetVariable("PrayersSubmitted", allCount + 1);
+
         FireworkLauncher.ActivateMessage();
         string answerText = ButtonText[answerIdx].GetComponentInChildren<TMP_Text>().text;
         PrayerFireworkTextScript.ActivateFirework(answerText);
@@ -60,6 +64,8 @@ public class PrayerScript : MonoBehaviour
         TotalPrayerCount += 1;
         if (GoodIdx == answerIdx)
         {
+            int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
+            DialogueLua.SetVariable("SuccessfulPrayersSubmitted", correctCount + 1);
             Debug.Log("You win!");
             RamAngyLevel -= 30f;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
@@ -68,6 +74,8 @@ public class PrayerScript : MonoBehaviour
         }
         else
         {
+            int failCount = DialogueLua.GetVariable("FailedPrayersSubmitted").asInt;
+            DialogueLua.SetVariable("FailedPrayersSubmitted", failCount + 1);
             Debug.Log("Ram be angy! >:C");
             RamAngyLevel += 30f;
             if (RamAngyLevel > 100) RamAngyLevel = 100;

@@ -61,7 +61,7 @@ public class ShutterScript : MonoBehaviour
     {
         if (!IsCoroutineRunning)
         {
-            StartCoroutine(ShutterHeightChange(RaisedHeight, LiftDuration));
+            ShutterOpen();
             ShudderAudioSource.clip = ShudderRaiseClip;
             ShudderAudioSource.Play();
             ShutterToggled.Invoke(true);
@@ -74,7 +74,7 @@ public class ShutterScript : MonoBehaviour
     {
         if (!IsCoroutineRunning)
         {
-            StartCoroutine(ShutterHeightChange(LoweredHeight, DropDuration));
+            ShutterClose();
             ShudderAudioSource.clip = SudderDropClip;
             ShudderAudioSource.Play();
             ShutterToggled.Invoke(false);
@@ -83,30 +83,23 @@ public class ShutterScript : MonoBehaviour
         return false;
     }
 
-    IEnumerator ShutterHeightChange(float newHeight, float updateDuration)
+    public void ShutterClose()
     {
-        IsCoroutineRunning = true;
 
-        float timeElapsed = 0f;
-        float startingHeight = CurrentHeight;
-
-        // Gradually crossfade over the fadeDuration
-        while (timeElapsed < updateDuration)
+        foreach (GameObject shutter in Shutters)
         {
-            timeElapsed += Time.deltaTime;
-            float progress = timeElapsed / updateDuration;
-            CurrentHeight = Mathf.Lerp(startingHeight, newHeight, progress);
+            Animator animator = shutter.GetComponent<Animator>();
+            animator.SetBool("Open", false);
+        };
+    }
 
-            foreach (GameObject shutter in Shutters)
-            {
-                Vector3 prevPos = shutter.transform.localPosition;
-                shutter.transform.localPosition = new Vector3(prevPos.x, CurrentHeight, prevPos.z);
-            }
+    public void ShutterOpen()
+    {
 
-            yield return null;
-        }
-
-        IsCoroutineRunning = false;
-        yield return null;
+        foreach (GameObject shutter in Shutters)
+        {
+            Animator animator = shutter.GetComponent<Animator>();
+            animator.SetBool("Open", true);
+        };
     }
 }

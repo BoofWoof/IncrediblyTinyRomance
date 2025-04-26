@@ -1,16 +1,10 @@
-using DS;
-using DS.Data;
-using System.Collections;
+using PixelCrushers.DialogueSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BalconyEventsScript : MonoBehaviour
 {
     public GameObject PrayerScreen;
-
-    public DialogueOptionsVariable MiloStartCheck;
-
-    public DSDialogue PrayerTutorial;
 
     private bool BalconyActivated = false;
     private bool OnBalcony = false;
@@ -20,17 +14,21 @@ public class BalconyEventsScript : MonoBehaviour
     public AudioSource RaiseAudio;
     public AudioSource LowerAudio;
 
+    private void Start()
+    {
+        Lua.RegisterFunction("StartPrayerSystem", this, SymbolExtensions.GetMethodInfo(() => StartSystem()));
+    }
+
     private void Update()
     {
         if (!BalconyActivated && OnBalcony)
         {
             if (
-                    DSMemory.OptionMemory.ContainsKey(MiloStartCheck.uniqueID) &&
-                    DSMemory.OptionMemory[MiloStartCheck.uniqueID] == MiloStartCheck.StateUuids[1])
+                QuestLog.GetQuestState("A View") == QuestState.Active
+                )
             {
-                DSMemory.OptionMemory.Remove(MiloStartCheck.uniqueID);
-                PrayerTutorial.SubmitDialogue();
-                PrayerTutorial.OnMessageComplete += StartSystem;
+                QuestManager.IncrementQuest();
+                MessageQueue.addDialogue("Prayer System Tutorial");
             }
         }
     }

@@ -1,14 +1,11 @@
 using DS;
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PrayerEventsScript : MonoBehaviour
 {
-    public DSDialogue StartEvent;
-    public DSDialogue StartEvent2;
-    public DSDialogue AriesMeeting;
-    public DSDialogue CrowdworkIntro;
 
     private void OnEnable()
     {
@@ -21,23 +18,38 @@ public class PrayerEventsScript : MonoBehaviour
 
     public void OnPrayerSubmission(bool GoodPrayer)
     {
-        if(PrayerScript.TotalPrayerCount == 3)
+        if (
+                QuestLog.GetQuestState("A Proper Theocrat") == QuestState.Active
+            )
         {
-            StartEvent.SubmitDialogue();
+            QuestManager.QuestManagerInstance.QuickUpdate();
+            int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
+            Debug.Log(correctCount);
+            if (correctCount >= 3)
+            {
+                QuestManager.IncrementQuest();
+            }
         }
+
+        /*
+        if(PrayerScript.TotalPrayerCount == 3)
+            {
+                //StartEvent.SubmitDialogue();
+            }
         if (PrayerScript.TotalPrayerCount == 10)
         {
-            AriesMeeting.SubmitDialogue();
+            //AriesMeeting.SubmitDialogue();
         }
         if (PrayerScript.TotalPrayerCount == 18)
         {
-            StartEvent2.SubmitDialogue();
+            //StartEvent2.SubmitDialogue();
         }
         if (PrayerScript.TotalPrayerCount == 25)
         {
-            CrowdworkIntro.SubmitDialogue();
-            CrowdworkIntro.OnMessageComplete += UnlockApps;
+            //CrowdworkIntro.SubmitDialogue();
+            //CrowdworkIntro.OnMessageComplete += UnlockApps;
         }
+        */
     }
 
     public void UnlockApps()

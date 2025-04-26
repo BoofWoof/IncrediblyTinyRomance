@@ -1,5 +1,3 @@
-using DS;
-using DS.Data;
 using JetBrains.Annotations;
 using PixelCrushers.DialogueSystem;
 using System;
