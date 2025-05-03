@@ -27,6 +27,17 @@ public class ShutterScript : MonoBehaviour
 
     public AudioSource Siren;
 
+    public void Start()
+    {
+        foreach (GameObject shutter in Shutters)
+        {
+            Animator animator = shutter.GetComponent<Animator>();
+            animator.Play(animator.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, 1f);
+            animator.Update(0f); // Force immediate update
+        };
+    }
+
+
     public void ActivateShutters()
     {
         if (FirstRaise)

@@ -27,6 +27,7 @@ public class QuestManager : MonoBehaviour
         currentQuestIndex = 0;
 
         QuestManagerInstance = this;
+        transform.parent = DialogueManager.instance.transform;
     }
 
     private void Start()

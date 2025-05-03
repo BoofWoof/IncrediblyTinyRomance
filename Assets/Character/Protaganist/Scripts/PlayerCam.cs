@@ -100,13 +100,6 @@ public class PlayerCam : MonoBehaviour
 
     public void Update()
     {
-        xRotation = orientation.rotation.eulerAngles.x;
-        if (xRotation > 180f) xRotation -= 360f;
-        yRotation = orientation.rotation.eulerAngles.y;
-
-        Vector3 loadOrientation = new Vector3(xRotation, yRotation, 0);
-        transform.rotation = Quaternion.Euler(loadOrientation);
-
         if (!EnableCameraMovement || CursorStateControl.MenuUp) return;
         float mouseX = CameraInput.x * Time.deltaTime * sensX;
         float mouseY = CameraInput.y * Time.deltaTime * sensY;
@@ -118,6 +111,6 @@ public class PlayerCam : MonoBehaviour
 
         Vector3 newOrientation = new Vector3 (xRotation, yRotation, 0) + MoveCamera.rumble * Random.insideUnitSphere * 15f + MoveCamera.shake * Random.insideUnitSphere * 15f;
         transform.rotation = Quaternion.Euler(newOrientation);
-        orientation.rotation = Quaternion.Euler(newOrientation);
+        orientation.rotation = Quaternion.Euler(new Vector3(0, yRotation, 0));
     }
 }

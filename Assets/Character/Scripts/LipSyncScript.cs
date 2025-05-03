@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -15,22 +16,7 @@ enum PhenomeTypes
     WQ,
     rest
 }
-struct PhenomeMarker
-{
-    public PhenomeTypes phenomeType;
-    public float timeSec;
 
-    public PhenomeMarker(PhenomeTypes phenomeType, float timeSec)
-    {
-        this.phenomeType = phenomeType;
-        this.timeSec = timeSec;
-    }
-
-    public override string ToString()
-    {
-        return phenomeType.ToString() + " : " + timeSec.ToString();
-    }
-}
 public class LipSyncScript : MonoBehaviour
 {
     public AudioSource LipSyncAudioSource;
@@ -39,53 +25,52 @@ public class LipSyncScript : MonoBehaviour
     public float FPS = 24f;
 
     private string[] PhenomesText;
-    private List<PhenomeMarker> PhenomeMarkers = new List<PhenomeMarker>();
+    private TimeList<PhenomeTypes> PhenomeMarkers = new TimeList<PhenomeTypes>();
 
-    private int CurrentPhenomeIdx = 0;
-    private PhenomeMarker CurrentPhenomeMarker;
-    private PhenomeMarker NextPhenomeMarker;
+    Coroutine SpeechCoroutine = null;
 
-    private void Update()
+    public void PlaySpeech()
     {
-        CurrentPhenomeIdx = 0;
-        if (LipSyncAudioSource.isPlaying)
+        if(!(SpeechCoroutine is null)) StopCoroutine(SpeechCoroutine);
+        SpeechCoroutine = StartCoroutine(PlaySpeechCoroutine());
+    }
+
+    private IEnumerator PlaySpeechCoroutine()
+    {
+        ProcessAudio();
+        LipSyncAudioSource.Play();
+
+        while (LipSyncAudioSource.isPlaying)
         {
+            yield return null;
+
             float audioTimeSec = LipSyncAudioSource.time;
-            for (int i = CurrentPhenomeIdx; i < PhenomeMarkers.Count; i++)
-            {
-                if(audioTimeSec < PhenomeMarkers[i].timeSec)
-                {
-                    CurrentPhenomeIdx = i-1;
-                    break;
-                }
-                CurrentPhenomeIdx = i;
-            }
-            int nextPhenomeIdx = CurrentPhenomeIdx + 1;
-            if (nextPhenomeIdx >= PhenomeMarkers.Count) nextPhenomeIdx = CurrentPhenomeIdx;
+            (
+                TimeMarker<PhenomeTypes> currentPhenomeMarker, 
+                TimeMarker<PhenomeTypes> nextPhenomeMarker
+                ) = PhenomeMarkers.GetNearestData(audioTimeSec);
 
-            CurrentPhenomeMarker = PhenomeMarkers[CurrentPhenomeIdx];
-            NextPhenomeMarker = PhenomeMarkers[nextPhenomeIdx];
-            float transitionLength = NextPhenomeMarker.timeSec - CurrentPhenomeMarker.timeSec;
+            float transitionLength = nextPhenomeMarker.timeSec - currentPhenomeMarker.timeSec;
 
-            foreach (PhenomeTypes phenomeType in System.Enum.GetValues(typeof(PhenomeTypes)).Cast<PhenomeTypes>())
+            foreach (PhenomeTypes phenomeType in Enum.GetValues(typeof(PhenomeTypes)).Cast<PhenomeTypes>())
             {
                 int blendShapeIndex = TargetMesh.sharedMesh.GetBlendShapeIndex(phenomeType.ToString());
                 if (blendShapeIndex == -1) continue; //Skip a blend shape if it doesn't exit.
 
                 float phenomeWeight = 0;
-                if(phenomeType == CurrentPhenomeMarker.phenomeType && phenomeType == NextPhenomeMarker.phenomeType)
+                if(phenomeType == currentPhenomeMarker.data && phenomeType == nextPhenomeMarker.data)
                 {
                     phenomeWeight = 1;
                 }
                 else
                 {
-                    if (phenomeType == CurrentPhenomeMarker.phenomeType)
+                    if (phenomeType == currentPhenomeMarker.data)
                     {
-                        phenomeWeight = 1f - (audioTimeSec - CurrentPhenomeMarker.timeSec) / transitionLength;
+                        phenomeWeight = 1f - (audioTimeSec - currentPhenomeMarker.timeSec) / transitionLength;
                     }
-                    if (phenomeType == NextPhenomeMarker.phenomeType)
+                    if (phenomeType == nextPhenomeMarker.data)
                     {
-                        phenomeWeight = (audioTimeSec - CurrentPhenomeMarker.timeSec) / transitionLength;
+                        phenomeWeight = (audioTimeSec - currentPhenomeMarker.timeSec) / transitionLength;
                     }
                 }
 
@@ -94,34 +79,31 @@ public class LipSyncScript : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void ProcessAudio()
     {
-        PhenomesText = PhenomeAsset.text.Split('\n');
+        //Removes first line.
+        PhenomesText = PhenomeAsset.text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        string trimmedText = string.Join("\n", PhenomesText.Skip(1));
 
-        for (int i = 1;  i < PhenomesText.Length; i++)
+        //Convert to time markers.
+        Func<string, PhenomeTypes> EnumParse = s =>
         {
-            if (PhenomesText[i].Length < 3) continue;
-            PhenomeMarker newPhenomeMarker = TextToPhenomeMarker(PhenomesText[i]);
-            PhenomeMarkers.Add(newPhenomeMarker);
+            return TextToPhenomeType(s);
+        };
+        PhenomeMarkers = trimmedText.ToTimeMarkers<PhenomeTypes>(" ", EnumParse, FPS);
+
+        //Adjust for rest marker position.
+        PhenomeTypes lastType = PhenomeTypes.FV;//Arbitrarily picked non rest type.
+        for (int i = 0; i < PhenomeMarkers.Count; i++)
+        {
+            TimeMarker<PhenomeTypes> marker = PhenomeMarkers[i];
+            if (marker.data == PhenomeTypes.rest && lastType == PhenomeTypes.rest)
+            {
+                marker.timeSec += (-1.5f / FPS);
+            }
+            //Debug.Log(marker.data.ToString() + " : " + marker.timeSec);
+            lastType = marker.data;
         }
-    }
-
-    private PhenomeMarker TextToPhenomeMarker(string text)
-    {
-        string[] textSplit = text.Split(" ");
-        PhenomeTypes phenomeType = TextToPhenomeType(textSplit[1]);
-        int phenomeFrame = int.Parse(textSplit[0]) - 1;
-
-        //This line is added because of weird Papagayo behavior.
-        if (phenomeType != PhenomeTypes.rest) phenomeFrame += 2;
-
-        float phenomeTimeSec = phenomeFrame / FPS;
-
-        return new PhenomeMarker(
-                phenomeType,
-                phenomeTimeSec
-                );
     }
 
     private PhenomeTypes TextToPhenomeType(string text)

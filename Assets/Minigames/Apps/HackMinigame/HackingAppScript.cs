@@ -24,6 +24,28 @@ public class HackingAppScript : MonoBehaviour
         ResetLevel();
     }
 
+    public void StartSong()
+    {
+        MusicSelectorScript.SetPhoneSong(2);
+    }
+    public void EndSong()
+    {
+        MusicSelectorScript.SetPhoneSong(MusicSelectorScript.instance.DefaultStartSongPhoneID);
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<AppScript>().OnShowApp += StartSong;
+        GetComponent<AppScript>().OnHideApp += EndSong;
+    }
+
+    private void OnDisable() 
+    {
+
+        GetComponent<AppScript>().OnShowApp -= StartSong;
+        GetComponent<AppScript>().OnHideApp -= EndSong;
+    }
+
     public void StartLevel()
     {
         ResetLevel();
