@@ -38,7 +38,6 @@ public class LipSyncScript : MonoBehaviour
     private IEnumerator PlaySpeechCoroutine()
     {
         ProcessAudio();
-        LipSyncAudioSource.Play();
 
         while (LipSyncAudioSource.isPlaying)
         {

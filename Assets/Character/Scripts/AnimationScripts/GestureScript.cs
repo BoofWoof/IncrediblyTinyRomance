@@ -10,7 +10,7 @@ public class GestureScript : MonoBehaviour
 
     private TimeList<string> TimeMarkers;
 
-    public List<string> ValidGestures;
+    public GestureListSO ValidGestures;
 
     Coroutine GestureCoroutine;
 
@@ -28,6 +28,8 @@ public class GestureScript : MonoBehaviour
         while (audioSource.isPlaying)
         {
             (TimeMarker<string> currentGesture, _) = TimeMarkers.GetNearestData(audioSource.time);
+            if (!ValidGestures.ValidGestures.Contains(currentGesture.data)) Debug.LogError("Gesture not found: " + currentGesture.data);
+
             yield return null;
         }
     }

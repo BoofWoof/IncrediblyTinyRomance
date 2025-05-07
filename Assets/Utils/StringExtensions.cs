@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 
 public struct TimeMarker<T>
 {
@@ -105,14 +104,18 @@ public static class StringExtensions
 
         foreach (string line in lines)
         {
-            string[] parts = line.Split(split);
-            if (parts.Length < 2)
-                continue;
+            int index = line.IndexOf(split);
 
-            if (float.TryParse(parts[0].Trim(), out float rawTimeSec))
+            if (index >= 0)
             {
-                T value = valueParser(parts[1].Trim());
-                result.Add(new TimeMarker<T>(value, rawTimeSec / fps - startingTimeSec));
+                string timeRaw = line.Substring(0, index);
+                string dataRaw = line.Substring(index + split.Length);
+
+                if (float.TryParse(timeRaw.Trim(), out float rawTimeSec))
+                {
+                    T value = valueParser(dataRaw.Trim());
+                    result.Add(new TimeMarker<T>(value, rawTimeSec / fps - startingTimeSec));
+                }
             }
         }
 

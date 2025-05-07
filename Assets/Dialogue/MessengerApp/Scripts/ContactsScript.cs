@@ -10,8 +10,9 @@ using UnityEngine.UI;
 
 public class ContactsScript : MonoBehaviour
 {
+    public static ContactsScript instance;
     public GameObject MessagingApp;
-    private MessengerApp messengerApp;
+    public MessengerApp messengerApp;
 
     public PixelCrushers.DialogueSystem.CharacterInfo activeCharacter = null;
     public PixelCrushers.DialogueSystem.CharacterInfo speakingCharacter = null;
@@ -28,48 +29,18 @@ public class ContactsScript : MonoBehaviour
 
     private static bool QuickMessaging = false;
 
-    public static bool ConversationOngoing = false;
-
     public void Start()
     {
-        //StartCoroutine(WaitForNextMessage());
+        instance = this;
+
         messengerApp = MessagingApp.GetComponent<MessengerApp>();
         GetComponent<AppScript>().OnShowApp += DeselectCharacter;
 
-        MessageQueue.addDialogue("Introduction Milo");
-        Lua.RegisterFunction("QueueDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("")));
-        Lua.RegisterFunction("QueueWaitDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("", 0)));
-
-        StartCoroutine(WaitForNextConversation());
-    }
-
-    public void StartDialogue(string newConversation)
-    {
-        ConversationOngoing=true;
-        DialogueManager.StartConversation(newConversation);
-    }
-
-    public IEnumerator WaitForNextConversation()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(2f);
-            if(MessageQueue.GetQueueLength() > 0)
-            {
-                Dialogue nextDialogue = MessageQueue.getNextDialogue();
-                yield return new WaitForSeconds((float)nextDialogue.wait);
-                StartDialogue(nextDialogue.dialouge);
-            }
-        }
-    }
-
-    public void OnConversationStart(Transform actor)
-    {
-        messengerApp.NotificationPing();
     }
 
     public void OnConversationLine(Subtitle subtitle)
     {
+        if (ConversationManagerScript.isMacroConvo) return;
         PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
         if (tempSpeakingCharacter.Name == "Player") return;
         if (speakingCharacter != null && speakingCharacter.id != tempSpeakingCharacter.id) {
@@ -151,9 +122,10 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationResponseMenu(Response[] responses)
     {
-        Debug.Log("Creating choices: " + responses.Length.ToString());
         speakingCharacter = DialogueManager.CurrentConversationState.subtitle.speakerInfo;
+        if (ConversationManagerScript.isMacroConvo) return;
         Debug.Log(speakingCharacter.nameInDatabase);
+        Debug.Log("Creating choices: " + responses.Length.ToString());
         StartCoroutine(SendChoicesMessage(responses));
     }
 
@@ -169,9 +141,9 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationEnd(Transform actor)
     {
+        if (ConversationManagerScript.isMacroConvo) return;
         AddEndBar();
         speakingCharacter = null;
-        ConversationOngoing = false;
     }
 
     public void AddEndBar()

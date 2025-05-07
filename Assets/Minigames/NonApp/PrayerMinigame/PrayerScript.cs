@@ -7,6 +7,8 @@ using PixelCrushers.DialogueSystem;
 
 public class PrayerScript : MonoBehaviour
 {
+    public static PrayerScript instance;
+
     public TextAsset GoodPrayers;
     private string[] GoodLines = null;
     public TextAsset BadPrayers;
@@ -35,8 +37,14 @@ public class PrayerScript : MonoBehaviour
     public SplineMessageScript FireworkLauncher;
     public PrayerFireworkTextScript PrayerFireworkTextScript;
 
+    //Dialogue Options
+    public static bool StoryMode = false;
+    private Response[] Responses;
+
     private void Start()
     {
+        instance = this;
+
         ProcessPrayers();
         GenerateNewPrayers();
     }
@@ -49,9 +57,121 @@ public class PrayerScript : MonoBehaviour
     }
     public void SubmitAnswer(int answerIdx)
     {
-        StartCoroutine(SubmitPrayer(answerIdx));
+        if (StoryMode)
+        {
+            StartCoroutine(SubmitResponse(answerIdx));
+        } else
+        {
+            StartCoroutine(SubmitPrayer(answerIdx));
+        }
     }
 
+    #region Conversation
+    public IEnumerator SubmitResponse(int answerIdx)
+    {
+        DisableButtons();
+        AuthorText[answerIdx].text = "";
+
+        int actualAnswerIdx = 0;
+
+        if (Responses.Length == 1)
+        {
+            actualAnswerIdx = 0;
+        }
+        else if (Responses.Length == 2)
+        {
+            if (answerIdx == 2)
+            {
+                actualAnswerIdx = 1;
+            }
+            else
+            {
+                actualAnswerIdx = 0;
+            }
+        }
+        else if (Responses.Length == 3)
+        {
+            actualAnswerIdx = answerIdx;
+        }
+
+        FireworkLauncher.ActivateMessage();
+        string answerText = Responses[actualAnswerIdx].formattedText.text;
+        PrayerFireworkTextScript.ActivateFirework(answerText);
+
+        yield return new WaitForSeconds(WaitForNextPrayerSec + 3f);
+        (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(Responses[actualAnswerIdx]);
+    }
+    public void OnConversationResponseMenu(Response[] responses)
+    {
+        if (!ConversationManagerScript.isMacroConvo) return;
+        Debug.Log("Creating choices: " + responses.Length.ToString());
+
+        Responses = responses;
+
+        for (int i = 0; i < ButtonText.Count; i++)
+        {
+            ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
+        }
+        if (responses.Length == 1)
+        {
+            ButtonText[0].GetComponentInChildren<TMP_Text>().text = "";
+            ButtonText[0].interactable = false;
+            ButtonText[1].GetComponentInChildren<TMP_Text>().text = responses[0].formattedText.text;
+            ButtonText[1].interactable = true;
+            ButtonText[2].GetComponentInChildren<TMP_Text>().text = "";
+            ButtonText[2].interactable = false;
+        } 
+        else if (responses.Length == 2)
+        {
+            ButtonText[0].GetComponentInChildren<TMP_Text>().text = responses[0].formattedText.text;
+            ButtonText[0].interactable = true;
+            ButtonText[1].GetComponentInChildren<TMP_Text>().text = "";
+            ButtonText[1].interactable = false;
+            ButtonText[2].GetComponentInChildren<TMP_Text>().text = responses[1].formattedText.text;
+            ButtonText[2].interactable = true;
+        }
+        else if (responses.Length == 3)
+        {
+            ButtonText[0].GetComponentInChildren<TMP_Text>().text = responses[0].formattedText.text;
+            ButtonText[0].interactable = true;
+            ButtonText[1].GetComponentInChildren<TMP_Text>().text = responses[1].formattedText.text;
+            ButtonText[1].interactable = true;
+            ButtonText[2].GetComponentInChildren<TMP_Text>().text = responses[2].formattedText.text;
+            ButtonText[2].interactable = true;
+        }
+    }
+    public void OnConversationLine(Subtitle subtitle)
+    {
+        if (!ConversationManagerScript.isMacroConvo) return;
+
+        string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
+        voiceFilePath = voiceFilePath.CleanResourcePath();
+        VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(voiceFilePath);
+
+        if (voiceLine == null) return;
+
+        Debug.Log(subtitle.formattedText.text);
+        StartCoroutine(GiantSpeak(voiceLine));
+    }
+    public IEnumerator GiantSpeak(VoiceLineSO voiceLine)
+    {
+        ConversationManagerScript.instance.AriesSpeak(voiceLine);
+        yield return null;
+        while (ConversationManagerScript.instance.isAriesSpeaking())
+        {
+            yield return null;
+        }
+        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+    }
+    public void OnConversationEnd(Transform actor)
+    {
+        if (!ConversationManagerScript.isMacroConvo) return;
+        StoryMode = false;
+        GenerateNewPrayers();
+    }
+    #endregion
+
+    #region MiniGame
     IEnumerator SubmitPrayer(int answerIdx)
     {
         int allCount = DialogueLua.GetVariable("PrayersSubmitted").asInt;
@@ -83,19 +203,20 @@ public class PrayerScript : MonoBehaviour
             BadPrayerCount++;
         }
 
-        //DisableButtons
-        for (int i = 0; i < ButtonText.Count; i++)
-        {
-            ButtonText[i].interactable = false;
-        }
+        DisableButtons();
         AuthorText[answerIdx].text = "";
 
         yield return new WaitForSeconds(WaitForNextPrayerSec);
 
         GenerateNewPrayers();
+    }
+
+    private void DisableButtons()
+    {
+        //DisableButtons
         for (int i = 0; i < ButtonText.Count; i++)
         {
-            ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
+            ButtonText[i].interactable = false;
         }
     }
 
@@ -118,6 +239,8 @@ public class PrayerScript : MonoBehaviour
 
     private void GenerateNewPrayers()
     {
+        if (StoryMode) return;
+
         List<string> selectedGoodLine = GetRandomUniqueLines(GoodLines, 1);
         List<string> selectedBadLines = GetRandomUniqueLines(BadLines, 2);
 
@@ -137,6 +260,11 @@ public class PrayerScript : MonoBehaviour
             ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
             AuthorText[i].text = split[1];
             badCount++;
+        }
+
+        for (int i = 0; i < ButtonText.Count; i++)
+        {
+            ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
         }
     }
 
@@ -158,4 +286,5 @@ public class PrayerScript : MonoBehaviour
 
         return result;
     }
+    #endregion
 }
