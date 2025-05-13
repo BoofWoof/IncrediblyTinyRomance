@@ -55,6 +55,7 @@ public class MoveCamera : MonoBehaviour
     public IEnumerator AddScreenShake(float durationSec, float shakeAmplitude = 1)
     {
         dustGenerator.Play();
+        earthquakeSoundSource.volume = shakeAmplitude;
         earthquakeSoundSource.Play();
 
         float timePassedSec = 0;

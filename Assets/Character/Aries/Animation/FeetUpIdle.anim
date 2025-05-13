@@ -1249,7 +1249,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -25.327, y: 8.094, z: -10.314}
+        value: {x: -39.667, y: 11.459, z: -12.136}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1258,7 +1258,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 10.383333
-        value: {x: -25.327, y: 8.094, z: -10.314}
+        value: {x: -39.667, y: 11.459, z: -12.136}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -6545,7 +6545,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -25.327
+        value: -39.667
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6554,7 +6554,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 10.383333
-        value: -25.327
+        value: -39.667
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6575,7 +6575,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 8.094
+        value: 11.459
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6584,7 +6584,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 10.383333
-        value: 8.094
+        value: 11.459
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6605,7 +6605,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -10.314
+        value: -12.136
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6614,7 +6614,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 10.383333
-        value: -10.314
+        value: -12.136
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8168,7 +8168,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/Neck
+    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R/Foot.R/HoofToes.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8180,7 +8180,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/Neck
+    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R/Foot.R/HoofToes.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8192,7 +8192,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/Neck
+    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R/Foot.R/HoofToes.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8276,7 +8276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R/Foot.R/HoofToes.R
+    path: Aries/Armature/Bone/Belly/Chest/Neck
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8288,7 +8288,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R/Foot.R/HoofToes.R
+    path: Aries/Armature/Bone/Belly/Chest/Neck
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8300,10 +8300,17 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R/Foot.R/HoofToes.R
+    path: Aries/Armature/Bone/Belly/Chest/Neck
     classID: 4
     script: {fileID: 0}
     flags: 0
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 4.866667
+    functionName: Impact
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1
+    intParameter: 0
+    messageOptions: 0

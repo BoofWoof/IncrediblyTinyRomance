@@ -34,6 +34,7 @@ public class CharacterSpeechScript : MonoBehaviour
         //THIS NEEDS TO ACTUALLY GET FILLED OUT
         if (voiceLine.GestureData != null)
         {
+            Gesture.Gestures = voiceLine.GestureData;
             Gesture.PlaySpeech();
         }
     }

@@ -244,6 +244,7 @@ MonoBehaviour:
   Gestures: {fileID: 4900000, guid: 852734d6acaf5914aa157234f02ab43d, type: 3}
   FPS: 24
   ValidGestures: {fileID: 11400000, guid: 43f99913eb4353845a8226f84c44b0f7, type: 2}
+  CharacterAnimator: {fileID: 2334049630121699796}
 --- !u!114 &6021394504351803873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5941152083313003701}
   - component: {fileID: 2334049630121699796}
+  - component: {fileID: 4749775732329079046}
   m_Layer: 0
   m_Name: Aries
   m_TagString: Untagged
@@ -427,6 +429,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4749775732329079046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931797638235989679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d4a6d1cf793494d8c7db89b0f5bc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3095250876932928933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -492,6 +506,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5335358089583848009, guid: ab0b5de0e5aa4d546aeb9a9536f5bca1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4321441275830684561, guid: ab0b5de0e5aa4d546aeb9a9536f5bca1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}

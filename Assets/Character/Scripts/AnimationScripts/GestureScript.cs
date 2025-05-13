@@ -10,7 +10,9 @@ public class GestureScript : MonoBehaviour
 
     private TimeList<string> TimeMarkers;
 
-    public GestureListSO ValidGestures;
+    public Animator CharacterAnimator;
+
+    private TimeMarker<string> lastTimeMarker;
 
     Coroutine GestureCoroutine;
 
@@ -24,13 +26,38 @@ public class GestureScript : MonoBehaviour
 
     public IEnumerator PlayGestures()
     {
+        lastTimeMarker = new TimeMarker<string>();
+        lastTimeMarker.timeSec = -1f;
         AudioSource audioSource = GetComponent<AudioSource>();
         while (audioSource.isPlaying)
         {
             (TimeMarker<string> currentGesture, _) = TimeMarkers.GetNearestData(audioSource.time);
-            if (!ValidGestures.ValidGestures.Contains(currentGesture.data)) Debug.LogError("Gesture not found: " + currentGesture.data);
+            //if (!ValidGestures.ValidGestures.Contains(currentGesture.data)) Debug.LogError("Gesture not found: " + currentGesture.data);
+            if(currentGesture.timeSec != lastTimeMarker.timeSec)
+            {
+                ProcessGesture(currentGesture.data);
+
+                lastTimeMarker = currentGesture;
+            }
 
             yield return null;
+        }
+    }
+
+    private void ProcessGesture(string GestureName)
+    {
+        Debug.Log("Running Gesture: " + GestureName);
+        switch (GestureName)
+        {
+            case "Sit":
+                CharacterAnimator.SetBool("Sitting", true);
+                break;
+            case "Stand":
+                CharacterAnimator.SetBool("Sitting", false);
+                break;
+            case "SitForward":
+                CharacterAnimator.SetTrigger("SitForward");
+                break;
         }
     }
 

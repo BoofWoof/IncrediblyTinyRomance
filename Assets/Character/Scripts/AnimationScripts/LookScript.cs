@@ -27,7 +27,7 @@ public class LookScript : MonoBehaviour
 
     private RotationLimits LEyeRotLimits = new RotationLimits(-70f, 10f, -10f, 5f);
     private RotationLimits REyeRotLimits = new RotationLimits(-10f, 70f, -10f, 5f);
-    private RotationLimits HeadRotLimits = new RotationLimits(-30f, 30f, -35f, 35f);
+    private RotationLimits HeadRotLimits = new RotationLimits(-30f, 30f, -15f, 35f);
 
     void Update()
     {

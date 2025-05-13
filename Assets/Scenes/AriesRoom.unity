@@ -25784,7 +25784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gestures: {fileID: 4900000, guid: 852734d6acaf5914aa157234f02ab43d, type: 3}
   FPS: 24
-  ValidGestures: {fileID: 11400000, guid: 43f99913eb4353845a8226f84c44b0f7, type: 2}
+  CharacterAnimator: {fileID: 0}
 --- !u!1001 &1215476301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40112,7 +40112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563996494}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.33772147, w: 0.94124615}
   m_LocalPosition: {x: -6.197, y: 8.28, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40121,7 +40121,7 @@ Transform:
   - {fileID: 1740461716}
   - {fileID: 2013337507}
   m_Father: {fileID: 511125688}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -39.476}
 --- !u!1 &1568935198
 GameObject:
   m_ObjectHideFlags: 0
@@ -57163,6 +57163,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &2144536394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4174121377666651126, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
+  m_PrefabInstance: {fileID: 7909703028265765590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &21216393663192231
 GameObject:
   m_ObjectHideFlags: 0
@@ -61431,6 +61436,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 130993704}
     m_Modifications:
+    - target: {fileID: 2388263887635511672, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
+      propertyPath: City
+      value: 
+      objectReference: {fileID: 32217737}
+    - target: {fileID: 2388263887635511672, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
+      propertyPath: Head
+      value: 
+      objectReference: {fileID: 2144536394}
+    - target: {fileID: 2388263887635511672, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
+      propertyPath: DistanceFalloff
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5941152083313003701, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.854
@@ -61475,6 +61492,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 32217738}
+    - target: {fileID: 8523489439316788405, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -7377775339961149256, guid: e9e2adb90d7e6ae4eb746f5d98732dd8, type: 2}
     - target: {fileID: 8931797638235989679, guid: 527153eb897162040b1b3f88ad8403df, type: 3}
       propertyPath: m_Name
       value: Aries

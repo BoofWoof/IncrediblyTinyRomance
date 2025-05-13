@@ -7484,7 +7484,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R
+    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L/HoofToes.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7496,7 +7496,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R
+    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L/HoofToes.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -7508,7 +7508,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R
+    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L/HoofToes.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8060,6 +8060,78 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: Aries/Armature/Bone/Belly/Chest/Neck
     classID: 4
     script: {fileID: 0}
@@ -8121,78 +8193,6 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L/HoofToes.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L/HoofToes.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Pelvis.L/UpperLeg.L/LowerLeg.L/Foot.L/HoofToes.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8276,7 +8276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L
+    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8288,7 +8288,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L
+    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8300,10 +8300,24 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L
+    path: Aries/Armature/Bone/Pelvis.R/UpperLeg.R/LowerLeg.R
     classID: 4
     script: {fileID: 0}
     flags: 0
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.016666668
+    functionName: Impact
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.2
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.0666666
+    functionName: Impact
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1
+    intParameter: 0
+    messageOptions: 0
