@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -14,7 +11,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public bool ExpandedLeft = false;
     public bool ExpandedRight = false;
 
-    public bool ConnecteddUp = false;
+    public bool ConnectedUp = false;
     public bool ConnectedDown = false;
     public bool ConnectedLeft = false;
     public bool ConnectedRight = false;
@@ -289,7 +286,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             expandToScript.GroupID != GroupID
             ) return null;
 
-        ConnecteddUp = true;
+        ConnectedUp = true;
         expandToScript.ConnectedDown = true;
 
         if (expandToScript.Linked) return null;
@@ -299,6 +296,43 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         expandToScript.GroupID = GroupID;
 
         return expandedTo;
+    }
+
+    public void ConnectionCheck()
+    {
+        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x, cord.y - 1))
+        {
+            ConnectedDown = false;
+        }
+        else
+        {
+            ConnectedDown = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y - 1].GetComponent<TurkCubeScript>().GroupID == GroupID;
+        }
+        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x, cord.y + 1))
+        {
+            ConnectedUp = false;
+        }
+        else
+        {
+            ConnectedUp = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y + 1].GetComponent<TurkCubeScript>().GroupID == GroupID;
+        }
+        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x - 1, cord.y))
+        {
+            ConnectedLeft = false;
+        }
+        else
+        {
+            ConnectedLeft = TurkPuzzleScript.puzzlePieceGrid[cord.x - 1, cord.y].GetComponent<TurkCubeScript>().GroupID == GroupID;
+        }
+        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x + 1, cord.y))
+        {
+            ConnectedRight = false;
+        }
+        else
+        {
+            ConnectedRight = TurkPuzzleScript.puzzlePieceGrid[cord.x + 1, cord.y].GetComponent<TurkCubeScript>().GroupID == GroupID;
+        }
+
     }
 
     private GameObject ExpandDown()
@@ -314,7 +348,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             ) return null;
 
         ConnectedDown = true;
-        expandToScript.ConnecteddUp = true;
+        expandToScript.ConnectedUp = true;
 
         if (expandToScript.Linked) return null;
 

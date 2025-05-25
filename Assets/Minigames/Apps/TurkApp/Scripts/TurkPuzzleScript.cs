@@ -1,10 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using Unity.Hierarchy;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TurkPuzzleScript : MonoBehaviour
 {
+    public static TurkPuzzleScript instance;
+
+    public GameObject EmptyTile;
+    public TMP_Text PuzzleName;
+    public Material ConstMat;
+
     [Header("Grid Settings")]
     public List<PuzzleShapeSO> VeryEasyPuzzles = new List<PuzzleShapeSO>();
     public List<PuzzleShapeSO> EasyPuzzles = new List<PuzzleShapeSO>();
@@ -58,6 +68,10 @@ public class TurkPuzzleScript : MonoBehaviour
     }
     void Start()
     {
+        instance = this;
+
+        PuzzleName.gameObject.SetActive(false);
+
         PuzzlesList.Add(VeryEasyPuzzles);
         PuzzlesList.Add(EasyPuzzles);
         PuzzlesList.Add(MediumPuzzles);
@@ -96,7 +110,7 @@ public class TurkPuzzleScript : MonoBehaviour
         {
             TurkCubeScript tcs = piece.GetComponent<TurkCubeScript>();
             piece.GetComponent<Image>().sprite = constallationTiles.GetSprite(
-                !tcs.ConnecteddUp,
+                !tcs.ConnectedUp,
                 !tcs.ConnectedDown,
                 !tcs.ConnectedLeft,
                 !tcs.ConnectedRight
@@ -110,14 +124,46 @@ public class TurkPuzzleScript : MonoBehaviour
         {
             if(!gridSquare.GetComponent<TurkHoleScript>().isFilled()) return false;
         }
-        Debug.Log("You win!");
 
+        instance.StartCoroutine(instance.WinCutscene());
+        return true;
+    }
+
+    public void DisablePieces()
+    {
+
+    }
+
+    public IEnumerator WinCutscene()
+    {
+        DisablePieces();
+
+        Debug.Log("Turk Puzzle Complete!");
         PuzzlesSolved += 1;
         GameData.Money += MoneyPerPuzzle;
-        OnPuzzleComplete?.Invoke(PuzzlesSolved);
 
+        float timePass = 0f;
+        float transitionPeriod = 1.5f;
+
+        while (timePass < transitionPeriod)
+        {
+            timePass += Time.deltaTime;
+            Shader.SetGlobalFloat("_TurkCompletion", timePass/transitionPeriod);
+
+            yield return null;
+        }
+        Shader.SetGlobalFloat("_TurkCompletion", 1);
+
+        yield return new WaitForSeconds(0.2f);
+        PuzzleName.text = selectedGridData.name;
+        PuzzleName.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        PuzzleName.gameObject.SetActive(false);
+        Shader.SetGlobalFloat("_TurkCompletion", 0);
+        OnPuzzleComplete?.Invoke(PuzzlesSolved);
         puzzleScript.GeneratePuzzle();
-        return true;
     }
 
     private void ScrambleCords()
@@ -180,6 +226,8 @@ public class TurkPuzzleScript : MonoBehaviour
         foreach (GameObject pieceRoot in puzzlePiece)
         {
             pieceRoot.GetComponent<Image>().color = ColorsList[GroupIdx];
+            pieceRoot.GetComponent<Image>().material.SetColor("_Tint", ColorsList[GroupIdx]);
+
             pieceRoot.GetComponent<TurkCubeScript>().Linked = true;
             pieceRoot.GetComponent<TurkCubeScript>().PieceRoot = true;
             pieceRoot.GetComponent<TurkCubeScript>().GroupID = GroupIdx;
@@ -199,6 +247,7 @@ public class TurkPuzzleScript : MonoBehaviour
                 if (newLink == null) continue;
                 linkedPieces++;
                 newLink.GetComponent<Image>().color = pieceRoot.GetComponent<Image>().color;
+                newLink.GetComponent<Image>().material.SetColor("_Tint", pieceRoot.GetComponent<Image>().color);
                 newLink.transform.parent = pieceRoot.transform;
             }
 
@@ -208,6 +257,13 @@ public class TurkPuzzleScript : MonoBehaviour
                 Debug.Log("Early Exit");
                 break;
             }
+        }
+        //Second connection pass.
+        foreach (GameObject piece in puzzlePieceSquares)
+        {
+            TurkCubeScript pieceScript = piece.GetComponent<TurkCubeScript>();
+            pieceScript.ConnectionCheck();
+
         }
     }
     private List<GameObject> SelectRandomSquares(int numberOfSquares)
@@ -251,6 +307,8 @@ public class TurkPuzzleScript : MonoBehaviour
             Image imageComponent = newSquare.AddComponent<Image>();
             imageComponent.sprite = constallationTiles.GetSprite(true, true, true, true);
             imageComponent.color = Color.white;
+            imageComponent.material = ConstMat;
+            imageComponent.material.SetTexture("_MainTex", imageComponent.sprite.ExtractSpriteTexture());
 
             TurkCubeScript turkCubeScript = newSquare.AddComponent<TurkCubeScript>();
             turkCubeScript.cord = hole.GetComponent<TurkHoleScript>().cord;
@@ -283,10 +341,10 @@ public class TurkPuzzleScript : MonoBehaviour
                 }
 
                 // Instantiate a new square
-                GameObject newSquare = new GameObject("PuzzleHole");
+                GameObject newSquare = Instantiate(EmptyTile);
                 newSquare.transform.parent = transform;
 
-                RectTransform rectTransform = newSquare.AddComponent<RectTransform>();
+                RectTransform rectTransform = newSquare.GetComponent<RectTransform>();
                 rectTransform.pivot = new Vector2(0.5f, 0.5f);
                 rectTransform.sizeDelta = new Vector2(squareSize, squareSize);
 
@@ -299,14 +357,13 @@ public class TurkPuzzleScript : MonoBehaviour
                     );
 
                 // Add an Image component and set the sprite
-                Image imageComponent = newSquare.AddComponent<Image>();
-                imageComponent.sprite = constallationTiles.GetSprite(true, true, true, true);
-                imageComponent.color = new Color(0, 0, 0, 0.3f);
+                Image imageComponent = newSquare.GetComponent<Image>();
+                imageComponent.color = new Color(255, 255, 255, 1f);
 
                 // Add a collider.
-                newSquare.AddComponent<BoxCollider2D>();
+                newSquare.GetComponent<BoxCollider2D>();
 
-                TurkHoleScript turkCubeScript = newSquare.AddComponent<TurkHoleScript>();
+                TurkHoleScript turkCubeScript = newSquare.GetComponent<TurkHoleScript>();
                 turkCubeScript.cord = new Vector2Int(x, y);
 
                 gridSquares.Add(newSquare);
