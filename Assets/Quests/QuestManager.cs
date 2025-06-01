@@ -74,6 +74,15 @@ public class QuestManager : MonoBehaviour
         ChangeQuest(newQuest);
     }
 
+    public static void SetQuestByIndex(int QuestIdx)
+    {
+        string[] QuestList = QuestLog.GetAllQuests(QuestState.Active | QuestState.Success | QuestState.Unassigned, false);
+
+        string newQuest = QuestList[QuestIdx];
+
+        ChangeQuest(newQuest);
+    }
+
     public void UpdateText(string questTitle)
     {
         string title = QuestLog.GetQuestTitle(questTitle);

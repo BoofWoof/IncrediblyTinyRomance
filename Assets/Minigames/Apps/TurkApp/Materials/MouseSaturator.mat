@@ -41,11 +41,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BrighteningFactor: 1
+    - _BrighteningFactor: 1.5
     - _BrighteningThreshold: 0.3
     - _ColorMask: 15
-    - _DarkeningFactor: 0.4
-    - _SaturationFactor: 4
+    - _DarkeningFactor: 0.1
+    - _SaturationFactor: 2
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

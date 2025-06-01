@@ -168,6 +168,7 @@ public class PrayerScript : MonoBehaviour
         if (!ConversationManagerScript.isMacroConvo) return;
         StoryMode = false;
         GenerateNewPrayers();
+        MusicSelectorScript.SetOverworldSong(1);
     }
     #endregion
 

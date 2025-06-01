@@ -7,6 +7,6 @@ public class MoneyTextUpdate : MonoBehaviour
 {
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = "Titan Funds: $" + GameData.Money.NumberToString();
+        GetComponent<TextMeshProUGUI>().text = "Credits: $" + CurrenyData.Credits.NumberToString();
     }
 }

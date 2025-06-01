@@ -41,11 +41,13 @@ public class ConversationManagerScript : MonoBehaviour
 
         ConversationOngoing = true;
 
+        DialogueManager.StopAllConversations();
         DialogueManager.StartConversation(newConversation);
 
         if (isMacroConvo)
         {
             PrayerScript.StoryMode = true;
+            MusicSelectorScript.SetOverworldSong(3);
         }
         else
         {

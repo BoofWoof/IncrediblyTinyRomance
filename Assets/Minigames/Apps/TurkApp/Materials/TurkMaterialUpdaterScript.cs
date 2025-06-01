@@ -12,6 +12,6 @@ public class TurkMaterialUpdaterScript : MonoBehaviour
         float newY = Screen.height - mousePosition.y;
         Vector2 newMousePosition = new Vector2(newX, newY);
         Shader.SetGlobalVector("_MousePosition", newMousePosition);
-        Shader.SetGlobalFloat("_RevealStrength", 2f);
+        Shader.SetGlobalFloat("_RevealStrength", 1/TurkData.VisionStrength);
     }
 }

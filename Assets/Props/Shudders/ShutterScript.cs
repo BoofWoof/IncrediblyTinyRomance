@@ -27,6 +27,13 @@ public class ShutterScript : MonoBehaviour
 
     public AudioSource Siren;
 
+    public static ShutterScript instance;
+
+    public void Awake()
+    {
+        instance = this;
+    }
+
     public void Start()
     {
         foreach (GameObject shutter in Shutters)

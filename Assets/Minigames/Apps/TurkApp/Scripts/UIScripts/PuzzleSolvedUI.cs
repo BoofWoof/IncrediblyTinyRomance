@@ -8,7 +8,7 @@ public class PuzzleSolvedUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdatePuzzlesSolved(TurkPuzzleScript.PuzzlesSolved);
+        UpdatePuzzlesSolved(TurkData.PuzzlesSolved);
     }
 
     public void OnEnable()

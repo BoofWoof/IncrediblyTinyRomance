@@ -14,6 +14,13 @@ public class BalconyEventsScript : MonoBehaviour
     public AudioSource RaiseAudio;
     public AudioSource LowerAudio;
 
+    public static BalconyEventsScript instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         Lua.RegisterFunction("StartPrayerSystem", this, SymbolExtensions.GetMethodInfo(() => StartSystem()));

@@ -11,6 +11,10 @@ public class TurkPuzzleScript : MonoBehaviour
 {
     public static TurkPuzzleScript instance;
 
+    public AudioSource Win;
+    public AudioSource Pickup;
+    public AudioSource Drop;
+
     public GameObject EmptyTile;
     public TMP_Text PuzzleName;
     public Material ConstMat;
@@ -48,10 +52,6 @@ public class TurkPuzzleScript : MonoBehaviour
     public RectTransform PieceHolder;
     public delegate void PuzzleCompleteCallback(int PuzzlesComplete);
     public static PuzzleCompleteCallback OnPuzzleComplete;
-
-    //Stats
-    public static float MoneyPerPuzzle = 0.000_000_001f;
-    public static int PuzzlesSolved = 0;
 
 
     public void IncreaseDifficulty()
@@ -137,10 +137,11 @@ public class TurkPuzzleScript : MonoBehaviour
     public IEnumerator WinCutscene()
     {
         DisablePieces();
+        Win.Play();
 
         Debug.Log("Turk Puzzle Complete!");
-        PuzzlesSolved += 1;
-        GameData.Money += MoneyPerPuzzle;
+        TurkData.PuzzlesSolved += 1;
+        CurrenyData.Credits += TurkData.CreditsPerPuzzle;
 
         float timePass = 0f;
         float transitionPeriod = 1.5f;
@@ -155,14 +156,14 @@ public class TurkPuzzleScript : MonoBehaviour
         Shader.SetGlobalFloat("_TurkCompletion", 1);
 
         yield return new WaitForSeconds(0.2f);
-        PuzzleName.text = selectedGridData.name;
+        PuzzleName.text = selectedGridData.Name;
         PuzzleName.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1f);
 
         PuzzleName.gameObject.SetActive(false);
         Shader.SetGlobalFloat("_TurkCompletion", 0);
-        OnPuzzleComplete?.Invoke(PuzzlesSolved);
+        OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved);
         puzzleScript.GeneratePuzzle();
     }
 

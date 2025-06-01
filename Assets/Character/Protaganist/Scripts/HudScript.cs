@@ -16,11 +16,20 @@ public class HudScript : MonoBehaviour
 
     private static bool ContinueTutorial = false;
 
+    public int LastTutorialQuestIndex = 3;
+    public Coroutine TutorialCoroutine;
+    public static HudScript instance;
+
+    public void Awake()
+    {
+        instance = this;
+    }
+
     public void Start()
     {
         PhonePositionScript.PhoneToggled += ShowReticle;
 
-        StartCoroutine(Tutorial());
+        TutorialCoroutine = StartCoroutine(Tutorial());
     }
 
     public void OnDisable()
@@ -43,6 +52,32 @@ public class HudScript : MonoBehaviour
         while(!ContinueTutorial) yield return null;
         ContinueTutorial = false;
     }
+
+    public void SkipTutorial()
+    {
+        StopCoroutine(TutorialCoroutine);
+
+        ShutterButton.ObjectEnabled = true;
+
+        if(MoveArrow != null)
+        {
+            Destroy(MoveArrow);
+        }
+        if (LookArrow != null)
+        {
+            Destroy(LookArrow);
+        }
+        if (InteractArrow != null)
+        {
+            Destroy(InteractArrow);
+        }
+
+        if (QuestManager.currentQuestIndex <= LastTutorialQuestIndex)
+        {
+            QuestManager.SetQuestByIndex(LastTutorialQuestIndex + 1);
+        }
+    }
+
     public IEnumerator Tutorial()
     {
         LookArrow.SetActive(false);

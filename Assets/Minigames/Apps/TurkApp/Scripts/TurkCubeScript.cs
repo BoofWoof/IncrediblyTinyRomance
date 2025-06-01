@@ -84,6 +84,8 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnPointerDown(PointerEventData eventData)
     {
         isDragging = true;
+        TurkPuzzleScript.instance.Pickup.Play();
+
         Vector2 mousePos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             TrukAppScript.PhoneScreenCanvas.transform as RectTransform,
@@ -109,6 +111,8 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnPointerUp(PointerEventData eventData)
     {
         isDragging = false;
+        TurkPuzzleScript.instance.Drop.Play();
+        TurkPuzzleScript.instance.Pickup.Stop();
 
         GameObject rootPiece;
         if (PieceRoot)

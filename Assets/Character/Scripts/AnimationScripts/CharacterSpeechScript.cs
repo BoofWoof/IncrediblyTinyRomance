@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
+    public string CharacterName;
+    public bool MacroSpeech = false;
+    public bool RadioSpeech = false;
+
     public CharacterSubtitleScript CharacterSubtitle;
     public LipSyncScript LipSync;
     public GestureScript Gesture;

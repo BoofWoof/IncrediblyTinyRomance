@@ -94,7 +94,7 @@ public class GraphScript : MonoBehaviour
             UpdateAverageValueLine();
         }
 
-        Money.text = "$" + GameData.Money.NumberToString();
+        Money.text = "$" + CurrenyData.Credits.NumberToString();
     }
 
     private void UpdateBuyQuantityText()
@@ -144,16 +144,16 @@ public class GraphScript : MonoBehaviour
 
     public void BuyStock()
     {
-        if (GameData.Money < GetLatestStockValue() * BuyQuantity) return;
+        if (CurrenyData.Credits < GetLatestStockValue() * BuyQuantity) return;
         UpdateStocksOwned(BuyQuantity);
-        GameData.Money -= GetLatestStockValue() * BuyQuantity;
+        CurrenyData.Credits -= GetLatestStockValue() * BuyQuantity;
     }
 
     public void SellStock()
     {
         if (StocksOwned <= BuyQuantity) return;
         UpdateStocksOwned(-BuyQuantity);
-        GameData.Money += GetLatestStockValue() * BuyQuantity;
+        CurrenyData.Credits += GetLatestStockValue() * BuyQuantity;
     }
 
     private void UpdateStocksOwned(float change, bool updateAverageValue = true)
