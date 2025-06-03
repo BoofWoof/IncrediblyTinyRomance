@@ -8,4 +8,6 @@ public class VoiceLineSO : ScriptableObject
     public TextAsset SubtitleData;
     public TextAsset GestureData;
     public float FocusLevel = 1;
+    public float PauseBeforeStart = 0;
+    public float PauseAfterEnd = 0;
 }

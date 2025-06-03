@@ -1,10 +1,14 @@
 using UnityEngine;
+using System.Collections;
+using PixelCrushers.DialogueSystem;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
-    public string CharacterName;
+    public string SpeakerName;
     public bool MacroSpeech = false;
     public bool RadioSpeech = false;
+
+    public GameObject RadioObject;
 
     public CharacterSubtitleScript CharacterSubtitle;
     public LipSyncScript LipSync;
@@ -12,9 +16,61 @@ public class CharacterSpeechScript : MonoBehaviour
 
     public VoiceLineSO debugVoiceLine;
 
+    private void OnEnable()
+    {
+        ConversationManagerScript.instance.GetComponent<DialogueSystemEvents>().conversationEvents.onConversationLine.AddListener(OnConversationLine);
+    }
+
+    public void OnDisable()
+    {
+        if(ConversationManagerScript.instance != null)
+        {
+            ConversationManagerScript.instance.GetComponent<DialogueSystemEvents>().conversationEvents.onConversationLine.RemoveListener(OnConversationLine);
+        }
+    }
+
+    public void Start()
+    {
+        if (RadioSpeech)
+        {
+            RadioObject.SetActive(false);
+        }
+    }
+
     public void PlayDebugVoiceLine()
     {
         PlaySpeech(debugVoiceLine);
+    }
+
+    public void OnConversationLine(Subtitle subtitle)
+    {
+        if (!subtitle.speakerInfo.GetFieldBool("IsRadio") && RadioSpeech) return;
+        if (!subtitle.speakerInfo.GetFieldBool("IsMacro") && MacroSpeech) return;
+        if (subtitle.speakerInfo.Name != SpeakerName) return;
+
+        string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
+        voiceFilePath = voiceFilePath.CleanResourcePath();
+        VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(voiceFilePath);
+
+        if (voiceLine == null) return;
+
+        Debug.Log(subtitle.formattedText.text);
+        StartCoroutine(Speak(voiceLine));
+    }
+    public IEnumerator Speak(VoiceLineSO voiceLine)
+    {
+        //Update play speech to allow animations before and after start.
+        yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
+        PlaySpeech(voiceLine);
+        if (RadioSpeech) RadioObject.SetActive(true);
+        yield return null;
+        while (isSpeechPlaying())
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
+        if (RadioSpeech) RadioObject.SetActive(false);
+        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public void PlaySpeech(VoiceLineSO voiceLine)
@@ -24,19 +80,19 @@ public class CharacterSpeechScript : MonoBehaviour
             GetComponent<AudioSource>().clip = voiceLine.AudioData;
         }
         GetComponent<AudioSource>().Play();
-        if (voiceLine.PhenomeData != null)
+        if (voiceLine.PhenomeData != null && LipSync != null)
         {
             LipSync.PhenomeAsset = voiceLine.PhenomeData;
             LipSync.PlaySpeech();
         }
 
-        if (voiceLine.SubtitleData != null)
+        if (voiceLine.SubtitleData != null && CharacterSubtitle != null)
         {
             CharacterSubtitle.Subtitles = voiceLine.SubtitleData;
             CharacterSubtitle.PlaySpeech();
         }
         //THIS NEEDS TO ACTUALLY GET FILLED OUT
-        if (voiceLine.GestureData != null)
+        if (voiceLine.GestureData != null && Gesture != null)
         {
             Gesture.Gestures = voiceLine.GestureData;
             Gesture.PlaySpeech();

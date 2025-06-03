@@ -140,29 +140,6 @@ public class PrayerScript : MonoBehaviour
             ButtonText[2].interactable = true;
         }
     }
-    public void OnConversationLine(Subtitle subtitle)
-    {
-        if (!ConversationManagerScript.isMacroConvo) return;
-
-        string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
-        voiceFilePath = voiceFilePath.CleanResourcePath();
-        VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(voiceFilePath);
-
-        if (voiceLine == null) return;
-
-        Debug.Log(subtitle.formattedText.text);
-        StartCoroutine(GiantSpeak(voiceLine));
-    }
-    public IEnumerator GiantSpeak(VoiceLineSO voiceLine)
-    {
-        ConversationManagerScript.instance.AriesSpeak(voiceLine);
-        yield return null;
-        while (ConversationManagerScript.instance.isAriesSpeaking())
-        {
-            yield return null;
-        }
-        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
-    }
     public void OnConversationEnd(Transform actor)
     {
         if (!ConversationManagerScript.isMacroConvo) return;

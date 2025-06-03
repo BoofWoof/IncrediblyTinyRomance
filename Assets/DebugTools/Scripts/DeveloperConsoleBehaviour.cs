@@ -48,12 +48,12 @@ namespace DebugTools.DeveloperConsole.Commands
 
             if (uiCanvas.activeSelf)
             {
-                Time.timeScale = pausedTimeScale;
+                //Time.timeScale = pausedTimeScale;
                 uiCanvas.SetActive(false);
             } else
             {
-                pausedTimeScale = Time.timeScale;
-                Time.timeScale = 0;
+                //pausedTimeScale = Time.timeScale;
+                //Time.timeScale = 0;
                 uiCanvas.SetActive(true);
                 inputField.ActivateInputField();
             }

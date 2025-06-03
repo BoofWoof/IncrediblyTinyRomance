@@ -4467,7 +4467,7 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: IsMacro
-      value: False
+      value: True
       type: 2
       typeString: CustomFieldType_Boolean
     overrideSettings:
@@ -4553,7 +4553,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 392
+        x: 496
         y: 50
         width: 160
         height: 30
@@ -4568,7 +4568,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/1SixthTime/1.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -4606,124 +4606,6 @@ MonoBehaviour:
       - originConversationID: 8
         originDialogueID: 1
         destinationConversationID: 8
-        destinationDialogueID: 2
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 392
-        y: 134
-        width: 160
-        height: 30
-    - id: 2
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 5
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: Don't bother with messages. Save your gunpowder.
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 8
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 8
-        originDialogueID: 2
-        destinationConversationID: 8
-        destinationDialogueID: 3
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 392
-        y: 218
-        width: 160
-        height: 30
-    - id: 3
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 5
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: There's nothing you can say to fix things...
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 8
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 8
-        originDialogueID: 3
-        destinationConversationID: 8
         destinationDialogueID: 4
         isConnector: 0
         priority: 2
@@ -4734,8 +4616,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 392
-        y: 302
+        x: 496
+        y: 134
         width: 160
         height: 30
     - id: 4
@@ -4749,11 +4631,11 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/M1Ignore/M1.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
-        value: 3
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -4810,8 +4692,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 392
-        y: 386
+        x: 496
+        y: 218
         width: 160
         height: 30
     - id: 5
@@ -4869,8 +4751,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
-        y: 470
+        x: 288
+        y: 302
         width: 160
         height: 30
     - id: 6
@@ -4928,8 +4810,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 496
-        y: 470
+        x: 704
+        y: 302
         width: 160
         height: 30
     - id: 7
@@ -4987,8 +4869,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 704
-        y: 470
+        x: 912
+        y: 302
         width: 160
         height: 30
     - id: 8
@@ -5002,7 +4884,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/4Devotion/4.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5047,8 +4929,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
-        y: 554
+        x: 288
+        y: 386
         width: 160
         height: 30
     - id: 9
@@ -5062,7 +4944,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/6ConsiderLucky/6.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5112,8 +4994,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 496
-        y: 554
+        x: 704
+        y: 386
         width: 160
         height: 30
     - id: 10
@@ -5127,7 +5009,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/7Plenty/7.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5179,8 +5061,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 704
-        y: 554
+        x: 912
+        y: 386
         width: 160
         height: 30
     - id: 11
@@ -5194,7 +5076,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/M2Attention/M2.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5245,8 +5127,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
-        y: 638
+        x: 288
+        y: 470
         width: 160
         height: 30
     - id: 12
@@ -5260,7 +5142,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/8Quiet/8.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5304,8 +5186,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 182.93616
-        y: 722
+        x: 288
+        y: 554
         width: 160
         height: 30
     - id: 13
@@ -5319,7 +5201,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/M3AdmitIt/M3.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5371,8 +5253,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
-        y: 806
+        x: 288
+        y: 638
         width: 160
         height: 30
     - id: 14
@@ -5431,8 +5313,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 890
+        x: 184
+        y: 722
         width: 160
         height: 30
     - id: 15
@@ -5491,8 +5373,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 288
-        y: 890
+        x: 496
+        y: 722
         width: 160
         height: 30
     - id: 16
@@ -5506,7 +5388,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: 
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/9Accept/9.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -5558,8 +5440,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 183
-        y: 952.93616
+        x: 184
+        y: 806
         width: 160
         height: 30
     - id: 17
@@ -5589,7 +5471,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: I don't understand. Our purpose is for you to decide!
+        value: I don't understand. The reason for our existence is for you to decide!
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -5603,7 +5485,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 17
+        destinationConversationID: 8
+        destinationDialogueID: 19
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -5611,8 +5499,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 108
-        y: 1034
+        x: 80
+        y: 890
         width: 160
         height: 30
     - id: 18
@@ -5642,8 +5530,503 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Everyone is meant to exist! Otherwise you wouldn't have placed us
+        value: Everyone is meant to exist! Otherwise, you wouldn't have placed us
           here!
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 18
+        destinationConversationID: 8
+        destinationDialogueID: 19
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 288
+        y: 890
+        width: 160
+        height: 30
+    - id: 19
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/10Disgust/10.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: '*Disgust*'
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 19
+        destinationConversationID: 8
+        destinationDialogueID: 20
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 974
+        width: 160
+        height: 30
+    - id: 20
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/M4TooMuchInterest/M4.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Okay, you may have attracted too much interest!!! One sec! (Away from
+          the mic, yelling at someone off screen.) Everyone, code armageddon! Be
+          ready to broadcast the endtime prayers.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 20
+        destinationConversationID: 8
+        destinationDialogueID: 21
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 1058
+        width: 160
+        height: 30
+    - id: 21
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/11MeantToExist/11.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: "(Picking up the habitat with his cyborg arm, holding it to his face.):
+          \r\nNO ONE was meant to exist. \r\n\r\n(Disgusted silence.)\r\n\r\nI\u2019ve
+          grown tired of your religion, of the false hope you spread. Do you think
+          that this ends well for any of you? \r\n\r\nThe weak are ephemeral. \r\nThe
+          strong, only slightly less so. \r\n\r\nAttempting to pretend otherwise
+          will only create more tragedy for yourselves. Live your short lives better
+          than fighting an unwinnable battle.\r\n"
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 21
+        destinationConversationID: 8
+        destinationDialogueID: 22
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 1142
+        width: 160
+        height: 30
+    - id: 22
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/M5Nevermind/M5.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: "(Away from the mic again, much calmer. With a sigh of relief.) Ohh,
+          Nevermind! Call off the broadcast! He\u2019s just waxing philosophically
+          again! Someone help me figure out how we\u2019ll spin this to the public!
+          (mic cut off)"
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 22
+        destinationConversationID: 8
+        destinationDialogueID: 23
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 1226
+        width: 160
+        height: 30
+    - id: 23
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/12DoesntMatter/12.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: " I suppose it doesn\u2019t matter\u2026 It won\u2019t be much longer
+          now\u2026"
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 23
+        destinationConversationID: 8
+        destinationDialogueID: 24
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 1310
+        width: 160
+        height: 30
+    - id: 24
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Wait, longer till what, Lord?
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 24
+        destinationConversationID: 8
+        destinationDialogueID: 25
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 1394
+        width: 160
+        height: 30
+    - id: 25
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/13AskSomeoneElse/13.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: "(with a long sigh, tired, not directly answering the question): I
+          refuse to explain myself every time you specks change leadership. (begins
+          to set the habitat back down) Ask the survivors you have left, I\u2019m
+          done with you."
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 8
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 8
+        originDialogueID: 25
+        destinationConversationID: 8
+        destinationDialogueID: 26
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 80
+        y: 1478
+        width: 160
+        height: 30
+    - id: 26
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Aries/Introduction2/M6GoodMood/M6.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: "Oh wow\u2026 (Concern turns to excitement. The rate of speaking grows
+          fast.) I can\u2019t believe how lucky we were! God\u2019s being so nice
+          today!!! We didn\u2019t even lose a single district, how great is that!
+          \r\n(Excitement is immediately hedged as he makes a few corrections.)\r\nWell,
+          a few buildings collapsed when he picked us up\u2026 but no districts were
+          lost!!! I\u2019ll switch back over to messaging you on your phone, PM.
+          In the meantime, keep sending prayers! Let\u2019s keep that good mood going!
+          Remember, red is dead! Blue is\u2026 (Excitement diminishes as he grows
+          thoughtful) what is a good thing that rhymes with blue\u2026\u201D\r\n"
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -5665,13 +6048,178 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 300
-        y: 1032
+        x: 80
+        y: 1562
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 728.28284}
-    canvasZoom: 0.94000006
+    canvasScrollPosition: {x: 285.3658, y: 32.92682}
+    canvasZoom: 0.8200002
+  - id: 9
+    fields:
+    - title: Title
+      value: TRadioMilo
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Actor
+      value: 4
+      type: 5
+      typeString: CustomFieldType_Actor
+    - title: Conversant
+      value: 7
+      type: 5
+      typeString: CustomFieldType_Actor
+    - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    overrideSettings:
+      useOverrides: 0
+      overrideSubtitleSettings: 0
+      showNPCSubtitlesDuringLine: 1
+      showNPCSubtitlesWithResponses: 1
+      showPCSubtitlesDuringLine: 0
+      skipPCSubtitleAfterResponseMenu: 0
+      subtitleCharsPerSecond: 30
+      minSubtitleSeconds: 2
+      continueButton: 0
+      overrideSequenceSettings: 0
+      defaultSequence: 
+      defaultPlayerSequence: 
+      defaultResponseMenuSequence: 
+      overrideInputSettings: 0
+      alwaysForceResponseMenu: 1
+      includeInvalidEntries: 0
+      responseTimeout: 0
+      emTagForOldResponses: 0
+      emTagForInvalidResponses: 0
+      cancelSubtitle:
+        key: 27
+        buttonName: 
+      cancelConversation:
+        key: 27
+        buttonName: 
+    nodeColor: 
+    dialogueEntries:
+    - id: 0
+      fields:
+      - title: Title
+        value: START
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: None()
+        type: 0
+        typeString: 
+      conversationID: 9
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 9
+        originDialogueID: 0
+        destinationConversationID: 9
+        destinationDialogueID: 1
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 160
+        y: 30
+        width: 160
+        height: 30
+    - id: 1
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/TestAudio/RadioTest/RadioTest.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Bark!
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 9
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 157
+        y: 112
+        width: 160
+        height: 30
+    entryGroups: []
+    canvasScrollPosition: {x: 0, y: 0}
+    canvasZoom: 1
   syncInfo:
     syncActors: 0
     syncItems: 0

@@ -40,7 +40,8 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationLine(Subtitle subtitle)
     {
-        if (ConversationManagerScript.isMacroConvo) return;
+        if (subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
+        if (subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
         PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
         if (tempSpeakingCharacter.Name == "Player") return;
         if (speakingCharacter != null && speakingCharacter.id != tempSpeakingCharacter.id) {
@@ -123,6 +124,8 @@ public class ContactsScript : MonoBehaviour
     public void OnConversationResponseMenu(Response[] responses)
     {
         speakingCharacter = DialogueManager.CurrentConversationState.subtitle.speakerInfo;
+        if (DialogueManager.CurrentConversationState.subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
+        if (DialogueManager.CurrentConversationState.subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
         if (ConversationManagerScript.isMacroConvo) return;
         Debug.Log(speakingCharacter.nameInDatabase);
         Debug.Log("Creating choices: " + responses.Length.ToString());

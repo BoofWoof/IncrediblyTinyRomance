@@ -9,12 +9,13 @@ public class ConversationManagerScript : MonoBehaviour
     public static bool ConversationOngoing = false;
     public static bool isMacroConvo = false;
 
-    public CharacterSpeechScript AriesSpeechScript;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
-        instance = this;
-
         Lua.RegisterFunction("QueueDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("")));
         Lua.RegisterFunction("QueueWaitDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("", 0)));
 
@@ -22,16 +23,6 @@ public class ConversationManagerScript : MonoBehaviour
         StartCoroutine(WaitForNextConversation());
 
         transform.parent = DialogueManager.instance.transform;
-    }
-
-    public void AriesSpeak(VoiceLineSO voiceLine)
-    {
-        AriesSpeechScript.PlaySpeech(voiceLine);
-    }
-
-    public bool isAriesSpeaking()
-    {
-        return AriesSpeechScript.isSpeechPlaying();
     }
 
     public void StartDialogue(string newConversation)
