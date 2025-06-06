@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class AnimationTriggers : MonoBehaviour
 {
-    public GameObject LeftHandGrabber;
+    public CollissionTracker LeftHandGrab;
+    public CollissionTracker LeftHandRelease;
     public void Impact(float Strength)
     {
         MoveCamera.moveCamera.ShakeScreen(1f, Strength);
@@ -10,9 +11,18 @@ public class AnimationTriggers : MonoBehaviour
 
     public void GrabLeft()
     {
-        GameObject Grabbable = LeftHandGrabber.GetComponent<CollissionTracker>().GetFirstTarget();
-        Grabbable.transform.parent = LeftHandGrabber.transform;
-        Grabbable.transform.localPosition = Vector3.zero;
-        Grabbable.transform.localRotation = Quaternion.identity;
+        GameObject Grabable = LeftHandGrab.GetFirstTarget();
+        Grabable.transform.parent = LeftHandGrab.transform;
+        Grabable.transform.localPosition = Vector3.zero;
+        Grabable.transform.localRotation = Quaternion.identity;
+    }
+
+    public void DropLeft()
+    {
+        GameObject ReleasePoint = LeftHandRelease.GetFirstTarget();
+        GameObject Grabable = LeftHandGrab.transform.GetChild(1).gameObject;
+        Grabable.transform.parent = ReleasePoint.transform;
+        Grabable.transform.localPosition = Vector3.zero;
+        Grabable.transform.localRotation = Quaternion.identity;
     }
 }

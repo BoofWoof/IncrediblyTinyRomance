@@ -15,7 +15,7 @@ public class MoveCamera : MonoBehaviour
     public static float rumble;
     public static float shake;
 
-    public float targetRumbleQuantity;
+    public static float targetRumbleQuantity;
     public float currentRumbleQuantity = 0f;
     public float falloffRate = 1f;
 
@@ -43,7 +43,7 @@ public class MoveCamera : MonoBehaviour
     {
         ShakeScreen(durationSec, 1);
     }
-    public void SetRumble(float rumbleQuantity)
+    public static void SetRumble(float rumbleQuantity)
     {
         targetRumbleQuantity = rumbleQuantity;
     }

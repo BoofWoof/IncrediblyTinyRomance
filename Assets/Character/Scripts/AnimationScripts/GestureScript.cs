@@ -63,8 +63,11 @@ public class GestureScript : MonoBehaviour
             case "Loom":
                 CharacterAnimator.SetBool("Looming", true);
                 break;
-            case "Grab":
-                CharacterAnimator.SetTrigger("Grab");
+            case "LeftGrab":
+                CharacterAnimator.SetBool("LeftGrab", true);
+                break;
+            case "LeftUnGrab":
+                CharacterAnimator.SetBool("LeftGrab", false);
                 break;
         }
     }

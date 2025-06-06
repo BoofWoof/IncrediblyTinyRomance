@@ -28,7 +28,7 @@ public class PrayerEventsScript : MonoBehaviour
             if (correctCount >= 3)
             {
                 QuestManager.IncrementQuest();
-                MessageQueue.addDialogue("Aries Introduction");
+                MessageQueue.addDialogue("AriesIntroduction2");
             }
         }
 
