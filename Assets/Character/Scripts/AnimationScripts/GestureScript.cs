@@ -16,6 +16,8 @@ public class GestureScript : MonoBehaviour
 
     Coroutine GestureCoroutine;
 
+    public MoodInterface Mood;
+
     public void PlaySpeech()
     {
         ProcessText();
@@ -47,7 +49,9 @@ public class GestureScript : MonoBehaviour
     private void ProcessGesture(string GestureName)
     {
         Debug.Log("Running Gesture: " + GestureName);
-        switch (GestureName)
+        string[] GestureData = GestureName.Split(" ");
+
+        switch (GestureData[0])
         {
             case "Sit":
                 CharacterAnimator.SetBool("Sitting", true);
@@ -68,6 +72,9 @@ public class GestureScript : MonoBehaviour
                 break;
             case "LeftUnGrab":
                 CharacterAnimator.SetBool("LeftGrab", false);
+                break;
+            case "Anger":
+                Mood.SetAnger(float.Parse(GestureData[1]));
                 break;
         }
     }
