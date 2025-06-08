@@ -13,7 +13,7 @@ public class CursorStateControl : MonoBehaviour
 
         MenuUp = false;
 
-        PhonePositionScript.PhoneToggled += PhoneToggle;
+        PhonePositionScript.PhoneToggled += AllowMouse;
 
         foreach(ToggleActive pauseMenu in PauseMenus) {
             pauseMenu.toggleActiveDelegate += PauseMenuToggle;
@@ -22,7 +22,7 @@ public class CursorStateControl : MonoBehaviour
 
     private void OnDestroy()
     {
-        PhonePositionScript.PhoneToggled -= PhoneToggle;
+        PhonePositionScript.PhoneToggled -= AllowMouse;
 
         foreach (ToggleActive pauseMenu in PauseMenus)
         {
@@ -53,9 +53,9 @@ public class CursorStateControl : MonoBehaviour
         }
     }
 
-    private void PhoneToggle(bool raised)
+    public static void AllowMouse(bool allow)
     {
-        if (raised)
+        if (allow)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;

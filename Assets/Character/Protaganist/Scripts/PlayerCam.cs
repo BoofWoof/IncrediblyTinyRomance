@@ -46,7 +46,7 @@ public class PlayerCam : MonoBehaviour
 
     private void ActivateObjects()
     {
-        if (PhonePositionScript.raised || CursorStateControl.MenuUp)
+        if (PhonePositionScript.raised || CursorStateControl.MenuUp || Cursor.lockState == CursorLockMode.Confined)
         {
             return;
         }
@@ -100,7 +100,7 @@ public class PlayerCam : MonoBehaviour
 
     public void Update()
     {
-        if (!EnableCameraMovement || CursorStateControl.MenuUp) return;
+        if (!EnableCameraMovement || CursorStateControl.MenuUp || Cursor.lockState == CursorLockMode.Confined) return;
         float mouseX = CameraInput.x * Time.deltaTime * sensX;
         float mouseY = CameraInput.y * Time.deltaTime * sensY;
 
