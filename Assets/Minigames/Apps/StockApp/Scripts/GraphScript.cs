@@ -7,15 +7,8 @@ using UnityEngine.UI;
 
 public class GraphScript : MonoBehaviour
 {
-    [Header("Value Display")]
-    public int MaxLength;
-    public List<float> GraphValues;
-    private float StocksOwned;
-    private float AverageValue = 0;
-
-    [Header("Stock Splitting")]
-    public float MaxStockValue;
-    public float MinStockValue;
+    [Header("Data")]
+    public GraphDataAbstract GraphData;
 
     [Header("Viewer Range")]
     public float VerticalRange;
@@ -28,6 +21,7 @@ public class GraphScript : MonoBehaviour
     private float PanelHeight;
 
     [Header("Display Settings")]
+    public static int MaxLength = 100;
     public float LineWidth = 0.0003f;
 
     public Color PositiveColor;
@@ -36,203 +30,141 @@ public class GraphScript : MonoBehaviour
 
     private List<GameObject> Lines = new List<GameObject>();
     private float LineSpacing;
-    private GameObject AverageValueLine;
 
     [Header("Update Rate")]
-    private float TimePassed = 0;
     public float SecondsPerUpdate = 1f;
 
     [Header("UI Display")]
+    public Material LineMaterial;
+    public RectTransform Indicator;
     public TextMeshProUGUI RoofText;
     public TextMeshProUGUI FloorText;
-    public TextMeshProUGUI StocksOwnedText;
-    public TextMeshProUGUI AveragePriceText;
     public TextMeshProUGUI Money;
+    public TextMeshProUGUI CompanyName;
+    public TextMeshProUGUI CompanyValue;
+    public Image GraphBackground;
+    public Image GraphForeground;
+    public Image GraphStockSprite;
+    public Image BetSetStockSprite;
+    public Image BetSetBackdrop;
+    public Image AppBackground;
+    public Image RenownBackground;
+    public Image DetailBackground;
+    public Image UpgradeButton;
 
     [Header("BuyQuantity")]
     public float BuyQuantity = 0.000_000_001f;
-    public TextMeshProUGUI BuyQuantityText;
+
+    public static GraphScript instance;
+    public delegate void GraphStepDelegate();
+    public static GraphStepDelegate GraphStepEvent;
+
+    private bool RedrawSinceStep = false;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
-        PanelHeight = GetComponent<RectTransform>().sizeDelta[1];
-        PanelWidth = GetComponent<RectTransform>().sizeDelta[0];
-        LineSpacing = PanelWidth / (MaxLength-1);
-
-        GraphValues = new List<float>();
-        for (int j = 0; j < MaxLength; j++)
-        {
-            GraphValues.Add(GenerateNextValue());
-        }
-
-        UpdateRoofFloorValues(
-            GetLatestStockValue() + VerticalRange / 2f, 
-            GetLatestStockValue() - VerticalRange / 2f
-            );
-        CreateAverageValueLine();
-        GenerateGraph();
-        UpdateStocksOwnedText();
-        UpdateBuyQuantityText();
+        SetDataSource(GraphData);
+        StartCoroutine(GraphStepLoop());
     }
 
-    private void Update()
+    public void SetDataSource(GraphDataAbstract newGraphData)
     {
-        TimePassed += Time.deltaTime;
-        if (TimePassed > SecondsPerUpdate)
+        GraphData = newGraphData;
+        Redraw();
+        CompanyName.text = GraphData.StockName;
+        GraphBackground.color = GraphData.StockColor;
+        GraphForeground.color = GraphData.StockColor;
+
+        RectTransform rect = GraphData.AssociatedButton.GetComponent<RectTransform>();
+        Indicator.parent = rect;
+        Indicator.localPosition = new Vector3(0, 60f, 0);
+        Indicator.GetComponentInChildren<Image>().color = GraphData.StockColor;
+
+        RenownBackground.color = GraphData.StockColor;
+        DetailBackground.color = GraphData.StockColor;
+        UpgradeButton.color = GraphData.StockColor;
+
+        GraphStockSprite.sprite = GraphData.StockSprite;
+        BetSetStockSprite.sprite = GraphData.StockSprite;
+        BetSetBackdrop.color = GraphData.StockColor;
+
+        AppBackground.materialForRendering.SetColor("_GradientColor2", GraphData.StockColor/2f);
+        AppBackground.materialForRendering.SetTexture("_TileGrid", GraphData.StockTexture);
+
+        RedrawSinceStep = false;
+    }
+
+    public void Redraw()
+    {
+        ClearGraph();
+        GenerateInitialGraph();
+
+        RedrawSinceStep = true;
+    }
+
+    public void ClearGraph()
+    {
+        while(Lines.Count != 0)
         {
-            GraphValues.Add(GenerateNextValue());
-            TimePassed -= SecondsPerUpdate;
-
-            StockSplit();
-            ShiftGraph();
-
             Destroy(Lines[0]);
             Lines.RemoveAt(0);
-            GraphValues.RemoveAt(0);
-            CreateLine(GraphValues[MaxLength - 2], GetLatestStockValue());
-
-            UpdateAverageValueLine();
         }
-
-        Money.text = "$" + CurrenyData.Credits.NumberToString();
     }
 
-    private void UpdateBuyQuantityText()
+    public void GenerateInitialGraph()
     {
-        BuyQuantityText.text = BuyQuantity.NumberToString() + "S";
+        PanelHeight = GetComponent<RectTransform>().sizeDelta[1];
+        PanelWidth = GetComponent<RectTransform>().sizeDelta[0];
+        LineSpacing = PanelWidth / (MaxLength - 1);
+
+        UpdateRoofFloorValues(
+            GetLatestStockValue() + VerticalRange / 2f,
+            GetLatestStockValue() - VerticalRange / 2f,
+            false
+            );
+        GenerateGraph();
     }
 
-    public void IncreaseBuyQuantity()
+    private IEnumerator GraphStepLoop()
     {
-        if (BuyQuantity >= 1_000_000_000_000) return;
-        BuyQuantity *= 10;
-        BuyQuantity = BuyQuantity.RoundToSignificantFigures(1);
-        UpdateBuyQuantityText();
-    }
-    public void DecreaseBuyQuantity()
-    {
-        if (BuyQuantity <= 0.000_000_001) return;
-        BuyQuantity /= 10;
-        BuyQuantity = BuyQuantity.RoundToSignificantFigures(1);
-        UpdateBuyQuantityText();
-    }
-
-    private void CreateAverageValueLine()
-    {
-
-        AverageValueLine = new GameObject("AverageValueLine", typeof(Image));
-        AverageValueLine.transform.SetParent(transform);
-
-        Image image = AverageValueLine.GetComponent<Image>();
-        image.color = AverageValueColor;
-
-        RectTransform rectTransform = AverageValueLine.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(PanelWidth, 3f);
-        rectTransform.anchorMin = new Vector2(0, 0);
-        rectTransform.anchorMax = new Vector2(0, 0);
-        rectTransform.pivot = new Vector2(0, 0);
-        rectTransform.localPosition = Vector3.zero;
-
-        rectTransform.localScale = Vector3.one;
-        rectTransform.localEulerAngles = new Vector3(0, 0, 0);
-    }
-
-    private void UpdateAverageValueLine()
-    {
-        AverageValueLine.transform.localPosition = new Vector3(0, valueToYPosition(AverageValue), 0);
-    }
-
-    public void BuyStock()
-    {
-        if (CurrenyData.Credits < GetLatestStockValue() * BuyQuantity) return;
-        UpdateStocksOwned(BuyQuantity);
-        CurrenyData.Credits -= GetLatestStockValue() * BuyQuantity;
-    }
-
-    public void SellStock()
-    {
-        if (StocksOwned <= BuyQuantity) return;
-        UpdateStocksOwned(-BuyQuantity);
-        CurrenyData.Credits += GetLatestStockValue() * BuyQuantity;
-    }
-
-    private void UpdateStocksOwned(float change, bool updateAverageValue = true)
-    {
-        StocksOwned += change;
-        UpdateStocksOwnedText();
-        if (change > 0 && updateAverageValue)
+        while (true)
         {
-            AverageValue = (change / StocksOwned * GetLatestStockValue()) + ((StocksOwned - change) / StocksOwned * AverageValue);
-            UpdateAveragePriceText();
-        }
-        StocksOwned = StocksOwned.RoundToSignificantFigures(6);
-        //Debug.Log(GameData.Money);
-    }
+            yield return new WaitForSeconds(SecondsPerUpdate);
 
-    private void UpdateStocksOwnedText()
-    {
-        StocksOwnedText.text = StocksOwned.NumberToString() + "S";
-    }
+            GraphStepEvent?.Invoke();
 
-    private void UpdateAveragePriceText()
-    {
-        AveragePriceText.text = "PURCHASED AVG: " + AverageValue.NumberToString();
-    }
+            ShiftGraph();
 
-    virtual public float GenerateNextValue()
-    {
-        return Random.Range(-100, 100);
-    }
-
-    private void StockSplit()
-    {
-        float mostRecentValue = GetLatestStockValue();
-        //Stock Split
-        if (mostRecentValue > MaxStockValue)
-        {
-            UpdateStocksOwned(StocksOwned, false);
-            float stockValueChange = mostRecentValue / 2f;
-            GraphValues[GraphValues.Count - 1] -= stockValueChange;
-            GraphValues[GraphValues.Count - 2] -= stockValueChange;
-
-            AverageValue = AverageValue / 2f;
-            UpdateAveragePriceText();
-
-            foreach (GameObject obj in Lines)
+            if (!RedrawSinceStep)
             {
-                obj.transform.localPosition -= new Vector3(0, stockValueChange * PanelHeight / VerticalRange, 0);
+                Destroy(Lines[0]);
+                Lines.RemoveAt(0);
+                CreateLine(GraphData.GraphValues[MaxLength - 2], GetLatestStockValue());
             }
-            StockSplitEvent();
-        }
 
-        //Reverse Stock Split
-        if (mostRecentValue < MinStockValue)
-        {
-            UpdateStocksOwned(- StocksOwned / 2f, false);
-            float stockValueChange = mostRecentValue;
-            GraphValues[GraphValues.Count - 1] += stockValueChange;
-            GraphValues[GraphValues.Count - 2] += stockValueChange;
+            CompanyValue.text = "<sprite index=1> " + (Mathf.Round(GetLatestStockValue())).ToString(); 
 
-            AverageValue = AverageValue * 2f;
-            UpdateAveragePriceText();
+            //Move this to text later.
+            Money.text = "<sprite index=1> " + CurrenyData.Credits.NumberToString();
 
-            foreach (GameObject obj in Lines)
-            {
-                obj.transform.localPosition += new Vector3(0, stockValueChange * PanelHeight / VerticalRange, 0);
-            }
-            ReverseStockSplitEvent();
+            RedrawSinceStep = false;
         }
     }
 
     private void GenerateGraph()
     {
-        for (int i = 0; i < GraphValues.Count - 1; i++)
+        for (int i = 0; i < GraphData.GraphValues.Count - 1; i++)
         {
-            CreateLine(GraphValues[i], GraphValues[i + 1]);
+            CreateLine(GraphData.GraphValues[i], GraphData.GraphValues[i + 1]);
         }
     }
 
-    private void ShiftGraph()
+    private bool ShiftGraph()
     {
         float mostRecentValue = GetLatestStockValue();
 
@@ -246,36 +178,53 @@ public class GraphScript : MonoBehaviour
             verticalShift = (CurrentFloor + VerticalBuffer) - mostRecentValue;
         }
 
-        UpdateRoofFloorValues(
-            CurrentRoof - verticalShift,
-            CurrentFloor - verticalShift
-            );
-
         // Shift Graph Left
-        Vector3 shiftVector = new Vector3(-LineSpacing, verticalShift * PanelHeight / VerticalRange, 0);
+        Vector3 shiftVector = new Vector3(-LineSpacing, 0, 0);
         foreach (GameObject obj in Lines)
         {
             obj.transform.localPosition += shiftVector;
         }
+
+        return UpdateRoofFloorValues(
+            CurrentRoof - verticalShift,
+            CurrentFloor - verticalShift
+            );
     }
 
-    private void UpdateRoofFloorValues(float roof, float floor)
+    private float RoundToNearest25(float value)
     {
-        CurrentFloor = floor;
-        FloorText.text = floor.ToString("G3");
-        CurrentRoof = roof;
-        RoofText.text = roof.ToString("G3");
+        return Mathf.Round(value / 25.0f) * 25f;
     }
-    private void ClearGraph()
+
+    private bool UpdateRoofFloorValues(float roof, float floor, bool allowReset = true)
     {
-        foreach (GameObject obj in Lines)
+        if (floor < GraphData.MinStockValue)
         {
-            if (obj != null) // Check if the object is not already destroyed
-            {
-                Destroy(obj);
-            }
+            roof = GraphData.MinStockValue + VerticalRange;
+            floor = GraphData.MinStockValue;
         }
-        Lines.Clear();
+        if (roof > GraphData.MaxStockValue) {
+            roof = GraphData.MaxStockValue;
+            floor = GraphData.MaxStockValue - VerticalRange;
+        }
+
+        float newFloor = RoundToNearest25(floor);
+        float newRoof = RoundToNearest25(roof);
+
+        bool redraw = newFloor != CurrentFloor || newRoof != CurrentRoof;
+
+        CurrentFloor = newFloor;
+        FloorText.text = CurrentFloor.ToString("G3");
+        CurrentRoof = newRoof;
+        RoofText.text = CurrentRoof.ToString("G3");
+
+        if (redraw && allowReset)
+        {
+            Redraw();
+            return true;
+        }
+
+        return false;
     }
 
     private float valueToYPosition(float value)
@@ -293,6 +242,7 @@ public class GraphScript : MonoBehaviour
         lineGO.transform.SetParent(transform);
 
         Image image = lineGO.GetComponent<Image>();
+        image.material = LineMaterial;
         if (valueA < valueB)
         {
             image.color = PositiveColor;
@@ -322,16 +272,6 @@ public class GraphScript : MonoBehaviour
 
     private float GetLatestStockValue()
     {
-        return GraphValues[GraphValues.Count - 1];
-    }
-
-    virtual public void StockSplitEvent()
-    {
-
-    }
-
-    virtual public void ReverseStockSplitEvent()
-    {
-
+        return GraphData.GraphValues[GraphData.GraphValues.Count - 1];
     }
 }

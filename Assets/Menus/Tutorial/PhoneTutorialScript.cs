@@ -24,7 +24,6 @@ public class PhoneTutorialScript : MonoBehaviour
 
     public void ProgressTutorial()
     {
-        Debug.Log(TutorialScreens.Count);
         if (TutorialScreens.Count <= 0) return;
         Destroy(TutorialScreens[TutorialStep].gameObject);
         TutorialStep++;
