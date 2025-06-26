@@ -6,6 +6,7 @@ public abstract class GraphDataAbstract : MonoBehaviour
 {
     [Header("Stock ID")]
     public string StockName;
+    public float BackgroundAngle;
     public Sprite StockSprite;
     public Texture2D StockTexture;
     public Color StockColor;
@@ -18,9 +19,9 @@ public abstract class GraphDataAbstract : MonoBehaviour
     public float MaxStockValue;
     public float MinStockValue;
 
-    public delegate void StockSplitDelegate(string stockName);
+    public delegate void StockSplitDelegate(string stockName, float valueChange);
     public StockSplitDelegate StockSplitEvent;
-    public delegate void ReverseStockSplitDelegate(string stockName);
+    public delegate void ReverseStockSplitDelegate(string stockName, float valueChange);
     public ReverseStockSplitDelegate ReverseStockSplitEvent;
 
     public void Awake()
@@ -76,8 +77,8 @@ public abstract class GraphDataAbstract : MonoBehaviour
     }
     private void StockSplit()
     {
-        StockSplitEvent?.Invoke(StockName);
         float valueChange = MaxStockValue/2f;
+        StockSplitEvent?.Invoke(StockName, -valueChange);
 
         for (int i = 0; i < GraphValues.Count; i++)
         {
@@ -90,8 +91,8 @@ public abstract class GraphDataAbstract : MonoBehaviour
     }
     private void ReverseStockSplit()
     {
-        ReverseStockSplitEvent?.Invoke(StockName);
         float valueChange = MinStockValue;
+        ReverseStockSplitEvent?.Invoke(StockName, valueChange);
 
         for (int i = 0; i < GraphValues.Count; i++)
         {

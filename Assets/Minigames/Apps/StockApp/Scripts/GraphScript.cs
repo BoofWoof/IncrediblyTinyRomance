@@ -95,6 +95,7 @@ public class GraphScript : MonoBehaviour
 
         AppBackground.materialForRendering.SetColor("_GradientColor2", GraphData.StockColor/2f);
         AppBackground.materialForRendering.SetTexture("_TileGrid", GraphData.StockTexture);
+        AppBackground.materialForRendering.SetFloat("_Angle", GraphData.BackgroundAngle);
 
         RedrawSinceStep = false;
     }
@@ -150,7 +151,7 @@ public class GraphScript : MonoBehaviour
             CompanyValue.text = "<sprite index=1> " + (Mathf.Round(GetLatestStockValue())).ToString(); 
 
             //Move this to text later.
-            Money.text = "<sprite index=1> " + CurrenyData.Credits.NumberToString();
+            Money.text = "Owned: <sprite index=1> " + CurrenyData.Credits.NumberToString();
 
             RedrawSinceStep = false;
         }
@@ -270,7 +271,7 @@ public class GraphScript : MonoBehaviour
         return lineGO;
     }
 
-    private float GetLatestStockValue()
+    public float GetLatestStockValue()
     {
         return GraphData.GraphValues[GraphData.GraphValues.Count - 1];
     }

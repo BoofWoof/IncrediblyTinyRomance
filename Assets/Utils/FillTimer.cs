@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class FillTimer : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class FillTimer : MonoBehaviour
 
     public float TimePassed;
     public Coroutine FillCoroutine;
+
+    public UnityEvent FilledEvent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,6 +38,6 @@ public class FillTimer : MonoBehaviour
 
     public void FillComplete()
     {
-
+        FilledEvent?.Invoke();
     }
 }
