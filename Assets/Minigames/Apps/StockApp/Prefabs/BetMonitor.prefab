@@ -477,6 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5745744719121854347}
+  - component: {fileID: 3187474558881259658}
   - component: {fileID: 2915547137283668129}
   - component: {fileID: 4306709264937338950}
   - component: {fileID: 3981908296905704454}
@@ -513,6 +514,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -9.869507}
   m_SizeDelta: {x: 945.33325, y: 177.33331}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &3187474558881259658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2771658313504688474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74779fb104669c4b91e93cde2c83568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackPanel: {fileID: 6329694852310729512, guid: 051a0efa4e670f74c94c3a11a27f65ce, type: 3}
+  feedbackTextPrefab: {fileID: 8693803653933864755, guid: 32fab448825348346a82c26238ee9d98, type: 3}
+  feedbackSpawnParent: {fileID: 5745744719121854347}
+  fadeDuration: 3
+  raiseDistance: 30
+  postCenter: 1
 --- !u!114 &2915547137283668129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +553,7 @@ MonoBehaviour:
   Timer: {fileID: 8211378314369337838}
   StockTypeImage: {fileID: 775963679445693760}
   BetAmount: 0
+  RawBetAmount: 0
   BetMulti: 0
   LastDelta: 0
   CollectBetButton: {fileID: 2958275776770291252}

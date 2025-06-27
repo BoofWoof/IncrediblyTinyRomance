@@ -3,9 +3,37 @@ public static class GameData
 {
 }
 
-public static class CurrenyData
+public static class CurrencyData
 {
     public static float Credits = 0;
+    public static float RenownFlock = 0;
+    public static float RenownAscension = 0;
+    public static float RenownFoundation = 0;
+    public static float RenownRevolution = 0;
+}
+
+public static class CurrencyGet
+{
+    public static ref float GetRenown(StockNames stockNames)
+    {
+        if(stockNames == StockNames.Flock)
+        {
+            return ref CurrencyData.RenownFlock;
+        }
+        if (stockNames == StockNames.Assscensssion)
+        {
+            return ref CurrencyData.RenownAscension;
+        }
+        if (stockNames == StockNames.Revolution)
+        {
+            return ref CurrencyData.RenownRevolution;
+        }
+        if (stockNames == StockNames.Foundation)
+        {
+            return ref CurrencyData.RenownFoundation;
+        }
+        return ref CurrencyData.RenownFlock;
+    }
 }
 
 public static class TurkData

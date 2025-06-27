@@ -2,10 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum StockNames{
+    Flock,
+    Assscensssion,
+    Foundation,
+    Revolution
+}
+
 public abstract class GraphDataAbstract : MonoBehaviour
 {
     [Header("Stock ID")]
     public string StockName;
+    public StockNames EnumName;
     public float BackgroundAngle;
     public Sprite StockSprite;
     public Texture2D StockTexture;

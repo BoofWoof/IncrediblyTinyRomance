@@ -42,6 +42,7 @@ public class GraphScript : MonoBehaviour
     public TextMeshProUGUI Money;
     public TextMeshProUGUI CompanyName;
     public TextMeshProUGUI CompanyValue;
+    public TextMeshProUGUI CompanyRenown;
     public Image GraphBackground;
     public Image GraphForeground;
     public Image GraphStockSprite;
@@ -70,6 +71,12 @@ public class GraphScript : MonoBehaviour
     {
         SetDataSource(GraphData);
         StartCoroutine(GraphStepLoop());
+    }
+
+    public void Update()
+    {
+        if (GraphData == null) return;
+        CompanyRenown.text = CurrencyGet.GetRenown(GraphData.EnumName).NumberToString();
     }
 
     public void SetDataSource(GraphDataAbstract newGraphData)
@@ -151,7 +158,7 @@ public class GraphScript : MonoBehaviour
             CompanyValue.text = "<sprite index=1> " + (Mathf.Round(GetLatestStockValue())).ToString(); 
 
             //Move this to text later.
-            Money.text = "Owned: <sprite index=1> " + CurrenyData.Credits.NumberToString();
+            Money.text = "Owned: <sprite index=1> " + CurrencyData.Credits.NumberToString();
 
             RedrawSinceStep = false;
         }

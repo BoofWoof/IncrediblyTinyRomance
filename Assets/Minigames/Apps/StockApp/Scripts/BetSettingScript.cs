@@ -31,7 +31,7 @@ public class BetSettingScript : MonoBehaviour
     {
         if (!CanSubmit(true)) return;
 
-        CurrenyData.Credits -= BetCost;
+        CurrencyData.Credits -= BetCost;
 
         GameObject bmPrefab = Instantiate(BetMonitorPrefab);
         RectTransform rect = bmPrefab.GetComponent<RectTransform>();
@@ -124,7 +124,7 @@ public class BetSettingScript : MonoBehaviour
             if(submitError) ErrorText.ShowInvalidClickFeedback("Select Higher or Lower");
             return false;
         }
-        if (CurrenyData.Credits < BetCost)
+        if (CurrencyData.Credits < BetCost)
         {
             if (submitError) ErrorText.ShowInvalidClickFeedback("Insufficient Funds");
             return false;

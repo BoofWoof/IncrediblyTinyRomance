@@ -141,7 +141,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
         Debug.Log("Turk Puzzle Complete!");
         TurkData.PuzzlesSolved += 1;
-        CurrenyData.Credits += TurkData.CreditsPerPuzzle;
+        CurrencyData.Credits += TurkData.CreditsPerPuzzle;
 
         float timePass = 0f;
         float transitionPeriod = 1.5f;
