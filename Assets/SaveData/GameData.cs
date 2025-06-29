@@ -42,3 +42,12 @@ public static class TurkData
     public static float CreditsPerPuzzle = 0.000_000_001f;
     public static float VisionStrength = 1f;//0.1f;
 }
+
+public static class GameConstants
+{
+    public static int CreditIdx = 1;
+    public static int FlockRenownIdx = 0;
+    public static int AssscensssionRenownIdx = 2;
+    public static int FoundationRenownIdx = 5;
+    public static int RevolutionRenownIdx = 4;
+}
