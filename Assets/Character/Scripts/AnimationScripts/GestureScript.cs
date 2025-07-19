@@ -46,6 +46,17 @@ public class GestureScript : MonoBehaviour
         }
     }
 
+    public void ForceAnimation(string stateName)
+    {
+        int stateHash = Animator.StringToHash(stateName);
+        if (!CharacterAnimator.HasState(0, stateHash))
+        {
+            Debug.LogError("No animation state with that name.");
+            return;
+        }
+        CharacterAnimator.Play(stateName);
+    }
+
     private void ProcessGesture(string GestureName)
     {
         Debug.Log("Running Gesture: " + GestureName);

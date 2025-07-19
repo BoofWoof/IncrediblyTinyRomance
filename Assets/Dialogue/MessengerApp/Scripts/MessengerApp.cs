@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DS
 {
@@ -216,7 +217,8 @@ namespace DS
         {
             if (!MessageHistorys.Keys.Contains(selectedCharacter.id)) return;
 
-            string[] messageHistory = MessageHistorys[selectedCharacter.id].Split("\n");
+            //Old version: MessageHistorys[selectedCharacter.id].Split("\n");
+            string[] messageHistory = Regex.Split(MessageHistorys[selectedCharacter.id], @"\n(?=<)");
             messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - 10)).ToArray();
 
             foreach (string message in messageHistory)

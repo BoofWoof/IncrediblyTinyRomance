@@ -20,6 +20,7 @@ public abstract class UpgradesAbstract : ScriptableObject
 
     public bool CanBuy()
     {
+        if (UpgradeBought) return false;
         if (CurrencyData.Credits < Credits) return false;
         if (CurrencyData.RenownFlock < FlockRenown) return false;
         if (CurrencyData.RenownFoundation < FoundationRenown) return false;

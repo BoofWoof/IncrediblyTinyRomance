@@ -31,26 +31,30 @@ public class PrayerEventsScript : MonoBehaviour
                 MessageQueue.addDialogue("AriesIntroduction2");
             }
         }
-
-        /*
-        if(PrayerScript.TotalPrayerCount == 3)
+        if (
+                QuestLog.GetQuestState("Worship") == QuestState.Active
+            )
+        {
+            QuestManager.QuestManagerInstance.QuickUpdate();
+            int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
+            Debug.Log(correctCount);
+            if (correctCount >= 10)
             {
-                //StartEvent.SubmitDialogue();
+                MessageQueue.addDialogue("SinfulProposal");
             }
-        if (PrayerScript.TotalPrayerCount == 10)
-        {
-            //AriesMeeting.SubmitDialogue();
         }
-        if (PrayerScript.TotalPrayerCount == 18)
+        if (
+                QuestLog.GetQuestState("More Worship...") == QuestState.Active
+            )
         {
-            //StartEvent2.SubmitDialogue();
+            QuestManager.QuestManagerInstance.QuickUpdate();
+            int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
+            Debug.Log(correctCount);
+            if (correctCount >= 17)
+            {
+                MessageQueue.addDialogue("InstallReady");
+            }
         }
-        if (PrayerScript.TotalPrayerCount == 25)
-        {
-            //CrowdworkIntro.SubmitDialogue();
-            //CrowdworkIntro.OnMessageComplete += UnlockApps;
-        }
-        */
     }
 
     public void UnlockApps()

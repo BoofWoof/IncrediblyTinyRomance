@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class AppMenuScript : AppScript
 
     private void OnEnable()
     {
+        Lua.RegisterFunction("UnlockApp", null, SymbolExtensions.GetMethodInfo(() => SetAppsRevealed(0f)));
         Instance = this;
         MakeButtons();
     }
@@ -35,6 +37,13 @@ public class AppMenuScript : AppScript
     private void OnDisable()
     {
         DeleteButtons();
+    }
+
+    public static void SetAppsRevealed(float AppRevealed)
+    {
+        Instance.DeleteButtons();
+        RevealedApps = (int)AppRevealed;
+        Instance.MakeButtons();
     }
 
     public static void SetAppsRevealed(int AppRevealed)

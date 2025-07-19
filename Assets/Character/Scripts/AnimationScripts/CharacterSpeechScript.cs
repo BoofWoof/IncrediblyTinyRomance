@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using PixelCrushers.DialogueSystem;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
@@ -16,17 +18,30 @@ public class CharacterSpeechScript : MonoBehaviour
 
     public VoiceLineSO debugVoiceLine;
 
+    public static List<CharacterSpeechScript> CharacterSpeechInstances = new List<CharacterSpeechScript>();
+
     private void OnEnable()
     {
+        CharacterSpeechInstances.Add(this);
+
         ConversationManagerScript.instance.GetComponent<DialogueSystemEvents>().conversationEvents.onConversationLine.AddListener(OnConversationLine);
     }
 
     public void OnDisable()
     {
-        if(ConversationManagerScript.instance != null)
+        CharacterSpeechInstances.Remove(this);
+
+        if (ConversationManagerScript.instance != null)
         {
             ConversationManagerScript.instance.GetComponent<DialogueSystemEvents>().conversationEvents.onConversationLine.RemoveListener(OnConversationLine);
         }
+    }
+
+    public void ForceGesture(string name, string gestureName)
+    {
+        if (SpeakerName.ToLower() != name.ToLower()) return;
+
+        Gesture.ForceAnimation(gestureName);
     }
 
     public void Start()
