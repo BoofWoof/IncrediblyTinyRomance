@@ -768,6 +768,10 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
     overrideSettings:
       useOverrides: 0
       overrideSubtitleSettings: 0
@@ -842,12 +846,6 @@ MonoBehaviour:
         originDialogueID: 0
         destinationConversationID: 5
         destinationDialogueID: 1
-        isConnector: 0
-        priority: 2
-      - originConversationID: 5
-        originDialogueID: 0
-        destinationConversationID: 5
-        destinationDialogueID: 31
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -1370,7 +1368,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: The pleasures all mine!
+        value: The pleasure's all mine!
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -1915,7 +1913,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Wait... no one told me about the immenint death part...
+        value: Wait... no one told me about the imminent death part...
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -2662,59 +2660,6 @@ MonoBehaviour:
         y: 1759.068
         width: 160
         height: 30
-    - id: 31
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 5
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 496
-        y: 100
-        width: 160
-        height: 30
     - id: 32
       fields:
       - title: Title
@@ -3250,8 +3195,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1791.177}
-    canvasZoom: 0.85000014
+    canvasScrollPosition: {x: 0, y: 1508.6189}
+    canvasZoom: 0.5800004
   - id: 6
     fields:
     - title: Title
@@ -3271,6 +3216,10 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
@@ -9380,8 +9329,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 112, y: 3587.5}
-    canvasZoom: 0.70000064
+    canvasScrollPosition: {x: 0, y: 4519.04}
+    canvasZoom: 0.5500008
   - id: 8
     fields:
     - title: Title
@@ -9402,6 +9351,10 @@ MonoBehaviour:
       typeString: CustomFieldType_Actor
     - title: IsMacro
       value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
+      value: False
       type: 2
       typeString: CustomFieldType_Boolean
     overrideSettings:
@@ -11054,7 +11007,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1236.6848}
+    canvasScrollPosition: {x: 17.910461, y: 1347.7607}
     canvasZoom: 0.6700003
   - id: 11
     fields:
@@ -11075,6 +11028,10 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
@@ -13997,8 +13954,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: There are ambrosias far beyond our walls that would treat his disease.
-          But they're not ones mortal hands could ever obtain.
+        value: There is a panaceas far beyond our walls that would treat his disease.
+          But they're not ones that mortal hands could ever touch.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -14379,7 +14336,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 3268.8826}
+    canvasScrollPosition: {x: 0, y: 3362.3516}
     canvasZoom: 0.85000014
   - id: 12
     fields:
@@ -14400,6 +14357,10 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
@@ -19977,7 +19938,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: It just uses the entire cities powergrid to connect to the deific
+        value: It just uses the entire city's powergrid to connect to the deific
           network.
         type: 0
         typeString: CustomFieldType_Text
@@ -20457,7 +20418,7 @@ MonoBehaviour:
         typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: Either way, in the brief time we were online with the last PM, we
-          found an app that we could earn credits using.
+          found an app that lets us earn credits.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -20974,8 +20935,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 5041.997}
-    canvasZoom: 0.84999996
+    canvasScrollPosition: {x: 0, y: 4985.919}
+    canvasZoom: 0.7000001
   - id: 13
     fields:
     - title: Title
@@ -20995,6 +20956,10 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
@@ -21112,7 +21077,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Installs almost done!
+        value: Install's almost done!
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -21230,7 +21195,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: What holy act are we going to do to deserve these... credits?
+        value: What holy act are we going to do to earn these... credits?
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -21407,7 +21372,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: I'm not sure what a constellation is though.
+        value: I'm not sure what a 'constellation' is, though.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -21708,7 +21673,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: Although... our God always looks so confused and worried.
+        value: Although... our god always looks so confused and worried.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -22000,7 +21965,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
-        value: Lets quit with the waiting, lets go!
+        value: Let's quit with the waiting. I want to go!
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
@@ -22418,8 +22383,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 'It''s on your phone! Remember, you can go back to find other apps
-          other than this messanger. [Right Click]'
+        value: 'It''s on your phone! Remember, you can go back to find other apps.
+          [Right Click]'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -22448,8 +22413,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 745}
-    canvasZoom: 1
+    canvasScrollPosition: {x: 15.714294, y: 0}
+    canvasZoom: 0.7000002
   syncInfo:
     syncActors: 0
     syncItems: 0
@@ -22463,6 +22428,6 @@ MonoBehaviour:
     Item","value":"True","type":2,"typeString":"CustomFieldType_Boolean"}],"questFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Success
     Description","value":"","type":0,"typeString":""},{"title":"Failure Description","value":"","type":0,"typeString":""},{"title":"State","value":"unassigned","type":0,"typeString":""},{"title":"Is
     Item","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"locationFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"variableFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Initial
-    Value","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"conversationFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"IsMacro","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"dialogueEntryFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"VoiceLinesSO","value":"","type":0,"typeString":"CustomFieldType_Files"},{"title":"Actor","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Menu
+    Value","value":"","type":0,"typeString":""},{"title":"Description","value":"","type":0,"typeString":""}],"conversationFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"IsMacro","value":"False","type":2,"typeString":"CustomFieldType_Boolean"},{"title":"AllowRepeat","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"dialogueEntryFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"VoiceLinesSO","value":"","type":0,"typeString":"CustomFieldType_Files"},{"title":"Actor","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Menu
     Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Dialogue
-    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"}],"actorPrimaryFieldTitles":["IsMacro","IsRadio","SkipThem"],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":["IsMacro"],"dialogueEntryPrimaryFieldTitles":["AudioClip","Phenomes","VoiceLinesSO"],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'
+    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"}],"actorPrimaryFieldTitles":["IsMacro","IsRadio","SkipThem"],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":["IsMacro","AllowRepeat"],"dialogueEntryPrimaryFieldTitles":["AudioClip","Phenomes","VoiceLinesSO"],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'

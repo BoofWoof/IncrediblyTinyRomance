@@ -6,6 +6,10 @@ public class CursorStateControl : MonoBehaviour
 {
     public static bool MenuUp;
     public ToggleActive[] PauseMenus;
+
+    public CursorLockMode LastLockMode = CursorLockMode.Locked;
+    public bool LastVisible = false;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -35,21 +39,17 @@ public class CursorStateControl : MonoBehaviour
         MenuUp = menuUp;
         if (menuUp)
         {
+            LastLockMode = Cursor.lockState;
+            LastVisible = Cursor.visible;
+
+
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
         else
         {
-            if (PhonePositionScript.raised)
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            Cursor.lockState = LastLockMode;
+            Cursor.visible = LastVisible;
         }
     }
 

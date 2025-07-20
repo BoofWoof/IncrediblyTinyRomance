@@ -8,6 +8,7 @@ public class AppScript : MonoBehaviour
     public GameObject PreviousApp;
 
     public bool HideOnStart = true;
+    public bool Active = true;
 
     public delegate void HideApp();
     public event HideApp OnHideApp;
@@ -36,6 +37,7 @@ public class AppScript : MonoBehaviour
 
     public void Show(GameObject previousApp)
     {
+        Active = true;
         if (previousApp != null)
         {
             PreviousApp = previousApp;
@@ -47,6 +49,7 @@ public class AppScript : MonoBehaviour
 
     public void Hide(bool revealLast)
     {
+        Active = false;
         if (PreviousApp != null && revealLast)
         {
             Debug.Log(gameObject.name);

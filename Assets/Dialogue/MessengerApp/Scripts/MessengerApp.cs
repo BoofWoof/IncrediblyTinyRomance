@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -47,6 +48,11 @@ namespace DS
         [Header("Voice")]
         public AudioSource VoiceSource;
 
+        [Header("MouseData")]
+        public float LastMousePosition;
+        public bool PreviouslyHeld = false;
+        public float VerticalShift = 0f;
+
         public void MakeAudioMessage(string audioFileName)
         {
             audioFileName = audioFileName.CleanResourcePath();
@@ -68,6 +74,29 @@ namespace DS
             conversation_height += buttonHeight + message_buffer;
 
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
+        }
+
+        public void Update()
+        {
+            if (!Active) return;
+            if (Input.GetMouseButton(0))
+            {
+                if (conversation_height < 900f) return;
+
+                float thisPosition = Input.mousePosition.y;
+                if(PreviouslyHeld)
+                {
+                    float mouseDelta = thisPosition - LastMousePosition;
+                    VerticalShift += mouseDelta;
+                    VerticalShift = Mathf.Clamp(VerticalShift, -(conversation_height - 900f), 0);
+                    content_rect.anchoredPosition = new Vector2(content_rect.anchoredPosition.x, VerticalShift + conversation_height - 900f + 100f);
+                }
+                LastMousePosition = thisPosition;
+                PreviouslyHeld = true;
+            } else
+            {
+                PreviouslyHeld = false;
+            }
         }
 
         // Start is called before the first frame update
@@ -107,9 +136,12 @@ namespace DS
                 Destroy(child.gameObject);
             }
             conversation_height = start_buffer;
+            VerticalShift = 0f;
         }
         public IEnumerator RevealOptions(PixelCrushers.DialogueSystem.CharacterInfo speakingCharacter)
         {
+            VerticalShift = 0f;
+
             List<string> choiceText = new List<string>();
             foreach (Response response in Choices)
             {

@@ -1,6 +1,7 @@
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ConversationManagerScript : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ConversationManagerScript : MonoBehaviour
 
     public static bool ConversationOngoing = false;
     public static bool isMacroConvo = false;
+
+    public static List<string> BannedDialogues = new List<string>();
 
     private void Awake()
     {
@@ -27,7 +30,11 @@ public class ConversationManagerScript : MonoBehaviour
 
     public void StartDialogue(string newConversation)
     {
+
         Conversation newConv = DialogueManager.masterDatabase.GetConversation(newConversation);
+        bool allowRepeat = Field.LookupBool(newConv.fields, "AllowRepeat");
+        if(!allowRepeat) BannedDialogues.Add(newConversation);
+
         isMacroConvo = Field.LookupBool(newConv.fields, "IsMacro");
 
         ConversationOngoing = true;
@@ -57,9 +64,12 @@ public class ConversationManagerScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(2f);
-            if (MessageQueue.GetQueueLength() > 0)
+            if (!ConversationOngoing && MessageQueue.GetQueueLength() > 0)
             {
                 Dialogue nextDialogue = MessageQueue.getNextDialogue();
+
+                if (BannedDialogues.Contains(nextDialogue.dialouge)) continue;
+
                 yield return new WaitForSeconds((float)nextDialogue.wait);
                 StartDialogue(nextDialogue.dialouge);
             }

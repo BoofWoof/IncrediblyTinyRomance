@@ -40,6 +40,7 @@ public class PrayerEventsScript : MonoBehaviour
             Debug.Log(correctCount);
             if (correctCount >= 10)
             {
+                QuestManager.CompleteQuest("Worship");
                 MessageQueue.addDialogue("SinfulProposal");
             }
         }
@@ -52,6 +53,7 @@ public class PrayerEventsScript : MonoBehaviour
             Debug.Log(correctCount);
             if (correctCount >= 17)
             {
+                QuestManager.CompleteQuest("More Worship...");
                 MessageQueue.addDialogue("InstallReady");
             }
         }

@@ -77,22 +77,12 @@ public class PlayerMovment : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        if(moveDirection.magnitude > 0)
+        if(rb.linearVelocity.magnitude > 0.1f)
         {
             if(!WalkingSounds.isPlaying) WalkingSounds.Play();
         } else
         {
             if (WalkingSounds.isPlaying) WalkingSounds.Stop();
-        }
-    }
-
-    private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.y);
-
-        if(flatVel.magnitude > moveSpeed){
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.linearVelocity = limitedVel;
         }
     }
 }

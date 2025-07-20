@@ -48,8 +48,16 @@ public class QuestManager : MonoBehaviour
         Lua.RegisterFunction("IncrementQuest", this, SymbolExtensions.GetMethodInfo(() => IncrementQuest()));
     }
 
+    public static void CompleteQuest(string questTitle)
+    {
+        QuestLog.SetQuestState(questTitle, QuestState.Success);
+        QuestText.color = Color.green;
+    }
+
     public static void ChangeQuest (string newQuestTitle)
     {
+        QuestText.color = Color.white;
+
         string[] QuestList = QuestLog.GetAllQuests(QuestState.Active | QuestState.Success | QuestState.Unassigned, false);
         currentQuestIndex = Array.IndexOf(QuestList, newQuestTitle);
 

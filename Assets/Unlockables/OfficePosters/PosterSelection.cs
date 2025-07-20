@@ -80,6 +80,12 @@ public class PosterSelection : MonoBehaviour
         }
     }
 
+    public void ExitMenu()
+    {
+        SelectedPoster = null;
+        Destroy(gameObject);
+    }
+
     public void SelectPoster(OfficePoster poster)
     {
         SelectedPoster = poster;
@@ -98,7 +104,7 @@ public class PosterSelection : MonoBehaviour
 
     public void OnDestroy()
     {
-        transform.parent.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", SelectedPoster.Image.texture);
+        if(SelectedPoster != null) transform.parent.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", SelectedPoster.Image.texture);
         CursorStateControl.AllowMouse(false);
     }
 }
