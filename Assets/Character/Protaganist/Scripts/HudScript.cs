@@ -18,11 +18,20 @@ public class HudScript : MonoBehaviour
 
     public int LastTutorialQuestIndex = 3;
     public Coroutine TutorialCoroutine;
+
+    public GameObject MessageNotification;
+
     public static HudScript instance;
+
+    public static void ShowMessageNotification(bool show)
+    {
+        instance.MessageNotification.SetActive(show);
+    }
 
     public void Awake()
     {
         instance = this;
+        MessageNotification.SetActive(false);
     }
 
     public void Start()

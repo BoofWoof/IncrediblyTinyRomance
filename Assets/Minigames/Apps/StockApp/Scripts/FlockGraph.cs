@@ -15,8 +15,6 @@ public class FlockGraph : GraphDataAbstract
 
     public override void StartUniqueGraphData()
     {
-        Debug.Log("AAAA");
         GraphValues.Add(StartingValue);
-        Debug.Log(GraphValues.Count);
     }
 }

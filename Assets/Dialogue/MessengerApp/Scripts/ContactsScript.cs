@@ -27,6 +27,8 @@ public class ContactsScript : MonoBehaviour
     public GameObject ContactListCenter;
     private List<GameObject> ContactList = new List<GameObject>();
 
+    public List<int> UncheckedMessages;
+
     private static bool QuickMessaging = false;
 
     public void Start()
@@ -48,6 +50,15 @@ public class ContactsScript : MonoBehaviour
             AddEndBar();
         }
 
+        if(activeCharacter == null || (activeCharacter.id != tempSpeakingCharacter.id))
+        {
+            HudScript.ShowMessageNotification(true);
+            if (!UncheckedMessages.Contains(tempSpeakingCharacter.id))
+            {
+                UncheckedMessages.Add(tempSpeakingCharacter.id);
+            }
+        }
+
         string messageText = string.Format(subtitle.formattedText.text);
 
         Debug.Log("New message: " + messageText);
@@ -62,6 +73,8 @@ public class ContactsScript : MonoBehaviour
         {
             StartCoroutine(SendAudioMessage(tempSpeakingCharacter, voiceFilePath));
         }
+
+        RebuildContacts();
     }
 
     public IEnumerator SendAudioMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string voiceFilePath)
@@ -95,9 +108,9 @@ public class ContactsScript : MonoBehaviour
         {
             speakingCharacter = newSpeaker;
         }
+        messengerApp.NotificationPing();
         if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
         {
-            messengerApp.NotificationPing();
             messengerApp.RecreateFromText();
 
             MessageBoxScript message_info = messengerApp.MakeLeftMessage(message_text);
@@ -130,6 +143,8 @@ public class ContactsScript : MonoBehaviour
         Debug.Log(speakingCharacter.nameInDatabase);
         Debug.Log("Creating choices: " + responses.Length.ToString());
         StartCoroutine(SendChoicesMessage(responses));
+
+        RebuildContacts();
     }
 
     public IEnumerator SendChoicesMessage(Response[] responses)
@@ -139,6 +154,9 @@ public class ContactsScript : MonoBehaviour
         if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
         {
             DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter));
+        } else
+        {
+            if (messengerApp.WaitingForChoice) HudScript.ShowMessageNotification(true);
         }
     }
 
@@ -185,6 +203,13 @@ public class ContactsScript : MonoBehaviour
             newContactButton.transform.localScale = Vector3.one;
 
             newContactButton.transform.GetChild(0).GetComponent<Image>().sprite = characterInfo.portrait;
+            if (UncheckedMessages.Contains(characterInfo.id))
+            {
+                newContactButton.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+            } else
+            {
+                newContactButton.transform.GetChild(0).GetComponent<Image>().color = Color.gray;
+            }
 
             EventTrigger eventTrigger = newContactButton.transform.GetChild(0).GetChild(0).gameObject.AddComponent<EventTrigger>();
 
@@ -220,14 +245,36 @@ public class ContactsScript : MonoBehaviour
         if (contact == null || ContactsFound.Keys.Contains(contact.id)) return;
 
         ContactsFound.Add(contact.id, contact);
+        RebuildContacts();
+    }
+
+    public void RebuildContacts()
+    {
         DeleteContactButtons();
         MakeContactButtons();
     }
 
+    public static void CheckShowMessageNotification()
+    {
+        HudScript.ShowMessageNotification(instance.UncheckedMessages.Count > 0);
+    }
+
     public void SwapToCharacterMessanger(PixelCrushers.DialogueSystem.CharacterInfo selectCharacter)
     {
+        if (DialogueCoroutine != null)
+        {
+            StopCoroutine(DialogueCoroutine);
+            DialogueCoroutine = null;
+        }
+
         activeCharacter = selectCharacter;
         GetComponent<AppScript>().Swap(MessagingApp.GetComponent<AppScript>());
+
+        if (UncheckedMessages.Contains(activeCharacter.id))
+        {
+            UncheckedMessages.Remove(activeCharacter.id);
+        }
+        CheckShowMessageNotification();
 
         messengerApp.CurrentCharacter = selectCharacter;
         messengerApp.RecreateFromText();
@@ -240,10 +287,9 @@ public class ContactsScript : MonoBehaviour
     public void DeselectCharacter()
     {
         activeCharacter = null;
-        if (DialogueCoroutine != null)
-        {
-            StopCoroutine(DialogueCoroutine);
-            DialogueCoroutine = null;
-        }
+        CheckShowMessageNotification();
+        if (messengerApp.WaitingForChoice) HudScript.ShowMessageNotification(true);
+
+        RebuildContacts();
     }
 }

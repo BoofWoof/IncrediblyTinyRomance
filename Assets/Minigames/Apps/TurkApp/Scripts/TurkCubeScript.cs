@@ -177,6 +177,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
 
             if (TurkPuzzleScript.IsCordTaken(newCord, puzzlePieces)) return false;
+            if (newCord.x > 13) return false; //Stops from placing on glass. Sorry for magic number. <3
         }
 
         List<TurkCubeScript> fillers = new List<TurkCubeScript>();

@@ -53,6 +53,8 @@ public class ShutterScript : MonoBehaviour
             HudScript.SetContinueTutorial();
         }
 
+        if (ShudderAudioSource.isPlaying) return;
+
         Debug.Log("Shutters Raising");
         if (ShuttersLowered)
         {
