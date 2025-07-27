@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class CharacterSpeechScript : MonoBehaviour
 {
     public string SpeakerName;
+    public string NickName;
     public bool MacroSpeech = false;
     public bool RadioSpeech = false;
 

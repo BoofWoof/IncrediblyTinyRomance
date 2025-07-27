@@ -4,6 +4,7 @@ public class AnimationTriggers : MonoBehaviour
 {
     public CollissionTracker LeftHandGrab;
     public CollissionTracker LeftHandRelease;
+    public OverworldPositionScript overworldPositionScript;
     public void Impact(float Strength)
     {
         MoveCamera.moveCamera.ShakeScreen(1f, Strength);
@@ -24,5 +25,10 @@ public class AnimationTriggers : MonoBehaviour
         Grabable.transform.parent = ReleasePoint.transform;
         Grabable.transform.localPosition = Vector3.zero;
         Grabable.transform.localRotation = Quaternion.identity;
+    }
+
+    public void EnableMobility()
+    {
+        overworldPositionScript.CharacterMobile = true;
     }
 }
