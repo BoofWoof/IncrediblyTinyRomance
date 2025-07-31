@@ -40,9 +40,16 @@ public class CharacterSpeechScript : MonoBehaviour
 
     public void ForceGesture(string name, string gestureName)
     {
-        if (SpeakerName.ToLower() != name.ToLower()) return;
+        if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;
 
         Gesture.ForceAnimation(gestureName);
+    }
+
+    public void GestureParameter(string name, string gestureParamter)
+    {
+        if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;
+
+        Gesture.ProcessGesture(gestureParamter);
     }
 
     public void Start()

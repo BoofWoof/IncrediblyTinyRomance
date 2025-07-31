@@ -57,7 +57,7 @@ public class GestureScript : MonoBehaviour
         CharacterAnimator.Play(stateName);
     }
 
-    private void ProcessGesture(string GestureName)
+    public void ProcessGesture(string GestureName)
     {
         Debug.Log("Running Gesture: " + GestureName);
         string[] GestureData = GestureName.Split(" ");

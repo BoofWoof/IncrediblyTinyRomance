@@ -5,6 +5,8 @@ public class AnimationTriggers : MonoBehaviour
     public CollissionTracker LeftHandGrab;
     public CollissionTracker LeftHandRelease;
     public OverworldPositionScript overworldPositionScript;
+    public Animator animator;
+
     public void Impact(float Strength)
     {
         MoveCamera.moveCamera.ShakeScreen(1f, Strength);
@@ -30,5 +32,15 @@ public class AnimationTriggers : MonoBehaviour
     public void EnableMobility()
     {
         overworldPositionScript.CharacterMobile = true;
+    }
+
+    public void HoldCity()
+    {
+        animator.SetBool("Holding", true);
+    }
+
+    public void ReleaseCity()
+    {
+        animator.SetBool("Holding", false);
     }
 }
