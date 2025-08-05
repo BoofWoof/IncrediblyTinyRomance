@@ -80,6 +80,26 @@ public class CharacterSpeechScript : MonoBehaviour
         Debug.Log(subtitle.formattedText.text);
         StartCoroutine(Speak(voiceLine));
     }
+    public void PlaySpeech(string name, VoiceLineSO voiceLine)
+    {
+        if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;
+
+        StartCoroutine(SpeakNoDialogue(voiceLine));
+    }
+    public IEnumerator SpeakNoDialogue(VoiceLineSO voiceLine)
+    {
+        //Update play speech to allow animations before and after start.
+        yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
+        PlaySpeech(voiceLine);
+        if (RadioSpeech) RadioObject.SetActive(true);
+        yield return null;
+        while (isSpeechPlaying())
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
+        if (RadioSpeech) RadioObject.SetActive(false);
+    }
     public IEnumerator Speak(VoiceLineSO voiceLine)
     {
         //Update play speech to allow animations before and after start.

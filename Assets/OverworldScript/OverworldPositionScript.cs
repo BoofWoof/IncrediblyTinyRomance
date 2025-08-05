@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class OverworldPositionScript : MonoBehaviour
@@ -148,19 +147,3 @@ public class OverworldPositionScript : MonoBehaviour
     }
 }
 
-
-
-[CustomEditor(typeof(OverworldPositionScript))]
-public class TeleportableCharacterEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        if (GUILayout.Button("ResetPosition (Edit Mode)"))
-        {
-            OverworldPositionScript overworldPositionScript = (OverworldPositionScript)target;
-            overworldPositionScript.GoTo(overworldPositionScript.CurrentNode);
-        }
-    }
-}

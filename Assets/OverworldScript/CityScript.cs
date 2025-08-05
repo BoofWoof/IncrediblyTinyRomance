@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 public class CityScript : MonoBehaviour
@@ -18,20 +17,5 @@ public class CityScript : MonoBehaviour
 
         transform.position = EndTransform.position;
         transform.rotation = EndTransform.rotation;
-    }
-}
-
-[CustomEditor(typeof(CityScript))]
-public class TeleportableCityEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        if (GUILayout.Button("ResetPosition (Edit Mode)"))
-        {
-            CityScript cityPositionScript = (CityScript)target;
-            cityPositionScript.GoTo(cityPositionScript.CurrentNode);
-        }
     }
 }
