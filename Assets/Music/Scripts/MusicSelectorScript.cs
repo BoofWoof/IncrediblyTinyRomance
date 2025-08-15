@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 [System.Serializable]
@@ -23,6 +24,7 @@ public class MusicSelectorScript : MonoBehaviour
 
     private void OnEnable()
     {
+        Lua.RegisterFunction("SwitchSong", null, SymbolExtensions.GetMethodInfo(() => SetOverworldSong(0)));
         PhonePositionScript.PhoneToggled += PhoneToggleMusicSwap;
     }
     private void OnDisable()
@@ -43,17 +45,17 @@ public class MusicSelectorScript : MonoBehaviour
         CrossfadeScript.InstantStartSong(OverworldSongID);
     }
 
-    public static void SetPhoneSong(int newSongID)
+    public static void SetPhoneSong(double newSongID)
     {
-        instance.PhoneMusicID = newSongID;
+        instance.PhoneMusicID = (int)newSongID;
         if (PhonePositionScript.raised)
         {
             CrossfadeScript.TransitionSong(MusicSelectorScript.instance.PhoneMusicID);
         }
     }
-    public static void SetOverworldSong(int newSongID)
+    public static void SetOverworldSong(double newSongID)
     {
-        instance.PhoneMusicID = newSongID;
+        instance.PhoneMusicID = (int)newSongID;
         if (!PhonePositionScript.raised)
         {
             CrossfadeScript.TransitionSong(MusicSelectorScript.instance.PhoneMusicID);

@@ -52,12 +52,13 @@ public class QuestManager : MonoBehaviour
     {
         QuestLog.SetQuestState(questTitle, QuestState.Success);
         QuestText.color = Color.green;
+        Debug.Log("A");
     }
 
     public static void ChangeQuest (string newQuestTitle)
     {
         QuestText.color = Color.white;
-
+        Debug.Log("B");
         string[] QuestList = QuestLog.GetAllQuests(QuestState.Active | QuestState.Success | QuestState.Unassigned, false);
         currentQuestIndex = Array.IndexOf(QuestList, newQuestTitle);
 
@@ -124,7 +125,7 @@ public class QuestManager : MonoBehaviour
 
     public IEnumerator TransitionText(string newText)
     {
-        while(QuestText.text.Length > 0)
+        while (QuestText.text.Length > 0)
         {
             QuestText.text = QuestText.text.Substring(0, QuestText.text.Length - 1);
             if (UnityEngine.Random.Range(0f, 1f) > 0.8f)

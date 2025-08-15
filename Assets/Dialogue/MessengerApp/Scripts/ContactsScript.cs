@@ -44,6 +44,7 @@ public class ContactsScript : MonoBehaviour
     {
         if (subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
         if (subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
+        if (subtitle.speakerInfo.GetFieldBool("WaitThem")) return;
         PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
         if (tempSpeakingCharacter.Name == "Player") return;
         if (speakingCharacter != null && speakingCharacter.id != tempSpeakingCharacter.id) {

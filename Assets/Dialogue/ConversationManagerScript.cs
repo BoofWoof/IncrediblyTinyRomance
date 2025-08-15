@@ -17,6 +17,11 @@ public class ConversationManagerScript : MonoBehaviour
         instance = this;
     }
 
+    public void ForceNextDialogue()
+    {
+        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+    }
+
     void Start()
     {
         Lua.RegisterFunction("QueueDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("")));
@@ -45,7 +50,7 @@ public class ConversationManagerScript : MonoBehaviour
         if (isMacroConvo)
         {
             PrayerScript.StoryMode = true;
-            MusicSelectorScript.SetOverworldSong(3);
+            //MusicSelectorScript.SetOverworldSong(3);
         }
         else
         {

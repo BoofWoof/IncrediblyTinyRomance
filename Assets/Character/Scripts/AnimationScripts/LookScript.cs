@@ -20,9 +20,14 @@ struct RotationLimits
 
 public class LookScript : MonoBehaviour
 {
+    [Range(0f, 1f)]
+    public float HeadLookWeight = 1f;
+
     public Transform EyeL;
     public Transform EyeR;
     public Transform Head;
+
+    public bool Flip = false;
 
     [Header("Target")]
     public Transform Target;
@@ -52,10 +57,20 @@ public class LookScript : MonoBehaviour
         LookAt(EyeL, 0f, LEyeRotLimits, initialLEyeLocalRotation);
         LookAt(EyeR, 0f, REyeRotLimits, initialREyeLocalRotation);
     }
-    void LookAt(Transform sourceTransform, float xOffset, RotationLimits rotLimits, Quaternion initialRotation)
+
+    public void SetLookWeight(float newWeight)
+    {
+        HeadLookWeight = newWeight;
+    }
+
+    void LookAt(Transform sourceTransform, float yOffset, RotationLimits rotLimits, Quaternion initialRotation)
     {
         // Direction from bone to target in world space
         Vector3 directionToTarget = sourceTransform.position - Target.position;
+        if (Flip)
+        {
+            directionToTarget = new Vector3(-directionToTarget.x, -directionToTarget.y, -directionToTarget.z);
+        }
 
         // Convert target direction into the bone's local space
         Vector3 localDirection = sourceTransform.parent.InverseTransformDirection(directionToTarget.normalized);
@@ -65,8 +80,8 @@ public class LookScript : MonoBehaviour
         float pitch = -Mathf.Asin(localDirection.y) * Mathf.Rad2Deg;
 
         // Clamp angles
-        yaw = Mathf.Clamp(yaw, rotLimits.NegHor, rotLimits.PosHor);
-        pitch = Mathf.Clamp(pitch, rotLimits.NegVer, rotLimits.PosVer);
+        yaw = HeadLookWeight * Mathf.Clamp(yaw, rotLimits.NegHor, rotLimits.PosHor);
+        pitch = HeadLookWeight * Mathf.Clamp(pitch, rotLimits.NegVer, rotLimits.PosVer);
 
         // Create rotation from the clamped angles
         Quaternion targetLocalRotation = Quaternion.Euler(pitch, yaw, 0f);

@@ -18,6 +18,8 @@ public class GestureScript : MonoBehaviour
 
     public MoodInterface Mood;
 
+    public LookScript TheScriptThatDoesTheEyes;
+
     public void PlaySpeech()
     {
         ProcessText();
@@ -86,6 +88,22 @@ public class GestureScript : MonoBehaviour
                 break;
             case "Anger":
                 Mood.SetAnger(float.Parse(GestureData[1]));
+                break;
+            case "Yell":
+                CharacterAnimator.SetBool("Yell", true);
+                break;
+            case "StopYell":
+                CharacterAnimator.SetBool("Yell", false);
+                break;
+            case "Look":
+                Debug.Log(float.Parse(GestureData[1]));
+                TheScriptThatDoesTheEyes.SetLookWeight(float.Parse(GestureData[1]));
+                break;
+            case "Focus":
+                CharacterAnimator.SetBool("Focused", true);
+                break;
+            case "StopFocus":
+                CharacterAnimator.SetBool("Focused", false);
                 break;
         }
     }
