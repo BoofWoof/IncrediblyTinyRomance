@@ -105,6 +105,9 @@ public class GestureScript : MonoBehaviour
             case "StopFocus":
                 CharacterAnimator.SetBool("Focused", false);
                 break;
+            case "CheckPhone":
+                CharacterAnimator.SetTrigger("CheckPhone");
+                break;
         }
     }
 

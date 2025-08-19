@@ -7,6 +7,8 @@ public class AnimationTriggers : MonoBehaviour
     public OverworldPositionScript overworldPositionScript;
     public Animator animator;
 
+    public HandScript RightHand;
+
     public void Impact(float Strength)
     {
         MoveCamera.moveCamera.ShakeScreen(1f, Strength);
@@ -42,5 +44,20 @@ public class AnimationTriggers : MonoBehaviour
     public void ReleaseCity()
     {
         animator.SetBool("Holding", false);
+    }
+
+    public void RightHandSpawn(int SpawnID)
+    {
+        RightHand.SpawnInHand(SpawnID);
+    }
+
+    public void RightHandDelete()
+    {
+        RightHand.DestroyHeldObject();
+    }
+
+    public void RightHandRelease(int ReleaseID)
+    {
+        RightHand.ReleaseHandObject(ReleaseID);
     }
 }
