@@ -3325,8 +3325,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1508.6189}
-    canvasZoom: 0.5800004
+    canvasScrollPosition: {x: 60.92542, y: 1122.9819}
+    canvasZoom: 0.82000023
   - id: 6
     fields:
     - title: Title
@@ -23001,7 +23001,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 638
+        y: 722
         width: 160
         height: 30
     - id: 4
@@ -23060,7 +23060,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 806
+        y: 890
         width: 160
         height: 30
     - id: 5
@@ -23119,7 +23119,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 974
+        y: 1058
         width: 160
         height: 30
     - id: 6
@@ -23178,7 +23178,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1058
+        y: 1142
         width: 160
         height: 30
     - id: 7
@@ -23237,7 +23237,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1142
+        y: 1226
         width: 160
         height: 30
     - id: 8
@@ -23296,7 +23296,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1226
+        y: 1310
         width: 160
         height: 30
     - id: 9
@@ -23367,7 +23367,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1478
+        y: 1562
         width: 160
         height: 30
     - id: 10
@@ -23420,7 +23420,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 1562
+        y: 1646
         width: 160
         height: 30
     - id: 11
@@ -23473,7 +23473,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1562
+        y: 1646
         width: 160
         height: 30
     - id: 12
@@ -23526,7 +23526,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 496
-        y: 1562
+        y: 1646
         width: 160
         height: 30
     - id: 13
@@ -23643,7 +23643,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 288
+        x: 286.73416
         y: 386
         width: 160
         height: 30
@@ -23658,7 +23658,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: Assets/Resources/VoiceLines/Sid/Intro/M3BEKNOWN.asset
+        value: Assets/Resources/VoiceLines/Sid/Intro/M3REQUEST.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -23692,7 +23692,7 @@ MonoBehaviour:
       - originConversationID: 15
         originDialogueID: 15
         destinationConversationID: 15
-        destinationDialogueID: 18
+        destinationDialogueID: 21
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -23717,7 +23717,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: Assets/Resources/VoiceLines/Sid/Intro/M4VIEW.asset
+        value: Assets/Resources/VoiceLines/Sid/Intro/M5VIEW.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -23762,7 +23762,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 722
+        y: 806
         width: 160
         height: 30
     - id: 17
@@ -23776,7 +23776,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: VoiceLinesSO
-        value: Assets/Resources/VoiceLines/Sid/Intro/M5POWERSOURCE.asset
+        value: Assets/Resources/VoiceLines/Sid/Intro/M6POWERSOURCE.asset
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
@@ -23821,7 +23821,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1310
+        y: 1394
         width: 160
         height: 30
     - id: 18
@@ -23880,7 +23880,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 554
+        y: 638
         width: 160
         height: 30
     - id: 19
@@ -23939,7 +23939,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 890
+        y: 974
         width: 160
         height: 30
     - id: 20
@@ -23998,12 +23998,71 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 288
-        y: 1394
+        y: 1478
+        width: 160
+        height: 30
+    - id: 21
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Sid/Intro/M4BEKNOWN.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 15
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 15
+        originDialogueID: 21
+        destinationConversationID: 15
+        destinationDialogueID: 18
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 288
+        y: 554
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 704.3073}
-    canvasZoom: 0.73000026
+    canvasScrollPosition: {x: 16.579214, y: 220.36113}
+    canvasZoom: 0.8200002
   syncInfo:
     syncActors: 0
     syncItems: 0

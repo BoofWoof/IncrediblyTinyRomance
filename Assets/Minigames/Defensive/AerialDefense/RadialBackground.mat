@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TurkPieceMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 348e47b8f4632f043b5c87ec906a400d, type: 3}
+  m_Name: RadialBackground
+  m_Shader: {fileID: -6465566751694194690, guid: b3b732086aeca39419f887c37bd487be, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b3175faae9454a5f869ac4c302d0dbfe_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 72ce6a22d88b23f499cdaf10ab8a63ab, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -42,7 +46,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _FullAlpha: 1
+    - _RadialSpeed: -40
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -51,8 +55,7 @@ Material:
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
     m_Colors:
+    - _Center: {r: 0.495, g: 0.36, b: 0, a: 0}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _CompletionColor: {r: 1.1603774, g: 2, b: 1.9343603, a: 0}
-    - _Tint: {r: 0.7783019, g: 0.8275682, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

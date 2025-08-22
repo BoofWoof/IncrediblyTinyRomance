@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TurkPieceMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 348e47b8f4632f043b5c87ec906a400d, type: 3}
+  m_Name: WeakInvaderGlow
+  m_Shader: {fileID: -6465566751694194690, guid: a73f523a7217e6e42bb3a0dd895193de, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 17ecae76c226c5042a2e3415ce9f44d0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _FullAlpha: 1
+    - _Intensity: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -52,7 +52,5 @@ Material:
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _CompletionColor: {r: 1.1603774, g: 2, b: 1.9343603, a: 0}
-    - _Tint: {r: 0.7783019, g: 0.8275682, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
