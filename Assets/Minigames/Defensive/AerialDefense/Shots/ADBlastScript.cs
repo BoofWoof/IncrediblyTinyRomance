@@ -27,6 +27,8 @@ public class ADBlastScript : MonoBehaviour
         Debug.Log("A");
         if (collision.gameObject.tag == "ADThreat")
         {
+            AerialDefenseScript.ThreatDestroyed();
+
             Debug.Log("B");
             Destroy(collision.gameObject);
             Destroy(gameObject);

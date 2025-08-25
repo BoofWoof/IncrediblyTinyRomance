@@ -66,5 +66,10 @@ public class FallingThreatScript : MonoBehaviour
             StopAllCoroutines();
             FadeInAndOutCorouting = StartCoroutine(FadeInAndOut());
         }
+        if (collision.gameObject.name == "DangerLine")
+        {
+            Destroy(gameObject);
+            AerialDefenseScript.TakeDamage();
+        }
     }
 }
