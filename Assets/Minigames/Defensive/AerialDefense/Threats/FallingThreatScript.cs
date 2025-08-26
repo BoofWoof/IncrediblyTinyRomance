@@ -8,8 +8,6 @@ public class FallingThreatScript : MonoBehaviour
     public float FadeOutPeriod = 1.0f;
     public float MaintainPeriod = 0.5f;
 
-    Coroutine FadeInAndOutCorouting;
-
     Image imageComponent;
 
     public Rigidbody2D thisRB2D;
@@ -17,6 +15,8 @@ public class FallingThreatScript : MonoBehaviour
 
     public GameObject DestructionPingPrefab;
     public GameObject DetectionPingPrefab;
+
+    public AudioClip[] DestructionNoises;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,9 +53,19 @@ public class FallingThreatScript : MonoBehaviour
         imageComponent.color = new Color(1f, 1f, 1f, 0f);
     }
 
+    public void SpawnExplosionPing()
+    {
+        GameObject newPing = Instantiate(DestructionPingPrefab, transform.position, Quaternion.identity, AerialDefenseScript.StaticGameCanvas);
+        AudioSource pingAudio = newPing.GetComponent<AudioSource>();
+        if (pingAudio != null && DestructionNoises.Length > 0)
+        {
+            int randIdx = Random.Range(0, DestructionNoises.Length);
+            pingAudio.clip = DestructionNoises[randIdx];
+            pingAudio.Play();
+        }
+    }
     public void OnDestroy()
     {
-        GameObject newPing = Instantiate(DestructionPingPrefab, transform.position, Quaternion.identity, transform.parent);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,10 +74,11 @@ public class FallingThreatScript : MonoBehaviour
         {
             Instantiate(DetectionPingPrefab, transform.position, Quaternion.identity, transform.parent);
             StopAllCoroutines();
-            FadeInAndOutCorouting = StartCoroutine(FadeInAndOut());
+            StartCoroutine(FadeInAndOut());
         }
         if (collision.gameObject.name == "DangerLine")
         {
+            SpawnExplosionPing();
             Destroy(gameObject);
             AerialDefenseScript.TakeDamage();
         }

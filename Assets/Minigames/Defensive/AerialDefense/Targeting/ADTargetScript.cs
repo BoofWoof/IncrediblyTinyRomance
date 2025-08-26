@@ -18,6 +18,8 @@ public class ADTargetScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (AerialDefenseScript.Locked) return;
+
         ValidTarget = false;
 
         // Get mouse position in screen space
@@ -30,7 +32,7 @@ public class ADTargetScript : MonoBehaviour
             if (localPoint.x > 950) return;
             if (localPoint.x < -950) return;
             if (localPoint.y > 500) return;
-            if (localPoint.y < -400) return;
+            if (localPoint.y < -300) return;
             thisRect.anchoredPosition = localPoint;
             ValidTarget = true;
         }

@@ -24,12 +24,11 @@ public class ADBlastScript : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("A");
         if (collision.gameObject.tag == "ADThreat")
         {
             AerialDefenseScript.ThreatDestroyed();
 
-            Debug.Log("B");
+            collision.gameObject.GetComponent<FallingThreatScript>().SpawnExplosionPing();
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
