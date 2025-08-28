@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CityScript : MonoBehaviour
+public class CityScript : CarryableObject
 {
     public static CityScript Instance;
 

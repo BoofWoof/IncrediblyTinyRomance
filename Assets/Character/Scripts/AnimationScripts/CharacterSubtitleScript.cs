@@ -11,6 +11,8 @@ public class CharacterSubtitleScript : MonoBehaviour
 
     Coroutine SubtitleCoroutine;
 
+    public CharacterSpeechScript speechScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +30,7 @@ public class CharacterSubtitleScript : MonoBehaviour
     public IEnumerator PlaySubtitles()
     {
         AudioSource audioSource = GetComponent<AudioSource>();
-        while (audioSource.isPlaying)
+        while (speechScript.isSpeechPlaying())
         {
             (TimeMarker<string> currentSubtitle, _) = timeMarkers.GetNearestData(audioSource.time);
             SubtitleScript.instance.SetText(currentSubtitle.data);

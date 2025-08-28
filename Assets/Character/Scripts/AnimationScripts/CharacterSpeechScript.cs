@@ -126,24 +126,30 @@ public class CharacterSpeechScript : MonoBehaviour
         if (voiceLine.PhenomeData != null && LipSync != null)
         {
             LipSync.PhenomeAsset = voiceLine.PhenomeData;
+            LipSync.speechScript = this;
             LipSync.PlaySpeech();
         }
 
         if (voiceLine.SubtitleData != null && CharacterSubtitle != null)
         {
             CharacterSubtitle.Subtitles = voiceLine.SubtitleData;
+            CharacterSubtitle.speechScript = this;
             CharacterSubtitle.PlaySpeech();
         }
         //THIS NEEDS TO ACTUALLY GET FILLED OUT
         if (voiceLine.GestureData != null && Gesture != null)
         {
             Gesture.Gestures = voiceLine.GestureData;
+            Gesture.speechScript = this;
             Gesture.PlaySpeech();
         }
     }
 
     public bool isSpeechPlaying()
     {
-        return GetComponent<AudioSource>().isPlaying;
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if(!audioSource.isPlaying && audioSource.timeSamples >= audioSource.clip.samples) return false;
+
+        return true;
     }
 }

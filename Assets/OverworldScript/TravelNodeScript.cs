@@ -5,7 +5,8 @@ using UnityEngine;
 public struct TravelNodeConnection
 {
     public TravelNodeScript TravelNode;
-    public bool UseAnimationInsteadOfWalking;
+    public bool ExitWithAnimation;
+    public bool EnterWithAnimation;
     public string AnimationCommand;
     public bool ForceAngleOnArrival;
     public bool FlipAngle;

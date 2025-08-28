@@ -43,8 +43,24 @@ public class HandScript : MonoBehaviour
         Destroy(SpawnedObject);
     }
 
-    public void ReleaseHandObject(int ReleaseIdx)
+    public void ReleaseHandObject(int releaseIdx)
     {
-        SpawnedObject.GetComponent<CarryableObject>().GoTo(ReleaseIdx);
+        SpawnedObject.GetComponent<CarryableObject>().GoTo(releaseIdx);
+    }
+
+    public void PickupHandObject(string objectName)
+    {
+        CarryableObject getCarryable = CarryableObject.GetCarryableObject(objectName);
+        if (getCarryable == null) {
+            Debug.Log("No carryable object with this name.");
+            return;
+        }
+        SpawnedObject = getCarryable.gameObject;
+
+        Debug.Log(SpawnedObject);
+
+        SpawnedObject.transform.parent = transform;
+        SpawnedObject.transform.localPosition = Vector3.zero;
+        SpawnedObject.transform.localRotation = Quaternion.identity;
     }
 }

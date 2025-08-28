@@ -20,6 +20,8 @@ public class GestureScript : MonoBehaviour
 
     public LookScript TheScriptThatDoesTheEyes;
 
+    public CharacterSpeechScript speechScript;
+
     public void PlaySpeech()
     {
         ProcessText();
@@ -33,7 +35,7 @@ public class GestureScript : MonoBehaviour
         lastTimeMarker = new TimeMarker<string>();
         lastTimeMarker.timeSec = -1f;
         AudioSource audioSource = GetComponent<AudioSource>();
-        while (audioSource.isPlaying)
+        while (speechScript.isSpeechPlaying())
         {
             (TimeMarker<string> currentGesture, _) = TimeMarkers.GetNearestData(audioSource.time);
             //if (!ValidGestures.ValidGestures.Contains(currentGesture.data)) Debug.LogError("Gesture not found: " + currentGesture.data);

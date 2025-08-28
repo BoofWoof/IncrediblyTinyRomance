@@ -29,6 +29,8 @@ public class LipSyncScript : MonoBehaviour
 
     Coroutine SpeechCoroutine = null;
 
+    public CharacterSpeechScript speechScript;
+
     public void PlaySpeech()
     {
         if(!(SpeechCoroutine is null)) StopCoroutine(SpeechCoroutine);
@@ -39,7 +41,7 @@ public class LipSyncScript : MonoBehaviour
     {
         ProcessAudio();
 
-        while (LipSyncAudioSource.isPlaying)
+        while (speechScript.isSpeechPlaying())
         {
             yield return null;
 
