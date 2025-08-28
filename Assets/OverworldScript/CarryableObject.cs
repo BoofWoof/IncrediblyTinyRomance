@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarryableObject : MonoBehaviour
 {
@@ -7,10 +8,17 @@ public class CarryableObject : MonoBehaviour
 
     public static List<CarryableObject> CarryableObjects = new List<CarryableObject>();
 
+    public UnityEvent ObjectActivate;
 
+    public Color LightColor;
     public void Start()
     {
         CarryableObjects.Add(this);
+    }
+
+    public void Activate()
+    {
+        ObjectActivate?.Invoke();
     }
 
     public static CarryableObject GetCarryableObject(string objectName)

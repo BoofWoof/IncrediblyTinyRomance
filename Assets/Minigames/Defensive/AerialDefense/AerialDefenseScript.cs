@@ -1,6 +1,8 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AerialDefenseScript : MonoBehaviour
 {
@@ -29,6 +31,9 @@ public class AerialDefenseScript : MonoBehaviour
     public static RectTransform StaticGameCanvas;
     public RectTransform GameCanvas;
 
+    public Volume RainVolume;
+    public float TransitionPeriod = 2f;
+
     public void Start()
     {
         Instance = this;
@@ -55,6 +60,13 @@ public class AerialDefenseScript : MonoBehaviour
 
     public void StartWave()
     {
+        if(threatSpawnerScript.threatWaveInfo.optionalVolume != null)
+        {
+            StartCoroutine(StartVolume(threatSpawnerScript.threatWaveInfo.optionalVolume));
+        }
+
+        CrossfadeScript.TransitionSong(5);
+
         onADLockStateChange?.Invoke(false);
         threatSpawnerScript.StartWave();
         GameRunning = true;
@@ -103,5 +115,24 @@ public class AerialDefenseScript : MonoBehaviour
     public void DamageImpact()
     {
         MoveCamera.moveCamera.ShakeScreen(0.8f, 0.6f);
+    }
+
+    public IEnumerator StartVolume(Volume volume)
+    {
+        Debug.Log("EFFECTS GO HERE");
+        volume.weight = 0f;
+
+        float time = 0;
+
+        while(time < TransitionPeriod)
+        {
+            time += Time.deltaTime;
+            float progress = time/TransitionPeriod;
+
+            volume.weight = Mathf.Lerp(0, 1, progress);
+
+            yield return null;
+        }
+        volume.weight = 1;
     }
 }

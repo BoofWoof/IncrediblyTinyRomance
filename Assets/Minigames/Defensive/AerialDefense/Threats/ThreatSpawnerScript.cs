@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public struct ThreatWaveInfo
@@ -8,6 +9,7 @@ public struct ThreatWaveInfo
     public float pauseMean;
     public float pauseStd;
     public int neededDestruction;
+    public Volume optionalVolume;
 }
 [System.Serializable]
 public struct ThreatInfo

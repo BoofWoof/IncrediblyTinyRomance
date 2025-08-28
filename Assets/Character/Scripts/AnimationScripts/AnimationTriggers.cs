@@ -79,6 +79,11 @@ public class AnimationTriggers : MonoBehaviour
         RightHand.PickupHandObject(objectName);
     }
 
+    public void RightHandActivate()
+    {
+        RightHand.Activate();
+    }
+
     public void LeftHandSpawn(int SpawnID)
     {
         LeftHand.SpawnInHand(SpawnID);
@@ -97,5 +102,10 @@ public class AnimationTriggers : MonoBehaviour
     public void LeftHandPickup(string objectName)
     {
         LeftHand.PickupHandObject(objectName);
+    }
+
+    public void LeftHandActivate()
+    {
+        LeftHand.Activate();
     }
 }

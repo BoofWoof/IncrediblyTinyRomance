@@ -18,11 +18,13 @@ public class AriesOverworldBehavior : MonoBehaviour
         yield return StartCoroutine(WalkToStation(5));
         thisAnimator.SetBool("LeftGrab", true);
 
-        yield return StartCoroutine(WaitForAnimation());
+        yield return StartCoroutine(WaitForAnimation(3));
 
-        Debug.Log("AAAA");
         yield return StartCoroutine(WalkToStation(0));
         thisAnimator.SetBool("LeftGrab", false);
+
+        yield return StartCoroutine(WaitForAnimation(2));
+        thisAnimator.SetBool("Sitting", true);
     }
 
     public IEnumerator WalkToStation(int StationIdx)
@@ -34,32 +36,20 @@ public class AriesOverworldBehavior : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitForAnimation()
+    public IEnumerator WaitForAnimation(int repeatWait)
     {
         AnimatorStateInfo stateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
         int startingStateHash = stateInfo.shortNameHash;
-
-        while (thisAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash == startingStateHash)
+        for (int i = 0; i < repeatWait; i++)
         {
-            yield return null;
+            stateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
+            startingStateHash = stateInfo.shortNameHash;
+
+            while (thisAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash == startingStateHash)
+            {
+                yield return null;
+            }
         }
-
-        stateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
-        startingStateHash = stateInfo.shortNameHash;
-
-        while (thisAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash == startingStateHash)
-        {
-            yield return null;
-        }
-
-        stateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
-        startingStateHash = stateInfo.shortNameHash;
-
-        while (thisAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash == startingStateHash)
-        {
-            yield return null;
-        }
-
         yield return null;
     }
 }

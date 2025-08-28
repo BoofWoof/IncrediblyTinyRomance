@@ -38,6 +38,11 @@ public class HandScript : MonoBehaviour
         #endif
     }
 
+    public void Activate()
+    {
+        SpawnedObject.GetComponent<CarryableObject>().Activate();
+    }
+
     public void DestroyHeldObject()
     {
         Destroy(SpawnedObject);

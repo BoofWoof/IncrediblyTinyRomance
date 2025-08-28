@@ -20,6 +20,7 @@ public class MoveCamera : MonoBehaviour
     public float falloffRate = 1f;
 
     public AudioSource earthquakeSoundSource;
+    public AudioClip[] earthquakeSoundOptions;
     public AudioSource rumbleSoundSource;
 
     private void Start()
@@ -56,6 +57,9 @@ public class MoveCamera : MonoBehaviour
     {
         dustGenerator.Play();
         earthquakeSoundSource.volume = shakeAmplitude;
+        AudioClip randomClip = earthquakeSoundOptions[Random.Range(0, earthquakeSoundOptions.Length)];
+
+        earthquakeSoundSource.clip = randomClip;
         earthquakeSoundSource.Play();
 
         float timePassedSec = 0;
