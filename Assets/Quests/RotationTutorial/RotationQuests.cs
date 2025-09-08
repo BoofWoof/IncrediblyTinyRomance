@@ -39,7 +39,7 @@ public class RotationQuest1 : MonoBehaviour
 
         if (Quest2Active)
         {
-            if(Spins%4 == 2)
+            if(Mathf.Abs(Spins%4) == 2)
             {
                 QuestManager.CompleteQuest("Lookie 2");
                 ConversationManagerScript.instance.ForceNextDialogue();

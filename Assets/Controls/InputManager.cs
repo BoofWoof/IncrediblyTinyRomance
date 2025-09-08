@@ -8,11 +8,18 @@ public class InputManager : MonoBehaviour
     void Awake()
     {
         PlayerInputs = new GameControls();
-        PlayerInputs.Enable();
-        PlayerInputs.Overworld.Enable();
+        PlayerInputs.Disable();
+        PlayerInputs.Overworld.Disable();
         PlayerInputs.Phone.Disable();
 
         PhonePositionScript.PhoneToggled += PhoneToggle;
+    }
+
+    public static void GameStart()
+    {
+        PlayerInputs.Enable();
+        PlayerInputs.Overworld.Enable();
+        PlayerInputs.Phone.Disable();
     }
 
     private void OnDisable()

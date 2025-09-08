@@ -24,6 +24,10 @@ public class TurretScript : MonoBehaviour
 
     public DiageticTurretScript diageticTurretScript;
 
+    public static bool autoFire = false;
+    public delegate void TurretFiredDelegate(TurretScript turretScript);
+    public static TurretFiredDelegate TurretFiredEvent;
+
     public void Start()
     {
         ChargePeriod = InitialChargePeriod;
@@ -51,7 +55,7 @@ public class TurretScript : MonoBehaviour
         // Apply rotation (z-axis since it’s 2D UI element)
         gun.localRotation = Quaternion.Euler(0, 0, angle - 90f);
 
-        if (Input.GetMouseButtonDown(0) && chargePercentage >= 1f && CurrentFireIdx == ThisTurretIdx && !TurretFired)
+        if ((Input.GetMouseButtonDown(0)|| autoFire) && chargePercentage >= 1f && CurrentFireIdx == ThisTurretIdx && !TurretFired)
         {
             float x = target.localPosition.x;
             if (ADTargetScript.ValidTarget)
@@ -68,6 +72,7 @@ public class TurretScript : MonoBehaviour
 
                 if(diageticTurretScript != null) diageticTurretScript.Fire();
                 currentCharge = 0;
+                TurretFiredEvent?.Invoke(this);
             }
         }
     }

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PrayerEventsScript : MonoBehaviour
 {
-
     private void OnEnable()
     {
         PrayerScript.PrayerSubmitted += OnPrayerSubmission;
@@ -18,6 +17,19 @@ public class PrayerEventsScript : MonoBehaviour
 
     public void OnPrayerSubmission(bool GoodPrayer)
     {
+        int allCount = DialogueLua.GetVariable("PrayersSubmitted").asInt;
+        DialogueLua.SetVariable("PrayersSubmitted", allCount + 1);
+
+        if(GoodPrayer)
+        {
+            int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
+            DialogueLua.SetVariable("SuccessfulPrayersSubmitted", correctCount + 1);
+        } else
+        {
+            int failCount = DialogueLua.GetVariable("FailedPrayersSubmitted").asInt;
+            DialogueLua.SetVariable("FailedPrayersSubmitted", failCount + 1);
+        }
+
         if (
                 QuestLog.GetQuestState("A Proper Theocrat") == QuestState.Active
             )

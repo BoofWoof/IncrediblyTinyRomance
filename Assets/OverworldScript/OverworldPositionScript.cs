@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class OverworldPositionScript : MonoBehaviour
 {
@@ -36,17 +34,20 @@ public class OverworldPositionScript : MonoBehaviour
             overworldPositionScript.GoTo(positionNodeIdx);
         }
     }
-    public void GoTo(int positionNodeIdx, bool flip = false)
+    public void GoTo(int positionNodeIdx, bool flip = false, bool forceAngle = true)
     {
         Transform targetNode = TravelNodeTracker.Instance.PositionNodes[positionNodeIdx].transform;
 
         RootTransform.position = targetNode.position;
 
-        Vector3 currentRotation = RootTransform.rotation.eulerAngles;
-        float yRot = targetNode.rotation.eulerAngles.y + 180f;
-        if (flip) yRot -= 180f;
-        Quaternion finalRotation = Quaternion.Euler(currentRotation.x, yRot, currentRotation.z);
-        RootTransform.rotation = finalRotation;
+        if (forceAngle)
+        {
+            Vector3 currentRotation = RootTransform.rotation.eulerAngles;
+            float yRot = targetNode.rotation.eulerAngles.y + 180f;
+            if (flip) yRot -= 180f;
+            Quaternion finalRotation = Quaternion.Euler(currentRotation.x, yRot, currentRotation.z);
+            RootTransform.rotation = finalRotation;
+        }
 
         SetNewStation(positionNodeIdx);
     }
@@ -168,15 +169,18 @@ public class OverworldPositionScript : MonoBehaviour
         RootTransform.position = targetNode.position;
         RootTransform.rotation = targetRotation;
 
-        while (Quaternion.Angle(RootTransform.rotation, finalRotation) > 0.01f)
+        if (connection.ForceAngleOnArrival)
         {
-            RootTransform.rotation = Quaternion.RotateTowards(RootTransform.rotation, finalRotation, RotationSpeed * Time.deltaTime);
-            yield return null;
+            while (Quaternion.Angle(RootTransform.rotation, finalRotation) > 0.01f)
+            {
+                RootTransform.rotation = Quaternion.RotateTowards(RootTransform.rotation, finalRotation, RotationSpeed * Time.deltaTime);
+                yield return null;
+            }
+            RootTransform.rotation = finalRotation;
         }
-        RootTransform.rotation = finalRotation;
 
         SetNewStation(positionNodeIdx);
-        GoTo(connection.TravelNode.SceneID, connection.FlipAngle);
+        GoTo(connection.TravelNode.SceneID, connection.FlipAngle, connection.ForceAngleOnArrival);
     }
 
     public void SetNewStation(int stationIdx)

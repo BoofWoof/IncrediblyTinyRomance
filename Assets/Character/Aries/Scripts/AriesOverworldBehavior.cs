@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AriesOverworldBehavior : MonoBehaviour
+public class AriesOverworldBehavior : OverworldBehavior
 {
     public OverworldPositionScript OverworldController;
     private Animator thisAnimator;
@@ -9,8 +9,6 @@ public class AriesOverworldBehavior : MonoBehaviour
     void Start()
     {
         thisAnimator = GetComponent<Animator>();
-
-        StartCoroutine(GrabSoda());
     }
 
     public IEnumerator GrabSoda()
@@ -51,5 +49,15 @@ public class AriesOverworldBehavior : MonoBehaviour
             }
         }
         yield return null;
+    }
+
+    public override void ExecuteBehavior(string submitName, string behavior)
+    {
+        if (NameSource.SpeakerName.ToLower() != submitName.ToLower() && NameSource.NickName.ToLower() != submitName.ToLower()) return;
+
+        if (behavior.ToLower() == "soda")
+        {
+            StartCoroutine(GrabSoda());
+        }
     }
 }

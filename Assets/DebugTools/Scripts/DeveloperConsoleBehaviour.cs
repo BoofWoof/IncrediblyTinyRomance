@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -73,6 +74,9 @@ namespace DebugTools.DeveloperConsole.Commands
             DeveleoperConsole.ProcessCommand(inputValue);
 
             inputField.text = string.Empty;
+
+            EventSystem.current.SetSelectedGameObject(inputField.gameObject);
+            inputField.ActivateInputField();
         }
     }
 }

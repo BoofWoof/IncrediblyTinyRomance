@@ -31,7 +31,6 @@ public class AerialDefenseScript : MonoBehaviour
     public static RectTransform StaticGameCanvas;
     public RectTransform GameCanvas;
 
-    public Volume RainVolume;
     public float TransitionPeriod = 2f;
 
     public void Start()
@@ -75,7 +74,18 @@ public class AerialDefenseScript : MonoBehaviour
     public void StopWave()
     {
         GameRunning = false;
+
         Instance.threatSpawnerScript.StopAllCoroutines();
+
+        RemainingHealth = MaxHealth;
+        Instance.RemainingHealthText.text = Instance.RemainingHealth.ToString();
+
+        CrossfadeScript.TransitionSong(1);
+
+        if (threatSpawnerScript.threatWaveInfo.optionalVolume != null)
+        {
+            StartCoroutine(StopVolume(threatSpawnerScript.threatWaveInfo.optionalVolume));
+        }
     }
 
     public static void ThreatDestroyed()
@@ -87,6 +97,7 @@ public class AerialDefenseScript : MonoBehaviour
 
         if(Instance.TargetsToKill == 0)
         {
+            TurretScript.autoFire = true;
             Instance.StopWave();
         }
     }
@@ -108,6 +119,7 @@ public class AerialDefenseScript : MonoBehaviour
 
         if (Instance.RemainingHealth <= 0)
         {
+            FallingThreatScript.DestroyAllThreats();
             Instance.StopWave();
         }
     }
@@ -134,5 +146,23 @@ public class AerialDefenseScript : MonoBehaviour
             yield return null;
         }
         volume.weight = 1;
+    }
+    public IEnumerator StopVolume(Volume volume)
+    {
+        Debug.Log("EFFECTS GO HERE");
+        volume.weight = 1f;
+
+        float time = 0;
+
+        while (time < TransitionPeriod)
+        {
+            time += Time.deltaTime;
+            float progress = time / TransitionPeriod;
+
+            volume.weight = Mathf.Lerp(1, 0, progress);
+
+            yield return null;
+        }
+        volume.weight = 0;
     }
 }

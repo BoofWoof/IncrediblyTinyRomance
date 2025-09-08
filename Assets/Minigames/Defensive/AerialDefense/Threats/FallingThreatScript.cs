@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,15 +19,32 @@ public class FallingThreatScript : MonoBehaviour
 
     public AudioClip[] DestructionNoises;
 
+    public static List<FallingThreatScript> FallingThreatScripts = new List<FallingThreatScript>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         imageComponent = GetComponent<Image>();
         imageComponent.color = new Color(1f, 1f, 1f, 0f);
 
-
         thisRB2D = GetComponent<Rigidbody2D>();
         thisRB2D.linearVelocity = Vector2.down * DropSpeed * transform.lossyScale.x;
+
+        FallingThreatScripts.Add(this);
+    }
+
+    public static void DestroyAllThreats()
+    {
+        foreach(FallingThreatScript fallingThreatScript in FallingThreatScripts)
+        {
+            fallingThreatScript.SpawnExplosionPing();
+            Destroy(fallingThreatScript.gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        FallingThreatScripts.Remove(this);
     }
 
     public IEnumerator FadeInAndOut()
@@ -63,9 +81,6 @@ public class FallingThreatScript : MonoBehaviour
             pingAudio.clip = DestructionNoises[randIdx];
             pingAudio.Play();
         }
-    }
-    public void OnDestroy()
-    {
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

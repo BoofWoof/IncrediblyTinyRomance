@@ -50,7 +50,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     [Header("Piece Storage")]
     public RectTransform PieceHolder;
-    public delegate void PuzzleCompleteCallback(int PuzzlesComplete);
+    public delegate void PuzzleCompleteCallback(int PuzzlesComplete, TurkPuzzleScript puzzleScript);
     public static PuzzleCompleteCallback OnPuzzleComplete;
 
 
@@ -163,7 +163,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
         PuzzleName.gameObject.SetActive(false);
         Shader.SetGlobalFloat("_TurkCompletion", 0);
-        OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved);
+        OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved, this);
         puzzleScript.GeneratePuzzle();
     }
 

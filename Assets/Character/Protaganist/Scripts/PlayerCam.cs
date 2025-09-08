@@ -29,12 +29,16 @@ public class PlayerCam : MonoBehaviour
 
     public static bool EnableCameraMovement = true;
 
+    public static PlayerCam Instance;
+
     private void Awake()
     {
         RegisterInputActions();
     }
     private void Start()
     {
+        Instance = this;
+        EnableCameraMovement = false;
         PhonePositionScript.PhoneToggled += PhoneToggle;
     }
     private void RegisterInputActions()

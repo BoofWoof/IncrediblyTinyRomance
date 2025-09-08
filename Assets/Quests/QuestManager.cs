@@ -52,13 +52,11 @@ public class QuestManager : MonoBehaviour
     {
         QuestLog.SetQuestState(questTitle, QuestState.Success);
         QuestText.color = Color.green;
-        Debug.Log("A");
     }
 
     public static void ChangeQuest (string newQuestTitle)
     {
         QuestText.color = Color.white;
-        Debug.Log("B");
         string[] QuestList = QuestLog.GetAllQuests(QuestState.Active | QuestState.Success | QuestState.Unassigned, false);
         currentQuestIndex = Array.IndexOf(QuestList, newQuestTitle);
 

@@ -16,6 +16,14 @@ namespace DebugTools.DeveloperConsole.Commands
                 ShutterScript.instance.ActivateShutters();
             }
 
+            if (args.Length <= 0) return true;
+
+            if (int.Parse(args[0]) == 2)
+            {
+                QuestManager.ChangeQuest("Visions");
+                AppMenuScript.SetAppsRevealed(2);
+            }
+
             return true;
         }
     }

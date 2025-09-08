@@ -42,9 +42,18 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationLine(Subtitle subtitle)
     {
+        if (subtitle.speakerInfo.GetFieldBool("WaitThem"))
+        {
+            ConversationManagerScript.WaitingForEvent = true;
+            return;
+        }
+        if (subtitle.speakerInfo.GetFieldBool("SkipThem"))
+        {
+            (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+            return;
+        }
         if (subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
         if (subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
-        if (subtitle.speakerInfo.GetFieldBool("WaitThem")) return;
         PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
         if (tempSpeakingCharacter.Name == "Player") return;
         if (speakingCharacter != null && speakingCharacter.id != tempSpeakingCharacter.id) {

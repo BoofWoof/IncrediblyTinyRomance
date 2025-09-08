@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -7,12 +8,16 @@ public class ADTargetScript : MonoBehaviour
     public Camera worldCamera;         // The camera looking at the canvas
     public RectTransform thisRect;
 
+    public int targetIdx = 0;
+
     public static bool ValidTarget = false;
 
     public void Start()
     {
         thisRect = GetComponent<RectTransform>();
         worldCamera = Camera.main;
+
+        TurretScript.TurretFiredEvent += TurretFireEvent;
     }
 
     // Update is called once per frame
@@ -20,22 +25,46 @@ public class ADTargetScript : MonoBehaviour
     {
         if (AerialDefenseScript.Locked) return;
 
-        ValidTarget = false;
-
-        // Get mouse position in screen space
-        Vector2 mousePos = Input.mousePosition;
-
-        // Convert mouse position to local position inside canvas
-        Vector2 localPoint;
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, mousePos, worldCamera, out localPoint))
+        if (AerialDefenseScript.GameRunning)
         {
-            if (localPoint.x > 950) return;
-            if (localPoint.x < -950) return;
-            if (localPoint.y > 500) return;
-            if (localPoint.y < -300) return;
-            thisRect.anchoredPosition = localPoint;
-            ValidTarget = true;
+            ValidTarget = false;
+
+            // Get mouse position in screen space
+            Vector2 mousePos = Input.mousePosition;
+
+            // Convert mouse position to local position inside canvas
+            Vector2 localPoint;
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, mousePos, worldCamera, out localPoint))
+            {
+                if (localPoint.x > 950) return;
+                if (localPoint.x < -950) return;
+                if (localPoint.y > 500) return;
+                if (localPoint.y < -300) return;
+                thisRect.anchoredPosition = localPoint;
+                ValidTarget = true;
+            }
+        } else
+        {
         }
 
+    }
+
+    public void TurretFireEvent(TurretScript turretScript)
+    {
+        if (!AerialDefenseScript.GameRunning)
+        {
+            if (FallingThreatScript.FallingThreatScripts.Count > 0)
+            {
+                targetIdx++;
+                if (FallingThreatScript.FallingThreatScripts.Count >= targetIdx)
+                {
+                    targetIdx = 0;
+                }
+                thisRect.position = FallingThreatScript.FallingThreatScripts[targetIdx].GetComponent<RectTransform>().position;
+            } else
+            {
+                TurretScript.autoFire = false;
+            }
+        }
     }
 }

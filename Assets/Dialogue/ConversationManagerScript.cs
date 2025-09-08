@@ -9,6 +9,7 @@ public class ConversationManagerScript : MonoBehaviour
 
     public static bool ConversationOngoing = false;
     public static bool isMacroConvo = false;
+    public static bool WaitingForEvent = false;
 
     public static List<string> BannedDialogues = new List<string>();
 
@@ -27,7 +28,6 @@ public class ConversationManagerScript : MonoBehaviour
         Lua.RegisterFunction("QueueDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("")));
         Lua.RegisterFunction("QueueWaitDialogue", null, SymbolExtensions.GetMethodInfo(() => MessageQueue.addDialogue("", 0)));
 
-        MessageQueue.addDialogue("Introduction Milo");
         StartCoroutine(WaitForNextConversation());
 
         transform.parent = DialogueManager.instance.transform;
@@ -62,6 +62,7 @@ public class ConversationManagerScript : MonoBehaviour
     {
         PrayerScript.StoryMode = false;
         ConversationOngoing = false;
+        WaitingForEvent = false;
     }
 
     public IEnumerator WaitForNextConversation()

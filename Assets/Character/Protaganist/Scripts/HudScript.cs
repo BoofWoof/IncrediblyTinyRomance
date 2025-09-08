@@ -103,12 +103,22 @@ public class HudScript : MonoBehaviour
         yield return StartCoroutine(WaitForContinue());
 
         Destroy(LookArrow);
+
+        QuestManager.CompleteQuest(QuestManager.currentQuest);
+
+        while (!ConversationManagerScript.WaitingForEvent)
+        {
+            yield return null;
+        }
+
         InteractArrow.SetActive(true);
         ShutterButton.ObjectEnabled = true;
 
         QuestManager.IncrementQuest();
 
         yield return StartCoroutine(WaitForContinue());
+
+        ConversationManagerScript.instance.ForceNextDialogue();
 
         Destroy(InteractArrow);
 
