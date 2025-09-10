@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class OverworldPositionScript : MonoBehaviour
@@ -24,6 +25,9 @@ public class OverworldPositionScript : MonoBehaviour
     {
         CharacterName = NameSource.SpeakerName;
         PositionScripts.Add(this);
+
+        SetNewStation(CurrentNode);
+        GoTo(CurrentNode);
     }
 
     public static void GoTo(string name, int positionNodeIdx)

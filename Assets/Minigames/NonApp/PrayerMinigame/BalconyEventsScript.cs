@@ -35,7 +35,7 @@ public class BalconyEventsScript : MonoBehaviour
                 )
             {
                 QuestManager.IncrementQuest();
-                MessageQueue.addDialogue("Prayer System Tutorial");
+                MessageQueue.addDialogue("FirstAriesSpotting");
             }
         }
     }
