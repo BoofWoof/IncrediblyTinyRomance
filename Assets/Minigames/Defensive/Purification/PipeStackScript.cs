@@ -1,34 +1,74 @@
+using PixelCrushers.DialogueSystem.Articy.Articy_4_0;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
+
+public enum Direction
+{
+    UP, DOWN, LEFT, RIGHT, NULL
+}
+public static class DirectionExtensions
+{
+    public static Direction Flipped(this Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.UP: return Direction.DOWN;
+            case Direction.DOWN: return Direction.UP;
+            case Direction.LEFT: return Direction.RIGHT;
+            case Direction.RIGHT: return Direction.LEFT;
+            case Direction.NULL: return Direction.NULL;
+            default: throw new System.ArgumentOutOfRangeException(nameof(dir), dir, null);
+        }
+    }
+}
 
 public class PipeStackScript : MonoBehaviour
 {
+    public VentGridScript GridSource;
+    public PipeStruct PipeStructData;
+    [HideInInspector] public int VentPosID;
+
     public PipeSOHolder PipeTypes;
-    public int PipeTypeIdx = 0;
+    [HideInInspector] public int PipeTypeIdx = 0;
 
     public GameObject Pipe;
+    public GameObject PipeSecondLayer;
+    public GameObject Backdrop;
+    public GameObject LightLayer;
+    public GameObject FanLayer;
 
-    [Header("Connections Without Rotation")]
-    public PipeConnectionType BaseUpConnection;
-    public PipeConnectionType BaseDownConnection;
-    public PipeConnectionType BaseLeftConnection;
-    public PipeConnectionType BaseRightConnection;
+    public bool isGoal = false;
+    public bool isSource = false;
+    public bool isCapped = false;
 
-    [Header ("Connections With Rotation")]
-    public PipeConnectionType UpConnection;
-    public PipeConnectionType DownConnection;
-    public PipeConnectionType LeftConnection;
-    public PipeConnectionType RightConnection;
+    //[Header ("Connections With Rotation")]
+    [HideInInspector] public PipeConnectionType UpConnection;
+    [HideInInspector] public bool UpSecondary;
+    [HideInInspector] public PipeConnectionType DownConnection;
+    [HideInInspector] public bool DownSecondary;
+    [HideInInspector] public PipeConnectionType LeftConnection;
+    [HideInInspector] public bool LeftSecondary;
+    [HideInInspector] public PipeConnectionType RightConnection;
+    [HideInInspector] public bool RightSecondary;
 
     [Header("Rotation Parameters")]
-    public int RotationTracker = 0;
+    [HideInInspector] public int RotationTracker = 0;
 
     public float RotationPeriod = 0.5f;
 
-    public bool Rotating;
+    [HideInInspector] public bool Rotating;
+
+    [Header("Lights")]
+    public Sprite IdleLight;
+    public Sprite DisconnectedLight;
+    public Sprite InUseLight;
+
+    public delegate void VentRotation();
+    public static VentRotation VentRotationEvent;
 
     static private PipeConnectionType[] RotationLoop = new PipeConnectionType[4] { 
         PipeConnectionType.UpConnected,
@@ -37,8 +77,158 @@ public class PipeStackScript : MonoBehaviour
         PipeConnectionType.LeftConnected
     };
 
+    public void SetSource()
+    {
+        if (PipeStructData.SourceVersion == null) return;
+
+        isCapped = true;
+        isGoal = false;
+        isSource = true;
+
+        Pipe.GetComponent<Image>().sprite = PipeStructData.SourceVersion;
+        PipeSecondLayer.SetActive(false);
+
+        FanLayer.SetActive(true);
+
+        GridSource.Sources.Remove(this);
+        GridSource.Goals.Remove(this);
+        GridSource.Sources.Add(this);
+        GridSource.Goals.Add(this);
+
+        ConnectionRotationUpdate();
+        CapOverride();
+    }
+
+    public void SetSink()
+    {
+        if (PipeStructData.SinkVersion == null) return;
+
+        isCapped = true;
+        isGoal = true;
+        isSource = false;
+
+        Pipe.GetComponent<Image>().sprite = PipeStructData.SinkVersion;
+        PipeSecondLayer.SetActive(false);
+
+        FanLayer.SetActive(true);
+
+        GridSource.Sources.Remove(this);
+        GridSource.Goals.Remove(this);
+        GridSource.Goals.Add(this);
+
+        ConnectionRotationUpdate();
+        CapOverride();
+    }
+
+    public void SetCap()
+    {
+        if (PipeStructData.CapVersion == null) return;
+
+        isCapped = true;
+        isGoal = false;
+        isSource = false;
+
+        Pipe.GetComponent<Image>().sprite = PipeStructData.CapVersion;
+        PipeSecondLayer.SetActive(false);
+
+        FanLayer.SetActive(false);
+
+        GridSource.Sources.Remove(this);
+        GridSource.Goals.Remove(this);
+
+        ConnectionRotationUpdate();
+        CapOverride();
+    }
+
+    public void SetNormal()
+    {
+        isCapped = false;
+        isGoal = false;
+        isSource = false;
+
+        if (PipeStructData.ShowFan)
+        {
+            FanLayer.SetActive(true);
+        } else
+        {
+            FanLayer.SetActive(false);
+        }
+
+        if (PipeStructData.PipeSprite)
+        {
+            Pipe.SetActive(true);
+            Pipe.GetComponent<Image>().sprite = PipeStructData.PipeSprite;
+        }
+        else
+        {
+            Pipe.SetActive(false);
+        }
+
+        Image secondaryImage = PipeSecondLayer.GetComponent<Image>();
+        if(PipeStructData.SecondaryPipeSprite == null)
+        {
+            PipeSecondLayer.SetActive(false);
+        } else
+        {
+            PipeSecondLayer.SetActive(true);
+            secondaryImage.sprite = PipeStructData.SecondaryPipeSprite;
+        }
+
+        GridSource.Sources.Remove(this);
+        GridSource.Goals.Remove(this);
+
+        ConnectionRotationUpdate();
+    }
+
+    public void CapOverride()
+    {
+        if (UpConnection != PipeConnectionType.Closed) UpConnection = PipeConnectionType.Capped;
+        UpSecondary = false;
+
+        if (RightConnection != PipeConnectionType.Closed) RightConnection = PipeConnectionType.Capped;
+        RightSecondary = false;
+
+        if (DownConnection != PipeConnectionType.Closed) DownConnection = PipeConnectionType.Capped;
+        DownSecondary = false;
+
+        if (LeftConnection != PipeConnectionType.Closed) LeftConnection = PipeConnectionType.Capped;
+        LeftSecondary = false;
+    }
+
+    public void ConnectionRotationUpdate()
+    {
+        UpConnection = RotateConnection(0);
+        UpSecondary = RotateSecondary(0);
+
+        RightConnection = RotateConnection(1);
+        RightSecondary = RotateSecondary(1);
+
+        DownConnection = RotateConnection(2);
+        DownSecondary = RotateSecondary(2);
+
+        LeftConnection = RotateConnection(3);
+        LeftSecondary = RotateSecondary(3);
+    }
+
+    public void SetLightIdle()
+    {
+        LightLayer.GetComponent<Image>().sprite = IdleLight;
+    }
+
+    public void SetLightActive()
+    {
+        LightLayer.GetComponent<Image>().sprite = InUseLight;
+    }
+
+    public void SetLightLeaking()
+    {
+        LightLayer.GetComponent<Image>().sprite = DisconnectedLight;
+    }
+
     public void Update()
     {
+        if(PipeStructData.ShowFan || isSource || isGoal) FanLayer.transform.Rotate(0, 0, - Time.deltaTime * 1000f);
+
         if (Input.GetMouseButtonDown(0)) // Right click
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -109,30 +299,52 @@ public class PipeStackScript : MonoBehaviour
         SetRotationTracker(RotationTracker + rotationChange);
 
         Rotating = false;
+
+        ConnectionRotationUpdate();
+        if(isCapped) CapOverride();
+
+        VentRotationEvent?.Invoke();
     }
 
     public void SetPipeType(int PipeIdx)
     {
         if (PipeTypes.PipeStructs.Count <= PipeIdx || PipeIdx < 0) return;
+
         PipeTypeIdx = PipeIdx;
         PipeStruct pipeData = PipeTypes.PipeStructs[PipeIdx];
 
-        BaseUpConnection = pipeData.UpConnection;
-        BaseRightConnection = pipeData.RightConnection;
-        BaseDownConnection = pipeData.DownConnection;
-        BaseLeftConnection = pipeData.LeftConnection;
+        PipeStructData = pipeData;
 
-        ConnectionRotationUpdate();
+        if (isSource) SetSource();
+        else if (isGoal) SetSink();
+        else if (isCapped) SetCap();
+        else SetNormal();
 
-        Pipe.GetComponent<Image>().sprite = pipeData.PipeSprite;
+        if (!pipeData.EnableBackdrop) HideBackdrop();
+        else ShowBackdrop();
     }
 
-    public void ConnectionRotationUpdate()
+    public bool RotateSecondary(int connectionIdx)
     {
-        UpConnection = RotateConnection(0);
-        RightConnection = RotateConnection(1);
-        DownConnection = RotateConnection(2);
-        LeftConnection = RotateConnection(3);
+        //Up = 0
+        //Right = 1
+        //Down = 2
+        //Left = 3
+        int updatedIdx = (connectionIdx - RotationTracker) % 4;
+        if (updatedIdx < 0) updatedIdx += 4;
+
+        switch (updatedIdx)
+        {
+            case 0:
+                return PipeStructData.UpSecondaryVentConnection;
+            case 1:
+                return PipeStructData.RightSecondaryVentConnection;
+            case 2:
+                return PipeStructData.DownSecondaryVentConnection;
+            case 3:
+                return PipeStructData.LeftSecondaryVentConnection;
+        }
+        return false;
     }
 
     public PipeConnectionType RotateConnection(int connectionIdx)
@@ -141,7 +353,7 @@ public class PipeStackScript : MonoBehaviour
         //Right = 1
         //Down = 2
         //Left = 3
-        int updatedIdx = (connectionIdx + RotationTracker)%4;
+        int updatedIdx = (connectionIdx - RotationTracker)%4;
         if (updatedIdx < 0) updatedIdx += 4;
 
         PipeConnectionType connectionType = PipeConnectionType.Closed;
@@ -149,23 +361,23 @@ public class PipeStackScript : MonoBehaviour
         switch (updatedIdx)
         {
             case 0:
-                connectionType = BaseUpConnection;
+                connectionType = PipeStructData.UpConnection;
                 break;
             case 1:
-                connectionType = BaseRightConnection;
+                connectionType = PipeStructData.RightConnection;
                 break;
             case 2:
-                connectionType = BaseDownConnection;
+                connectionType = PipeStructData.DownConnection;
                 break;
             case 3:
-                connectionType = BaseLeftConnection;
+                connectionType = PipeStructData.LeftConnection;
                 break;
         }
 
         if (connectionType == PipeConnectionType.Closed || connectionType == PipeConnectionType.All) return connectionType;
 
         int connectionTypeIdx = Array.IndexOf(RotationLoop, connectionType);
-        connectionTypeIdx = (connectionTypeIdx - RotationTracker) % 4;
+        connectionTypeIdx = (connectionTypeIdx + RotationTracker) % 4;
         if (connectionTypeIdx < 0) connectionTypeIdx += 4;
         return RotationLoop[connectionTypeIdx];
     }
@@ -180,5 +392,75 @@ public class PipeStackScript : MonoBehaviour
     public void InstantRotation()
     {
         Pipe.transform.rotation = Quaternion.Euler(0f, 0f, -RotationTracker * 90f);
+    }
+    public void HideBackdrop()
+    {
+        if (Backdrop) Backdrop.SetActive(false);
+        if (LightLayer) LightLayer.SetActive(false);
+    }
+    public void ShowBackdrop()
+    {
+        if (Backdrop) Backdrop.SetActive(true);
+        if (LightLayer) LightLayer.SetActive(true);
+    }
+
+    public List<Direction> GetPossibleExpansions(Direction fumeEntranceVelocity)
+    {
+        if (fumeEntranceVelocity == Direction.NULL) return GetNullExpansions();
+
+        List<Direction> expansionList = new List<Direction>();
+
+        PipeConnectionType sourceConnectionType = PipeConnectionType.Closed;
+
+        //If the fumes are heading this direction, what pipe do they enter, and where is that pipe going to?
+        switch (fumeEntranceVelocity)
+        {
+            case Direction.LEFT:
+                sourceConnectionType = RightConnection;
+                break;
+            case Direction.RIGHT:
+                sourceConnectionType = LeftConnection;
+                break;
+            case Direction.UP:
+                sourceConnectionType = DownConnection;
+                break;
+            case Direction.DOWN:
+                sourceConnectionType = UpConnection;
+                break;
+        }
+
+        //Based on where the fumes are going, what pipes will it exit from.
+        switch (sourceConnectionType){
+            case PipeConnectionType.UpConnected:
+                expansionList.Add(Direction.UP);
+                break;
+            case PipeConnectionType.RightConnected:
+                expansionList.Add(Direction.RIGHT);
+                break;
+            case PipeConnectionType.DownConnected:
+                expansionList.Add(Direction.DOWN);
+                break;
+            case PipeConnectionType.LeftConnected:
+                expansionList.Add(Direction.LEFT);
+                break;
+            case PipeConnectionType.All:
+                expansionList = GetNullExpansions();
+                expansionList.Remove(fumeEntranceVelocity.Flipped());
+                break;
+        }
+
+        return expansionList;
+    }
+
+    private List<Direction> GetNullExpansions()
+    {
+        List<Direction> expansionList = new List<Direction>();
+
+        if (UpConnection != PipeConnectionType.Closed) expansionList.Add(Direction.UP);
+        if (DownConnection != PipeConnectionType.Closed) expansionList.Add(Direction.DOWN);
+        if (LeftConnection != PipeConnectionType.Closed) expansionList.Add(Direction.LEFT);
+        if (RightConnection != PipeConnectionType.Closed) expansionList.Add(Direction.RIGHT);
+
+        return expansionList;
     }
 }

@@ -148,8 +148,6 @@ public class CharacterSpeechScript : MonoBehaviour
     public bool isSpeechPlaying()
     {
         AudioSource audioSource = GetComponent<AudioSource>();
-        Debug.Log(audioSource.timeSamples);
-        Debug.Log(audioSource.clip.samples);
         if(!audioSource.isPlaying && (audioSource.timeSamples >= audioSource.clip.samples || audioSource.timeSamples == 0)) return false;
 
         return true;
