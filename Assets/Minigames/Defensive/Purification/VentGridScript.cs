@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEditor.Overlays;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class VentGridScript : MonoBehaviour
 {
     public string LevelName;
@@ -11,10 +13,10 @@ public class VentGridScript : MonoBehaviour
     public int Cols;
     public int Rows;
 
+    public float TileSize = 300;
+
     public float GridPixelWidth;
     public float GridPixelHeight;
-    public float VentPixelWidth;
-    public float VentPixelHeight;
 
     public GameObject[] PipeStacks;
     public List<PipeStackScript> Goals;
@@ -22,20 +24,19 @@ public class VentGridScript : MonoBehaviour
 
     public int MaxPipeTypeIdx = 6;
 
+    public GameObject ExtraGraphic;
+
     void ResetGrid()
     {
         ClearGrid();
 
         PipeStacks = new GameObject[Cols * Rows];
 
-        GridPixelWidth = Cols * VentPixelWidth;
-        GridPixelHeight = Rows * VentPixelHeight;
+        GridPixelWidth = Cols * TileSize;
+        GridPixelHeight = Rows * TileSize;
 
         Goals = new List<PipeStackScript>();
         Sources = new List<PipeStackScript>();
-
-        VentPixelWidth = PipeObjectPrefab.GetComponent<RectTransform>().sizeDelta.x;
-        VentPixelHeight = PipeObjectPrefab.GetComponent<RectTransform>().sizeDelta.y;
     }
 
     public void SpawnGrid()
@@ -50,6 +51,10 @@ public class VentGridScript : MonoBehaviour
             NewVentRect.transform.localPosition = Vector3.zero;
             NewVentRect.localScale = Vector3.one;
             NewVentRect.localRotation = Quaternion.identity;
+
+            NewVentRect.sizeDelta = new Vector2(TileSize, TileSize);
+            BoxCollider NewVentBoxCollider = NewVent.GetComponent<BoxCollider>();
+            NewVentBoxCollider.size = new Vector3(TileSize, TileSize, NewVentBoxCollider.size.z);
 
             (float xPos, float yPos) = IdxToPos(i);
             NewVentRect.anchoredPosition = new Vector2(xPos, yPos);
@@ -67,7 +72,7 @@ public class VentGridScript : MonoBehaviour
 
     public void SpawnGridFromSaveData(PurificationLevelSO saveData)
     {
-        ClearGrid();
+        transform.localPosition = saveData.VentGridPos;
 
         LevelName = saveData.LevelName;
         LevelDescription = saveData.LevelDescription;
@@ -77,8 +82,19 @@ public class VentGridScript : MonoBehaviour
 
         Rows = saveData.Rows;
         Cols = saveData.Cols;
+        TileSize = saveData.SquareSize;
 
         ResetGrid();
+
+        if (saveData.OnScreenData != null)
+        {
+            ExtraGraphic = Instantiate(saveData.OnScreenData);
+            ExtraGraphic.transform.parent = transform.parent;
+            ExtraGraphic.transform.rotation = Quaternion.identity;
+            ExtraGraphic.transform.localScale = Vector3.one;
+            ExtraGraphic.transform.localPosition = saveData.OnScreenDataPos;
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        }
 
         int i = 0;
         foreach (PipeData pipeData in saveData.Data)
@@ -89,6 +105,10 @@ public class VentGridScript : MonoBehaviour
             NewVentRect.transform.localPosition = Vector3.zero;
             NewVentRect.localScale = Vector3.one;
             NewVentRect.localRotation = Quaternion.identity;
+
+            NewVentRect.sizeDelta = new Vector2(TileSize, TileSize);
+            BoxCollider NewVentBoxCollider = NewVent.GetComponent<BoxCollider>();
+            NewVentBoxCollider.size = new Vector3(TileSize, TileSize, NewVentBoxCollider.size.z);
 
             (float xPos, float yPos) = IdxToPos(i);
             NewVentRect.anchoredPosition = new Vector2(xPos, yPos);
@@ -115,6 +135,8 @@ public class VentGridScript : MonoBehaviour
 
     public void ClearGrid()
     {
+        if (ExtraGraphic != null) Destroy(ExtraGraphic);
+
 
         for (int i = 0; i < PipeStacks.Length; i++)
         {
@@ -234,6 +256,6 @@ public class VentGridScript : MonoBehaviour
         float leftMostPos = GridPixelWidth / 2f;
         float bottomMostPos = GridPixelHeight / 2f;
 
-        return (-leftMostPos + VentPixelWidth * col + VentPixelWidth/2f, -bottomMostPos + VentPixelHeight * row + VentPixelHeight / 2f);
+        return (-leftMostPos + TileSize * col + TileSize / 2f, -bottomMostPos + TileSize * row + TileSize / 2f);
     }
 }

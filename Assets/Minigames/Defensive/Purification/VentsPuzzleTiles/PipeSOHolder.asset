@@ -28,6 +28,7 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 0
     RightSecondaryVentConnection: 0
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: e22fb0d645438d8449d7dd66b79503c5, type: 3}
     SecondaryPipeSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 5b31a64464871d74d8ae36843dd9810e, type: 3}
@@ -43,6 +44,7 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 1
     RightSecondaryVentConnection: 0
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: b1824187cc2d2aa428ddc8d4e51e0638, type: 3}
     SecondaryPipeSprite: {fileID: 21300000, guid: 154cbe1d560fd72409f771c115b26df3, type: 3}
     SourceVersion: {fileID: 0}
@@ -58,6 +60,7 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 1
     RightConnection: 4
     RightSecondaryVentConnection: 1
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: 43c781ce1e242b848bfe2cb15aaee2cf, type: 3}
     SecondaryPipeSprite: {fileID: 21300000, guid: 07cd143ce86d2e0468b420a317c00f30, type: 3}
     SourceVersion: {fileID: 0}
@@ -73,6 +76,7 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 3
     RightSecondaryVentConnection: 1
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: 43c781ce1e242b848bfe2cb15aaee2cf, type: 3}
     SecondaryPipeSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 23a8a1dbfc5beb7428e99f6e71415efd, type: 3}
@@ -88,6 +92,7 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 0
     RightSecondaryVentConnection: 0
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: 154cbe1d560fd72409f771c115b26df3, type: 3}
     SecondaryPipeSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 51c77db2fcc119c46a1846d35e661ba8, type: 3}
@@ -103,6 +108,7 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 0
     RightSecondaryVentConnection: 0
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: fd81f0f518f3da343bbe8afe1ef33f3c, type: 3}
     SecondaryPipeSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 0c7db0d8f4d56954187060cb8bdc7e12, type: 3}
@@ -118,11 +124,12 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 1
     RightSecondaryVentConnection: 0
+    ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: decef8565d4794c45b898c0cba231293, type: 3}
     SecondaryPipeSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 65b4835308839e441b64aff91cded686, type: 3}
     SinkVersion: {fileID: 21300000, guid: be638006b8861f243bfd2d465615fe40, type: 3}
-    CapVersion: {fileID: 0}
+    CapVersion: {fileID: 21300000, guid: decef8565d4794c45b898c0cba231293, type: 3}
     EnableBackdrop: 1
     ShowFan: 0
     UpConnection: 0
@@ -133,3 +140,4 @@ MonoBehaviour:
     LeftSecondaryVentConnection: 0
     RightConnection: 0
     RightSecondaryVentConnection: 0
+    ForceCapped: 1

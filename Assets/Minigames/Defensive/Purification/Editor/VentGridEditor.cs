@@ -28,6 +28,8 @@ public class VentGridEditor : Editor
             PurificationLevelSO saveData = new PurificationLevelSO();
             saveData.LevelName = ventGridScript.LevelName;
             saveData.LevelDescription = ventGridScript.LevelDescription;
+            saveData.OnScreenDataPos = ventGridScript.transform.localPosition;
+            saveData.SquareSize = ventGridScript.TileSize;
 
             saveData.ConnectedCutsceneName = "";
             saveData.OnScreenData = null;

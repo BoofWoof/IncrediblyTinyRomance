@@ -20,10 +20,13 @@ public class PurificationLevelSO : ScriptableObject
     [Header("Meta Data")]
     public string LevelName;
     public string LevelDescription;
+    public Vector3 VentGridPos;
+    public float SquareSize;
 
     [Header("Events")]
     public string ConnectedCutsceneName;
     public GameObject OnScreenData;
+    public Vector3 OnScreenDataPos;
 
     [Header("Data")]
     public int Rows;

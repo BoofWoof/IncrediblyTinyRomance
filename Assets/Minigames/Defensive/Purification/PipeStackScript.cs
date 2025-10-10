@@ -59,15 +59,17 @@ public class PipeStackScript : MonoBehaviour
     public bool isSource = false;
     public bool isCapped = false;
 
+    public bool lightActive = false;
+
     //[Header ("Connections With Rotation")]
-    [HideInInspector] public PipeConnectionType UpConnection;
-    [HideInInspector] public bool UpSecondary;
-    [HideInInspector] public PipeConnectionType DownConnection;
-    [HideInInspector] public bool DownSecondary;
-    [HideInInspector] public PipeConnectionType LeftConnection;
-    [HideInInspector] public bool LeftSecondary;
-    [HideInInspector] public PipeConnectionType RightConnection;
-    [HideInInspector] public bool RightSecondary;
+    public PipeConnectionType UpConnection;
+    public bool UpSecondary;
+    public PipeConnectionType DownConnection;
+    public bool DownSecondary;
+    public PipeConnectionType LeftConnection;
+    public bool LeftSecondary;
+    public PipeConnectionType RightConnection;
+    public bool RightSecondary;
 
     [Header("Rotation Parameters")]
     [HideInInspector] public int RotationTracker = 0;
@@ -83,6 +85,7 @@ public class PipeStackScript : MonoBehaviour
 
     public delegate void VentRotation();
     public static VentRotation VentRotationEvent;
+    public static VentRotation VentRotationStartEvent;
 
     static private PipeConnectionType[] RotationLoop = new PipeConnectionType[4] { 
         PipeConnectionType.UpConnected,
@@ -90,6 +93,8 @@ public class PipeStackScript : MonoBehaviour
         PipeConnectionType.DownConnected,
         PipeConnectionType.LeftConnected
     };
+
+    public static bool GlobalRotationAllowed = false;
 
     public void SetSource()
     {
@@ -165,7 +170,7 @@ public class PipeStackScript : MonoBehaviour
 
     public void SetNormal()
     {
-        isCapped = false;
+        isCapped = PipeStructData.ForceCapped;
         isGoal = false;
         isSource = false;
 
@@ -204,10 +209,12 @@ public class PipeStackScript : MonoBehaviour
         SinkParticles.SetActive(false);
 
         ConnectionRotationUpdate();
+        CapOverride();
     }
 
     public void CapOverride()
     {
+        if (!isCapped) return;
         if (UpConnection != PipeConnectionType.Closed) UpConnection = PipeConnectionType.Capped;
         UpSecondary = false;
 
@@ -252,26 +259,27 @@ public class PipeStackScript : MonoBehaviour
     {
         LightLayer.GetComponent<Image>().sprite = IdleLight;
         fanSpinning = false;
-        SinkParticles.SetActive(false);
+        lightActive = false;
     }
 
     public void SetLightActive()
     {
         LightLayer.GetComponent<Image>().sprite = InUseLight;
         fanSpinning = true;
-        if(isGoal) SinkParticles.SetActive(true);
+        lightActive = true;
     }
 
     public void SetLightLeaking()
     {
         LightLayer.GetComponent<Image>().sprite = DisconnectedLight;
         fanSpinning = false;
-        SinkParticles.SetActive(false);
+        lightActive = false;
     }
 
     public void Update()
     {
-        if(isSource || fanSpinning) FanLayer.transform.Rotate(0, 0, - Time.deltaTime * 1000f);
+        if (isGoal) SinkParticles.SetActive(lightActive);
+        if (isSource || fanSpinning) FanLayer.transform.Rotate(0, 0, - Time.deltaTime * 1000f);
 
         if (Input.GetMouseButtonDown(0)) // Right click
         {
@@ -314,23 +322,27 @@ public class PipeStackScript : MonoBehaviour
     public void Start()
     {
         InstantRotation();
-        SetPipeType(PipeTypeIdx);
+        //SetPipeType(PipeTypeIdx);
     }
 
     public void RotateCW()
     {
+        if (!GlobalRotationAllowed) return;
         if (Rotating || !canRotate) return;
         StartCoroutine(RotatePipe(1));
     }
 
     public void RotateCC()
     {
+        if (!GlobalRotationAllowed) return;
         if (Rotating || !canRotate) return;
         StartCoroutine(RotatePipe(-1));
     }
 
     public IEnumerator RotatePipe(int rotationChange)
     {
+        VentRotationStartEvent?.Invoke();
+
         Rotating = true;
         float currentRotations = RotationTracker * 90f;
         float finalRotation = (RotationTracker + rotationChange) * 90f;

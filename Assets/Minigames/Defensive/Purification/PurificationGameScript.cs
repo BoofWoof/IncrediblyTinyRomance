@@ -12,6 +12,8 @@ struct VentRouteData
     public List<PipeStackScript> PrimaryExpanded;
     public List<PipeStackScript> SecondaryExpanded;
     public List<WaitingExpansion> WaitingExpansions;
+    public bool LeakFound;
+    public List<PipeStackScript> GoalsFound;
     public bool GoalFound;
 }
 public class PurificationGameScript : MonoBehaviour
@@ -25,17 +27,35 @@ public class PurificationGameScript : MonoBehaviour
     public GameObject MainBackdrop;
     public GameObject WinText;
 
+    public ParticleSystem FogSource;
+
+    public AudioSource VentRotationAS;
+    public AudioSource WinAS;
+
     public void Start()
     {
-        VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
         PipeStackScript.VentRotationEvent += UpdatePipeRoutes;
-        UpdatePipeRoutes();
+        PipeStackScript.VentRotationStartEvent += VentRotationAS.Play;
     }
 
     public void StartGame()
     {
+        if (ChannelChanger.DangerActive) return;
+        ChannelChanger.DangerActive = true;
 
+        CurrentLevelInPack = 0;
+        MusicSelectorScript.SetOverworldSong(5);
+        FogSource.Play();
+        StartLevel();
     }
+
+    public void StartLevel()
+    {
+        VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
+        UpdatePipeRoutes();
+        PipeStackScript.GlobalRotationAllowed = true;
+    }
+
     public void UpdatePipeRoutes()
     {
         ResetPipeRoutes();
@@ -65,13 +85,17 @@ public class PurificationGameScript : MonoBehaviour
                 newVentRouteData.SecondaryExpanded = new List<PipeStackScript>();
                 newVentRouteData.WaitingExpansions = new List<WaitingExpansion>();
                 newVentRouteData.GoalFound = false;
+                newVentRouteData.LeakFound = false;
+                newVentRouteData.GoalsFound = new List<PipeStackScript>();
 
                 newVentRouteData.PrimaryExpanded.Add(currentVent);
 
                 WaitingExpansion newWaitingExpansion = new WaitingExpansion();
                 newWaitingExpansion.expansionDirection = expansionDirection;
                 newWaitingExpansion.sourceVent = currentVent;
-                newVentRouteData.WaitingExpansions.Add(newWaitingExpansion); 
+                newVentRouteData.WaitingExpansions.Add(newWaitingExpansion);
+
+                Debug.Log("----");
 
                 int i = 0; //I is just being used to avoid infinite loops while debugging.
                 while (newVentRouteData.WaitingExpansions.Count > 0)
@@ -84,12 +108,10 @@ public class PurificationGameScript : MonoBehaviour
 
                     (bool validVent, bool secondaryVent, PipeStackScript nextVent) = VentGridData.ExpansionCheck(expansionData.expansionDirection, expansionData.sourceVent.VentPosID);
 
-                    Debug.Log("-");
-                    Debug.Log(expansionData.sourceVent.VentPosID);
-                    Debug.Log(expansionData.expansionDirection);
 
                     if (!validVent)
                     {
+                        newVentRouteData.LeakFound = true;
                         DeadEndExpansions.Add(expansionData);
                         continue;
                     }
@@ -97,13 +119,12 @@ public class PurificationGameScript : MonoBehaviour
                     if (nextVent.isGoal)
                     {
                         newVentRouteData.GoalFound = true;
-                        nextVent.SetLightActive();
+                        newVentRouteData.GoalsFound.Add(nextVent);
                         continue;
                     }
 
                     if (nextVent.isSource) continue;
 
-                    Debug.Log(nextVent.VentPosID);
                     Debug.DrawLine(expansionData.sourceVent.transform.position, nextVent.transform.position, Color.red, 30f);
 
                     if (secondaryVent)
@@ -132,6 +153,13 @@ public class PurificationGameScript : MonoBehaviour
                     if (i > 1000) break;
                 }
 
+                if (!newVentRouteData.LeakFound)
+                {
+                    foreach(PipeStackScript goalVent in newVentRouteData.GoalsFound)
+                    {
+                        goalVent.SetLightActive();
+                    }
+                }
 
                 foreach (WaitingExpansion deadExpansion in DeadEndExpansions)
                 {
@@ -152,7 +180,9 @@ public class PurificationGameScript : MonoBehaviour
         if(!GoalsMissing && !DeadPipesFound)
         {
             Debug.Log("Purification: YOUWIN");
+            PipeStackScript.GlobalRotationAllowed = false;
             SpawnWinScreen();
+            WinAS.Play();
         }
         if(PrevDeadEndExpansions != null)
         {
@@ -209,13 +239,17 @@ public class PurificationGameScript : MonoBehaviour
         if(CurrentLevelInPack < CurrentLevelPack.Levels.Count)
         {
             Debug.Log("LoadingNextLevel");
-            VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
-            UpdatePipeRoutes();
+            StartLevel();
         }
         else
         {
             Debug.Log("LevelPackComplete");
             VentGridData.ClearGrid();
+            FogSource.Stop();
+            MusicSelectorScript.SetOverworldSong(1);
+
+            ChannelChanger.DangerActive = false;
+            ChannelChanger.ActiveChannelChanger.LockSwitch();
         }
     }
 

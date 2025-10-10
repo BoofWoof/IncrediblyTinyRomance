@@ -23,8 +23,6 @@ public class ADTargetScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AerialDefenseScript.Locked) return;
-
         if (AerialDefenseScript.GameRunning)
         {
             ValidTarget = false;

@@ -15,9 +15,6 @@ public class AerialDefenseScript : MonoBehaviour
     public TMP_Text TargetsToKillText;
     public TMP_Text RemainingHealthText;
 
-    public static bool Locked = true;
-    public GameObject LockScreen;
-
     public delegate void OnADLockStateChange(bool lockState);
     public static OnADLockStateChange onADLockStateChange;
 
@@ -33,15 +30,15 @@ public class AerialDefenseScript : MonoBehaviour
 
     public float TransitionPeriod = 2f;
 
-    public void Start()
+    public void Awake()
     {
         Instance = this;
         RemainingHealth = MaxHealth;
 
         StaticGameCanvas = GameCanvas;
 
-        Instance.TargetsToKillText.text = Instance.TargetsToKill.ToString();
-        Instance.RemainingHealthText.text = Instance.RemainingHealth.ToString();
+        TargetsToKillText.text = TargetsToKill.ToString();
+        RemainingHealthText.text = RemainingHealth.ToString();
     }
 
     public static void SetTargetsToKill(int newTargetCount)
@@ -52,13 +49,14 @@ public class AerialDefenseScript : MonoBehaviour
 
     public static void Unlock()
     {
-        Locked = false;
-        Instance.LockScreen.SetActive(false);
         Instance.StartWave();
     }
 
     public void StartWave()
     {
+        if (ChannelChanger.DangerActive) return;
+        ChannelChanger.DangerActive = true;
+
         if(threatSpawnerScript.threatWaveInfo.optionalVolume != null)
         {
             StartCoroutine(StartVolume(threatSpawnerScript.threatWaveInfo.optionalVolume));
@@ -86,6 +84,9 @@ public class AerialDefenseScript : MonoBehaviour
         {
             StartCoroutine(StopVolume(threatSpawnerScript.threatWaveInfo.optionalVolume));
         }
+
+        ChannelChanger.DangerActive = false;
+        ChannelChanger.ActiveChannelChanger.LockSwitch();
     }
 
     public static void ThreatDestroyed()

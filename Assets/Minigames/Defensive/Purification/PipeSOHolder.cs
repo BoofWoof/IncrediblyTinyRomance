@@ -38,6 +38,9 @@ public struct PipeStruct
     public bool LeftSecondaryVentConnection;
     public PipeConnectionType RightConnection;
     public bool RightSecondaryVentConnection;
+
+    [Header("Force Logic")]
+    public bool ForceCapped;
 }
 
 [CreateAssetMenu(fileName = "PipeSOHolder", menuName = "Pipes/PipeSOHolder")]
