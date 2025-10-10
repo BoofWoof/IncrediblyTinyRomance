@@ -2,6 +2,7 @@ using PixelCrushers.DialogueSystem.Articy.Articy_4_0;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,11 +36,24 @@ public class PipeStackScript : MonoBehaviour
     public PipeSOHolder PipeTypes;
     [HideInInspector] public int PipeTypeIdx = 0;
 
+    [Header ("Components")]
     public GameObject Pipe;
     public GameObject PipeSecondLayer;
     public GameObject Backdrop;
     public GameObject LightLayer;
     public GameObject FanLayer;
+    public GameObject Gear;
+
+    [Header("Praticle Components")]
+    public GameObject SourceParticles;
+    public GameObject SinkParticles;
+    public GameObject UpLeakParticles;
+    public GameObject RightLeakParticles;
+    public GameObject DownLeakParticles;
+    public GameObject LeftLeakParticles;
+
+    public bool canRotate = true;
+    public bool fanSpinning = false;
 
     public bool isGoal = false;
     public bool isSource = false;
@@ -95,6 +109,9 @@ public class PipeStackScript : MonoBehaviour
         GridSource.Sources.Add(this);
         GridSource.Goals.Add(this);
 
+        SourceParticles.SetActive(true);
+        SinkParticles.SetActive(false);
+
         ConnectionRotationUpdate();
         CapOverride();
     }
@@ -116,6 +133,9 @@ public class PipeStackScript : MonoBehaviour
         GridSource.Goals.Remove(this);
         GridSource.Goals.Add(this);
 
+        SourceParticles.SetActive(false);
+        SinkParticles.SetActive(false);
+
         ConnectionRotationUpdate();
         CapOverride();
     }
@@ -135,6 +155,9 @@ public class PipeStackScript : MonoBehaviour
 
         GridSource.Sources.Remove(this);
         GridSource.Goals.Remove(this);
+
+        SourceParticles.SetActive(false);
+        SinkParticles.SetActive(false);
 
         ConnectionRotationUpdate();
         CapOverride();
@@ -177,6 +200,9 @@ public class PipeStackScript : MonoBehaviour
         GridSource.Sources.Remove(this);
         GridSource.Goals.Remove(this);
 
+        SourceParticles.SetActive(false);
+        SinkParticles.SetActive(false);
+
         ConnectionRotationUpdate();
     }
 
@@ -193,6 +219,18 @@ public class PipeStackScript : MonoBehaviour
 
         if (LeftConnection != PipeConnectionType.Closed) LeftConnection = PipeConnectionType.Capped;
         LeftSecondary = false;
+    }
+
+    public void EnableRotation()
+    {
+        canRotate = true;
+        Gear.SetActive(true);
+    }
+
+    public void DisableRotation()
+    {
+        canRotate = false;
+        Gear.SetActive(false);
     }
 
     public void ConnectionRotationUpdate()
@@ -213,21 +251,27 @@ public class PipeStackScript : MonoBehaviour
     public void SetLightIdle()
     {
         LightLayer.GetComponent<Image>().sprite = IdleLight;
+        fanSpinning = false;
+        SinkParticles.SetActive(false);
     }
 
     public void SetLightActive()
     {
         LightLayer.GetComponent<Image>().sprite = InUseLight;
+        fanSpinning = true;
+        if(isGoal) SinkParticles.SetActive(true);
     }
 
     public void SetLightLeaking()
     {
         LightLayer.GetComponent<Image>().sprite = DisconnectedLight;
+        fanSpinning = false;
+        SinkParticles.SetActive(false);
     }
 
     public void Update()
     {
-        if(PipeStructData.ShowFan || isSource || isGoal) FanLayer.transform.Rotate(0, 0, - Time.deltaTime * 1000f);
+        if(isSource || fanSpinning) FanLayer.transform.Rotate(0, 0, - Time.deltaTime * 1000f);
 
         if (Input.GetMouseButtonDown(0)) // Right click
         {
@@ -259,6 +303,14 @@ public class PipeStackScript : MonoBehaviour
         }
     }
 
+    public void ResetParticleSystems()
+    {
+        LeftLeakParticles.SetActive(false);
+        RightLeakParticles.SetActive(false);
+        UpLeakParticles.SetActive(false);
+        DownLeakParticles.SetActive(false);
+    }
+
     public void Start()
     {
         InstantRotation();
@@ -267,13 +319,13 @@ public class PipeStackScript : MonoBehaviour
 
     public void RotateCW()
     {
-        if (Rotating) return;
+        if (Rotating || !canRotate) return;
         StartCoroutine(RotatePipe(1));
     }
 
     public void RotateCC()
     {
-        if (Rotating) return;
+        if (Rotating || !canRotate) return;
         StartCoroutine(RotatePipe(-1));
     }
 
@@ -291,10 +343,12 @@ public class PipeStackScript : MonoBehaviour
 
             float newRotation = Mathf.Lerp(currentRotations, finalRotation, progress);
             Pipe.transform.rotation = Quaternion.Euler(0f, 0f, -newRotation);
+            Gear.transform.rotation = Quaternion.Euler(0f, 0f, -newRotation);
             yield return null;
         }
 
         Pipe.transform.rotation = Quaternion.Euler(0f, 0f, -finalRotation);
+        Gear.transform.rotation = Quaternion.Euler(0f, 0f, -finalRotation);
 
         SetRotationTracker(RotationTracker + rotationChange);
 
@@ -313,6 +367,8 @@ public class PipeStackScript : MonoBehaviour
         PipeTypeIdx = PipeIdx;
         PipeStruct pipeData = PipeTypes.PipeStructs[PipeIdx];
 
+        if(PipeTypeIdx == 0) canRotate = false;
+
         PipeStructData = pipeData;
 
         if (isSource) SetSource();
@@ -322,6 +378,13 @@ public class PipeStackScript : MonoBehaviour
 
         if (!pipeData.EnableBackdrop) HideBackdrop();
         else ShowBackdrop();
+
+        if (canRotate) Gear.SetActive(true);
+        else Gear.SetActive(false);
+
+        InstantRotation();
+
+        ResetParticleSystems();
     }
 
     public bool RotateSecondary(int connectionIdx)
@@ -395,12 +458,12 @@ public class PipeStackScript : MonoBehaviour
     }
     public void HideBackdrop()
     {
-        if (Backdrop) Backdrop.SetActive(false);
+        if (Backdrop) Backdrop.GetComponent<Image>().color = Color.grey;
         if (LightLayer) LightLayer.SetActive(false);
     }
     public void ShowBackdrop()
     {
-        if (Backdrop) Backdrop.SetActive(true);
+        if (Backdrop) Backdrop.GetComponent<Image>().color = Color.white;
         if (LightLayer) LightLayer.SetActive(true);
     }
 

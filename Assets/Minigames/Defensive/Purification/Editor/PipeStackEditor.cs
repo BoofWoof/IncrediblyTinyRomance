@@ -95,6 +95,20 @@ public class PipeStackEditor : Editor
             SceneView.RepaintAll();
         }
 
+        EditorGUILayout.LabelField("SetRotation", EditorStyles.boldLabel);
+        EditorGUILayout.Space();
+
+        if (GUILayout.Button("Turn On Rotation"))
+        {
+            pipeScript.EnableRotation();
+            SceneView.RepaintAll();
+        }
+        if (GUILayout.Button("Turn Off Rotation"))
+        {
+            pipeScript.DisableRotation();
+            SceneView.RepaintAll();
+        }
+
         // Draw the normal inspector first
         DrawDefaultInspector();
 

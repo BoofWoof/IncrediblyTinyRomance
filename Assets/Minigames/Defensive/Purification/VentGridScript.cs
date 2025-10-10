@@ -1,15 +1,11 @@
 using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
-
-[System.Serializable]
-public struct PipeData
-{
-    public int PipeTypeID; 
-    public int Rotations;
-}
-
 public class VentGridScript : MonoBehaviour
 {
+    public string LevelName;
+    public string LevelDescription;
+
     public GameObject PipeObjectPrefab;
 
     public int Cols;
@@ -20,7 +16,6 @@ public class VentGridScript : MonoBehaviour
     public float VentPixelWidth;
     public float VentPixelHeight;
 
-    public PipeData[] PipeGridData;
     public GameObject[] PipeStacks;
     public List<PipeStackScript> Goals;
     public List<PipeStackScript> Sources;
@@ -31,7 +26,6 @@ public class VentGridScript : MonoBehaviour
     {
         ClearGrid();
 
-        PipeGridData = new PipeData[Cols * Rows];
         PipeStacks = new GameObject[Cols * Rows];
 
         GridPixelWidth = Cols * VentPixelWidth;
@@ -48,7 +42,7 @@ public class VentGridScript : MonoBehaviour
     {
         ResetGrid();
 
-        for (int i = 0; i < PipeGridData.Length; i++)
+        for (int i = 0; i < Cols * Rows; i++)
         {
             GameObject NewVent = Instantiate(PipeObjectPrefab);
             RectTransform NewVentRect = NewVent.GetComponent<RectTransform>();
@@ -68,6 +62,54 @@ public class VentGridScript : MonoBehaviour
             pipeStackScript.SetPipeType(Random.Range(0, MaxPipeTypeIdx));
 
             PipeStacks[i] = NewVent;
+        }
+    }
+
+    public void SpawnGridFromSaveData(PurificationLevelSO saveData)
+    {
+        ClearGrid();
+
+        LevelName = saveData.LevelName;
+        LevelDescription = saveData.LevelDescription;
+
+        //saveData.ConnectedCutsceneName = "";
+        ///saveData.OnScreenData = null;
+
+        Rows = saveData.Rows;
+        Cols = saveData.Cols;
+
+        ResetGrid();
+
+        int i = 0;
+        foreach (PipeData pipeData in saveData.Data)
+        {
+            GameObject NewVent = Instantiate(PipeObjectPrefab);
+            RectTransform NewVentRect = NewVent.GetComponent<RectTransform>();
+            NewVentRect.parent = transform;
+            NewVentRect.transform.localPosition = Vector3.zero;
+            NewVentRect.localScale = Vector3.one;
+            NewVentRect.localRotation = Quaternion.identity;
+
+            (float xPos, float yPos) = IdxToPos(i);
+            NewVentRect.anchoredPosition = new Vector2(xPos, yPos);
+
+            PipeStackScript pipeStackScript = NewVent.GetComponent<PipeStackScript>();
+            pipeStackScript.GridSource = this;
+            pipeStackScript.VentPosID = i;
+
+            pipeStackScript.RotationTracker = pipeData.Rotations;
+
+            pipeStackScript.isCapped = pipeData.isCap;
+            pipeStackScript.isSource = pipeData.isSource;
+            pipeStackScript.isGoal = pipeData.isSink;
+
+            pipeStackScript.canRotate = pipeData.canRotate;
+
+            pipeStackScript.SetPipeType(pipeData.PipeTypeID);
+
+            PipeStacks[i] = NewVent;
+
+            i++;
         }
     }
 
@@ -123,19 +165,47 @@ public class VentGridScript : MonoBehaviour
         {
             case Direction.UP:
                 secondaryExpansion = nextVent.DownSecondary;
-                if(nextVent.DownConnection == PipeConnectionType.Closed) return (validExpansion, secondaryExpansion, nextVent);
+                if (nextVent.DownConnection == PipeConnectionType.Closed)
+                {
+                    nextVent.DownLeakParticles.SetActive(true);
+                    return (validExpansion, secondaryExpansion, nextVent);
+                } else
+                {
+                    nextVent.DownLeakParticles.SetActive(false);
+                }
                 break;
             case Direction.DOWN:
                 secondaryExpansion = nextVent.UpSecondary;
-                if (nextVent.UpConnection == PipeConnectionType.Closed) return (validExpansion, secondaryExpansion, nextVent);
+                if (nextVent.UpConnection == PipeConnectionType.Closed)
+                {
+                    nextVent.UpLeakParticles.SetActive(true);
+                    return (validExpansion, secondaryExpansion, nextVent);
+                }
+                {
+                    nextVent.UpLeakParticles.SetActive(false);
+                }
                 break;
             case Direction.LEFT:
                 secondaryExpansion = nextVent.RightSecondary;
-                if (nextVent.RightConnection == PipeConnectionType.Closed) return (validExpansion, secondaryExpansion, nextVent);
+                if (nextVent.RightConnection == PipeConnectionType.Closed)
+                {
+                    nextVent.RightLeakParticles.SetActive(true);
+                    return (validExpansion, secondaryExpansion, nextVent);
+                }
+                {
+                    nextVent.RightLeakParticles.SetActive(false);
+                }
                 break;
             case Direction.RIGHT:
                 secondaryExpansion = nextVent.LeftSecondary;
-                if (nextVent.LeftConnection == PipeConnectionType.Closed) return (validExpansion, secondaryExpansion, nextVent);
+                if (nextVent.LeftConnection == PipeConnectionType.Closed)
+                {
+                    nextVent.LeftLeakParticles.SetActive(true);
+                    return (validExpansion, secondaryExpansion, nextVent);
+                }
+                {
+                    nextVent.LeftLeakParticles.SetActive(false);
+                }
                 break;
         }
 

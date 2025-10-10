@@ -16,11 +16,20 @@ struct VentRouteData
 }
 public class PurificationGameScript : MonoBehaviour
 {
+    public PurificationLevelPacksSO CurrentLevelPack;
+    public int CurrentLevelInPack = 0;
+
     public VentGridScript VentGridData;
+    private List<WaitingExpansion> PrevDeadEndExpansions;
+
+    public GameObject MainBackdrop;
+    public GameObject WinText;
 
     public void Start()
     {
+        VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
         PipeStackScript.VentRotationEvent += UpdatePipeRoutes;
+        UpdatePipeRoutes();
     }
 
     public void StartGame()
@@ -142,14 +151,82 @@ public class PurificationGameScript : MonoBehaviour
 
         if(!GoalsMissing && !DeadPipesFound)
         {
-            Debug.Log("YOUWIN");
+            Debug.Log("Purification: YOUWIN");
+            SpawnWinScreen();
         }
+        if(PrevDeadEndExpansions != null)
+        {
+            foreach (WaitingExpansion prevDeadEnd in PrevDeadEndExpansions)
+            {
+                bool stillDeadEnd = false;
+                foreach (WaitingExpansion newDeadEnd in DeadEndExpansions)
+                {
+                    if(prevDeadEnd.sourceVent == newDeadEnd.sourceVent && prevDeadEnd.expansionDirection == newDeadEnd.expansionDirection)
+                    {
+                        stillDeadEnd = true;
+                        break;
+                    }
+                }
+                if (!stillDeadEnd)
+                {
+                    int adjacentVentID = VentGridData.ConvertVector2ToPosID(prevDeadEnd.sourceVent.VentPosID, prevDeadEnd.expansionDirection);
+                    if (adjacentVentID > 0)
+                    {
+                        PipeStackScript adjacentVentScript = VentGridData.PipeStacks[adjacentVentID].GetComponent<PipeStackScript>();
+                        switch (prevDeadEnd.expansionDirection)
+                        {
+                            case Direction.UP:
+                                adjacentVentScript.DownLeakParticles.SetActive(false);
+                                break;
+                            case Direction.RIGHT:
+                                adjacentVentScript.LeftLeakParticles.SetActive(false);
+                                break;
+                            case Direction.DOWN:
+                                adjacentVentScript.UpLeakParticles.SetActive(false);
+                                break;
+                            case Direction.LEFT:
+                                adjacentVentScript.RightLeakParticles.SetActive(false);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        PrevDeadEndExpansions = DeadEndExpansions;
     }
+
     public void ResetPipeRoutes()
     {
         foreach (GameObject vent in VentGridData.PipeStacks)
         {
             vent.GetComponent<PipeStackScript>().SetLightIdle();
         }
+    }
+
+    public void NextLevel()
+    {
+        CurrentLevelInPack += 1;
+        if(CurrentLevelInPack < CurrentLevelPack.Levels.Count)
+        {
+            Debug.Log("LoadingNextLevel");
+            VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
+            UpdatePipeRoutes();
+        }
+        else
+        {
+            Debug.Log("LevelPackComplete");
+            VentGridData.ClearGrid();
+        }
+    }
+
+    public void SpawnWinScreen()
+    {
+        GameObject newWinText = Instantiate(WinText);
+        newWinText.transform.parent = MainBackdrop.transform;
+        newWinText.transform.localScale = Vector3.one;
+        newWinText.transform.rotation = Quaternion.identity;
+        newWinText.transform.localPosition = Vector3.zero;
+
+        newWinText.GetComponent<MaterialGradient>().OnCompletion.AddListener(NextLevel);
     }
 }
