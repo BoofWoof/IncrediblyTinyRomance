@@ -35,6 +35,7 @@ public class UpgradeItemScript : MonoBehaviour
     public void Buy()
     {
         if (!AssociatedUpgrade.Buy()) return;
+        UpgradeScreenScript.UpgradeBoughtEvent?.Invoke(AssociatedUpgrade.AssociatedMinigame);
         SourceScreen.Refresh();
     }
 }

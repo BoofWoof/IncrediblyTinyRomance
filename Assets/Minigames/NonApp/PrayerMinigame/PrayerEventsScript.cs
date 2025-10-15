@@ -50,7 +50,7 @@ public class PrayerEventsScript : MonoBehaviour
             QuestManager.QuestManagerInstance.QuickUpdate();
             int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
             Debug.Log(correctCount);
-            if (correctCount >= 10)
+            if (correctCount >= 7)
             {
                 QuestManager.CompleteQuest("Worship");
                 MessageQueue.addDialogue("SinfulProposal");
@@ -63,7 +63,7 @@ public class PrayerEventsScript : MonoBehaviour
             QuestManager.QuestManagerInstance.QuickUpdate();
             int correctCount = DialogueLua.GetVariable("SuccessfulPrayersSubmitted").asInt;
             Debug.Log(correctCount);
-            if (correctCount >= 17)
+            if (correctCount >= 11)
             {
                 QuestManager.CompleteQuest("More Worship...");
                 MessageQueue.addDialogue("InstallReady");

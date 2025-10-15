@@ -12,6 +12,11 @@ public class AriesMoodScript : MoodInterface
 
     public override void UpdateAnger()
     {
+        if (PrayerScript.instance.JudgementActive)
+        {
+            SetAnger(PrayerScript.instance.GetAngerLevel() * 100f);
+        }
+
         base.UpdateAnger();
 
         float normalizedAnger = Mathf.InverseLerp(MinAnger, MaxAnger, Anger);
@@ -20,7 +25,7 @@ public class AriesMoodScript : MoodInterface
 
         PointLight1.color = angerColor;
         PointLight2.color = angerColor;
-        TubeMaterial.SetColor("_EmissionColor", angerColor * 2f);
+        TubeMaterial.SetColor("_EmissionColor", angerColor * 1.5f);
 
         int blendshapeIndex = HeadMesh.sharedMesh.GetBlendShapeIndex("Angry");
         HeadMesh.SetBlendShapeWeight(blendshapeIndex, normalizedAnger * 100f);

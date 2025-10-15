@@ -60,7 +60,6 @@ public class BalconyEventsScript : MonoBehaviour
 
     public void StartSystem()
     {
-        PrayerScript.IncreaseAnger = true;
         BalconyActivated = true;
         if (OnBalcony)
         {

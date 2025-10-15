@@ -1,6 +1,14 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum Minigame
+{
+    Visions,
+    Stocks,
+    Rally,
+    Hacking
+}
+
 public abstract class UpgradesAbstract : ScriptableObject
 {
     public string UpgradeName;
@@ -17,6 +25,8 @@ public abstract class UpgradesAbstract : ScriptableObject
     public float RevolutionRenown;
 
     public bool UpgradeBought = false;
+
+    public Minigame AssociatedMinigame;
 
     public bool CanBuy()
     {

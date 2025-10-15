@@ -32,10 +32,7 @@ public class PushupScript : MonoBehaviour
             string name = "MacroAries";
             if (e.Character.Length > 0) name =e.Character;
 
-            foreach (CharacterSpeechScript c in CharacterSpeechScript.CharacterSpeechInstances)
-            {
-                c.PlaySpeech(name, e.VoiceLine);
-            }
+            CharacterSpeechScript.BroadcastSpeechAttempt(name, e.VoiceLine);
         }
     }
 }

@@ -11,6 +11,14 @@ public class AriesOverworldBehavior : OverworldBehavior
         thisAnimator = GetComponent<Animator>();
     }
 
+    public IEnumerator Judgement()
+    {
+        yield return StartCoroutine(WalkToStation(0));
+        thisAnimator.SetBool("Sitting", true);
+        thisAnimator.SetBool("Looming", false);
+        PrayerScript.instance.ActivateJudgement();
+    }
+
     public IEnumerator GrabSoda()
     {
         yield return StartCoroutine(WalkToStation(5));
@@ -27,6 +35,7 @@ public class AriesOverworldBehavior : OverworldBehavior
 
     public IEnumerator WalkToStation(int StationIdx)
     {
+        if (OverworldController.CurrentNode == StationIdx) yield break;
         OverworldController.StartWalkTo(StationIdx);
         while(OverworldController.CurrentNode != StationIdx)
         {
@@ -55,9 +64,16 @@ public class AriesOverworldBehavior : OverworldBehavior
     {
         if (NameSource.SpeakerName.ToLower() != submitName.ToLower() && NameSource.NickName.ToLower() != submitName.ToLower()) return;
 
+        PrayerScript.instance.DeactivateJudgement();
+
         if (behavior.ToLower() == "soda")
         {
             StartCoroutine(GrabSoda());
+        }
+
+        if (behavior.ToLower() == "judge")
+        {
+            StartCoroutine(Judgement());
         }
     }
 }

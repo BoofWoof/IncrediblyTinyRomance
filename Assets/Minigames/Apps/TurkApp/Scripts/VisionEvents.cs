@@ -6,6 +6,7 @@ public class VisionEvents : MonoBehaviour
     private void OnEnable()
     {
         TurkPuzzleScript.OnPuzzleComplete += OnPuzzleCompletion;
+        UpgradeScreenScript.UpgradeBoughtEvent += OnUpgradeBought;
     }
     private void OnDisable()
     {
@@ -25,7 +26,28 @@ public class VisionEvents : MonoBehaviour
             Debug.Log(allCount);
             if (allCount >= 3)
             {
-                QuestManager.IncrementQuest();
+                MessageQueue.addDialogue("FirstPuzzlesVision");
+                QuestManager.CompleteQuest("Visions");
+            }
+        }
+    }
+
+    public void OnUpgradeBought(Minigame minigame)
+    {
+        if (minigame != Minigame.Visions) return;
+        int allCount = DialogueLua.GetVariable("PuzzleUpgradesBought").asInt + 1;
+        DialogueLua.SetVariable("PuzzleUpgradesBought", allCount);
+
+        if (
+                QuestLog.GetQuestState("Sights Beyond") == QuestState.Active
+            )
+        {
+            QuestManager.QuestManagerInstance.QuickUpdate();
+            Debug.Log(allCount);
+            if (allCount >= 5)
+            {
+                MessageQueue.addDialogue("FirstUpgradesVision");
+                QuestManager.CompleteQuest("Sights Beyond");
             }
         }
     }

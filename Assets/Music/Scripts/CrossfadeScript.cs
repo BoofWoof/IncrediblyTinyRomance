@@ -58,6 +58,8 @@ public class CrossfadeScript : MonoBehaviour
         MusicPlayer.currentTrack.volume = MusicPlayer.CurrentSong.MaxVolume;
 
         if(!MusicPaused) MusicPlayer.currentTrack.Play();
+
+        MusicPlayer.currentTrack.time = MusicPlayer.CurrentSong.StartTime;
     }
 
     public static void TransitionSong(int SongID)
@@ -65,6 +67,10 @@ public class CrossfadeScript : MonoBehaviour
         if (MusicSelectorScript.instance.SongList[SongID].Name == MusicPlayer.CurrentSong.Name) return;
 
         MusicDataStruct NewSong = MusicSelectorScript.instance.SongList[SongID];
+
+        if (MusicPlayer.CurrentSong.Song != null) {
+            MusicSelectorScript.instance.SongList[SongID].StartTime = MusicPlayer.currentTrack.time;
+        }
 
         if (NewSong.GroupID != MusicPlayer.CurrentSong.GroupID)
         {

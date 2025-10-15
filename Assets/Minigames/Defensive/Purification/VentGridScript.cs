@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Overlays;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class VentGridScript : MonoBehaviour
 {

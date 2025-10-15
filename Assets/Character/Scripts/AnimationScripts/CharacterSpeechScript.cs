@@ -80,6 +80,14 @@ public class CharacterSpeechScript : MonoBehaviour
         Debug.Log(subtitle.formattedText.text);
         StartCoroutine(Speak(voiceLine));
     }
+
+    public static void BroadcastSpeechAttempt(string name, VoiceLineSO voiceLine)
+    {
+        foreach (CharacterSpeechScript c in CharacterSpeechInstances)
+        {
+            c.PlaySpeech(name, voiceLine);
+        }
+    }
     public void PlaySpeech(string name, VoiceLineSO voiceLine)
     {
         if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;

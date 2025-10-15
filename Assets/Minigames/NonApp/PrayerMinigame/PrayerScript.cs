@@ -14,8 +14,10 @@ public class PrayerScript : MonoBehaviour
     public TextAsset BadPrayers;
     private string[] BadLines = null;
 
-    private float RamAngyLevel = 0;
+    public float RamAngyLevel = 0;
     public float AngerRate = 1f;
+    public float AngerReduction = 50f;
+    public float AngerThreshold = 180f;
 
     private int GoodIdx;
 
@@ -30,8 +32,6 @@ public class PrayerScript : MonoBehaviour
     public static int BadPrayerCount = 0;
     public static int TotalPrayerCount = 0;
 
-    public static bool IncreaseAnger = false;
-
     public float WaitForNextPrayerSec = 2f;
 
     public SplineMessageScript FireworkLauncher;
@@ -41,19 +41,48 @@ public class PrayerScript : MonoBehaviour
     public static bool StoryMode = false;
     private Response[] Responses;
 
+    [Header("Judgement Variables")]
+    public bool JudgementActive = false;
+
+    public List<VoiceLineSO> PositiveJudgementAudios;
+    public List<int> LastPositiveJudgementIdxs;
+    public int UniquePositivesTillRepeatAllowed;
+    public List<VoiceLineSO> NegativeJudgementAudios;
+    public List<int> LastNegativeJudgementIdxs;
+    public int UniqueNegativesTillRepeatAllowed;
+
+    public void ActivateJudgement()
+    {
+        Debug.Log("Activating Judgement");
+        JudgementActive = true;
+        RamAngyLevel = 0;
+    }
+
+    public void DeactivateJudgement()
+    {
+        Debug.Log("Deactivating Judgement");
+        JudgementActive = false;
+        RamAngyLevel = 0;
+    }
+
+    public float GetAngerLevel()
+    {
+        return (RamAngyLevel / AngerThreshold);
+    }
+
+    private void Update()
+    {
+        if (!JudgementActive) return;
+        RamAngyLevel += Time.deltaTime * AngerRate;
+        AngyDebug.text = "RamAngyLevel: " + GetAngerLevel().ToString("F2");
+    }
+
     private void Start()
     {
         instance = this;
 
         ProcessPrayers();
         GenerateNewPrayers();
-    }
-
-    private void Update()
-    {
-        if (!IncreaseAnger) return;
-        RamAngyLevel += Time.deltaTime * AngerRate;
-        AngyDebug.text = "RamAngyLevel: " + RamAngyLevel.ToString("0");
     }
     public void SubmitAnswer(int answerIdx)
     {
@@ -156,22 +185,30 @@ public class PrayerScript : MonoBehaviour
         string answerText = ButtonText[answerIdx].GetComponentInChildren<TMP_Text>().text;
         PrayerFireworkTextScript.ActivateFirework(answerText);
 
+        yield return new WaitForSeconds(5f);
+
         TotalPrayerCount += 1;
         if (GoodIdx == answerIdx)
         {
             Debug.Log("You win!");
-            RamAngyLevel -= 30f;
+            RamAngyLevel -= AngerReduction;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
             PrayerSubmitted.Invoke(true);
             GoodPrayerCount++;
+
+            int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
+            CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
         }
         else
         {
             Debug.Log("Ram be angy! >:C");
             RamAngyLevel += 30f;
-            if (RamAngyLevel > 100) RamAngyLevel = 100;
+            if (RamAngyLevel > AngerThreshold) RamAngyLevel = AngerThreshold;
             PrayerSubmitted.Invoke(false);
             BadPrayerCount++;
+
+            int RandomIdx = Random.Range(0, NegativeJudgementAudios.Count);
+            CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", NegativeJudgementAudios[RandomIdx]);
         }
 
         DisableButtons();

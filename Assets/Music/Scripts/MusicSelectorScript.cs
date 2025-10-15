@@ -8,6 +8,8 @@ public struct MusicDataStruct
     public string Name;
     public float MaxVolume;
     public int GroupID;
+
+    public float StartTime;
 }
 
 public class MusicSelectorScript : MonoBehaviour
@@ -58,7 +60,7 @@ public class MusicSelectorScript : MonoBehaviour
         instance.PhoneMusicID = (int)newSongID;
         if (!PhonePositionScript.raised)
         {
-            CrossfadeScript.TransitionSong(MusicSelectorScript.instance.PhoneMusicID);
+            CrossfadeScript.TransitionSong(MusicSelectorScript.instance.OverworldSongID);
         }
     }
 

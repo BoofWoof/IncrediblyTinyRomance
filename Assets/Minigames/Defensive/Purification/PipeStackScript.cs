@@ -355,11 +355,13 @@ public class PipeStackScript : MonoBehaviour
 
             float newRotation = Mathf.Lerp(currentRotations, finalRotation, progress);
             Pipe.transform.rotation = Quaternion.Euler(0f, 0f, -newRotation);
+            if (isGoal) newRotation += 45;
             Gear.transform.rotation = Quaternion.Euler(0f, 0f, -newRotation);
             yield return null;
         }
 
         Pipe.transform.rotation = Quaternion.Euler(0f, 0f, -finalRotation);
+        if (isGoal) finalRotation += 45;
         Gear.transform.rotation = Quaternion.Euler(0f, 0f, -finalRotation);
 
         SetRotationTracker(RotationTracker + rotationChange);
@@ -466,7 +468,10 @@ public class PipeStackScript : MonoBehaviour
 
     public void InstantRotation()
     {
-        Pipe.transform.rotation = Quaternion.Euler(0f, 0f, -RotationTracker * 90f);
+        float rotation = -RotationTracker * 90f;
+        Pipe.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
+        if (isGoal) rotation += 45f;
+        Gear.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
     }
     public void HideBackdrop()
     {
