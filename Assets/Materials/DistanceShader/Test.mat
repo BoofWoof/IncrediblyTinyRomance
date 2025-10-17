@@ -37,12 +37,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Atmosphere: 0.1
     - _BlurDepthIntensity: 10
     - _BlurStrength: 0.1
-    - _ContrastIntensity: 4
-    - _DepthIntensity: 0.3
+    - _ContrastIntensity: 9.24
+    - _DepthIntensity: 4.82
+    - _Impact: 0.2
     - _SaturationIntensity: 1
+    - _StartCutoff: 0.02
     m_Colors:
-    - _DepthColor: {r: 0.4575472, g: 0.90647364, b: 1, a: 1}
+    - _Darkness: {r: 0, g: 0, b: 0, a: 0}
+    - _DepthColor: {r: 0.26962438, g: 0.5102697, b: 0.6886792, a: 1}
+    - _NeutralColor: {r: 0.10899276, g: 0.086507656, b: 0.2264151, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

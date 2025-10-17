@@ -3,6 +3,7 @@ using System.Collections;
 using PixelCrushers.DialogueSystem;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
@@ -45,11 +46,27 @@ public class CharacterSpeechScript : MonoBehaviour
         Gesture.ForceAnimation(gestureName);
     }
 
+    public static void BroadcastForceGesture(string name, string gestureName)
+    {
+        foreach (CharacterSpeechScript characterSpeechScript in CharacterSpeechInstances)
+        {
+            characterSpeechScript.ForceGesture(name, gestureName);
+        }
+    }
+
     public void GestureParameter(string name, string gestureParamter)
     {
         if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;
 
         Gesture.ProcessGesture(gestureParamter);
+    }
+
+    public static void BroadcastGestureParameter(string name, string gestureParamter)
+    {
+        foreach (CharacterSpeechScript characterSpeechScript in CharacterSpeechInstances)
+        {
+            characterSpeechScript.GestureParameter(name, gestureParamter);
+        }
     }
 
     public void Start()

@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: CiberArmMat
+    second: {fileID: 2100000, guid: 2c6900c02d2131d4382526ed527aa41b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: EyeBack
     second: {fileID: 2100000, guid: c3f329e1f7366c6489a4ae3f3353aad1, type: 2}
   - first:
@@ -37,6 +42,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Hide.001
+    second: {fileID: 2100000, guid: 9ea78c3cec587fb4a80aa3f579a26143, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: HideBody
     second: {fileID: 2100000, guid: f7818560567264c4796cc04bcf7137b8, type: 2}
   - first:
@@ -59,6 +69,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Pants
     second: {fileID: 2100000, guid: 24c378481fa16264684d8b76563d9a76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PantsMat
+    second: {fileID: 2100000, guid: 4e6dea4a44d63f34a886d7142765a4d6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -92,28 +107,58 @@ ModelImporter:
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
+      name: CiberArmText_Diffuse_Worn
+    second: {fileID: 2800000, guid: b1fd395a02136df41bb80efb8c1fa437, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CiberArmText_Emission_Worn
+    second: {fileID: 2800000, guid: b4ef5f91f15c09742a2eb69060266ab1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CiberArmText_Metallic_Worn
+    second: {fileID: 2800000, guid: 025d93b662f493e40bce0a467803bc57, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CiberArmText_Normal_Worn
+    second: {fileID: 2800000, guid: d10a4d9443cf9bf43b776ec6dd366b92, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CiberArmText_Roughness_Worn
+    second: {fileID: 2800000, guid: bfe587abe0b17364a9225d07fabed6bd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
       name: HideColorHead
-    second: {fileID: 2800000, guid: 3c740eb4c317e2648803453ff210cf12, type: 3}
+    second: {fileID: 2800000, guid: c1c914bbfab5ac04bbe289efd25f78f9, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideNormalsBody
-    second: {fileID: 2800000, guid: 09908b6d34b0c6748b429ff79f0677c1, type: 3}
+    second: {fileID: 2800000, guid: 6ed30f665b8544048b48578c93d97cd8, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideNormalsHead
-    second: {fileID: 2800000, guid: 8ba5564330858f3448a3a9dee894b514, type: 3}
+    second: {fileID: 2800000, guid: 25966444d74b7dc488020f742300ddd5, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HideTextureBody
-    second: {fileID: 2800000, guid: 5bb8932b6a2f82d46a048d3ce355838d, type: 3}
+    second: {fileID: 2800000, guid: c4dcbd673f6ebea4ea37e0da76b8d28b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: HornNormals
-    second: {fileID: 2800000, guid: 69504be61827d1940b9bd2ba10adb06c, type: 3}
+    second: {fileID: 2800000, guid: ae06345ddb5fb1246af097b3229f813d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WoolTexture
+    second: {fileID: 2800000, guid: 9763d2f393dadcb4c8bb2303386120d2, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -43,6 +43,7 @@ public class PrayerScript : MonoBehaviour
 
     [Header("Judgement Variables")]
     public bool JudgementActive = false;
+    public bool JudgementFocus = false;
 
     public List<VoiceLineSO> PositiveJudgementAudios;
     public List<int> LastPositiveJudgementIdxs;
@@ -56,6 +57,7 @@ public class PrayerScript : MonoBehaviour
         Debug.Log("Activating Judgement");
         JudgementActive = true;
         RamAngyLevel = 0;
+        JudgementFocus = false;
     }
 
     public void DeactivateJudgement()
@@ -63,6 +65,7 @@ public class PrayerScript : MonoBehaviour
         Debug.Log("Deactivating Judgement");
         JudgementActive = false;
         RamAngyLevel = 0;
+        JudgementFocus = false;
     }
 
     public float GetAngerLevel()
@@ -75,6 +78,18 @@ public class PrayerScript : MonoBehaviour
         if (!JudgementActive) return;
         RamAngyLevel += Time.deltaTime * AngerRate;
         AngyDebug.text = "RamAngyLevel: " + GetAngerLevel().ToString("F2");
+
+        if(!JudgementFocus && GetAngerLevel() > 0.8f)
+        {
+            CharacterSpeechScript.BroadcastGestureParameter("MacroAries", "SitForward");
+            JudgementFocus = true;
+        }
+
+        if (JudgementFocus && GetAngerLevel() < 0.4f)
+        {
+            CharacterSpeechScript.BroadcastGestureParameter("MacroAries", "SitBack");
+            JudgementFocus = false;
+        }
     }
 
     private void Start()

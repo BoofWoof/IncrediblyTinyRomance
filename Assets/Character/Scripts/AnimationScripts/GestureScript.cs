@@ -77,7 +77,10 @@ public class GestureScript : MonoBehaviour
                 CharacterAnimator.SetBool("Looming", false);
                 break;
             case "SitForward":
-                CharacterAnimator.SetTrigger("SitForward");
+                CharacterAnimator.SetBool("SitForward", true);
+                break;
+            case "SitBack":
+                CharacterAnimator.SetBool("SitForward", false);
                 break;
             case "Loom":
                 CharacterAnimator.SetBool("Looming", true);

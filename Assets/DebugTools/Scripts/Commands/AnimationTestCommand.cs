@@ -10,10 +10,7 @@ public class AnimationTestCommand : ConsoleCommand
 
         string StateName = string.Join(" ", args[1..]);
 
-        foreach (CharacterSpeechScript characterSpeechScript in CharacterSpeechScript.CharacterSpeechInstances)
-        {
-            characterSpeechScript.ForceGesture(CharacterName, StateName);
-        }
+        CharacterSpeechScript.BroadcastForceGesture(CharacterName, StateName);
 
         return true;
     }

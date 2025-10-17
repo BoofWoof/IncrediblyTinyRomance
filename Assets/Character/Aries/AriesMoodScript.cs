@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AriesMoodScript : MoodInterface
 {
     [Header ("Aries Components")]
-    public SkinnedMeshRenderer HeadMesh;
+    public List<SkinnedMeshRenderer> EmotiveMeshes;
     public Material TubeMaterial;
     public Light PointLight1;
     public Light PointLight2;
@@ -27,7 +28,10 @@ public class AriesMoodScript : MoodInterface
         PointLight2.color = angerColor;
         TubeMaterial.SetColor("_EmissionColor", angerColor * 1.5f);
 
-        int blendshapeIndex = HeadMesh.sharedMesh.GetBlendShapeIndex("Angry");
-        HeadMesh.SetBlendShapeWeight(blendshapeIndex, normalizedAnger * 100f);
+        foreach (SkinnedMeshRenderer emotiveMesh in EmotiveMeshes)
+        {
+            int blendshapeIndex = emotiveMesh.sharedMesh.GetBlendShapeIndex("Angry");
+            emotiveMesh.SetBlendShapeWeight(blendshapeIndex, normalizedAnger * 100f);
+        }
     }
 }

@@ -10,10 +10,7 @@ public class GestureParameterCommand : ConsoleCommand
 
         string ParameterName = string.Join(" ", args[1..]);
 
-        foreach (CharacterSpeechScript characterSpeechScript in CharacterSpeechScript.CharacterSpeechInstances)
-        {
-            characterSpeechScript.GestureParameter(CharacterName, ParameterName);
-        }
+        CharacterSpeechScript.BroadcastGestureParameter(CharacterName, ParameterName);
 
         return true;
     }
