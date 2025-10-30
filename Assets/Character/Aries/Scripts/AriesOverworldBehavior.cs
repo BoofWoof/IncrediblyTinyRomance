@@ -35,9 +35,9 @@ public class AriesOverworldBehavior : OverworldBehavior
 
     public IEnumerator WalkToStation(int StationIdx)
     {
-        if (OverworldController.CurrentNode == StationIdx) yield break;
+        if (OverworldController.CurrentStation == StationIdx) yield break;
         OverworldController.StartWalkTo(StationIdx);
-        while(OverworldController.CurrentNode != StationIdx)
+        while(OverworldController.CurrentStation != StationIdx)
         {
             yield return null;
         }

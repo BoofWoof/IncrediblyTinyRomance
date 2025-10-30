@@ -8,6 +8,7 @@ namespace DebugTools.DeveloperConsole.Commands
     {
         public override bool Process(string[] args)
         {
+            CharacterSpeechScript.BroadcastShutUp();
             DialogueManager.StopConversation();
 
             return true;

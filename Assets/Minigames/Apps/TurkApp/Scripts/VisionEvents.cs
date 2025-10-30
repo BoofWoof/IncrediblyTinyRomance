@@ -44,7 +44,7 @@ public class VisionEvents : MonoBehaviour
         {
             QuestManager.QuestManagerInstance.QuickUpdate();
             Debug.Log(allCount);
-            if (allCount >= 5)
+            if (allCount >= 2)
             {
                 MessageQueue.addDialogue("FirstUpgradesVision");
                 QuestManager.CompleteQuest("Sights Beyond");

@@ -108,4 +108,10 @@ public class AnimationTriggers : MonoBehaviour
     {
         LeftHand.Activate();
     }
+
+    public void LeftHandDropAndActivate(int ReleaseID)
+    {
+        LeftHand.ReleaseHandObject(ReleaseID);
+        LeftHand.Activate();
+    }
 }

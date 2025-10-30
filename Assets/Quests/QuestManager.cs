@@ -32,6 +32,8 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
+        QuestText.text = "";
+
         currentQuestIndex = 0;
         string[] QuestList = QuestLog.GetAllQuests(QuestState.Active | QuestState.Success | QuestState.Unassigned, false);
         foreach (string questName in QuestList)

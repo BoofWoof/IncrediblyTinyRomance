@@ -69,6 +69,18 @@ public class CharacterSpeechScript : MonoBehaviour
         }
     }
 
+    public static void BroadcastShutUp()
+    {
+        foreach (CharacterSpeechScript characterSpeechScript in CharacterSpeechInstances)
+        {
+            characterSpeechScript.ShutUp();
+        }
+    }
+    public void ShutUp()
+    {
+        GetComponent<AudioSource>().Stop();
+    }
+
     public void Start()
     {
         if (RadioSpeech)

@@ -27,7 +27,7 @@ public class TeleportableCharacterEditor : Editor
         if (GUILayout.Button("ResetPosition (Edit Mode)"))
         {
             OverworldPositionScript overworldPositionScript = (OverworldPositionScript)target;
-            overworldPositionScript.GoTo(overworldPositionScript.CurrentNode);
+            overworldPositionScript.GoTo(overworldPositionScript.CurrentStation);
         }
     }
 }

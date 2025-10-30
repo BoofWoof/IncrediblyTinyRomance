@@ -31,10 +31,17 @@ public class IntroSoundEffects : MonoBehaviour
     }
     public void StartDay()
     {
-        MessageQueue.addDialogue("Day1Intro");
+        StartDayOne();
         PlayerCam.EnableCameraMovement = true;
         GetComponent<Camera>().enabled = false;
         InputManager.GameStart();
         Destroy(gameObject);
+    }
+
+    public void StartDayOne()
+    {
+        QuestManager.SetQuestByIndex(0);
+        MessageQueue.addDialogue("Day1Intro");
+        CharacterSpeechScript.BroadcastForceGesture("MacroAries", "BannEnterPuff");
     }
 }

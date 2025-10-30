@@ -155,6 +155,7 @@ public class PrayerScript : MonoBehaviour
         for (int i = 0; i < ButtonText.Count; i++)
         {
             ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
+            AuthorText[i].text = "";
         }
         if (responses.Length == 1)
         {
@@ -200,6 +201,9 @@ public class PrayerScript : MonoBehaviour
         string answerText = ButtonText[answerIdx].GetComponentInChildren<TMP_Text>().text;
         PrayerFireworkTextScript.ActivateFirework(answerText);
 
+        AuthorText[answerIdx].text = "";
+        DisableButtons();
+
         yield return new WaitForSeconds(5f);
 
         TotalPrayerCount += 1;
@@ -212,7 +216,8 @@ public class PrayerScript : MonoBehaviour
             GoodPrayerCount++;
 
             int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
-            CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
+
+            if(JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
         }
         else
         {
@@ -223,10 +228,9 @@ public class PrayerScript : MonoBehaviour
             BadPrayerCount++;
 
             int RandomIdx = Random.Range(0, NegativeJudgementAudios.Count);
-            CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", NegativeJudgementAudios[RandomIdx]);
+            if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", NegativeJudgementAudios[RandomIdx]);
         }
 
-        DisableButtons();
         AuthorText[answerIdx].text = "";
 
         yield return new WaitForSeconds(WaitForNextPrayerSec);

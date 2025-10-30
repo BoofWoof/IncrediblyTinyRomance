@@ -1,5 +1,7 @@
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OverworldPositionScript : MonoBehaviour
@@ -7,7 +9,9 @@ public class OverworldPositionScript : MonoBehaviour
     public CharacterSpeechScript NameSource;
     [HideInInspector] public string CharacterName;
 
-    public int CurrentNode = 0;
+    public int InitialNodeValue = 6;
+    //public int CurrentStation { get; set; }
+    public int CurrentStation;
 
     public Transform RootTransform;
     public GestureScript GestureControl;
@@ -15,6 +19,8 @@ public class OverworldPositionScript : MonoBehaviour
 
     public float Speed = 1f;
     public float RotationSpeed = 360f;
+
+    public static int WaitStation = -1;
 
     public static List<OverworldPositionScript> PositionScripts = new List<OverworldPositionScript>();
 
@@ -25,21 +31,29 @@ public class OverworldPositionScript : MonoBehaviour
         CharacterName = NameSource.SpeakerName;
         PositionScripts.Add(this);
 
-        SetNewStation(CurrentNode);
-        GoTo(CurrentNode);
+        SetNewStation(InitialNodeValue);
+        GoTo(CurrentStation);
+
+        Lua.RegisterFunction("SetWaitStation", null, SymbolExtensions.GetMethodInfo(() => SetWaitStation(0)));
+        Lua.RegisterFunction("StartWalkTo", null, SymbolExtensions.GetMethodInfo(() => StartWalkTo("Name", 0.0f)));
     }
 
-    public static void GoTo(string name, int positionNodeIdx)
+    public static void SetWaitStation(float StationIdx)
+    {
+        WaitStation = (int)StationIdx;
+    }
+
+    public static void GoTo(string name, int CurrentStationIdx)
     {
         foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
         {
             if (overworldPositionScript.CharacterName != name && overworldPositionScript.NameSource.NickName != name) continue;
-            overworldPositionScript.GoTo(positionNodeIdx);
+            overworldPositionScript.GoTo(CurrentStationIdx);
         }
     }
-    public void GoTo(int positionNodeIdx, bool flip = false, bool forceAngle = true)
+    public void GoTo(int CurrentStationIdx, bool flip = false, bool forceAngle = true)
     {
-        Transform targetNode = TravelNodeTracker.Instance.PositionNodes[positionNodeIdx].transform;
+        Transform targetNode = TravelNodeTracker.Instance.PositionNodes[CurrentStationIdx].transform;
 
         RootTransform.position = targetNode.position;
 
@@ -52,23 +66,28 @@ public class OverworldPositionScript : MonoBehaviour
             RootTransform.rotation = finalRotation;
         }
 
-        SetNewStation(positionNodeIdx);
+        SetNewStation(CurrentStationIdx);
     }
 
-    public static void StartWalkTo(string name, int positionNodeIdx)
+    public static void StartWalkTo(string name, float CurrentStationIdx)
+    {
+        StartWalkTo(name, (int)CurrentStationIdx);
+    }
+
+    public static void StartWalkTo(string name, int CurrentStationIdx)
     {
         foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
         {
             if (overworldPositionScript.CharacterName != name && overworldPositionScript.NameSource.NickName != name) continue;
-            overworldPositionScript.StartWalkTo(positionNodeIdx);
+            overworldPositionScript.StartWalkTo(CurrentStationIdx);
         }
     }
 
-    public void StartWalkTo(int positionNodeIdx)
+    public void StartWalkTo(int CurrentStationIdx)
     {
-        WalkToCoroutine = StartCoroutine(FollowRouteTo(positionNodeIdx));
+        WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx));
     }
-    public IEnumerator FollowRouteTo(int positionNodeIdx)
+    public IEnumerator FollowRouteTo(int CurrentStationIdx)
     {
         GestureControl.CharacterAnimator.SetBool("Sitting", false);
         GestureControl.CharacterAnimator.SetBool("Looming", false);
@@ -76,9 +95,9 @@ public class OverworldPositionScript : MonoBehaviour
 
         OverworldRoute route = new OverworldRoute();
         route.Initialize();
-        route.RouteIdxs.Add(CurrentNode);
+        route.RouteIdxs.Add(CurrentStation);
         bool routeFound;
-        (routeFound, route) = TravelNodeTracker.Instance.FindShortestRoute(route, positionNodeIdx);
+        (routeFound, route) = TravelNodeTracker.Instance.FindShortestRoute(route, CurrentStationIdx);
         if (!routeFound) Debug.LogError("No route found.");
 
         int prev_idx = route.RouteIdxs[0];
@@ -87,8 +106,6 @@ public class OverworldPositionScript : MonoBehaviour
         foreach (int idx in route.RouteIdxs)
         {
             TravelNodeConnection connection = TravelNodeTracker.Instance.FindConnection(prev_idx, idx);
-
-            Debug.Log(idx);
 
             if (connection.ExitWithAnimation)
             {
@@ -108,7 +125,7 @@ public class OverworldPositionScript : MonoBehaviour
         GestureControl.CharacterAnimator.SetBool("WalkTo", false);
     }
 
-    public IEnumerator WaitForAnimation(int positionNodeIdx, TravelNodeConnection connection)
+    public IEnumerator WaitForAnimation(int CurrentStationIdx, TravelNodeConnection connection)
     {
         Animator animator = GestureControl.CharacterAnimator;
         GestureControl.CharacterAnimator.SetTrigger("ActivateTransition");
@@ -129,11 +146,10 @@ public class OverworldPositionScript : MonoBehaviour
             yield return null;
         }
 
-        SetNewStation(positionNodeIdx);
         GoTo(connection.TravelNode.SceneID, connection.FlipAngle);
     }
 
-    public IEnumerator WaitForMobility(int positionNodeIdx, TravelNodeConnection connection)
+    public IEnumerator WaitForMobility(int CurrentStationIdx, TravelNodeConnection connection)
     {
         CharacterMobile = false;
         while (!CharacterMobile)
@@ -141,12 +157,11 @@ public class OverworldPositionScript : MonoBehaviour
             yield return null;
         }
 
-        SetNewStation(positionNodeIdx);
         GoTo(connection.TravelNode.SceneID, connection.FlipAngle);
     }
-    public IEnumerator WalkTo(int positionNodeIdx, TravelNodeConnection connection)
+    public IEnumerator WalkTo(int CurrentStationIdx, TravelNodeConnection connection)
     {
-        TravelNodeScript targetNodeScript = TravelNodeTracker.Instance.PositionNodes[positionNodeIdx].GetComponent<TravelNodeScript>();
+        TravelNodeScript targetNodeScript = TravelNodeTracker.Instance.PositionNodes[CurrentStationIdx].GetComponent<TravelNodeScript>();
         Transform targetNode = targetNodeScript.transform;
 
         while (!CharacterMobile)
@@ -182,14 +197,19 @@ public class OverworldPositionScript : MonoBehaviour
             RootTransform.rotation = finalRotation;
         }
 
-        SetNewStation(positionNodeIdx);
         GoTo(connection.TravelNode.SceneID, connection.FlipAngle, connection.ForceAngleOnArrival);
     }
 
     public void SetNewStation(int stationIdx)
     {
-        CurrentNode = stationIdx;
-        GestureControl.CharacterAnimator.SetInteger("CurrentStation", CurrentNode);
+        CurrentStation = stationIdx;
+        GestureControl.CharacterAnimator.SetInteger("CurrentStation", CurrentStation);
+
+        if(CurrentStation == WaitStation)
+        {
+            WaitStation = -1;
+            (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+        }
     }
 }
 

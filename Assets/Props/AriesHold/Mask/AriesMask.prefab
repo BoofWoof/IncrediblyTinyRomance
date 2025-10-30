@@ -71,6 +71,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d9fdf86c16610546a95e5f0b5147002, type: 3}
       insertIndex: 2
       addedObject: {fileID: 9003129786864397561}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d9fdf86c16610546a95e5f0b5147002, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3951850062703005033}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d9fdf86c16610546a95e5f0b5147002, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2622115958090409602}
   m_SourcePrefab: {fileID: 100100000, guid: 5d9fdf86c16610546a95e5f0b5147002, type: 3}
 --- !u!1 &7037929305421551101 stripped
 GameObject:
@@ -92,5 +98,56 @@ MonoBehaviour:
   ObjectName: Mask
   ObjectActivate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3951850062703005033}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BounceIntoPlace
+          m_BoolArgument: 0
+        m_CallState: 2
   LightColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!95 &3951850062703005033
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037929305421551101}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ee7990ab824bee4397a00b32c106661, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2622115958090409602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7037929305421551101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d4a6d1cf793494d8c7db89b0f5bc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overworldPositionScript: {fileID: 0}
+  animator: {fileID: 0}
+  RightHand: {fileID: 0}
+  LeftHand: {fileID: 0}
+  LookControl: {fileID: 0}
