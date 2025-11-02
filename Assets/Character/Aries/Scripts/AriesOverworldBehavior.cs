@@ -11,11 +11,24 @@ public class AriesOverworldBehavior : OverworldBehavior
         thisAnimator = GetComponent<Animator>();
     }
 
+    public IEnumerator PuffAttack()
+    {
+        yield return StartCoroutine(WalkToStation(0));
+        thisAnimator.SetBool("Sitting", true);
+        thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", true);
+
+        yield return StartCoroutine(WaitForAnimation("SitForwardIdle"));
+
+        thisAnimator.SetTrigger("Puff");
+    }
+
     public IEnumerator Judgement()
     {
         yield return StartCoroutine(WalkToStation(0));
         thisAnimator.SetBool("Sitting", true);
         thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", false);
         PrayerScript.instance.ActivateJudgement();
     }
 
@@ -38,6 +51,14 @@ public class AriesOverworldBehavior : OverworldBehavior
         if (OverworldController.CurrentStation == StationIdx) yield break;
         OverworldController.StartWalkTo(StationIdx);
         while(OverworldController.CurrentStation != StationIdx)
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerator WaitForAnimation(string animationStateName)
+    {
+        while (!thisAnimator.GetCurrentAnimatorStateInfo(0).IsName(animationStateName))
         {
             yield return null;
         }
@@ -74,6 +95,11 @@ public class AriesOverworldBehavior : OverworldBehavior
         if (behavior.ToLower() == "judge")
         {
             StartCoroutine(Judgement());
+        }
+
+        if (behavior.ToLower() == "puff")
+        {
+            StartCoroutine(PuffAttack());
         }
     }
 }

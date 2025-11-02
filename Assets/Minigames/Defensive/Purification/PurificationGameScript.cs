@@ -41,6 +41,7 @@ public class PurificationGameScript : MonoBehaviour
     public void StartGame()
     {
         if (ChannelChanger.DangerActive) return;
+        ChannelChanger.ActiveChannelChanger.PuritySwitch();
         ChannelChanger.DangerActive = true;
 
         CurrentLevelInPack = 0;
@@ -179,10 +180,7 @@ public class PurificationGameScript : MonoBehaviour
 
         if(!GoalsMissing && !DeadPipesFound)
         {
-            Debug.Log("Purification: YOUWIN");
-            PipeStackScript.GlobalRotationAllowed = false;
-            SpawnWinScreen();
-            WinAS.Play();
+            Win();
         }
         if(PrevDeadEndExpansions != null)
         {
@@ -223,6 +221,17 @@ public class PurificationGameScript : MonoBehaviour
             }
         }
         PrevDeadEndExpansions = DeadEndExpansions;
+    }
+
+    public void Win()
+    {
+        string cutsceneName = CurrentLevelPack.Levels[CurrentLevelInPack].ConnectedCutsceneName;
+        if (cutsceneName.Length > 0) MessageQueue.addDialogue(CurrentLevelPack.Levels[CurrentLevelInPack].ConnectedCutsceneName);
+
+        Debug.Log("Purification: YOUWIN");
+        PipeStackScript.GlobalRotationAllowed = false;
+        SpawnWinScreen();
+        WinAS.Play();
     }
 
     public void ResetPipeRoutes()

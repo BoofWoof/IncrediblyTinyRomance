@@ -41,7 +41,12 @@ public class AnimationTriggers : MonoBehaviour
 
     public void Impact(float Strength)
     {
-        MoveCamera.moveCamera.ShakeScreen(1f, Strength);
+        MoveCamera.moveCamera.ImpactShakeScreen(1f, Strength);
+    }
+
+    public void Rumble(float Strength)
+    {
+        MoveCamera.SetMaintainRumble(Strength);
     }
 
     public void EnableMobility()

@@ -12,11 +12,15 @@ public class MoveCamera : MonoBehaviour
     public ParticleSystem dustGenerator;
 
     public static MoveCamera moveCamera;
-    public static float rumble;
-    public static float shake;
+    private static float ImpactRumble;
 
-    public static float targetRumbleQuantity;
-    public float currentRumbleQuantity = 0f;
+    private static float TargetWordRumble { get; set; }
+    private static float CurrentWordRumble { get; set; }
+
+    private static float TargetMaintainRumble { get; set; }
+    private static float CurrentMaintainRumble { get; set; }
+    public static float TotalRumble { get; set; }
+
     public float falloffRate = 1f;
 
     public AudioSource earthquakeSoundSource;
@@ -29,26 +33,38 @@ public class MoveCamera : MonoBehaviour
     }
     void Update()
     {
-        transform.position = cameraPosition.position + cameraShakeOffset + Random.insideUnitSphere * rumble;
+        if (TargetWordRumble > CurrentWordRumble) CurrentWordRumble = TargetWordRumble;
+        CurrentWordRumble = CurrentWordRumble * 1 / (1 + Time.deltaTime * 10f);
 
+        if (TargetMaintainRumble >= CurrentMaintainRumble) CurrentMaintainRumble = TargetMaintainRumble;
+        else CurrentMaintainRumble = Mathf.MoveTowards(CurrentMaintainRumble, TargetMaintainRumble, Time.deltaTime * falloffRate);
 
-        if (targetRumbleQuantity > currentRumbleQuantity) currentRumbleQuantity = targetRumbleQuantity;
-        currentRumbleQuantity = Mathf.MoveTowards(currentRumbleQuantity, targetRumbleQuantity, Time.deltaTime * falloffRate);
+        TotalRumble = ImpactRumble + CurrentMaintainRumble + CurrentWordRumble;
+        transform.position = cameraPosition.position + TotalRumble * Random.insideUnitSphere;
 
-        rumble = currentRumbleQuantity * 0.2f;
-        rumbleSoundSource.volume = currentRumbleQuantity * 10f;
-        rumbleSoundSource.pitch = 1 + currentRumbleQuantity * 2f;
+        float MaintainRumbles = CurrentMaintainRumble + CurrentWordRumble;
+        rumbleSoundSource.volume = MaintainRumbles * 10f;
+        rumbleSoundSource.pitch = 1 + MaintainRumbles * 2f;
+
+        TargetWordRumble = 0;
     }
 
     public void TestShake(float durationSec)
     {
-        ShakeScreen(durationSec, 1);
+        ImpactShakeScreen(durationSec, 1);
     }
-    public static void SetRumble(float rumbleQuantity)
+    public static void SetMaintainRumble(float rumbleQuantity)
     {
-        targetRumbleQuantity = rumbleQuantity;
+        TargetMaintainRumble = rumbleQuantity;
     }
-    public void ShakeScreen(float durationSec, float shakeAmplitude = 1)
+    public static void SetWordRumble(float rumbleQuantity)
+    {
+        if (TargetWordRumble < rumbleQuantity)
+        {
+            TargetWordRumble = rumbleQuantity;
+        }
+    }
+    public void ImpactShakeScreen(float durationSec, float shakeAmplitude = 1)
     {
         moveCamera.StartCoroutine(moveCamera.AddScreenShake(durationSec, shakeAmplitude));
     }
@@ -67,11 +83,10 @@ public class MoveCamera : MonoBehaviour
         {
             yield return null;
             timePassedSec += Time.deltaTime;
-            shake = shakeAmplitude * amplitudeCurve.Evaluate(timePassedSec / durationSec);
-            cameraShakeOffset = Random.insideUnitSphere * shake;
+            ImpactRumble = shakeAmplitude * amplitudeCurve.Evaluate(timePassedSec / durationSec);
         }
 
-        cameraShakeOffset = Vector3.zero;
+        ImpactRumble = 0;
 
         StartCoroutine(AudioFadeOut.FadeOut(earthquakeSoundSource, 2.5f));
     }

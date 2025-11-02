@@ -1,9 +1,10 @@
+using PixelCrushers.DialogueSystem.Articy.Articy_4_0;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-
-
+using UnityEngine.Audio;
 
 public class CrossfadeScript : MonoBehaviour
 {
@@ -13,10 +14,18 @@ public class CrossfadeScript : MonoBehaviour
     public AudioSource oldTrack;       // AudioSource for the new track
     public float fadeDuration = 3.0f;  // Duration of the crossfade
 
+    public int CurrentSongID;
     public MusicDataStruct CurrentSong;
     public Coroutine TransitionCoroutine;
 
     private static bool MusicPaused = true;
+
+    public AudioMixer masterMixer;
+    public bool cutoffTriggered = false;
+    public float lowpassMinCutoff = 321;
+    public float lowpassMaxCutoff = 5000;
+    public float transitionPeriod = 1f;
+    Coroutine lowpassTransition;
 
     // Start playing the new track with crossfade
 
@@ -24,13 +33,51 @@ public class CrossfadeScript : MonoBehaviour
     public void Awake()
     {
         MusicPlayer = this;
+        PauseMusic();
+        oldTrack.volume = 0;
     }
 
-    public void Start()
+    public static void SetLowpassOn(bool LowpassOn, bool instant = false)
     {
-        PauseMusic();
+        if (LowpassOn == MusicPlayer.cutoffTriggered) return;
+        MusicPlayer.cutoffTriggered = LowpassOn;
+        float newCutoff;
+        if (LowpassOn)
+        {
+            newCutoff = MusicPlayer.lowpassMinCutoff;
+        } else
+        {
+            newCutoff = MusicPlayer.lowpassMaxCutoff;
+        }
+        if (instant)
+        {
+            InstantCutoff(newCutoff);
+            return;
+        }
+        if(MusicPlayer.TransitionCoroutine != null) MusicPlayer.StopCoroutine(MusicPlayer.TransitionCoroutine);
+        MusicPlayer.TransitionCoroutine = MusicPlayer.StartCoroutine(MusicPlayer.cutoffTransition(newCutoff));
+    }
 
-        oldTrack.volume = 0;
+    public static void InstantCutoff(float cutoff)
+    {
+        MusicPlayer.masterMixer.SetFloat("MusicLowpass", cutoff);
+    }
+
+    public IEnumerator cutoffTransition(float newCutoff)
+    {
+        float timePassed = 0f;
+        float startingValue;
+        MusicPlayer.masterMixer.GetFloat("MusicLowpass", out startingValue);
+        while (timePassed < transitionPeriod)
+        {
+            timePassed += Time.deltaTime;
+            float progress = timePassed/ transitionPeriod;
+
+            MusicPlayer.masterMixer.SetFloat("MusicLowpass", Mathf.Lerp(startingValue, newCutoff, progress));
+
+            yield return null;
+        }
+        MusicPlayer.masterMixer.SetFloat("MusicLowpass", newCutoff);
     }
 
     public static void PauseMusic()
@@ -53,12 +100,15 @@ public class CrossfadeScript : MonoBehaviour
     {
         if (MusicSelectorScript.instance.SongList[SongID].Name == MusicPlayer.CurrentSong.Name) return;
 
+        MusicPlayer.CurrentSongID = SongID;
+
         MusicPlayer.CurrentSong = MusicSelectorScript.instance.SongList[SongID];
         MusicPlayer.currentTrack.clip = MusicPlayer.CurrentSong.Song;
         MusicPlayer.currentTrack.volume = MusicPlayer.CurrentSong.MaxVolume;
 
         if(!MusicPaused) MusicPlayer.currentTrack.Play();
 
+        Debug.Log(MusicPlayer.CurrentSong.StartTime);
         MusicPlayer.currentTrack.time = MusicPlayer.CurrentSong.StartTime;
     }
 
@@ -69,7 +119,7 @@ public class CrossfadeScript : MonoBehaviour
         MusicDataStruct NewSong = MusicSelectorScript.instance.SongList[SongID];
 
         if (MusicPlayer.CurrentSong.Song != null) {
-            MusicSelectorScript.instance.SongList[SongID].StartTime = MusicPlayer.currentTrack.time;
+            MusicSelectorScript.instance.SongList[MusicPlayer.CurrentSongID].StartTime = MusicPlayer.currentTrack.time;
         }
 
         if (NewSong.GroupID != MusicPlayer.CurrentSong.GroupID)
@@ -78,6 +128,7 @@ public class CrossfadeScript : MonoBehaviour
             return;
         }
 
+        MusicPlayer.CurrentSongID = SongID;
         MusicPlayer.CurrentSong = MusicSelectorScript.instance.SongList[SongID];
 
         if (MusicPlayer.TransitionCoroutine != null) MusicPlayer.StopCoroutine(MusicPlayer.TransitionCoroutine);

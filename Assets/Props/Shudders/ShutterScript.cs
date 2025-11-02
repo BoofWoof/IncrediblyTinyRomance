@@ -60,7 +60,9 @@ public class ShutterScript : MonoBehaviour
         {
             if (RaiseShutters())
             {
-                CrossfadeScript.ResumeMusic();
+                CrossfadeScript.SetLowpassOn(false);
+                MusicSelectorScript.RevertOverworldSong();
+
                 Siren.Pause();
                 ShuttersLowered = false;
                 PhonePositionScript.AllowPhoneToggle = true;
@@ -70,7 +72,10 @@ public class ShutterScript : MonoBehaviour
         {
             if (LowerShutters())
             {
-                CrossfadeScript.PauseMusic();
+                CrossfadeScript.SetLowpassOn(true);
+                MusicSelectorScript.SetOverworldSong(5);
+
+
                 Siren.Play();
                 ShuttersLowered = true;
                 PhonePositionScript.AllowPhoneToggle = false;

@@ -1,4 +1,5 @@
 using PixelCrushers.DialogueSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -17,7 +18,9 @@ public class MusicSelectorScript : MonoBehaviour
     public static MusicSelectorScript instance;
 
     public int DefaultStartSongOverworldID = 1;
+    public static int DefaultOverworldSong {  get; set; }
     public int DefaultStartSongPhoneID = 0;
+    public static int DefaultPhoneSong { get; set; }
 
     public int OverworldSongID;
     public int PhoneMusicID;
@@ -26,7 +29,10 @@ public class MusicSelectorScript : MonoBehaviour
 
     private void OnEnable()
     {
-        Lua.RegisterFunction("SwitchSong", null, SymbolExtensions.GetMethodInfo(() => SetOverworldSong(0)));
+        Lua.RegisterFunction("SetSong", null, SymbolExtensions.GetMethodInfo(() => SetOverworldSong(0)));
+        Lua.RegisterFunction("SetPhoneSong", null, SymbolExtensions.GetMethodInfo(() => SetPhoneSong(0)));
+        Lua.RegisterFunction("RevertSong", null, SymbolExtensions.GetMethodInfo(() => RevertOverworldSong()));
+        Lua.RegisterFunction("RevertPhoneSong", null, SymbolExtensions.GetMethodInfo(() => RevertPhoneSong()));
         PhonePositionScript.PhoneToggled += PhoneToggleMusicSwap;
     }
     private void OnDisable()
@@ -37,14 +43,15 @@ public class MusicSelectorScript : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        DefaultOverworldSong = DefaultStartSongOverworldID;
+        DefaultPhoneSong = DefaultStartSongPhoneID;
+
+        OverworldSongID = DefaultStartSongOverworldID;
+        PhoneMusicID = DefaultStartSongPhoneID;
     }
 
     public void Start()
     {
-        OverworldSongID = DefaultStartSongOverworldID;
-        PhoneMusicID = DefaultStartSongPhoneID;
-        
-        CrossfadeScript.InstantStartSong(OverworldSongID);
     }
 
     public static void SetPhoneSong(double newSongID)
@@ -52,16 +59,24 @@ public class MusicSelectorScript : MonoBehaviour
         instance.PhoneMusicID = (int)newSongID;
         if (PhonePositionScript.raised)
         {
-            CrossfadeScript.TransitionSong(MusicSelectorScript.instance.PhoneMusicID);
+            CrossfadeScript.TransitionSong(instance.PhoneMusicID);
         }
+    }
+    public static void RevertPhoneSong()
+    {
+        SetPhoneSong(DefaultPhoneSong);
     }
     public static void SetOverworldSong(double newSongID)
     {
-        instance.PhoneMusicID = (int)newSongID;
+        instance.OverworldSongID = (int)newSongID;
         if (!PhonePositionScript.raised)
         {
-            CrossfadeScript.TransitionSong(MusicSelectorScript.instance.OverworldSongID);
+            CrossfadeScript.TransitionSong(instance.OverworldSongID);
         }
+    }
+    public static void RevertOverworldSong()
+    {
+        SetOverworldSong(DefaultOverworldSong);
     }
 
     public void PhoneToggleMusicSwap(bool raised)

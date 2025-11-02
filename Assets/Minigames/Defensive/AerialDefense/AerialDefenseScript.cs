@@ -127,7 +127,7 @@ public class AerialDefenseScript : MonoBehaviour
 
     public void DamageImpact()
     {
-        MoveCamera.moveCamera.ShakeScreen(0.8f, 0.6f);
+        MoveCamera.moveCamera.ImpactShakeScreen(0.8f, 0.6f);
     }
 
     public IEnumerator StartVolume(Volume volume)

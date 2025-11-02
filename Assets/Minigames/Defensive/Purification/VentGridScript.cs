@@ -138,7 +138,18 @@ public class VentGridScript : MonoBehaviour
 
         for (int i = 0; i < PipeStacks.Length; i++)
         {
-            if (PipeStacks[i] != null) DestroyImmediate(PipeStacks[i]);
+            if (PipeStacks[i] != null)
+            {
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                    DestroyImmediate(PipeStacks[i]);
+                else
+                        Destroy(PipeStacks[i]);
+#else
+                    Destroy(PipeStacks[i]);
+#endif
+
+            }
         }
     }
 

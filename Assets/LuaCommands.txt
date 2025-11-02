@@ -1,2 +1,9 @@
+OVERWORDBEHAVIOR
 SetWaitStation(int)
 AriesBehavior(string)
+
+MUSIC
+SetSong SetOverworldSong(0)
+SetPhoneSong SetPhoneSong(0)
+RevertSong RevertOverworldSong()
+RevertPhoneSong RevertPhoneSong()

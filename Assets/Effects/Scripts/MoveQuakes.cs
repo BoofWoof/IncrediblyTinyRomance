@@ -23,6 +23,6 @@ public class MoveQuakes : MonoBehaviour
         float Acceleration = (Velocity - LastVelocity).magnitude;
         LastVelocity = Velocity;
 
-        MoveCamera.SetRumble(Acceleration*AccelerationRumble);
+        //MoveCamera.SetRumble(Acceleration*AccelerationRumble);
     }
 }

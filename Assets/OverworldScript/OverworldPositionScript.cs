@@ -13,7 +13,7 @@ public class OverworldPositionScript : MonoBehaviour
     //public int CurrentStation { get; set; }
     public int CurrentStation;
 
-    public Transform RootTransform;
+    public Transform CharacterTransform;
     public GestureScript GestureControl;
     public bool CharacterMobile = false;
 
@@ -41,6 +41,15 @@ public class OverworldPositionScript : MonoBehaviour
     public static void SetWaitStation(float StationIdx)
     {
         WaitStation = (int)StationIdx;
+
+        foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
+        {
+            if (overworldPositionScript.CurrentStation == WaitStation)
+            {
+                WaitStation = -1;
+                (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+            }
+        }
     }
 
     public static void GoTo(string name, int CurrentStationIdx)
@@ -48,6 +57,7 @@ public class OverworldPositionScript : MonoBehaviour
         foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
         {
             if (overworldPositionScript.CharacterName != name && overworldPositionScript.NameSource.NickName != name) continue;
+            Debug.Log("Teleporting: " + name);
             overworldPositionScript.GoTo(CurrentStationIdx);
         }
     }
@@ -55,15 +65,15 @@ public class OverworldPositionScript : MonoBehaviour
     {
         Transform targetNode = TravelNodeTracker.Instance.PositionNodes[CurrentStationIdx].transform;
 
-        RootTransform.position = targetNode.position;
+        CharacterTransform.SetPositionAndRotation(targetNode.position, CharacterTransform.rotation);
 
         if (forceAngle)
         {
-            Vector3 currentRotation = RootTransform.rotation.eulerAngles;
+            Vector3 currentRotation = CharacterTransform.rotation.eulerAngles;
             float yRot = targetNode.rotation.eulerAngles.y + 180f;
             if (flip) yRot -= 180f;
             Quaternion finalRotation = Quaternion.Euler(currentRotation.x, yRot, currentRotation.z);
-            RootTransform.rotation = finalRotation;
+            CharacterTransform.rotation = finalRotation;
         }
 
         SetNewStation(CurrentStationIdx);
@@ -85,6 +95,7 @@ public class OverworldPositionScript : MonoBehaviour
 
     public void StartWalkTo(int CurrentStationIdx)
     {
+        Debug.Log("AAAAAAAAA");
         WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx));
     }
     public IEnumerator FollowRouteTo(int CurrentStationIdx)
@@ -169,32 +180,32 @@ public class OverworldPositionScript : MonoBehaviour
             yield return null;
         }
 
-        Vector3 currentRotation = RootTransform.rotation.eulerAngles;
+        Vector3 currentRotation = CharacterTransform.rotation.eulerAngles;
 
-        Vector3 direction = RootTransform.position-targetNode.position;
+        Vector3 direction = CharacterTransform.position-targetNode.position;
         direction.y = 0f;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         targetRotation = Quaternion.Euler(currentRotation.x, targetRotation.eulerAngles.y, currentRotation.z);
 
         Quaternion finalRotation = Quaternion.Euler(currentRotation.x, targetNode.rotation.eulerAngles.y + 180f, currentRotation.z);
 
-        while (Vector3.Magnitude(RootTransform.position - targetNode.position) > 0.01f)
+        while (Vector3.Magnitude(CharacterTransform.position - targetNode.position) > 0.01f)
         {
-            RootTransform.position = Vector3.MoveTowards(RootTransform.position, targetNode.position, Speed * Time.deltaTime);
-            RootTransform.rotation = Quaternion.RotateTowards(RootTransform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+            CharacterTransform.position = Vector3.MoveTowards(CharacterTransform.position, targetNode.position, Speed * Time.deltaTime);
+            CharacterTransform.rotation = Quaternion.RotateTowards(CharacterTransform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
             yield return null;
         }
-        RootTransform.position = targetNode.position;
-        RootTransform.rotation = targetRotation;
+        CharacterTransform.position = targetNode.position;
+        CharacterTransform.rotation = targetRotation;
 
         if (connection.ForceAngleOnArrival)
         {
-            while (Quaternion.Angle(RootTransform.rotation, finalRotation) > 0.01f)
+            while (Quaternion.Angle(CharacterTransform.rotation, finalRotation) > 0.01f)
             {
-                RootTransform.rotation = Quaternion.RotateTowards(RootTransform.rotation, finalRotation, RotationSpeed * Time.deltaTime);
+                CharacterTransform.rotation = Quaternion.RotateTowards(CharacterTransform.rotation, finalRotation, RotationSpeed * Time.deltaTime);
                 yield return null;
             }
-            RootTransform.rotation = finalRotation;
+            CharacterTransform.rotation = finalRotation;
         }
 
         GoTo(connection.TravelNode.SceneID, connection.FlipAngle, connection.ForceAngleOnArrival);

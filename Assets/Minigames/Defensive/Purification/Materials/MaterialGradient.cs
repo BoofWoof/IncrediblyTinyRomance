@@ -21,15 +21,12 @@ public class MaterialGradient : MonoBehaviour
     IEnumerator DoGradient()
     {
         float timePassed = 0;
-        Debug.Log("a");
         while (timePassed < TransitionPeriod)
         {
-            Debug.Log("b");
             timePassed += Time.deltaTime;
             SourceImage.materialForRendering.SetFloat(FloatName, Mathf.Lerp(StartingFloat, EndingFloat, timePassed / TransitionPeriod));
             yield return null;
         }
-        Debug.Log("c");
         SourceImage.material.SetFloat(FloatName, EndingFloat);
 
         yield return new WaitForSeconds(HoldEndValue);

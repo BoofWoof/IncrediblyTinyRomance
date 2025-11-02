@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class IntroSoundEffects : MonoBehaviour
@@ -9,11 +10,19 @@ public class IntroSoundEffects : MonoBehaviour
 
     public bool SkipStart = false;
 
+    public int Day = 0;
+
     public void Start()
     {
         ThisAudioSource = GetComponent<AudioSource>();
-        
-        if(SkipStart)
+
+        //SetupAudioForDay
+        MusicSelectorScript.SetOverworldSong(5);
+        CrossfadeScript.ResumeMusic();
+        CrossfadeScript.SetLowpassOn(true, true);
+
+
+        if (SkipStart)
         {
             StartDay();
         }
@@ -31,17 +40,29 @@ public class IntroSoundEffects : MonoBehaviour
     }
     public void StartDay()
     {
-        StartDayOne();
+        if (Day == 1)
+        {
+            StartCoroutine(StartDayOne());
+        }
         PlayerCam.EnableCameraMovement = true;
         GetComponent<Camera>().enabled = false;
         InputManager.GameStart();
-        Destroy(gameObject);
+        if (Day == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void StartDayOne()
+    public IEnumerator StartDayOne()
     {
         QuestManager.SetQuestByIndex(0);
         MessageQueue.addDialogue("Day1Intro");
         CharacterSpeechScript.BroadcastForceGesture("MacroAries", "BannEnterPuff");
+
+        yield return new WaitForSeconds(0.1f);
+
+        OverworldPositionScript.GoTo("A", 6);
+
+        Destroy(gameObject);
     }
 }

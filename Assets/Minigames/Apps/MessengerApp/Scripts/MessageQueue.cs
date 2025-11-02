@@ -35,6 +35,7 @@ public class MessageQueue
     public static void addDialogue(string newDialogue)
     {
         dialogueQueue.Add(new Dialogue(newDialogue, 0));
+        Debug.Log(dialogueQueue.Count);
     }
     public static void addDialogue(string newDialogue, double wait)
     {
