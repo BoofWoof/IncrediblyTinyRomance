@@ -68,6 +68,11 @@ public class PrayerScript : MonoBehaviour
         JudgementFocus = false;
     }
 
+    public void IncreaseAngerThreshold(float AdditionalThreshold)
+    {
+        AngerThreshold += AdditionalThreshold;
+    }
+
     public float GetAngerLevel()
     {
         return (RamAngyLevel / AngerThreshold);

@@ -7,6 +7,6 @@ public class MoneyTextUpdate : MonoBehaviour
 {
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = "Credits: $" + CurrencyData.Credits.NumberToString();
+        GetComponent<TextMeshProUGUI>().text = "Credits: <sprite index=1>" + CurrencyData.Credits.NumberToString();
     }
 }
