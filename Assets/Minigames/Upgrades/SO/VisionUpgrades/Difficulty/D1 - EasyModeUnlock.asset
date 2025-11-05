@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: D1 - EasyModeUnlock
   m_EditorClassIdentifier: 
   UpgradeName: Sights Beyond
-  UpgradeIcon: {fileID: 0}
+  UpgradeIcon: {fileID: 1785675261, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   UpgradeDescription: You've proven yourself to have a place here, and with capability
     comes responsibility. New difficulty unlocked.
   Credits: 0.00000006
@@ -23,3 +23,5 @@ MonoBehaviour:
   RevolutionRenown: 0
   UpgradeBought: 0
   AssociatedMinigame: 0
+  AddMultiplier: 1
+  BasePower: 2

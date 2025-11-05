@@ -30,7 +30,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public List<Color> ColorsList = new List<Color>();
 
-    private static int CurrentDifficutly = 0;
+    public static int CurrentDifficutly = 0;
     public static int DifficultiesUnlocked = 1;
     public Button DifficultyIncreaseButton;
     public Button DifficultyDecreaseButton;
@@ -48,6 +48,9 @@ public class TurkPuzzleScript : MonoBehaviour
     private static GameObject PuzzleCenter;
 
     public static TurkPuzzleScript puzzleScript;
+
+    public delegate void PieceModifier(ref float BaseValue);
+    public static PieceModifier pieceCountModifier;
 
     public ModifierMenuText modifierMenuText;
     private static ModifierMenuText.RewardModifier rewardBaseModifier;
@@ -192,11 +195,7 @@ public class TurkPuzzleScript : MonoBehaviour
         Win.Play();
 
         Debug.Log("Turk Puzzle Complete!");
-        TurkData.PuzzlesSolved += 1;
-        float reward = TurkData.CreditsPerPuzzle;
-        RewardBaseModifier?.Invoke(ref reward);
-        RewardMultiplier?.Invoke(ref reward);
-        CurrencyData.Credits += reward;
+        ApplyReward(CurrentDifficutly);
 
         float timePass = 0f;
         float transitionPeriod = 1.5f;
@@ -220,6 +219,20 @@ public class TurkPuzzleScript : MonoBehaviour
         Shader.SetGlobalFloat("_TurkCompletion", 0);
         OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved, this);
         puzzleScript.GeneratePuzzle();
+    }
+
+    public void ApplyReward(int completitionDifficulty)
+    {
+        int tempDifficulty = CurrentDifficutly;
+        CurrentDifficutly = completitionDifficulty;
+
+        TurkData.PuzzlesSolved += 1;
+        float reward = TurkData.CreditsPerPuzzle;
+        RewardBaseModifier?.Invoke(ref reward);
+        RewardMultiplier?.Invoke(ref reward);
+        CurrencyData.Credits += reward;
+
+        CurrentDifficutly = tempDifficulty;
     }
 
     private void ScrambleCords()
@@ -276,7 +289,13 @@ public class TurkPuzzleScript : MonoBehaviour
 
     private void GroupPuzzlePieces()
     {
-        puzzlePiece = SelectRandomSquares(UnityEngine.Random.Range(selectedGridData.min_pieces, selectedGridData.max_pieces+1));
+        float pieceCount = Random.Range(selectedGridData.min_pieces, selectedGridData.max_pieces + 1);
+        Debug.Log("----------");
+        Debug.Log(pieceCount);
+        pieceCountModifier?.Invoke(ref pieceCount);
+        Debug.Log(pieceCount);
+        if (pieceCount < 2) pieceCount = 2;
+        puzzlePiece = SelectRandomSquares((int)pieceCount);
 
         int GroupIdx = 0;
         foreach (GameObject pieceRoot in puzzlePiece)
