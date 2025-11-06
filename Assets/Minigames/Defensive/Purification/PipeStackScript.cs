@@ -7,21 +7,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public enum Direction
+public enum BADdirections
 {
     UP, DOWN, LEFT, RIGHT, NULL
 }
-public static class DirectionExtensions
+public static class BADDirectionExtensions
 {
-    public static Direction Flipped(this Direction dir)
+    public static BADdirections Flipped(this BADdirections dir)
     {
         switch (dir)
         {
-            case Direction.UP: return Direction.DOWN;
-            case Direction.DOWN: return Direction.UP;
-            case Direction.LEFT: return Direction.RIGHT;
-            case Direction.RIGHT: return Direction.LEFT;
-            case Direction.NULL: return Direction.NULL;
+            case BADdirections.UP: return BADdirections.DOWN;
+            case BADdirections.DOWN: return BADdirections.UP;
+            case BADdirections.LEFT: return BADdirections.RIGHT;
+            case BADdirections.RIGHT: return BADdirections.LEFT;
+            case BADdirections.NULL: return BADdirections.NULL;
             default: throw new System.ArgumentOutOfRangeException(nameof(dir), dir, null);
         }
     }
@@ -484,27 +484,27 @@ public class PipeStackScript : MonoBehaviour
         if (LightLayer) LightLayer.SetActive(true);
     }
 
-    public List<Direction> GetPossibleExpansions(Direction fumeEntranceVelocity)
+    public List<BADdirections> GetPossibleExpansions(BADdirections fumeEntranceVelocity)
     {
-        if (fumeEntranceVelocity == Direction.NULL) return GetNullExpansions();
+        if (fumeEntranceVelocity == BADdirections.NULL) return GetNullExpansions();
 
-        List<Direction> expansionList = new List<Direction>();
+        List<BADdirections> expansionList = new List<BADdirections>();
 
         PipeConnectionType sourceConnectionType = PipeConnectionType.Closed;
 
         //If the fumes are heading this direction, what pipe do they enter, and where is that pipe going to?
         switch (fumeEntranceVelocity)
         {
-            case Direction.LEFT:
+            case BADdirections.LEFT:
                 sourceConnectionType = RightConnection;
                 break;
-            case Direction.RIGHT:
+            case BADdirections.RIGHT:
                 sourceConnectionType = LeftConnection;
                 break;
-            case Direction.UP:
+            case BADdirections.UP:
                 sourceConnectionType = DownConnection;
                 break;
-            case Direction.DOWN:
+            case BADdirections.DOWN:
                 sourceConnectionType = UpConnection;
                 break;
         }
@@ -512,16 +512,16 @@ public class PipeStackScript : MonoBehaviour
         //Based on where the fumes are going, what pipes will it exit from.
         switch (sourceConnectionType){
             case PipeConnectionType.UpConnected:
-                expansionList.Add(Direction.UP);
+                expansionList.Add(BADdirections.UP);
                 break;
             case PipeConnectionType.RightConnected:
-                expansionList.Add(Direction.RIGHT);
+                expansionList.Add(BADdirections.RIGHT);
                 break;
             case PipeConnectionType.DownConnected:
-                expansionList.Add(Direction.DOWN);
+                expansionList.Add(BADdirections.DOWN);
                 break;
             case PipeConnectionType.LeftConnected:
-                expansionList.Add(Direction.LEFT);
+                expansionList.Add(BADdirections.LEFT);
                 break;
             case PipeConnectionType.All:
                 expansionList = GetNullExpansions();
@@ -532,14 +532,14 @@ public class PipeStackScript : MonoBehaviour
         return expansionList;
     }
 
-    private List<Direction> GetNullExpansions()
+    private List<BADdirections> GetNullExpansions()
     {
-        List<Direction> expansionList = new List<Direction>();
+        List<BADdirections> expansionList = new List<BADdirections>();
 
-        if (UpConnection != PipeConnectionType.Closed) expansionList.Add(Direction.UP);
-        if (DownConnection != PipeConnectionType.Closed) expansionList.Add(Direction.DOWN);
-        if (LeftConnection != PipeConnectionType.Closed) expansionList.Add(Direction.LEFT);
-        if (RightConnection != PipeConnectionType.Closed) expansionList.Add(Direction.RIGHT);
+        if (UpConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.UP);
+        if (DownConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.DOWN);
+        if (LeftConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.LEFT);
+        if (RightConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.RIGHT);
 
         return expansionList;
     }

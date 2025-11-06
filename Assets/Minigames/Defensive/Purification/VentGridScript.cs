@@ -153,21 +153,21 @@ public class VentGridScript : MonoBehaviour
         }
     }
 
-    public int ConvertVector2ToPosID(int currentPosID, Direction shiftDirection)
+    public int ConvertVector2ToPosID(int currentPosID, BADdirections shiftDirection)
     {
         Vector2 PosIDShift = Vector2.zero;
         switch (shiftDirection)
         {
-            case Direction.UP:
+            case BADdirections.UP:
                 PosIDShift = Vector2.up;
                 break;
-            case Direction.DOWN:
+            case BADdirections.DOWN:
                 PosIDShift = Vector2.down;
                 break;
-            case Direction.LEFT:
+            case BADdirections.LEFT:
                 PosIDShift = Vector2.left;
                 break;
-            case Direction.RIGHT:
+            case BADdirections.RIGHT:
                 PosIDShift = Vector2.right;
                 break;
         }
@@ -181,7 +181,7 @@ public class VentGridScript : MonoBehaviour
         return newIdx;
     }
 
-    public (bool, bool, PipeStackScript) ExpansionCheck(Direction expansionDirection, int sourceVentID)
+    public (bool, bool, PipeStackScript) ExpansionCheck(BADdirections expansionDirection, int sourceVentID)
     {
         bool validExpansion = false;
         bool secondaryExpansion = true;
@@ -194,7 +194,7 @@ public class VentGridScript : MonoBehaviour
 
         switch (expansionDirection)
         {
-            case Direction.UP:
+            case BADdirections.UP:
                 secondaryExpansion = nextVent.DownSecondary;
                 if (nextVent.DownConnection == PipeConnectionType.Closed)
                 {
@@ -205,7 +205,7 @@ public class VentGridScript : MonoBehaviour
                     nextVent.DownLeakParticles.SetActive(false);
                 }
                 break;
-            case Direction.DOWN:
+            case BADdirections.DOWN:
                 secondaryExpansion = nextVent.UpSecondary;
                 if (nextVent.UpConnection == PipeConnectionType.Closed)
                 {
@@ -216,7 +216,7 @@ public class VentGridScript : MonoBehaviour
                     nextVent.UpLeakParticles.SetActive(false);
                 }
                 break;
-            case Direction.LEFT:
+            case BADdirections.LEFT:
                 secondaryExpansion = nextVent.RightSecondary;
                 if (nextVent.RightConnection == PipeConnectionType.Closed)
                 {
@@ -227,7 +227,7 @@ public class VentGridScript : MonoBehaviour
                     nextVent.RightLeakParticles.SetActive(false);
                 }
                 break;
-            case Direction.RIGHT:
+            case BADdirections.RIGHT:
                 secondaryExpansion = nextVent.LeftSecondary;
                 if (nextVent.LeftConnection == PipeConnectionType.Closed)
                 {

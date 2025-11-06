@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,17 +7,32 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 {
     public Vector2Int cord;
 
-    public bool ExpandedUp = false;
-    public bool ExpandedDown = false;
-    public bool ExpandedLeft = false;
-    public bool ExpandedRight = false;
+    public Dictionary<Directions, bool> CardinalExpands = new Dictionary<Directions, bool>
+    {
+        {Directions.Up, false},
+        {Directions.Left, false},
+        {Directions.Right, false},
+        {Directions.Down, false}
+    };
 
-    public bool ConnectedUp = false;
-    public bool ConnectedDown = false;
-    public bool ConnectedLeft = false;
-    public bool ConnectedRight = false;
+    public Dictionary<Directions, bool> DiagonalExpands = new Dictionary<Directions, bool>
+    {
+        {Directions.LowerLeft, false},
+        {Directions.UpperLeft, false},
+        {Directions.LowerRight, false},
+        {Directions.UpperRight, false}
+    };
 
-    public bool FullyExpanded = false;
+    public Dictionary<Directions, bool> ConnectedDirections = new Dictionary<Directions, bool>
+    {
+        {Directions.Up, false},
+        {Directions.Left, false},
+        {Directions.Right, false},
+        {Directions.Down, false}
+    };
+
+    public bool FullyCardinallyExpanded = false;
+    public bool FullyDiagonallyExpanded = false;
 
     public bool Linked = false;
     private bool FirstRelease = true;
@@ -28,15 +44,8 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public int GroupID = -1;
 
-    private List<TurkCubeScript> ExpandedToScripts = new List<TurkCubeScript>();
+    public List<TurkCubeScript> ExpandedToScripts = new List<TurkCubeScript>();
 
-    enum Directions
-    {
-        Left,
-        Right,
-        Up,
-        Down
-    }
     #region Follow Mouse
     void Update()
     {
@@ -210,89 +219,74 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     #endregion
 
     #region Find Other Pieces
-    public GameObject AttemptRandomExpand()
+
+    public GameObject AttemptRandomExpand(bool expandDiagonally = false)
     {
         foreach (TurkCubeScript ExpandedToScript in ExpandedToScripts)
         {
-            GameObject expandToObject = ExpandedToScript.AttemptRandomExpand();
+            GameObject expandToObject = ExpandedToScript.AttemptRandomExpand(expandDiagonally);
             if (expandToObject != null) return expandToObject;
         }
-        if (FullyExpanded) return null;
+        if (FullyCardinallyExpanded && !expandDiagonally) return null;
+        if (FullyDiagonallyExpanded && expandDiagonally) return null;
 
         List<Directions> directionsLeft = new List<Directions>();
-        if (!ExpandedLeft)
+        if (expandDiagonally)
         {
-            directionsLeft.Add(Directions.Left);
-        }
-        if (!ExpandedRight)
+            foreach(KeyValuePair<Directions, bool> expansionKeyValue in DiagonalExpands)
+            {
+                if(!expansionKeyValue.Value) directionsLeft.Add(expansionKeyValue.Key);
+            }
+        } else
         {
-            directionsLeft.Add(Directions.Right);
+            foreach (KeyValuePair<Directions, bool> expansionKeyValue in CardinalExpands)
+            {
+                if (!expansionKeyValue.Value) directionsLeft.Add(expansionKeyValue.Key);
+            }
         }
-        if (!ExpandedUp)
+        if (directionsLeft.Count == 0)
         {
-            directionsLeft.Add(Directions.Up);
+            if (expandDiagonally)
+            {
+                FullyDiagonallyExpanded = true;
+            } else
+            {
+                FullyCardinallyExpanded = true;
+            }
+            return null;
         }
-        if (!ExpandedDown)
-        {
-            directionsLeft.Add(Directions.Down);
-        }
-        if (directionsLeft.Count == 0) return null;
 
         while (directionsLeft.Count > 0)
         {
             Directions RandomDir = directionsLeft[Random.Range(0, directionsLeft.Count)];
-            GameObject selectedObject = null;
-            switch (RandomDir)
-            {
-                case Directions.Up:
-                    {
-                        selectedObject = ExpandUp();
-                        directionsLeft.Remove(Directions.Up);
-                        break;
-                    }
-                case Directions.Left:
-                    {
-                        selectedObject = ExpandLeft();
-                        directionsLeft.Remove(Directions.Left);
-                        break;
-                    }
-                case Directions.Right:
-                    {
-                        selectedObject = ExpandRight();
-                        directionsLeft.Remove(Directions.Right);
-                        break;
-                    }
-                case Directions.Down:
-                    {
-                        selectedObject = ExpandDown();
-                        directionsLeft.Remove(Directions.Down);
-                        break;
-                    }
-            }
-            CheckFullyExpanded();
+            GameObject selectedObject = Expand(RandomDir);
+            directionsLeft.Remove(RandomDir);
+
             if (selectedObject != null) return selectedObject;
         }
         return null;
     }
 
-    private void CheckFullyExpanded()
+    private GameObject Expand(Directions ExpandDirection)
     {
-        FullyExpanded = (ExpandedDown && ExpandedUp && ExpandedLeft && ExpandedRight);
-    }
-    private GameObject ExpandUp()
-    {
-        ExpandedUp = true;
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x, cord.y + 1)) return null;
+        if (CardinalExpands.ContainsKey(ExpandDirection)) CardinalExpands[ExpandDirection] = true;
+        if (DiagonalExpands.ContainsKey(ExpandDirection)) DiagonalExpands[ExpandDirection] = true;
 
-        GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y + 1];
+
+        Vector2Int expandCordShift = ExpandDirection.ToCordShift();
+        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x + expandCordShift.x, cord.y + expandCordShift.y)) return null;
+        GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x + expandCordShift.x, cord.y + expandCordShift.y];
         TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
 
         if (expandToScript.Linked &&
             expandToScript.GroupID != GroupID
             ) return null;
 
-        ConnectedUp = true;
-        expandToScript.ConnectedDown = true;
+        if (CardinalExpands.ContainsKey(ExpandDirection))
+        {
+            ConnectedDirections[ExpandDirection] = true;
+            expandToScript.ConnectedDirections[ExpandDirection.FlipDirection()] = true;
+        }
 
         if (expandToScript.Linked) return null;
 
@@ -305,111 +299,18 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void ConnectionCheck()
     {
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x, cord.y - 1))
+        foreach (Directions connectionKey in DirectionHelper.CardinalDirections)
         {
-            ConnectedDown = false;
+            Vector2Int posShift = connectionKey.ToCordShift();
+            if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x + posShift.x, cord.y + posShift.y))
+            {
+                ConnectedDirections[connectionKey] = false;
+            }
+            else
+            {
+                ConnectedDirections[connectionKey] = TurkPuzzleScript.puzzlePieceGrid[cord.x + posShift.x, cord.y + posShift.y].GetComponent<TurkCubeScript>().GroupID == GroupID;
+            }
         }
-        else
-        {
-            ConnectedDown = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y - 1].GetComponent<TurkCubeScript>().GroupID == GroupID;
-        }
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x, cord.y + 1))
-        {
-            ConnectedUp = false;
-        }
-        else
-        {
-            ConnectedUp = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y + 1].GetComponent<TurkCubeScript>().GroupID == GroupID;
-        }
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x - 1, cord.y))
-        {
-            ConnectedLeft = false;
-        }
-        else
-        {
-            ConnectedLeft = TurkPuzzleScript.puzzlePieceGrid[cord.x - 1, cord.y].GetComponent<TurkCubeScript>().GroupID == GroupID;
-        }
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x + 1, cord.y))
-        {
-            ConnectedRight = false;
-        }
-        else
-        {
-            ConnectedRight = TurkPuzzleScript.puzzlePieceGrid[cord.x + 1, cord.y].GetComponent<TurkCubeScript>().GroupID == GroupID;
-        }
-
-    }
-
-    private GameObject ExpandDown()
-    {
-        ExpandedDown = true;
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x, cord.y - 1)) return null;
-
-        GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x, cord.y - 1];
-        TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
-
-        if (expandToScript.Linked &&
-            expandToScript.GroupID != GroupID
-            ) return null;
-
-        ConnectedDown = true;
-        expandToScript.ConnectedUp = true;
-
-        if (expandToScript.Linked) return null;
-
-        if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
-        expandToScript.Linked = true;
-        expandToScript.GroupID = GroupID;
-
-        return expandedTo;
-    }
-
-    private GameObject ExpandLeft()
-    {
-        ExpandedLeft = true;
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x - 1, cord.y)) return null;
-
-        GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x - 1, cord.y];
-        TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
-
-        if (expandToScript.Linked &&
-            expandToScript.GroupID != GroupID
-            ) return null;
-
-        ConnectedLeft = true;
-        expandToScript.ConnectedRight = true;
-
-        if (expandToScript.Linked) return null;
-
-        if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
-        expandToScript.Linked = true;
-        expandToScript.GroupID = GroupID;
-
-        return expandedTo;
-    }
-
-    private GameObject ExpandRight()
-    {
-        ExpandedRight = true;
-        if (!TurkPuzzleScript.IsCoordinateInsideGrid(cord.x + 1, cord.y)) return null;
-
-        GameObject expandedTo = TurkPuzzleScript.puzzlePieceGrid[cord.x + 1, cord.y];
-        TurkCubeScript expandToScript = expandedTo.GetComponent<TurkCubeScript>();
-
-        if (expandToScript.Linked &&
-            expandToScript.GroupID != GroupID
-            ) return null;
-
-        ConnectedRight = true;
-        expandToScript.ConnectedLeft = true;
-
-        if (expandToScript.Linked) return null;
-
-        if (!ExpandedToScripts.Contains(expandToScript)) ExpandedToScripts.Add(expandToScript);
-        expandToScript.Linked = true;
-        expandToScript.GroupID = GroupID;
-
-        return expandedTo;
     }
     #endregion
 }

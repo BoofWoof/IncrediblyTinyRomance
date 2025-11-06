@@ -165,10 +165,10 @@ public class TurkPuzzleScript : MonoBehaviour
         {
             TurkCubeScript tcs = piece.GetComponent<TurkCubeScript>();
             piece.GetComponent<Image>().sprite = constallationTiles.GetSprite(
-                !tcs.ConnectedUp,
-                !tcs.ConnectedDown,
-                !tcs.ConnectedLeft,
-                !tcs.ConnectedRight
+                !tcs.ConnectedDirections[Directions.Up],
+                !tcs.ConnectedDirections[Directions.Down],
+                !tcs.ConnectedDirections[Directions.Left],
+                !tcs.ConnectedDirections[Directions.Right]
                 );
         }
     }
@@ -290,10 +290,9 @@ public class TurkPuzzleScript : MonoBehaviour
     private void GroupPuzzlePieces()
     {
         float pieceCount = Random.Range(selectedGridData.min_pieces, selectedGridData.max_pieces + 1);
-        Debug.Log("----------");
-        Debug.Log(pieceCount);
+
         pieceCountModifier?.Invoke(ref pieceCount);
-        Debug.Log(pieceCount);
+
         if (pieceCount < 2) pieceCount = 2;
         puzzlePiece = SelectRandomSquares((int)pieceCount);
 
@@ -312,19 +311,23 @@ public class TurkPuzzleScript : MonoBehaviour
         int linkedPieces = puzzlePiece.Count;
 
         int breakOutCheck = 0;
-        while(linkedPieces < puzzlePieceSquares.Count)
+        bool searchDiagonally = false;
+        while (linkedPieces < puzzlePieceSquares.Count)
         {
+            bool newLinkFound = false;
             foreach (GameObject pieceRoot in puzzlePiece)
             {
                 TurkCubeScript pieceRootScript = pieceRoot.GetComponent<TurkCubeScript>();
-                GameObject newLink = pieceRootScript.AttemptRandomExpand();
+                GameObject newLink = pieceRootScript.AttemptRandomExpand(searchDiagonally);
 
                 if (newLink == null) continue;
+                newLinkFound = true;
                 linkedPieces++;
                 newLink.GetComponent<Image>().color = pieceRoot.GetComponent<Image>().color;
                 newLink.GetComponent<Image>().material.SetColor("_Tint", pieceRoot.GetComponent<Image>().color);
                 newLink.transform.parent = pieceRoot.transform;
             }
+            if (!newLinkFound) searchDiagonally = true;
 
             breakOutCheck++;
             if (breakOutCheck > 500)

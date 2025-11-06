@@ -3,7 +3,7 @@ using UnityEngine;
 
 struct WaitingExpansion
 {
-    public Direction expansionDirection;
+    public BADdirections expansionDirection;
     public PipeStackScript sourceVent;
 }
 struct VentRouteData
@@ -73,9 +73,9 @@ public class PurificationGameScript : MonoBehaviour
             PipeStackScript currentVent = fumeSource;
 
             //Find valid expansion directions.
-            List<Direction> possibleExpansionDirection = currentVent.GetPossibleExpansions(Direction.NULL);
+            List<BADdirections> possibleExpansionDirection = currentVent.GetPossibleExpansions(BADdirections.NULL);
 
-            foreach (Direction expansionDirection in possibleExpansionDirection)
+            foreach (BADdirections expansionDirection in possibleExpansionDirection)
             {
                 VentRouteData newVentRouteData = new VentRouteData();
 
@@ -140,7 +140,7 @@ public class PurificationGameScript : MonoBehaviour
 
                     possibleExpansionDirection = nextVent.GetPossibleExpansions(expansionData.expansionDirection);
 
-                    foreach (Direction expansionDirection2 in possibleExpansionDirection)
+                    foreach (BADdirections expansionDirection2 in possibleExpansionDirection)
                     {
                         Debug.Log(expansionDirection2);
                         WaitingExpansion newWaitingExpansion2 = new WaitingExpansion();
@@ -203,16 +203,16 @@ public class PurificationGameScript : MonoBehaviour
                         PipeStackScript adjacentVentScript = VentGridData.PipeStacks[adjacentVentID].GetComponent<PipeStackScript>();
                         switch (prevDeadEnd.expansionDirection)
                         {
-                            case Direction.UP:
+                            case BADdirections.UP:
                                 adjacentVentScript.DownLeakParticles.SetActive(false);
                                 break;
-                            case Direction.RIGHT:
+                            case BADdirections.RIGHT:
                                 adjacentVentScript.LeftLeakParticles.SetActive(false);
                                 break;
-                            case Direction.DOWN:
+                            case BADdirections.DOWN:
                                 adjacentVentScript.UpLeakParticles.SetActive(false);
                                 break;
-                            case Direction.LEFT:
+                            case BADdirections.LEFT:
                                 adjacentVentScript.RightLeakParticles.SetActive(false);
                                 break;
                         }
