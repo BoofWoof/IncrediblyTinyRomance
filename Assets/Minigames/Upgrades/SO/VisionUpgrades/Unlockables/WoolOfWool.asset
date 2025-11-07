@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b4ac61b1ea7d44295ac3c4b7a44807, type: 3}
-  m_Name: BrighterLight
+  m_Script: {fileID: 11500000, guid: b77e722c68c55004aa573fa91d35666a, type: 3}
+  m_Name: WoolOfWool
   m_EditorClassIdentifier: 
-  UpgradeName: Enlightened Soul
-  UpgradeIcon: {fileID: -1997820138, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
-  UpgradeDescription: Your soul is growing closer with the Flock. (Increase your
-    cursor's vision range.)
-  Credits: 0.0000001
+  UpgradeName: WoolOfWool
+  UpgradeIcon: {fileID: 2106267085, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  UpgradeDescription: Most objects in life are redundant and thus useless. Receive
+    a visual reminder of such horrors.
+  Credits: 0.00032
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0
   RevolutionRenown: 0
   UpgradeBought: 0
   AssociatedMinigame: 0
-  LightIncrease: 0.3
+  AutoBuy: 0
+  PosterName: WoolOfWool

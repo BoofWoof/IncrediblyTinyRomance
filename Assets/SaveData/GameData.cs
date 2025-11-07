@@ -40,7 +40,7 @@ public static class TurkData
 {
     public static int PuzzlesSolved = 0;
     public static float CreditsPerPuzzle = 0.000_000_001f;
-    public static float VisionStrength = 1f;//0.1f;
+    public static float VisionStrength = 0.9f;//0.1f;
 }
 
 public static class GameConstants

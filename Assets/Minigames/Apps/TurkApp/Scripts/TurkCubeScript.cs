@@ -46,6 +46,9 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public List<TurkCubeScript> ExpandedToScripts = new List<TurkCubeScript>();
 
+    public static bool PickupEnabled = true;
+    public static bool PieceHolderRestraint = true;
+
     #region Follow Mouse
     void Update()
     {
@@ -92,6 +95,8 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!PickupEnabled) return;
+
         isDragging = true;
         TurkPuzzleScript.instance.Pickup.Play();
 
@@ -119,6 +124,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!PickupEnabled) return;
         isDragging = false;
         TurkPuzzleScript.instance.Drop.Play();
         TurkPuzzleScript.instance.Pickup.Stop();
@@ -186,7 +192,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
 
             if (TurkPuzzleScript.IsCordTaken(newCord, puzzlePieces)) return false;
-            if (newCord.x > 13) return false; //Stops from placing on glass. Sorry for magic number. <3
+            if (newCord.x > 13 && PieceHolderRestraint) return false; //Stops from placing on glass. Sorry for magic number. <3
         }
 
         List<TurkCubeScript> fillers = new List<TurkCubeScript>();

@@ -42,9 +42,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
+    - _FalloffRate: 1
+    - _Glow: 5
+    - _RevealPower: 4
     - _RevealStrength: 2
-    - _StarSize: 500
-    - _StartShiftTimeScale: 1
+    - _StarSize: 1000
+    - _StartShiftTimeScale: 0.8
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

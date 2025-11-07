@@ -28,6 +28,8 @@ public abstract class UpgradesAbstract : ScriptableObject
 
     public Minigame AssociatedMinigame;
 
+    public bool AutoBuy = false;
+
     public bool CanBuy()
     {
         if (UpgradeBought) return false;
@@ -38,10 +40,10 @@ public abstract class UpgradesAbstract : ScriptableObject
         if (CurrencyData.RenownRevolution < RevolutionRenown) return false;
         return true;
     }
-    public bool Buy()
+    public bool Buy(bool forceBuy = false)
     {
         bool canBuy = CanBuy();
-        if (!canBuy) return canBuy;
+        if (!canBuy && !forceBuy) return canBuy;
         UpgradeBought = true;
 
         CurrencyData.Credits -= Credits;

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526e60f8f5cf62b428d94d514dc2721f, type: 3}
+  m_Name: Simplify II
+  m_EditorClassIdentifier: 
+  UpgradeName: Simple Mind II
+  UpgradeIcon: {fileID: -691155298, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  UpgradeDescription: Some struggle to see the forest for more than the trees, and
+    in that way, thinking too much can poison the mind. (Creates a 10% chance for
+    the puzzle to be two pieces simpler.)
+  Credits: 0.000002
+  FlockRenown: 0
+  FoundationRenown: 0
+  AssscensssionRenown: 0
+  RevolutionRenown: 0
+  UpgradeBought: 0
+  AssociatedMinigame: 0
+  AutoBuy: 0
+  MaxPieceReduction: 2
+  MinPieceReduction: 0
+  Chance: 0.1

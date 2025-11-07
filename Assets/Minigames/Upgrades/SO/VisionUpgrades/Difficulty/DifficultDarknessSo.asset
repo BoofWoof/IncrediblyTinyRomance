@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98fa681ad8e961048aa092796fd7ab60, type: 3}
+  m_Name: DifficultDarknessSo
+  m_EditorClassIdentifier: 
+  UpgradeName: Difficult Darkness
+  UpgradeIcon: {fileID: 540152914, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
+  UpgradeDescription: The lights grow more dim the more difficult things become.
+  Credits: 0
+  FlockRenown: 0
+  FoundationRenown: 0
+  AssscensssionRenown: 0
+  RevolutionRenown: 0
+  UpgradeBought: 0
+  AssociatedMinigame: 0
+  AutoBuy: 1
+  LightDifficultyScaler:
+  - 1.5
+  - 1
+  - 0.8
+  - 0.6
+  - 0.5
+  - 0.4
+  - 0.3

@@ -23,14 +23,20 @@ public class UpgradeScreenScript : MonoBehaviour
     public delegate void UpgradeBoughtDelegate(Minigame minigame);
     public static UpgradeBoughtDelegate UpgradeBoughtEvent;
 
-    public void Start()
+    public void Awake()
     {
         foreach (UpgradesAbstract upgrade in Upgrades)
         {
             UpgradeClones.Add(Instantiate(upgrade));
         }
+        foreach (UpgradesAbstract upgrade in UpgradeClones)
+        {
+            if (upgrade.AutoBuy) upgrade.Buy(true);
+        }
 
         FullGenerate();
+
+        gameObject.SetActive(false);
     }
 
     public void FullGenerate()

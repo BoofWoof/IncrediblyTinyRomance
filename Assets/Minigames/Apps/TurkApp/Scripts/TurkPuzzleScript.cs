@@ -9,6 +9,9 @@ public class TurkPuzzleScript : MonoBehaviour
 {
     public static TurkPuzzleScript instance;
 
+    public int RepeatsBannedFor = 3;
+    public List<int> Repeats = new List<int>();
+
     public AudioSource Win;
     public AudioSource Pickup;
     public AudioSource Drop;
@@ -97,21 +100,25 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public void IncreaseDifficulty()
     {
+        Repeats.Clear();
+
         CurrentDifficutly++;
-        if (CurrentDifficutly > 1) CurrentDifficutly = 1;
+        if (CurrentDifficutly >= DifficultiesUnlocked - 1) CurrentDifficutly = DifficultiesUnlocked - 1;
         puzzleScript.GeneratePuzzle();
 
         UpdateDifficultyButtons();
     }
     public void DecreaseDifficulty()
     {
+        Repeats.Clear();
+
         CurrentDifficutly--;
         if (CurrentDifficutly < 0) CurrentDifficutly = 0;
         puzzleScript.GeneratePuzzle();
 
         UpdateDifficultyButtons();
     }
-    void Start()
+    void Awake()
     {
         instance = this;
 
@@ -144,7 +151,23 @@ public class TurkPuzzleScript : MonoBehaviour
     public static PuzzleShapeSO SamplePuzzles()
     {
         List<PuzzleShapeSO> PuzzleSamples = PuzzlesList[CurrentDifficutly];
-        int sampledPuzzleIdx = Random.Range(0, PuzzleSamples.Count);
+
+        int sampledPuzzleIdx = 0;
+        bool validPuzzleIdx = false;
+        if (PuzzleSamples.Count > instance.RepeatsBannedFor)
+        {
+            while (!validPuzzleIdx)
+            {
+                sampledPuzzleIdx = Random.Range(0, PuzzleSamples.Count);
+                validPuzzleIdx = !instance.Repeats.Contains(sampledPuzzleIdx);
+            }
+        } else
+        {
+            sampledPuzzleIdx = Random.Range(0, PuzzleSamples.Count);
+        }
+        instance.Repeats.Add(sampledPuzzleIdx);
+        if (instance.Repeats.Count > instance.RepeatsBannedFor) instance.Repeats.RemoveAt(0);
+
         return PuzzleSamples[sampledPuzzleIdx];
     }
 
@@ -184,14 +207,9 @@ public class TurkPuzzleScript : MonoBehaviour
         return true;
     }
 
-    public void DisablePieces()
-    {
-
-    }
-
     public IEnumerator WinCutscene()
     {
-        DisablePieces();
+        TurkCubeScript.PickupEnabled = false;
         Win.Play();
 
         Debug.Log("Turk Puzzle Complete!");
@@ -219,6 +237,7 @@ public class TurkPuzzleScript : MonoBehaviour
         Shader.SetGlobalFloat("_TurkCompletion", 0);
         OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved, this);
         puzzleScript.GeneratePuzzle();
+        TurkCubeScript.PickupEnabled = true;
     }
 
     public void ApplyReward(int completitionDifficulty)
@@ -255,7 +274,12 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public void MovePieceToHolder()
     {
-        if (puzzlePiece.Count == 0) return;
+        if (puzzlePiece.Count == 0)
+        {
+            TurkCubeScript.PieceHolderRestraint = false;
+            PieceHolder.gameObject.SetActive(false);
+            return;
+        }
         GameObject pieceRoot = puzzlePiece[0];
         Vector2 pieceHolderPos = PieceHolder.anchoredPosition;
         Vector2 centerOffset = pieceRoot.GetComponent<TurkCubeScript>().CalcualteCenterOffset();
@@ -327,7 +351,7 @@ public class TurkPuzzleScript : MonoBehaviour
                 newLink.GetComponent<Image>().material.SetColor("_Tint", pieceRoot.GetComponent<Image>().color);
                 newLink.transform.parent = pieceRoot.transform;
             }
-            if (!newLinkFound) searchDiagonally = true;
+            searchDiagonally = !newLinkFound;
 
             breakOutCheck++;
             if (breakOutCheck > 500)
@@ -357,6 +381,8 @@ public class TurkPuzzleScript : MonoBehaviour
 
     private void GeneratePuzzlePieces()
     {
+        TurkCubeScript.PieceHolderRestraint = true;
+        PieceHolder.gameObject.SetActive(true);
         // Clear existing squares if any
         foreach (GameObject square in puzzlePieceSquares)
         {
