@@ -108,7 +108,6 @@ public class CrossfadeScript : MonoBehaviour
 
         if(!MusicPaused) MusicPlayer.currentTrack.Play();
 
-        Debug.Log(MusicPlayer.CurrentSong.StartTime);
         MusicPlayer.currentTrack.time = MusicPlayer.CurrentSong.StartTime;
     }
 

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa6bb3e2c4f5b41a12f66407372851, type: 3}
   m_Name: 4 - Transcend
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Transcend
   UpgradeIcon: {fileID: 2117758218, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
+  DialogueToTrigger: V-Transcend
+  CompleteQuest: 1
+  ProgressQuest: 0
   UpgradeDescription: You're almost ready. Show patience with yourself.. Keep working.
     Trust in your brethern. Each puzzle now earns you more credits.
   Credits: 0.000125

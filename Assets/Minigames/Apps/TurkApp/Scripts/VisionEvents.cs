@@ -24,7 +24,7 @@ public class VisionEvents : MonoBehaviour
         {
             QuestManager.QuestManagerInstance.QuickUpdate();
             Debug.Log(allCount);
-            if (allCount >= 3)
+            if (allCount >= 4)
             {
                 MessageQueue.addDialogue("FirstPuzzlesVision");
                 QuestManager.CompleteQuest("Visions");
@@ -37,18 +37,5 @@ public class VisionEvents : MonoBehaviour
         if (minigame != Minigame.Visions) return;
         int allCount = DialogueLua.GetVariable("PuzzleUpgradesBought").asInt + 1;
         DialogueLua.SetVariable("PuzzleUpgradesBought", allCount);
-
-        if (
-                QuestLog.GetQuestState("Sights Beyond") == QuestState.Active
-            )
-        {
-            QuestManager.QuestManagerInstance.QuickUpdate();
-            Debug.Log(allCount);
-            if (allCount >= 2)
-            {
-                MessageQueue.addDialogue("FirstUpgradesVision");
-                QuestManager.CompleteQuest("Sights Beyond");
-            }
-        }
     }
 }

@@ -11,8 +11,14 @@ public enum Minigame
 
 public abstract class UpgradesAbstract : ScriptableObject
 {
+    public int UpgradeID;
+
     public string UpgradeName;
     public Sprite UpgradeIcon;
+
+    public string DialogueToTrigger = "";
+    public bool CompleteQuest = false;
+    public bool ProgressQuest = false;
 
     [TextArea]
     public string UpgradeDescription;
@@ -53,6 +59,10 @@ public abstract class UpgradesAbstract : ScriptableObject
         CurrencyData.RenownRevolution -= RevolutionRenown;
 
         OnBuy();
+
+        if(DialogueToTrigger.Length > 0) MessageQueue.addDialogue(DialogueToTrigger);
+        if (CompleteQuest) QuestManager.CompleteQuest(QuestManager.currentQuest);
+        if (ProgressQuest) QuestManager.IncrementQuest();
 
         return canBuy;
     }

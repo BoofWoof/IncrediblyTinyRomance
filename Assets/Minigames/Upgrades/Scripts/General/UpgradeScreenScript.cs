@@ -1,10 +1,15 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 
 public class UpgradeScreenScript : MonoBehaviour
 {
     public Minigame AssociatedMinigame;
+    public Dictionary<Minigame, string> MinigameToString = new Dictionary<Minigame, string>()
+    {
+        {Minigame.Visions, "vision"}
+    };
 
     public List<UpgradesAbstract> Upgrades;
     public List<UpgradesAbstract> UpgradeClones;
@@ -23,15 +28,28 @@ public class UpgradeScreenScript : MonoBehaviour
     public delegate void UpgradeBoughtDelegate(Minigame minigame);
     public static UpgradeBoughtDelegate UpgradeBoughtEvent;
 
+    public static List<UpgradeScreenScript> upgradeScreenScripts = new List<UpgradeScreenScript>();
+    public int RevealedUpgrades = 0;
+
     public void Awake()
     {
+        Lua.RegisterFunction("RevealUpgrades", null, SymbolExtensions.GetMethodInfo(() => BroadcastUpgradeReveal("", 0)));
+
+        upgradeScreenScripts.Add(this);
+
         foreach (UpgradesAbstract upgrade in Upgrades)
         {
             UpgradeClones.Add(Instantiate(upgrade));
         }
+        int upgradeIdx = 0;
         foreach (UpgradesAbstract upgrade in UpgradeClones)
         {
             if (upgrade.AutoBuy) upgrade.Buy(true);
+            else
+            {
+                upgrade.UpgradeID = upgradeIdx;
+                upgradeIdx++;
+            }
         }
 
         FullGenerate();
@@ -39,11 +57,27 @@ public class UpgradeScreenScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public static void BroadcastUpgradeReveal(string game, float quantity)
+    {
+        foreach (UpgradeScreenScript script in upgradeScreenScripts)
+        {
+            script.IncreaseUpgradeReveal(game, (int)quantity);
+        }
+    }
+
+    public void IncreaseUpgradeReveal(string game, int quantity)
+    {
+        if (MinigameToString[AssociatedMinigame].ToLower() != game.ToLower()) return;
+        RevealedUpgrades += quantity;
+        Refresh();
+    }
+
     public void FullGenerate()
     {
         foreach (UpgradesAbstract upgrade in UpgradeClones)
         {
             if (DisplayedUpgrades >= UpgradesVisible) break;
+            if (RevealedUpgrades <= upgrade.UpgradeID) break;
             if (upgrade.UpgradeBought) continue;
             AddUpgrade(upgrade);
         }
