@@ -14961,8 +14961,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 204.36981, y: 627.47253}
-    canvasZoom: 0.9100001
+    canvasScrollPosition: {x: 151.44914, y: 582.43475}
+    canvasZoom: 0.7600002
   - id: 12
     fields:
     - title: Title
@@ -30233,8 +30233,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 2183.5818}
-    canvasZoom: 0.6700005
+    canvasScrollPosition: {x: 0, y: 1940.6729}
+    canvasZoom: 0.73000044
   - id: 20
     fields:
     - title: Title
@@ -30514,7 +30514,9 @@ MonoBehaviour:
         RevealUpgrades("vision",
         4)
 
-        IncrementQuest()'
+        IncrementQuest()
+
+        AriesBehavior("judge")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -30683,7 +30685,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: RevealUpgrades("vision", 6)
+      userScript: 'RevealUpgrades("vision", 6)
+
+        IncrementQuest()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -30852,7 +30856,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: RevealUpgrades("vision", 6)
+      userScript: 'RevealUpgrades("vision", 6)
+
+        IncrementQuest()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -31021,13 +31027,15 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: RevealUpgrades("vision", 1)
+      userScript: 'RevealUpgrades("vision", 1)
+
+        IncrementQuest()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 160
+        x: 161
         y: 93
         width: 160
         height: 30

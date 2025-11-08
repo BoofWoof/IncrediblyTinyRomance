@@ -158,13 +158,28 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
                 return;
             } else
             {
-                rootPiece.transform.parent = TurkPuzzleScript.puzzleScript.PieceHolder.transform;
-                rootPiece.GetComponent<RectTransform>().anchoredPosition = -rootPieceScript.CalcualteCenterOffset();
+                SendToPieceHolder();
                 return;
             }
         }
 
         rootPiece.GetComponent<RectTransform>().anchoredPosition = TurkPuzzleScript.GridIdxToPos(rootPieceScript.cord);
+    }
+
+    public void SendToPieceHolder()
+    {
+        GameObject rootPiece;
+        if (PieceRoot)
+        {
+            rootPiece = gameObject;
+        }
+        else
+        {
+            rootPiece = transform.parent.gameObject;
+        }
+        TurkCubeScript rootPieceScript = rootPiece.GetComponent<TurkCubeScript>();
+        rootPiece.transform.parent = TurkPuzzleScript.puzzleScript.PieceHolder.transform;
+        rootPiece.GetComponent<RectTransform>().anchoredPosition = -rootPieceScript.CalcualteCenterOffset();
     }
 
     public bool UpdateCord()
@@ -192,7 +207,9 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
 
             if (TurkPuzzleScript.IsCordTaken(newCord, puzzlePieces)) return false;
-            if (newCord.x > 13 && PieceHolderRestraint) return false; //Stops from placing on glass. Sorry for magic number. <3
+
+            Vector2 newPos = TurkPuzzleScript.GridIdxToPos(new Vector2Int(newCord.x, newCord.y));
+            if (newPos.x > 516f && PieceHolderRestraint) return false; //Stops from placing on glass. Sorry for magic number. <3
         }
 
         List<TurkCubeScript> fillers = new List<TurkCubeScript>();

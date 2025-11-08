@@ -1,4 +1,5 @@
 
+using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "TurkGridData", menuName = "ScriptableObjects/TrukGridData", order = 1)]
@@ -6,6 +7,7 @@ using UnityEngine;
 public class PuzzleShapeSO : ScriptableObject
 {
     public string Name;
+    public string Artist;
 
     public Texture2D puzzleTexture;
 

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98fa681ad8e961048aa092796fd7ab60, type: 3}
   m_Name: DifficultDarknessSo
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Difficult Darkness
   UpgradeIcon: {fileID: 540152914, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: The lights grow more dim the more difficult things become.
   Credits: 0
   FlockRenown: 0
@@ -24,10 +28,10 @@ MonoBehaviour:
   AssociatedMinigame: 0
   AutoBuy: 1
   LightDifficultyScaler:
+  - 1.8
   - 1.5
+  - 1.2
   - 1
   - 0.8
+  - 0.7
   - 0.6
-  - 0.5
-  - 0.4
-  - 0.3

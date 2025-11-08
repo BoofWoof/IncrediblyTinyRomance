@@ -281,11 +281,14 @@ public class TurkPuzzleScript : MonoBehaviour
             return;
         }
         GameObject pieceRoot = puzzlePiece[0];
-        Vector2 pieceHolderPos = PieceHolder.anchoredPosition;
-        Vector2 centerOffset = pieceRoot.GetComponent<TurkCubeScript>().CalcualteCenterOffset();
-        RectTransform rootTransform = pieceRoot.GetComponent<RectTransform>();
-        rootTransform.anchoredPosition = pieceHolderPos - centerOffset;
-        rootTransform.parent = PieceHolder;
+        pieceRoot.GetComponent<TurkCubeScript>().SendToPieceHolder();
+        /*
+            Vector2 pieceHolderPos = PieceHolder.anchoredPosition;
+            Vector2 centerOffset = pieceRoot.GetComponent<TurkCubeScript>().CalcualteCenterOffset();
+            RectTransform rootTransform = pieceRoot.GetComponent<RectTransform>();
+            rootTransform.anchoredPosition = pieceHolderPos - centerOffset;
+            rootTransform.parent = PieceHolder;
+        */
 
         puzzlePiece.Remove(pieceRoot);
     }
