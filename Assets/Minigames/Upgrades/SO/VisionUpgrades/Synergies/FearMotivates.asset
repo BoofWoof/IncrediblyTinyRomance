@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaee23ce4df6a2043874e3fee989029f, type: 3}
   m_Name: FearMotivates
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Fear Motivates
   UpgradeIcon: {fileID: 1295698386, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: You finally deserve some leadership of your own, and the first
     rule of leadership is that FEAR MOTIVATES. (The Great Ram's anger increases your
     earnings.)
-  Credits: 0.0000016
+  Credits: 0.0000625
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0

@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e6952d6fcca3e4f85c9fed8a5238c8, type: 3}
   m_Name: LoveBombing
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Love Bombing
   UpgradeIcon: {fileID: 895661343, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: In a lonely world, love can be addictive. Make sure to love
     your Flock. (Positive prayer fireworks complete a <color=green>Very Easy</color>
     Vision puzzle.)
-  Credits: 0.00001
+  Credits: 0.00005
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0

@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526e60f8f5cf62b428d94d514dc2721f, type: 3}
   m_Name: Simplify I
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Simple Mind I
   UpgradeIcon: {fileID: -691155298, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: Some struggle to see the forest for more than the trees, and
     in that way, thinking too much can poison the mind. (Creates a 50% chance for
     the puzzle to be one piece simpler.)
-  Credits: 0.00000008
+  Credits: 0.00000025
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0

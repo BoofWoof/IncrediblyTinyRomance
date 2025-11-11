@@ -11,6 +11,8 @@ public class UpgradeScreenScript : MonoBehaviour
         {Minigame.Visions, "vision"}
     };
 
+    public AudioSource UpgradeAudio;
+
     public List<UpgradesAbstract> Upgrades;
     public List<UpgradesAbstract> UpgradeClones;
     public List<GameObject> UpgradeObjects;
@@ -57,6 +59,21 @@ public class UpgradeScreenScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void OnEnable()
+    {
+        UpgradeBoughtEvent += UpgradeAudioPlay;
+    }
+    public void OnDisable()
+    {
+        UpgradeBoughtEvent -= UpgradeAudioPlay;
+    }
+
+    public void UpgradeAudioPlay(Minigame minigameUpgraded)
+    {
+        if (minigameUpgraded != AssociatedMinigame) return;
+        UpgradeAudio.Play();
+    }
+
     public static void BroadcastUpgradeReveal(string game, float quantity)
     {
         foreach (UpgradeScreenScript script in upgradeScreenScripts)
@@ -67,6 +84,7 @@ public class UpgradeScreenScript : MonoBehaviour
 
     public void IncreaseUpgradeReveal(string game, int quantity)
     {
+        Debug.Log("Reveal " + game + " " + quantity.ToString());
         if (MinigameToString[AssociatedMinigame].ToLower() != game.ToLower()) return;
         RevealedUpgrades += quantity;
         Refresh();

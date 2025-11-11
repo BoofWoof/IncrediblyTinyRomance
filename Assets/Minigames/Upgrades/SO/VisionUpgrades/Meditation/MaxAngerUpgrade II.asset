@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f518b6fd96f2d543a233fcdec2f7fd9, type: 3}
   m_Name: MaxAngerUpgrade II
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Clear Mind II
   UpgradeIcon: {fileID: 811170558, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: Learning to empty ones mind can remove even the most polluting
     thoughts. (The Great Ram will get angry slower.)
-  Credits: 0.000000375
+  Credits: 0.0000017
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0

@@ -126,7 +126,6 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (!PickupEnabled) return;
         isDragging = false;
-        TurkPuzzleScript.instance.Drop.Play();
         TurkPuzzleScript.instance.Pickup.Stop();
 
         GameObject rootPiece;
@@ -146,6 +145,14 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         rootPiece.GetComponent<RectTransform>().anchoredPosition = pos;
 
         bool successfulUpdate = rootPieceScript.UpdateCord();
+
+        if (successfulUpdate)
+        {
+            TurkPuzzleScript.instance.Drop.Play();
+        } else
+        {
+            TurkPuzzleScript.instance.DropBad.Play();
+        }
 
         if (TurkPuzzleScript.CheckWin()) return;
 

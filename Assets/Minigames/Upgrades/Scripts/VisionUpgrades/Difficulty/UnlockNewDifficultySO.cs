@@ -8,5 +8,6 @@ public class UnlockNewDifficultySO : UpgradesAbstract
     public override void OnBuy()
     {
         TurkPuzzleScript.instance.UnlockNewDifficulty();
+        ActiveBroadcast.BroadcastActivation("DifficultyGlow");
     }
 }

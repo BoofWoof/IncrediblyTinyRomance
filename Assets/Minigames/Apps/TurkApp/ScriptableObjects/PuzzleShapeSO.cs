@@ -1,6 +1,3 @@
-
-using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
-using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "TurkGridData", menuName = "ScriptableObjects/TrukGridData", order = 1)]
 

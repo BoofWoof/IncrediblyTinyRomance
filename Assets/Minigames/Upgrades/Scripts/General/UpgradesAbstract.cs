@@ -60,6 +60,8 @@ public abstract class UpgradesAbstract : ScriptableObject
 
         OnBuy();
 
+        if (!forceBuy) UpgradeScreenScript.UpgradeBoughtEvent?.Invoke(AssociatedMinigame);
+
         if(DialogueToTrigger.Length > 0) MessageQueue.addDialogue(DialogueToTrigger);
         if (CompleteQuest) QuestManager.CompleteQuest(QuestManager.currentQuest);
         if (ProgressQuest) QuestManager.IncrementQuest();
