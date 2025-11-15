@@ -15,7 +15,7 @@ public class ContactsScript : MonoBehaviour
     public MessengerApp messengerApp;
 
     public PixelCrushers.DialogueSystem.CharacterInfo activeCharacter = null;
-    public PixelCrushers.DialogueSystem.CharacterInfo speakingCharacter = null;
+    public int speakingCharacterId = -1;
 
     public Coroutine DialogueCoroutine = null;
 
@@ -56,7 +56,7 @@ public class ContactsScript : MonoBehaviour
         if (subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
         PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
         if (tempSpeakingCharacter.Name == "Player") return;
-        if (speakingCharacter != null && speakingCharacter.id != tempSpeakingCharacter.id) {
+        if (speakingCharacterId != -1 && speakingCharacterId != tempSpeakingCharacter.id) {
             AddEndBar();
         }
 
@@ -92,20 +92,20 @@ public class ContactsScript : MonoBehaviour
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
         if (newSpeaker != null)
         {
-            speakingCharacter = newSpeaker;
+            speakingCharacterId = newSpeaker.id;
         }
-        if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
+        if (activeCharacter != null && activeCharacter.id == speakingCharacterId)
         {
             messengerApp.NotificationPing();
             messengerApp.RecreateFromText();
 
             messengerApp.MakeAudioMessage(voiceFilePath);
 
-            messengerApp.UpdateTextHistory(speakingCharacter, "<v>" + voiceFilePath + "\n");
+            messengerApp.UpdateTextHistory(speakingCharacterId, "<v>" + voiceFilePath + "\n");
         }
         else
         {
-            messengerApp.UpdateTextHistory(speakingCharacter, "<v>" + voiceFilePath + "\n");
+            messengerApp.UpdateTextHistory(speakingCharacterId, "<v>" + voiceFilePath + "\n");
         }
 
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
@@ -116,16 +116,16 @@ public class ContactsScript : MonoBehaviour
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages + MessagingVariables.TimePerCharacter * message_text.Length);
         if (newSpeaker != null)
         {
-            speakingCharacter = newSpeaker;
+            speakingCharacterId = newSpeaker.id;
         }
         messengerApp.NotificationPing();
-        if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
+        if (activeCharacter != null && activeCharacter.id == speakingCharacterId)
         {
             messengerApp.RecreateFromText();
 
             MessageBoxScript message_info = messengerApp.MakeLeftMessage(message_text);
 
-            messengerApp.UpdateTextHistory(speakingCharacter, "<a>" + message_text + "\n");
+            messengerApp.UpdateTextHistory(speakingCharacterId, "<a>" + message_text + "\n");
 
             if (MessagingVariables.TimeBetweenMessages > 0)
             {
@@ -139,18 +139,19 @@ public class ContactsScript : MonoBehaviour
         }
         else
         {
-            messengerApp.UpdateTextHistory(speakingCharacter, "<a>" + message_text + "\n");
+            messengerApp.UpdateTextHistory(speakingCharacterId, "<a>" + message_text + "\n");
         }
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public void OnConversationResponseMenu(Response[] responses)
     {
-        speakingCharacter = DialogueManager.CurrentConversationState.subtitle.speakerInfo;
+
+        speakingCharacterId = responses[0].destinationEntry.ConversantID;
+
         if (DialogueManager.CurrentConversationState.subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
         if (DialogueManager.CurrentConversationState.subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
         if (ConversationManagerScript.isMacroConvo) return;
-        Debug.Log(speakingCharacter.nameInDatabase);
         Debug.Log("Creating choices: " + responses.Length.ToString());
         StartCoroutine(SendChoicesMessage(responses));
 
@@ -160,10 +161,12 @@ public class ContactsScript : MonoBehaviour
     public IEnumerator SendChoicesMessage(Response[] responses)
     {
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
+        if(activeCharacter != null) Debug.Log(activeCharacter.id);
+        Debug.Log(speakingCharacterId);
         messengerApp.SetTextChoices(responses);
-        if (activeCharacter != null && activeCharacter.id == speakingCharacter.id)
+        if (activeCharacter != null && activeCharacter.id == speakingCharacterId)
         {
-            DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter));
+            DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter.id));
         } else
         {
             if (messengerApp.WaitingForChoice) HudScript.ShowMessageNotification(true);
@@ -174,13 +177,13 @@ public class ContactsScript : MonoBehaviour
     {
         if (ConversationManagerScript.isMacroConvo) return;
         AddEndBar();
-        speakingCharacter = null;
+        speakingCharacterId = -1;
     }
 
     public void AddEndBar()
     {
         messengerApp.MakeDivisionBar();
-        messengerApp.UpdateTextHistory(speakingCharacter, "<c>" + "\n");
+        messengerApp.UpdateTextHistory(speakingCharacterId, "<c>" + "\n");
     }
 
     public void InstantMessaging()
@@ -288,9 +291,9 @@ public class ContactsScript : MonoBehaviour
 
         messengerApp.CurrentCharacter = selectCharacter;
         messengerApp.RecreateFromText();
-        if (activeCharacter != null && speakingCharacter != null && activeCharacter.id == speakingCharacter.id && messengerApp.WaitingForChoice)
+        if (activeCharacter != null && speakingCharacterId != -1 && activeCharacter.id == speakingCharacterId && messengerApp.WaitingForChoice)
         {
-            DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter));
+            DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter.id));
         }
     }
 

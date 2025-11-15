@@ -152,6 +152,16 @@ public class MessageBoxScript : MonoBehaviour
         char new_letter = message_text[0];
         displayed_message += new_letter;
         message_text = message_text.Remove(0, 1);
+        if(new_letter == '<')
+        {
+            while(new_letter != '>')
+            {
+                if (message_text.Length == 0) break;
+                new_letter = message_text[0];
+                displayed_message += new_letter;
+                message_text = message_text.Remove(0, 1);
+            }
+        }
         text_object.text = displayed_message;
         text_object.ForceMeshUpdate();
 

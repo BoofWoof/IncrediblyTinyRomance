@@ -8,8 +8,6 @@ using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DS
 {
@@ -53,6 +51,8 @@ namespace DS
         public bool PreviouslyHeld = false;
         public float VerticalShift = 0f;
 
+        public int ShowMessageHistory = 20;
+
         public void MakeAudioMessage(string audioFileName)
         {
             audioFileName = audioFileName.CleanResourcePath();
@@ -79,17 +79,19 @@ namespace DS
         public void Update()
         {
             if (!Active) return;
+            if (conversation_height < 900f) return;
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if(Mathf.Abs(scroll) > 0.01f) ShiftScreen(-scroll * 1000);
+
             if (Input.GetMouseButton(0))
             {
-                if (conversation_height < 900f) return;
 
                 float thisPosition = Input.mousePosition.y;
                 if(PreviouslyHeld)
                 {
                     float mouseDelta = thisPosition - LastMousePosition;
-                    VerticalShift += mouseDelta;
-                    VerticalShift = Mathf.Clamp(VerticalShift, -(conversation_height - 900f), 0);
-                    content_rect.anchoredPosition = new Vector2(content_rect.anchoredPosition.x, VerticalShift + conversation_height - 900f + 100f);
+                    ShiftScreen(mouseDelta);
                 }
                 LastMousePosition = thisPosition;
                 PreviouslyHeld = true;
@@ -97,6 +99,14 @@ namespace DS
             {
                 PreviouslyHeld = false;
             }
+        }
+
+        public void ShiftScreen(float shiftAmount)
+        {
+            VerticalShift += shiftAmount;
+            VerticalShift = Mathf.Clamp(VerticalShift, -(conversation_height - 900f), 0);
+            content_rect.anchoredPosition = new Vector2(content_rect.anchoredPosition.x, VerticalShift + conversation_height - 900f + 100f);
+
         }
 
         // Start is called before the first frame update
@@ -138,7 +148,7 @@ namespace DS
             conversation_height = start_buffer;
             VerticalShift = 0f;
         }
-        public IEnumerator RevealOptions(PixelCrushers.DialogueSystem.CharacterInfo speakingCharacter)
+        public IEnumerator RevealOptions(int speakingCharacterID)
         {
             VerticalShift = 0f;
 
@@ -163,12 +173,12 @@ namespace DS
             int choiceIdx = 0;
             if (MessagingVariables.ForceSelect)
             {
-                UpdateTextHistory(speakingCharacter, "<b>" + choiceText[0] + "\n");
+                UpdateTextHistory(speakingCharacterID, "<b>" + choiceText[0] + "\n");
             } else
             {
                 yield return StartCoroutine(messageOptionScript.WaitForResponse());
                 choiceIdx = messageOptionScript.OptionIdx;
-                UpdateTextHistory(speakingCharacter, "<b>" + messageOptionScript.message + "\n");
+                UpdateTextHistory(speakingCharacterID, "<b>" + messageOptionScript.message + "\n");
             }
             GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
             WaitingForChoice = false;
@@ -182,13 +192,13 @@ namespace DS
             notification_source.clip = new_message_notification;
             notification_source.Play();
         }
-        public void UpdateTextHistory(PixelCrushers.DialogueSystem.CharacterInfo targetCharacter, string newText)
+        public void UpdateTextHistory(int targetCharacterID, string newText)
         {
             if (MessageHistorys == null) return;
-            if(!MessageHistorys.Keys.Contains(targetCharacter.id)){
-                MessageHistorys.Add(targetCharacter.id, "");
+            if(!MessageHistorys.Keys.Contains(targetCharacterID)){
+                MessageHistorys.Add(targetCharacterID, "");
             }
-            MessageHistorys[targetCharacter.id] += newText;
+            MessageHistorys[targetCharacterID] += newText;
         }
 
         private MessageBoxScript MakeRightMessage(string message_text)
@@ -252,7 +262,7 @@ namespace DS
 
             //Old version: MessageHistorys[selectedCharacter.id].Split("\n");
             string[] messageHistory = Regex.Split(MessageHistorys[selectedCharacter.id], @"\n(?=<)");
-            messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - 10)).ToArray();
+            messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - ShowMessageHistory)).ToArray();
 
             foreach (string message in messageHistory)
             {

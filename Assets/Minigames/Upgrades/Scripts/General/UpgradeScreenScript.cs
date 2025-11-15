@@ -33,9 +33,14 @@ public class UpgradeScreenScript : MonoBehaviour
     public static List<UpgradeScreenScript> upgradeScreenScripts = new List<UpgradeScreenScript>();
     public int RevealedUpgrades = 0;
 
+    public GameObject ProgressToUnlockUpgradesText;
+
+    public static bool WaitToOpen = false;
+
     public void Awake()
     {
         Lua.RegisterFunction("RevealUpgrades", null, SymbolExtensions.GetMethodInfo(() => BroadcastUpgradeReveal("", 0)));
+        Lua.RegisterFunction("UpgradeWait", null, SymbolExtensions.GetMethodInfo(() => EnableWaitTrigger()));
 
         upgradeScreenScripts.Add(this);
 
@@ -61,11 +66,17 @@ public class UpgradeScreenScript : MonoBehaviour
 
     public void OnEnable()
     {
+        if(WaitToOpen) (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
         UpgradeBoughtEvent += UpgradeAudioPlay;
     }
     public void OnDisable()
     {
         UpgradeBoughtEvent -= UpgradeAudioPlay;
+    }
+
+    public static void EnableWaitTrigger()
+    {
+        WaitToOpen = true;
     }
 
     public void UpgradeAudioPlay(Minigame minigameUpgraded)
@@ -99,6 +110,7 @@ public class UpgradeScreenScript : MonoBehaviour
             if (upgrade.UpgradeBought) continue;
             AddUpgrade(upgrade);
         }
+        ProgressToUnlockUpgradesText?.SetActive(DisplayedUpgrades == 0);
     }
     public void BoughtGenerate()
     {
