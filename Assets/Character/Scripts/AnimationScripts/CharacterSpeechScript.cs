@@ -4,6 +4,7 @@ using PixelCrushers.DialogueSystem;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
@@ -102,11 +103,25 @@ public class CharacterSpeechScript : MonoBehaviour
 
         string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
         voiceFilePath = voiceFilePath.CleanResourcePath();
-        VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(voiceFilePath);
-
-        if (voiceLine == null) return;
 
         Debug.Log(subtitle.formattedText.text);
+
+        StartCoroutine(LoadConversationLine(voiceFilePath));
+        //VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(voiceFilePath);
+    }
+
+    IEnumerator LoadConversationLine(string voiceFilePath)
+    {
+        ResourceRequest request = Resources.LoadAsync<VoiceLineSO>(voiceFilePath); // Replace GameObject with your asset type
+        while (!request.isDone)
+        {
+            // Update loading bar or display progress
+            yield return null;
+        }
+        VoiceLineSO voiceLine = request.asset as VoiceLineSO;
+
+        if (voiceLine == null) yield break;
+
         StartCoroutine(Speak(voiceLine));
     }
 
@@ -185,6 +200,7 @@ public class CharacterSpeechScript : MonoBehaviour
     public bool isSpeechPlaying()
     {
         AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource.clip == null) Debug.LogError("NO AUDIO FILE ASSIGNED TO DIALOGUE");
         if(!audioSource.isPlaying && (audioSource.timeSamples >= audioSource.clip.samples || audioSource.timeSamples == 0)) return false;
 
         return true;
