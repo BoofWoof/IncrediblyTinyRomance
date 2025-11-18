@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,6 +16,8 @@ public class ActiveBroadcast : MonoBehaviour
     {
         gameObject.SetActive(StartActive);
         ActiveBroadcastItems[ActiveItemName.ToLower()] = this;
+
+        Lua.RegisterFunction("BroadcastActivate", null, SymbolExtensions.GetMethodInfo(() => BroadcastActivation("")));
     }
 
     public static void BroadcastActivation(string triggerName)

@@ -53,6 +53,77 @@ namespace DS
 
         public int ShowMessageHistory = 20;
 
+        public int AppSong = -1;
+        public bool SongLock = false;
+
+        // Start is called before the first frame update
+        void Awake()
+        {
+            conversation_height = start_buffer;
+
+            Lua.RegisterFunction("SetTextSong", this, SymbolExtensions.GetMethodInfo(() => SetTextSongLUA(0f)));
+            Lua.RegisterFunction("LockInSong", this, SymbolExtensions.GetMethodInfo(() => LockInSong()));
+            Lua.RegisterFunction("ReleaseSong", this, SymbolExtensions.GetMethodInfo(() => ReleaseSong()));
+        }
+
+        public void OnEnable()
+        {
+            OnShowApp += MusinOnAppShow;
+            OnHideApp += MusinOnAppHide;
+        }
+
+        public void OnDisable()
+        {
+            OnShowApp -= MusinOnAppShow;
+            OnHideApp -= MusinOnAppHide;
+        }
+
+        #region Song
+        public void LockInSong()
+        {
+            SongLock = true;
+            if (Active)
+            {
+                MusicSelectorScript.LockSong();
+            }
+        }
+        public void ReleaseSong()
+        {
+            SongLock = false;
+            MusicSelectorScript.ReleaseSong();
+        }
+        public void SetTextSongLUA(float newAppSong)
+        {
+            SetTextSong((int) newAppSong);
+        }
+        public void SetTextSong(int newAppSong)
+        {
+            if (newAppSong == AppSong) return;
+            AppSong = newAppSong;
+
+            if (Active)
+            {
+                if (AppSong < 0)
+                {
+                    MusicSelectorScript.RevertPhoneSong();
+                    return;
+                }
+                MusicSelectorScript.SetPhoneSong(AppSong);
+            }
+        }
+        public void MusinOnAppShow()
+        {
+            if (AppSong < 0) return;
+            MusicSelectorScript.SetPhoneSong(AppSong);
+            if(SongLock) MusicSelectorScript.LockSong();
+        }
+        public void MusinOnAppHide()
+        {
+            MusicSelectorScript.RevertPhoneSong();
+        }
+
+        #endregion
+
         public void MakeAudioMessage(string audioFileName)
         {
             audioFileName = audioFileName.CleanResourcePath();
@@ -107,12 +178,6 @@ namespace DS
             VerticalShift = Mathf.Clamp(VerticalShift, -(conversation_height - 900f), 0);
             content_rect.anchoredPosition = new Vector2(content_rect.anchoredPosition.x, VerticalShift + conversation_height - 900f + 100f);
 
-        }
-
-        // Start is called before the first frame update
-        void Awake()
-        {
-            conversation_height = start_buffer;
         }
 
         public void SetTextChoices(Response[] responses)

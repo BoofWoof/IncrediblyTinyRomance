@@ -1,11 +1,26 @@
 
+using System;
+
 public static class GameData
 {
 }
 
 public static class CurrencyData
 {
-    public static float Credits = 0;
+    public delegate void ValueUpdate(float newValue);
+    public static ValueUpdate CreditUpdate;
+    private static float _credits;
+    public static float Credits {
+        get
+        {
+            return _credits;
+        }
+        set
+        {
+            CreditUpdate?.Invoke(value);
+            _credits = value;
+        }
+    }
     public static float RenownFlock = 0;
     public static float RenownAscension = 0;
     public static float RenownFoundation = 0;

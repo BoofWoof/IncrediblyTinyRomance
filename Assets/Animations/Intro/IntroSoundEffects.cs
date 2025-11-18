@@ -1,6 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+
+public static class DayInfo
+{
+    public static int CurrentDay = 0;
+}
+
 public class IntroSoundEffects : MonoBehaviour
 {
     public AudioClip Gate;
@@ -11,6 +17,11 @@ public class IntroSoundEffects : MonoBehaviour
     public bool SkipStart = false;
 
     public int Day = 0;
+
+    public void Awake()
+    {
+        DayInfo.CurrentDay = Day;
+    }
 
     public void Start()
     {

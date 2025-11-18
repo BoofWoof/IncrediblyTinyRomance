@@ -225,6 +225,44 @@ MonoBehaviour:
     spritePortrait: {fileID: 0}
     alternatePortraits: []
     spritePortraits: []
+  - id: 12
+    fields:
+    - title: Name
+      value: RadioSid
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: He on the radio!
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: IsRadio
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: SkipThem
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: WaitThem
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 0}
+    alternatePortraits: []
+    spritePortraits: []
   - id: 10
     fields:
     - title: Name
@@ -52526,7 +52564,9 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: SetPhoneSong(7)
+      userScript: 'SetTextSong(8)
+
+        LockInSong()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -53251,7 +53291,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: IncrementQuest()
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -53443,7 +53483,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 379
-        y: 812.16144
+        y: 810.84564
         width: 160
         height: 30
     - id: 18
@@ -53711,7 +53751,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: In all honesty, it's becomes obvious this app is a bait and switch.
+        value: In all honesty, it's become obvious that this app is a bait and switch.
           It draws in the desperate with promises of wealth and fufillment, and then
           switches that with mindless labor.
         type: 0
@@ -53748,7 +53788,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 383.2554
-        y: 1056.8423
+        y: 1055.6228
         width: 160
         height: 30
     - id: 23
@@ -55754,7 +55794,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: That this is demands that we compromise on our values...
+        value: That this place demands that we compromise on everything we value...
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -56540,8 +56580,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: The more I learn, the more I experience, the more that I think that
-          the systems around us craft who we are.
+        value: 'The more I learn, the more I experience: the more I think the systems
+          around us craft who we are.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -56602,7 +56642,7 @@ MonoBehaviour:
       - title: Dialogue Text
         value: And if there is an engineer above us all, a shaper of those systems,
           a designer of our world... he's really done an immaculate job at crafting
-          a factory that produced wretched people...
+          a factory that produces wretched people...
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -56838,8 +56878,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: But for now, you should get some rest. Me and the team are going to
-          pull an all nighter and figure out a new plan.
+        value: For now, you should get some rest. Me and the team are going to pull
+          an all nighter and figure out a new plan.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -57159,7 +57199,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'QueueWaitDialogue("AlesssInt", 30)
 
-        RevertPhoneSong()'
+        ReleaseSong()
+
+        SetTextSong(-1)'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -57170,8 +57212,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 50, y: 0}
-    canvasZoom: 0.64000016
+    canvasScrollPosition: {x: 75.29419, y: 0}
+    canvasZoom: 0.85
   - id: 24
     fields:
     - title: Title
@@ -62147,12 +62189,6 @@ MonoBehaviour:
       - originConversationID: 25
         originDialogueID: 0
         destinationConversationID: 25
-        destinationDialogueID: 4
-        isConnector: 0
-        priority: 2
-      - originConversationID: 25
-        originDialogueID: 0
-        destinationConversationID: 25
         destinationDialogueID: 1
         isConnector: 0
         priority: 2
@@ -62231,7 +62267,7 @@ MonoBehaviour:
         priority: 2
       conditionsString: (Variable["SocialScore"] > Variable["WorkerScore"]) and (Variable["SocialScore"]
         > Variable["SpiritScore"])
-      userScript: 
+      userScript: BroadcastActivate("VisionAd")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -62290,7 +62326,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 'Variable["WorkerScore"] > Variable["SpiritScore"]'
-      userScript: 
+      userScript: BroadcastActivate("VisionAd")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -62349,7 +62385,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("VisionAd")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -62426,8 +62462,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 642
-        y: 97
+        x: 171
+        y: 294
         width: 160
         height: 30
     - id: 5
@@ -62623,7 +62659,176 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 45, y: 0}
+    canvasScrollPosition: {x: 0, y: 22}
+    canvasZoom: 1
+  - id: 26
+    fields:
+    - title: Title
+      value: GG01
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Actor
+      value: 4
+      type: 5
+      typeString: CustomFieldType_Actor
+    - title: Conversant
+      value: 12
+      type: 5
+      typeString: CustomFieldType_Actor
+    - title: IsMacro
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: AllowRepeat
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    overrideSettings:
+      useOverrides: 0
+      overrideSubtitleSettings: 0
+      showNPCSubtitlesDuringLine: 1
+      showNPCSubtitlesWithResponses: 1
+      showPCSubtitlesDuringLine: 0
+      skipPCSubtitleAfterResponseMenu: 0
+      subtitleCharsPerSecond: 30
+      minSubtitleSeconds: 2
+      continueButton: 0
+      overrideSequenceSettings: 0
+      defaultSequence: 
+      defaultPlayerSequence: 
+      defaultResponseMenuSequence: 
+      overrideInputSettings: 0
+      alwaysForceResponseMenu: 1
+      includeInvalidEntries: 0
+      responseTimeout: 0
+      emTagForOldResponses: 0
+      emTagForInvalidResponses: 0
+      cancelSubtitle:
+        key: 27
+        buttonName: 
+      cancelConversation:
+        key: 27
+        buttonName: 
+    nodeColor: 
+    dialogueEntries:
+    - id: 0
+      fields:
+      - title: Title
+        value: START
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 12
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: None()
+        type: 0
+        typeString: 
+      conversationID: 26
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 26
+        originDialogueID: 0
+        destinationConversationID: 26
+        destinationDialogueID: 1
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 160
+        y: 30
+        width: 160
+        height: 30
+    - id: 1
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: Assets/Resources/VoiceLines/Sid/Grindset/Grindset1/FullGrindset1.asset
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 12
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 26
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 156
+        y: 109
+        width: 160
+        height: 30
+    entryGroups: []
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 1
   syncInfo:
     syncActors: 0

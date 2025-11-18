@@ -25,6 +25,8 @@ public class MusicSelectorScript : MonoBehaviour
     public int OverworldSongID;
     public int PhoneMusicID;
 
+    private static bool SongLock = false;
+
     public MusicDataStruct[] SongList;
 
     private void OnEnable()
@@ -40,6 +42,15 @@ public class MusicSelectorScript : MonoBehaviour
         PhonePositionScript.PhoneToggled -= PhoneToggleMusicSwap;
     }
 
+    public static void LockSong()
+    {
+        SongLock = true;
+    }
+    public static void ReleaseSong()
+    {
+        SongLock = false;
+    }
+
     public void Awake()
     {
         instance = this;
@@ -50,12 +61,9 @@ public class MusicSelectorScript : MonoBehaviour
         PhoneMusicID = DefaultStartSongPhoneID;
     }
 
-    public void Start()
-    {
-    }
-
     public static void SetPhoneSong(double newSongID)
     {
+        if (SongLock) return;
         instance.PhoneMusicID = (int)newSongID;
         if (PhonePositionScript.raised)
         {
@@ -68,6 +76,7 @@ public class MusicSelectorScript : MonoBehaviour
     }
     public static void SetOverworldSong(double newSongID)
     {
+        if (SongLock) return;
         instance.OverworldSongID = (int)newSongID;
         if (!PhonePositionScript.raised)
         {
@@ -81,6 +90,8 @@ public class MusicSelectorScript : MonoBehaviour
 
     public void PhoneToggleMusicSwap(bool raised)
     {
+        if (SongLock) return;
+
         if (raised)
         {
             CrossfadeScript.TransitionSong(PhoneMusicID);

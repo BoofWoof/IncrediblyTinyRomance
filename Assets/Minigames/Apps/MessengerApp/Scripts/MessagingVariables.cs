@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public static class MessagingVariables
 {
-    public static float DefaultTimeBetweenMessages = 1f;
+    public static float DefaultTimeBetweenMessages = 2f;
     public static float DefaultTimePerCharacter = 0.01f;
     public static bool DefaultForceSelect = false;
 
