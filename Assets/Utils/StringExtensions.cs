@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using System.Linq;
 
 public struct TimeMarker<T>
 {
@@ -93,6 +94,8 @@ public static class StringExtensions
     public static TimeList<T> ToTimeMarkers<T>(this string text, string split, Func<string, T> valueParser, float fps)
     {
         TimeList<T> result = new TimeList<T>();
+        if (text.Length == 0) return result;
+
         string[] lines = text.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
         float startingTimeSec = 0;

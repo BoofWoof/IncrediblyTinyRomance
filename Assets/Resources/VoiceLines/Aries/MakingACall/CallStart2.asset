@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fef4ccefb1dff5488338f22eca80251, type: 3}
+  m_Name: CallStart2
+  m_EditorClassIdentifier: 
+  AudioData: {fileID: 8300000, guid: bfcdf20d20203da4cacc83d4fca10b4f, type: 3}
+  PhenomeData: {fileID: 0}
+  SubtitleData: {fileID: 4900000, guid: 31e3e57f1b533144da634b99b791be0b, type: 3}
+  GestureData: {fileID: 4900000, guid: 07fe5846cdad452409a8cbab34a3e27f, type: 3}
+  FocusLevel: 1
+  PauseBeforeStart: 8
+  PauseAfterEnd: 0
