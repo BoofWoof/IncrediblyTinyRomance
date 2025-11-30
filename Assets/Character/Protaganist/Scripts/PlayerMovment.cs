@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -28,6 +26,8 @@ public class PlayerMovment : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource WalkingSounds;
+
+    private float SpeedMultiplier = 1f;
 
     private void Awake()
     {
@@ -62,6 +62,18 @@ public class PlayerMovment : MonoBehaviour
         }
     }
 
+    public void SetSpeed(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SpeedMultiplier = 0.3f;
+        }
+        if (context.canceled)
+        {
+            SpeedMultiplier = 1f;
+        }
+    }
+
     private void FixedUpdate()
     {
         MovePlayer();
@@ -76,7 +88,7 @@ public class PlayerMovment : MonoBehaviour
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * SpeedMultiplier, ForceMode.Force);
         if(rb.linearVelocity.magnitude > 0.1f)
         {
             if(!WalkingSounds.isPlaying) WalkingSounds.Play();
@@ -84,5 +96,6 @@ public class PlayerMovment : MonoBehaviour
         {
             if (WalkingSounds.isPlaying) WalkingSounds.Stop();
         }
+        if (SpeedMultiplier < 0.9f) WalkingSounds.Stop();
     }
 }

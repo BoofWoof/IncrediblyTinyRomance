@@ -31,6 +31,10 @@ public class PlayerCam : MonoBehaviour
 
     public static PlayerCam Instance;
 
+
+    private static float MouseSensitivityMultiplier = 1f;
+    private float SlowModeMultiplier = 1f;
+
     private void Awake()
     {
         RegisterInputActions();
@@ -46,6 +50,11 @@ public class PlayerCam : MonoBehaviour
         InputManager.PlayerInputs.Overworld.Camera.performed += context => CameraInput = context.ReadValue<Vector2>();
         InputManager.PlayerInputs.Overworld.Camera.canceled += context => CameraInput = Vector2.zero;
         InputManager.PlayerInputs.Overworld.ActivateObject.performed += context => ActivateObjects();
+    }
+
+    public static void SetMouseSensitivity(float newMouseSensitivity)
+    {
+        MouseSensitivityMultiplier = newMouseSensitivity;
     }
 
     private void ActivateObjects()
@@ -89,6 +98,17 @@ public class PlayerCam : MonoBehaviour
             ScreenMask.ShutDownScreen();
         }
     }
+    public void SetSpeed(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            SlowModeMultiplier = 0.3f;
+        }
+        if (context.canceled)
+        {
+            SlowModeMultiplier = 1f;
+        }
+    }
 
     public void OnApplicationFocus(bool focus)
     {
@@ -107,8 +127,8 @@ public class PlayerCam : MonoBehaviour
     public void Update()
     {
         if (!EnableCameraMovement || CursorStateControl.MenuUp || Cursor.lockState == CursorLockMode.Confined) return;
-        float mouseX = CameraInput.x * Time.deltaTime * sensX;
-        float mouseY = CameraInput.y * Time.deltaTime * sensY;
+        float mouseX = CameraInput.x * Time.deltaTime * sensX * SlowModeMultiplier * MouseSensitivityMultiplier;
+        float mouseY = CameraInput.y * Time.deltaTime * sensY * SlowModeMultiplier * MouseSensitivityMultiplier;
 
         yRotation += mouseX;
 

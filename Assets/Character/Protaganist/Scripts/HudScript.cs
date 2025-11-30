@@ -2,6 +2,7 @@ using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HudScript : MonoBehaviour
 {
@@ -21,11 +22,28 @@ public class HudScript : MonoBehaviour
 
     public GameObject MessageNotification;
 
+    public GameObject QuestPanel;
+    public GameObject SubtitlePanel;
+
     public static HudScript instance;
 
     public static void ShowMessageNotification(bool show)
     {
         instance.MessageNotification.SetActive(show);
+    }
+
+    public static void SetQuestVisiblity(bool questVisible)
+    {
+        instance.QuestPanel.SetActive(questVisible);
+    }
+    public static void SetSubtitleVisiblity(bool subtitleVisible)
+    {
+        instance.SubtitlePanel.SetActive(subtitleVisible);
+    }
+
+    public static void SetReticleOpacity(float reticleOpacity)
+    {
+        instance.Reticle.GetComponent<Image>().color = new Color(255, 255, 255, reticleOpacity * 255f);
     }
 
     public void Awake()

@@ -4,11 +4,18 @@ using UnityEngine.Windows;
 
 public class CursorStateControl : MonoBehaviour
 {
+    public static CursorStateControl ActiveCursorController;
+
     public static bool MenuUp;
     public ToggleActive[] PauseMenus;
 
     public CursorLockMode LastLockMode = CursorLockMode.Locked;
     public bool LastVisible = false;
+
+    public void Awake()
+    {
+        ActiveCursorController = this;
+    }
 
     void Start()
     {

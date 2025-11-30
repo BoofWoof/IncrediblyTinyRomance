@@ -27,6 +27,8 @@ public class MoveCamera : MonoBehaviour
     public AudioClip[] earthquakeSoundOptions;
     public AudioSource rumbleSoundSource;
 
+    public static float VibrationIntensity = 1f;
+
     private void Start()
     {
         moveCamera = this;
@@ -39,7 +41,7 @@ public class MoveCamera : MonoBehaviour
         if (TargetMaintainRumble >= CurrentMaintainRumble) CurrentMaintainRumble = TargetMaintainRumble;
         else CurrentMaintainRumble = Mathf.MoveTowards(CurrentMaintainRumble, TargetMaintainRumble, Time.deltaTime * falloffRate);
 
-        TotalRumble = ImpactRumble + CurrentMaintainRumble + CurrentWordRumble;
+        TotalRumble = VibrationIntensity * (ImpactRumble + CurrentMaintainRumble + CurrentWordRumble);
         transform.position = cameraPosition.position + TotalRumble * Random.insideUnitSphere;
 
         float MaintainRumbles = CurrentMaintainRumble + CurrentWordRumble;
@@ -47,6 +49,11 @@ public class MoveCamera : MonoBehaviour
         rumbleSoundSource.pitch = 1 + MaintainRumbles * 2f;
 
         TargetWordRumble = 0;
+    }
+
+    public static void SetVibrationIntensity(float newIntensity)
+    {
+        VibrationIntensity = newIntensity;
     }
 
     public void TestShake(float durationSec)

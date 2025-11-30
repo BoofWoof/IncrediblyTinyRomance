@@ -135,6 +135,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlowMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""a643d687-8f0f-48fc-9cd2-9cd974bb2009"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -313,6 +322,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49272531-bc5a-42fd-8424-0c99de83a609"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -444,6 +464,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Overworld_Move = m_Overworld.FindAction("Move", throwIfNotFound: true);
         m_Overworld_ActivateObject = m_Overworld.FindAction("ActivateObject", throwIfNotFound: true);
         m_Overworld_Pause = m_Overworld.FindAction("Pause", throwIfNotFound: true);
+        m_Overworld_SlowMove = m_Overworld.FindAction("SlowMove", throwIfNotFound: true);
         // Phone
         m_Phone = asset.FindActionMap("Phone", throwIfNotFound: true);
         m_Phone_AppReturn = m_Phone.FindAction("AppReturn", throwIfNotFound: true);
@@ -539,6 +560,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Overworld_Move;
     private readonly InputAction m_Overworld_ActivateObject;
     private readonly InputAction m_Overworld_Pause;
+    private readonly InputAction m_Overworld_SlowMove;
     /// <summary>
     /// Provides access to input actions defined in input action map "Overworld".
     /// </summary>
@@ -570,6 +592,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Overworld/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Overworld_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Overworld/SlowMove".
+        /// </summary>
+        public InputAction @SlowMove => m_Wrapper.m_Overworld_SlowMove;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -611,6 +637,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @SlowMove.started += instance.OnSlowMove;
+            @SlowMove.performed += instance.OnSlowMove;
+            @SlowMove.canceled += instance.OnSlowMove;
         }
 
         /// <summary>
@@ -637,6 +666,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @SlowMove.started -= instance.OnSlowMove;
+            @SlowMove.performed -= instance.OnSlowMove;
+            @SlowMove.canceled -= instance.OnSlowMove;
         }
 
         /// <summary>
@@ -926,6 +958,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SlowMove" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSlowMove(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Phone" which allows adding and removing callbacks.
