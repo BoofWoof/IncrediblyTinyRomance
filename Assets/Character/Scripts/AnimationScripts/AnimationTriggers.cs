@@ -119,4 +119,9 @@ public class AnimationTriggers : MonoBehaviour
         LeftHand.ReleaseHandObject(ReleaseID);
         LeftHand.Activate();
     }
+
+    public void BroadcastActivation(string TriggerName)
+    {
+        ActiveBroadcast.BroadcastActivation(TriggerName);
+    }
 }

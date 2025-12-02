@@ -6,9 +6,38 @@ public class AriesOverworldBehavior : OverworldBehavior
     public OverworldPositionScript OverworldController;
     private Animator thisAnimator;
 
+    [Header("AttackTapInfo")]
+    public VoiceLineSO AttackTapAriesVoice;
+    public VoiceLineSO AttackTapMiloVoice;
+
     void Start()
     {
         thisAnimator = GetComponent<Animator>();
+    }
+
+    public IEnumerator AttackTap()
+    {
+        yield return StartCoroutine(WalkToStation(0));
+        thisAnimator.SetBool("Sitting", true);
+        thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", true);
+
+        yield return StartCoroutine(WaitForAnimation("SitForwardIdle"));
+
+        thisAnimator.SetTrigger("AttackTap");
+
+        yield return new WaitForSeconds(1f);
+
+        MusicSelectorScript.SetOverworldSong(5);
+        CharacterSpeechScript.BroadcastSpeechAttempt("A", AttackTapAriesVoice);
+
+        float waitTime = 19f - 3.8f;
+        yield return new WaitForSeconds(waitTime);
+
+        CharacterSpeechScript.BroadcastSpeechAttempt("M", AttackTapMiloVoice);
+
+        yield return new WaitForSeconds(24f - waitTime);
+        CrossfadeScript.PauseMusic();
     }
 
     public IEnumerator PuffAttack()
@@ -100,6 +129,11 @@ public class AriesOverworldBehavior : OverworldBehavior
         if (behavior.ToLower() == "puff")
         {
             StartCoroutine(PuffAttack());
+        }
+
+        if (behavior.ToLower() == "tap")
+        {
+            StartCoroutine(AttackTap());
         }
     }
 }

@@ -43,7 +43,7 @@ public class HudScript : MonoBehaviour
 
     public static void SetReticleOpacity(float reticleOpacity)
     {
-        instance.Reticle.GetComponent<Image>().color = new Color(255, 255, 255, reticleOpacity * 255f);
+        instance.Reticle.GetComponent<Image>().color = new Color(1, 1, 1, reticleOpacity);
     }
 
     public void Awake()
