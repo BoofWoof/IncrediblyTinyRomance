@@ -7,41 +7,28 @@ public class CursorStateControl : MonoBehaviour
     public static CursorStateControl ActiveCursorController;
 
     public static bool MenuUp;
-    public ToggleActive[] PauseMenus;
 
-    public CursorLockMode LastLockMode = CursorLockMode.Locked;
-    public bool LastVisible = false;
+    public static CursorLockMode LastLockMode = CursorLockMode.Locked;
+    public static bool LastVisible = false;
 
     public void Awake()
     {
         ActiveCursorController = this;
-    }
 
-    void Start()
-    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         MenuUp = false;
 
         PhonePositionScript.PhoneToggled += AllowMouse;
-
-        foreach(ToggleActive pauseMenu in PauseMenus) {
-            pauseMenu.toggleActiveDelegate += PauseMenuToggle;
-        }
     }
 
     private void OnDestroy()
     {
         PhonePositionScript.PhoneToggled -= AllowMouse;
-
-        foreach (ToggleActive pauseMenu in PauseMenus)
-        {
-            pauseMenu.toggleActiveDelegate -= PauseMenuToggle;
-        }
     }
 
-    private void PauseMenuToggle(bool menuUp)
+    public static void PauseMenuToggle(bool menuUp)
     {
         MenuUp = menuUp;
         if (menuUp)

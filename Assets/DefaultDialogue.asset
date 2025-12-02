@@ -696,6 +696,36 @@ MonoBehaviour:
       value: Day1
       type: 0
       typeString: CustomFieldType_Text
+  - id: 21
+    fields:
+    - title: Name
+      value: A View 2
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Right click to zoom in.
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
   - id: 6
     fields:
     - title: Name
@@ -8559,7 +8589,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: StartPrayerSystem();
+      userScript: 'StartPrayerSystem();
+
+        IncrementQuest();'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -15147,7 +15179,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 151.44914, y: 582.43475}
+    canvasScrollPosition: {x: 15.78949, y: 3432.4336}
     canvasZoom: 0.7600002
   - id: 12
     fields:
@@ -25600,7 +25632,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: QueueDialogue("Prayer System Tutorial");
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []

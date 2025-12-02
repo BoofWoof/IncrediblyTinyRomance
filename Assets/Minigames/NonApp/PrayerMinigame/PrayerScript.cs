@@ -64,7 +64,6 @@ public class PrayerScript : MonoBehaviour
     {
         Debug.Log("Deactivating Judgement");
         JudgementActive = false;
-        RamAngyLevel = 0;
         JudgementFocus = false;
     }
 
@@ -227,8 +226,12 @@ public class PrayerScript : MonoBehaviour
         else
         {
             Debug.Log("Ram be angy! >:C");
-            RamAngyLevel += 30f;
-            if (RamAngyLevel > AngerThreshold) RamAngyLevel = AngerThreshold;
+            RamAngyLevel += AngerReduction * 2f / 3f;
+            if (RamAngyLevel > AngerThreshold)
+            {
+                RamAngyLevel = AngerThreshold;
+                ActivateGameOver();
+            }
             PrayerSubmitted.Invoke(false);
             BadPrayerCount++;
 
@@ -241,6 +244,11 @@ public class PrayerScript : MonoBehaviour
         yield return new WaitForSeconds(WaitForNextPrayerSec);
 
         GenerateNewPrayers();
+    }
+
+    private void ActivateGameOver()
+    {
+        OverworldBehavior.BroadcastBehaviors("A", "Tap");
     }
 
     private void DisableButtons()

@@ -20,7 +20,7 @@ public abstract class EventAbstract : ScriptableObject
 
     public bool CheckIfValid(float Value)
     {
-        if (RequiredQuest.Length > 0 && QuestLog.GetQuestState("Visions") != QuestState.Active) return false;
+        if (RequiredQuest.Length > 0 && QuestLog.GetQuestState(RequiredQuest) != QuestState.Active) return false;
         return Value >= Threshold;
     }
 

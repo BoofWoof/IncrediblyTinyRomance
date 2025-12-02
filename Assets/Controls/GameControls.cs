@@ -144,6 +144,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ZoomCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0951c41-319c-4ee2-b632-c436505f308a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""SlowMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65841343-14b7-4d1b-9086-95699eefc956"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -465,6 +485,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Overworld_ActivateObject = m_Overworld.FindAction("ActivateObject", throwIfNotFound: true);
         m_Overworld_Pause = m_Overworld.FindAction("Pause", throwIfNotFound: true);
         m_Overworld_SlowMove = m_Overworld.FindAction("SlowMove", throwIfNotFound: true);
+        m_Overworld_ZoomCamera = m_Overworld.FindAction("ZoomCamera", throwIfNotFound: true);
         // Phone
         m_Phone = asset.FindActionMap("Phone", throwIfNotFound: true);
         m_Phone_AppReturn = m_Phone.FindAction("AppReturn", throwIfNotFound: true);
@@ -561,6 +582,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Overworld_ActivateObject;
     private readonly InputAction m_Overworld_Pause;
     private readonly InputAction m_Overworld_SlowMove;
+    private readonly InputAction m_Overworld_ZoomCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "Overworld".
     /// </summary>
@@ -596,6 +618,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Overworld/SlowMove".
         /// </summary>
         public InputAction @SlowMove => m_Wrapper.m_Overworld_SlowMove;
+        /// <summary>
+        /// Provides access to the underlying input action "Overworld/ZoomCamera".
+        /// </summary>
+        public InputAction @ZoomCamera => m_Wrapper.m_Overworld_ZoomCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -640,6 +666,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @SlowMove.started += instance.OnSlowMove;
             @SlowMove.performed += instance.OnSlowMove;
             @SlowMove.canceled += instance.OnSlowMove;
+            @ZoomCamera.started += instance.OnZoomCamera;
+            @ZoomCamera.performed += instance.OnZoomCamera;
+            @ZoomCamera.canceled += instance.OnZoomCamera;
         }
 
         /// <summary>
@@ -669,6 +698,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @SlowMove.started -= instance.OnSlowMove;
             @SlowMove.performed -= instance.OnSlowMove;
             @SlowMove.canceled -= instance.OnSlowMove;
+            @ZoomCamera.started -= instance.OnZoomCamera;
+            @ZoomCamera.performed -= instance.OnZoomCamera;
+            @ZoomCamera.canceled -= instance.OnZoomCamera;
         }
 
         /// <summary>
@@ -965,6 +997,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSlowMove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ZoomCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoomCamera(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Phone" which allows adding and removing callbacks.

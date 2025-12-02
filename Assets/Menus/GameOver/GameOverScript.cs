@@ -44,21 +44,30 @@ public class GameOverScript : MonoBehaviour
 
         while (timePassed < FadePeriod)
         {
-            timePassed += Time.deltaTime;
+            timePassed += Time.unscaledDeltaTime;
             Panel.color = new Color(0, 0, 0, timePassed/FadePeriod);
             yield return null;
         }
         Panel.color = new Color(0, 0, 0, 1);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         Text1.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         Text2.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         Text3.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         Buttons.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         Explinations.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        ClearScreen();
+        CharacterSpeechScript.BroadcastForceGesture("A", "FeetUpIdle");
+        OverworldBehavior.BroadcastBehaviors("A", "judge");
+        CrossfadeScript.ResumeMusic();
+        MusicSelectorScript.RevertOverworldSong();
     }
 }

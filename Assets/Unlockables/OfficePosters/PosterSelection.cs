@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -28,6 +29,13 @@ public class PosterSelection : MonoBehaviour
     public OfficePoster SelectedPoster;
 
     public Material PosterMaterial;
+
+    public List<GameObject> Posters = new List<GameObject>();
+
+    public void Update()
+    {
+        Shader.SetGlobalFloat("_UnscaledTime", Time.unscaledTime);
+    }
 
     public void Start()
     {
@@ -77,6 +85,7 @@ public class PosterSelection : MonoBehaviour
             }
 
             spawned++;
+            Posters.Add(posterButton);
         }
     }
 
