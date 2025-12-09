@@ -14,17 +14,19 @@ public class GameOverScript : MonoBehaviour
 
     public float FadePeriod;
 
-    public void Start()
+    public void Awake()
     {
         ClearScreen();
     }
     public void StartGameOver()
     {
+        gameObject.SetActive(true);
         StartCoroutine(GameoverCoroutine());
     }
 
     public void ClearScreen()
     {
+        gameObject.SetActive(false);
         Panel.gameObject.SetActive(false);
         Panel.color = new Color(0, 0, 0, 0);
         Text1.SetActive(false);
@@ -38,6 +40,7 @@ public class GameOverScript : MonoBehaviour
     IEnumerator GameoverCoroutine()
     {
         ClearScreen();
+        gameObject.SetActive(true);
         Panel.gameObject.SetActive(true);
 
         float timePassed = 0f;

@@ -6,7 +6,7 @@ public class ToggleActive : MonoBehaviour
     public bool StartActive = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         gameObject.SetActive(StartActive);
     }

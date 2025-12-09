@@ -31,9 +31,10 @@ public class PlayerCam : MonoBehaviour
 
     public static PlayerCam Instance;
 
-
     private static float MouseSensitivityMultiplier = 1f;
     private float SlowModeMultiplier = 1f;
+
+    private GameObject TargetActivationObject = null;
 
     private void Awake()
     {
@@ -59,23 +60,12 @@ public class PlayerCam : MonoBehaviour
 
     private void ActivateObjects()
     {
-        if (PhonePositionScript.raised || CursorStateControl.MenuUp || Cursor.lockState == CursorLockMode.Confined)
+        if (!EnableCameraMovement || CursorStateControl.MenuUp || Cursor.lockState == CursorLockMode.Confined) return;
+        if (TargetActivationObject == null) return;
+        ActivatableObjectScript aos = TargetActivationObject.GetComponent<ActivatableObjectScript>();
+        if (aos != null)
         {
-            return;
-        }
-        // Create a ray from the center of the screen
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        RaycastHit hit;
-
-        // Perform the raycast
-        if (Physics.Raycast(ray, out hit, MaxActivationDistance))
-        {
-            // Call a function on the object (like an Activate method)
-            ActivatableObjectScript aos = hit.collider.gameObject.GetComponent<ActivatableObjectScript>();
-            if (aos != null)
-            {
-                aos.Activate();
-            }
+            aos.Activate();
         }
     }
     private void OnDestroy()
@@ -138,5 +128,36 @@ public class PlayerCam : MonoBehaviour
         Vector3 newOrientation = new Vector3 (xRotation, yRotation, 0) + MoveCamera.TotalRumble * Random.insideUnitSphere * 15f;
         transform.rotation = Quaternion.Euler(newOrientation);
         orientation.rotation = Quaternion.Euler(new Vector3(0, yRotation, 0));
+
+
+        // Create a ray from the center of the screen
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        // Perform the raycast
+        if (Physics.Raycast(ray, out hit, MaxActivationDistance))
+        {
+            ActivatableObjectScript aos = hit.collider.gameObject.GetComponent<ActivatableObjectScript>();
+            if (aos != null)
+            {
+                if (TargetActivationObject != null) TargetActivationObject.layer = LayerMask.NameToLayer("Default");
+                TargetActivationObject = hit.collider.gameObject;
+                if(aos.ObjectEnabled) TargetActivationObject.layer = LayerMask.NameToLayer("Outline");
+            } else
+            {
+                if (TargetActivationObject != null)
+                {
+                    TargetActivationObject.layer = LayerMask.NameToLayer("Default");
+                    TargetActivationObject = null;
+                }
+            }
+        } else
+        {
+            if(TargetActivationObject != null)
+            {
+                TargetActivationObject.layer = LayerMask.NameToLayer("Default");
+                TargetActivationObject = null;
+            }
+        }
     }
 }
