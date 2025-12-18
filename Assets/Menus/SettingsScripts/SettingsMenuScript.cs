@@ -47,4 +47,8 @@ public class SettingsMenuScript : MonoBehaviour
     {
         audioMixer.SetFloat("VoiceVolume", newVoiceVolume);
     }
+    public void SetAmbientVolume(float newAmbientVolume)
+    {
+        audioMixer.SetFloat("AmbientVolume", newAmbientVolume);
+    }
 }

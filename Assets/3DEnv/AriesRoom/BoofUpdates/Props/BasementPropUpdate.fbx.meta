@@ -1,0 +1,357 @@
+fileFormatVersion: 2
+guid: ee37494e94f30634bbe313f5af8373a9
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedSheetMaterial
+    second: {fileID: 2100000, guid: d02b7b38756b22a46828d85cec3d59ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlueNeonMaterial
+    second: {fileID: 2100000, guid: 961cea27dfeae7749930c18db57d213a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CouchCushion
+    second: {fileID: 2100000, guid: f9cff2c79b7b0db4c82d2cd03c9118ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CouchCushion2
+    second: {fileID: 2100000, guid: e8852975d2551d049ae0fd020cb20066, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CrateLightMaterial
+    second: {fileID: 2100000, guid: ccafc80d6adbe5248b24367657375450, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkScreen
+    second: {fileID: 2100000, guid: 6493e9ad50c4fb144b7f0b67d1d11b51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkSteelMaterial
+    second: {fileID: 2100000, guid: 67a858c6cf7e7dd42ac4fe2c765e4f7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlockRug
+    second: {fileID: 2100000, guid: 70ee9725c6cd9834c8500979c92cbc16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass&SignsMaterial
+    second: {fileID: 2100000, guid: 84b2c697616666244b4a1757e729cd17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GlassMaterial
+    second: {fileID: 2100000, guid: 1d87e2dd21d3403438790956ea0a0d36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenGlassMaterial
+    second: {fileID: 2100000, guid: 5cd0cc8af81e8fc499e14e43bccfee47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenGoopMaterial
+    second: {fileID: 2100000, guid: 419adf538f8d00d479aa26a25be78397, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenLightMaterial
+    second: {fileID: 2100000, guid: a543982e8e6107e4697b541905180660, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenNeonMaterial
+    second: {fileID: 2100000, guid: 93a670619c2dc394690930be07efd36f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leather
+    second: {fileID: 2100000, guid: 28a54c3275093254b91e2b9e19f02702, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightIronMaterial
+    second: {fileID: 2100000, guid: b3bdc76bb15120346bdc4080871d3fc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LootBoxMaterial
+    second: {fileID: 2100000, guid: 08972db771a9e9941ab551fb22e31aa7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LootBoxMaterial2
+    second: {fileID: 2100000, guid: c04881ba2a20b8d4dbb1726c9560119b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MachineMaterial
+    second: {fileID: 2100000, guid: d992e48cb7903f948a4faecb2b74fd23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MagentaNeonMaterial
+    second: {fileID: 2100000, guid: 8d424d641a9131841b199a92fc453fb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.014
+    second: {fileID: 2100000, guid: 49f4884096af63a42ac4e21765c14719, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinkGlassMaterial
+    second: {fileID: 2100000, guid: 22bb99f868bf9204ea09ac000e3589f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinkGoopMaterial
+    second: {fileID: 2100000, guid: 24ae4921be021614aa9cc88dc9da7284, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinkLightMaterial
+    second: {fileID: 2100000, guid: 56b44f1488d39e745a4fc84f2f6d0243, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinkNeonMaterial
+    second: {fileID: 2100000, guid: a0438091561b88b4da6e02c59f19d362, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PinkRubber
+    second: {fileID: 2100000, guid: f9b57ca5059f48444aebf6677bd148f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoughSteel
+    second: {fileID: 2100000, guid: 1b6ae6638ceb6b04c95fb86415c27af5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SmoothDarkSteel
+    second: {fileID: 2100000, guid: dae2c159516896749833ea8e6cc40b15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TableMaterial
+    second: {fileID: 2100000, guid: eabcc318284fe684a80ed7d6aa3a317c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TealGoopMaterial
+    second: {fileID: 2100000, guid: 2963ff5dbfce0da42be5d5d9ee3d8913, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TealLightMaterial
+    second: {fileID: 2100000, guid: f0a6119e662fed2419735556d3366cfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WeightLiftingMat
+    second: {fileID: 2100000, guid: d0d3247a06e09e84bab957d187d3bf2a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_CiberFluidEmit
+    second: {fileID: 2800000, guid: 3485094f324a388459fe1c7ede898079, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_CiberFluidEmit2
+    second: {fileID: 2800000, guid: 1f1d57fc91784d84d8a2044c8665f5f5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_CiberFluidEmit3
+    second: {fileID: 2800000, guid: 069d31c0953264b47aba2db4d1d882d4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_ClothTexture
+    second: {fileID: 2800000, guid: f92baba7aa51a204e9197aa09da55d00, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_IronCrateTexture
+    second: {fileID: 2800000, guid: 64f048fae327ead4ca8cce3897701cf2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_LootBoxEmit
+    second: {fileID: 2800000, guid: 7b9b4924286a0e24897efcb6581bd7a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_LootBoxTexture
+    second: {fileID: 2800000, guid: 42a844c1f91873746a124b0579be120c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_LootBoxTextureB
+    second: {fileID: 2800000, guid: c49fd336bf6347a459f51e272490aca8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_TableEmit
+    second: {fileID: 2800000, guid: 1946b63565f88db44b5f5880f57f8d0f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: AriesRoom_TableTexture
+    second: {fileID: 2800000, guid: 486adc0839cdfbc40be7eb54940507d4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CopperRoughnessMap
+    second: {fileID: 2800000, guid: 542eb1b8e1e00ce4992c45c4b48e7fe7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HighResRoughness
+    second: {fileID: 2800000, guid: 47458b1944bb9da43a8a4bea39553b01, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Leather
+    second: {fileID: 2800000, guid: 2f2a18312ff8ee1469f9c8c19301827c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RescaleNorms
+    second: {fileID: 2800000, guid: 2ff2a33dd715d1640b9ecd147769d4a7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: RugTexture
+    second: {fileID: 2800000, guid: b8e950f5993e27c4bb7d79024335c92b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: VenomDrip
+    second: {fileID: 2800000, guid: dcf8c30ef0acf634a8078d7985b0c3df, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: VenomDripColor
+    second: {fileID: 2800000, guid: 955dc32003ced6b4996aae42c778d957, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: thingvendingmachine
+    second: {fileID: 2800000, guid: 0a7be692c463bb94a886f253841359c5, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
