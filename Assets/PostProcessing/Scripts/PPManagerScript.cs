@@ -13,6 +13,10 @@ public class PPManagerScript : MonoBehaviour
     public Volume PhonePP;
     public float PhoneFadePeriod = 2f;
 
+    [Header("Standard")]
+    public Volume StandardPP;
+    public float StandardFadePeriod = 2f;
+
     private void Start()
     {
         EmergencyPP.weight = 1;
@@ -42,10 +46,12 @@ public class PPManagerScript : MonoBehaviour
         if (raised)
         {
             StartCoroutine(AdjustPPFilter(PhonePP, 1, EmergencyFadePeriod));
+            StartCoroutine(AdjustPPFilter(StandardPP, 0, EmergencyFadePeriod));
         }
         else
         {
             StartCoroutine(AdjustPPFilter(PhonePP, 0, EmergencyFadePeriod/2f));
+            StartCoroutine(AdjustPPFilter(StandardPP, 1, EmergencyFadePeriod/2f));
         }
     }
 
