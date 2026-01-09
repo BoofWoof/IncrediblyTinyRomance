@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,11 +10,43 @@ public class MessageSendScript : MonoBehaviour
     public float SendPeriodSec = 1f;
     public float FinalMessageSize = 0.1f;
 
+    public Button SubmissionButton;
+    public TMP_Text AuthorText;
+    public GameObject SpecialReply;
+
+    public bool IsSpecial = false;
+
     Vector3 backupPos;
 
     public void Start()
     {
+        SpecialReply.SetActive(false);
+
         backupPos = transform.localPosition;
+
+        IsSpecial = false;
+    }
+
+    public void SetAuthorName(string newName)
+    {
+        AuthorText.text = newName;
+    }
+
+    public void SetButtonText(string newText)
+    {
+        SubmissionButton.GetComponentInChildren<TMP_Text>().text = newText;
+    }
+
+    public void SetNormalResponse()
+    {
+        SpecialReply.SetActive(false);
+        IsSpecial = false;
+    }
+
+    public void SetSpecialResponse()
+    {
+        SpecialReply.SetActive(true);
+        IsSpecial = true;
     }
 
     public void RestartMessage()

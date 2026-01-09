@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
+using System.Linq;
 
 public class PrayerScript : MonoBehaviour
 {
@@ -21,8 +22,7 @@ public class PrayerScript : MonoBehaviour
 
     private int GoodIdx;
 
-    public List<Button> ButtonText;
-    public List<TMP_Text> AuthorText;
+    public List<MessageSendScript> SubmissionButtons;
     public TMP_Text AngyDebug;
 
     public delegate void PrayerSubmittedCallback(bool GoodPrayer);
@@ -51,6 +51,8 @@ public class PrayerScript : MonoBehaviour
     public List<VoiceLineSO> NegativeJudgementAudios;
     public List<int> LastNegativeJudgementIdxs;
     public int UniqueNegativesTillRepeatAllowed;
+
+    public SpecialPrayerData[] SetSpecialPrayers = new SpecialPrayerData[3];
 
     public void ActivateJudgement()
     {
@@ -102,6 +104,8 @@ public class PrayerScript : MonoBehaviour
 
         ProcessPrayers();
         GenerateNewPrayers();
+
+        SPrayerSubmissionScript.OnNewForcedPrayers += OnNewForcedPrayer;
     }
     public void SubmitAnswer(int answerIdx)
     {
@@ -118,7 +122,7 @@ public class PrayerScript : MonoBehaviour
     public IEnumerator SubmitResponse(int answerIdx)
     {
         DisableButtons();
-        AuthorText[answerIdx].text = "";
+        SubmissionButtons[answerIdx].SetAuthorName("");
 
         int actualAnswerIdx = 0;
 
@@ -156,39 +160,75 @@ public class PrayerScript : MonoBehaviour
 
         Responses = responses;
 
-        for (int i = 0; i < ButtonText.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
-            ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
-            AuthorText[i].text = "";
+            SubmissionButtons[i].RestartMessage();
+            SubmissionButtons[i].SetAuthorName("");
         }
-        if (responses.Length == 1)
+
+        List<string> stringResponse = new List<string>();
+        foreach (Response response in responses)
         {
-            ButtonText[0].GetComponentInChildren<TMP_Text>().text = "";
-            ButtonText[0].interactable = false;
-            ButtonText[1].GetComponentInChildren<TMP_Text>().text = responses[0].formattedText.text;
-            ButtonText[1].interactable = true;
-            ButtonText[2].GetComponentInChildren<TMP_Text>().text = "";
-            ButtonText[2].interactable = false;
-        } 
-        else if (responses.Length == 2)
-        {
-            ButtonText[0].GetComponentInChildren<TMP_Text>().text = responses[0].formattedText.text;
-            ButtonText[0].interactable = true;
-            ButtonText[1].GetComponentInChildren<TMP_Text>().text = "";
-            ButtonText[1].interactable = false;
-            ButtonText[2].GetComponentInChildren<TMP_Text>().text = responses[1].formattedText.text;
-            ButtonText[2].interactable = true;
+            stringResponse.Add(response.formattedText.text);
         }
-        else if (responses.Length == 3)
+        CreateVariableLenghtOptions(stringResponse);
+    }
+
+    public void CreateVariableLenghtOptions(List<string> responses, List<string> authors = null)
+    {
+        if (responses.Count == 1)
         {
-            ButtonText[0].GetComponentInChildren<TMP_Text>().text = responses[0].formattedText.text;
-            ButtonText[0].interactable = true;
-            ButtonText[1].GetComponentInChildren<TMP_Text>().text = responses[1].formattedText.text;
-            ButtonText[1].interactable = true;
-            ButtonText[2].GetComponentInChildren<TMP_Text>().text = responses[2].formattedText.text;
-            ButtonText[2].interactable = true;
+            SubmissionButtons[0].SetButtonText("");
+            SubmissionButtons[0].SubmissionButton.interactable = false;
+            SubmissionButtons[0].SetNormalResponse();
+            SubmissionButtons[1].SetButtonText(responses[0]);
+            SubmissionButtons[1].SubmissionButton.interactable = true;
+            SubmissionButtons[1].SetSpecialResponse();
+            SubmissionButtons[2].SetButtonText("");
+            SubmissionButtons[2].SubmissionButton.interactable = false;
+            SubmissionButtons[2].SetNormalResponse();
+            if(authors != null)
+            {
+                SubmissionButtons[1].SetAuthorName(authors[0]);
+            }
+        }
+        else if (responses.Count == 2)
+        {
+            SubmissionButtons[0].SetButtonText(responses[0]);
+            SubmissionButtons[0].SubmissionButton.interactable = true;
+            SubmissionButtons[0].SetSpecialResponse();
+            SubmissionButtons[1].SetButtonText("");
+            SubmissionButtons[1].SubmissionButton.interactable = false;
+            SubmissionButtons[1].SetNormalResponse();
+            SubmissionButtons[2].SetButtonText(responses[1]);
+            SubmissionButtons[2].SubmissionButton.interactable = true;
+            SubmissionButtons[2].SetSpecialResponse();
+            if (authors != null)
+            {
+                SubmissionButtons[0].SetAuthorName(authors[0]);
+                SubmissionButtons[2].SetAuthorName(authors[1]);
+            }
+        }
+        else if (responses.Count == 3)
+        {
+            SubmissionButtons[0].SetButtonText(responses[0]);
+            SubmissionButtons[0].SubmissionButton.interactable = true;
+            SubmissionButtons[0].SetSpecialResponse();
+            SubmissionButtons[1].SetButtonText(responses[1]);
+            SubmissionButtons[1].SubmissionButton.interactable = true;
+            SubmissionButtons[1].SetSpecialResponse();
+            SubmissionButtons[2].SetButtonText(responses[2]);
+            SubmissionButtons[2].SubmissionButton.interactable = true;
+            SubmissionButtons[2].SetSpecialResponse();
+            if (authors != null)
+            {
+                SubmissionButtons[0].SetAuthorName(authors[0]);
+                SubmissionButtons[1].SetAuthorName(authors[1]);
+                SubmissionButtons[2].SetAuthorName(authors[2]);
+            }
         }
     }
+
     public void OnConversationEnd(Transform actor)
     {
         if (!ConversationManagerScript.isMacroConvo) return;
@@ -202,16 +242,17 @@ public class PrayerScript : MonoBehaviour
     IEnumerator SubmitPrayer(int answerIdx)
     {
         FireworkLauncher.ActivateMessage();
-        string answerText = ButtonText[answerIdx].GetComponentInChildren<TMP_Text>().text;
+        string answerText = SubmissionButtons[answerIdx].SubmissionButton.GetComponentInChildren<TMP_Text>().text;
         PrayerFireworkTextScript.ActivateFirework(answerText);
 
-        AuthorText[answerIdx].text = "";
+        SubmissionButtons[answerIdx].SetButtonText("");
+        SubmissionButtons[answerIdx].SetAuthorName("");
         DisableButtons();
 
         yield return new WaitForSeconds(5f);
 
         TotalPrayerCount += 1;
-        if (GoodIdx == answerIdx)
+        if (GoodIdx == answerIdx || SubmissionButtons[answerIdx].SpecialReply)
         {
             Debug.Log("You win!");
             RamAngyLevel -= AngerReduction;
@@ -220,8 +261,15 @@ public class PrayerScript : MonoBehaviour
             GoodPrayerCount++;
 
             int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
-
-            if(JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
+            
+            if(SetSpecialPrayers[answerIdx].SpecialResponse != null)
+            {
+                SPrayerSubmissionScript.WaitingSpecialPrayers.Remove(SetSpecialPrayers[answerIdx]);
+                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", SetSpecialPrayers[answerIdx].SpecialResponse);
+            } else
+            {
+                if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
+            }
         }
         else
         {
@@ -239,8 +287,6 @@ public class PrayerScript : MonoBehaviour
             if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", NegativeJudgementAudios[RandomIdx]);
         }
 
-        AuthorText[answerIdx].text = "";
-
         yield return new WaitForSeconds(WaitForNextPrayerSec);
 
         GenerateNewPrayers();
@@ -254,9 +300,12 @@ public class PrayerScript : MonoBehaviour
     private void DisableButtons()
     {
         //DisableButtons
-        for (int i = 0; i < ButtonText.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
-            ButtonText[i].interactable = false;
+            SubmissionButtons[i].SetButtonText("");
+            SubmissionButtons[i].SetAuthorName("");
+            SubmissionButtons[i].SetNormalResponse();
+            SubmissionButtons[i].SubmissionButton.interactable = false;
         }
     }
 
@@ -277,34 +326,96 @@ public class PrayerScript : MonoBehaviour
         }
     }
 
+    public void OnNewForcedPrayer()
+    {
+        GenerateNewPrayers();
+    }
+
     private void GenerateNewPrayers()
     {
         if (StoryMode) return;
+
+        SetSpecialPrayers = new SpecialPrayerData[3];
+        if (SPrayerSubmissionScript.WaitingForcedPrayers.Count > 0)
+        {
+            SpecialPrayerSetSO targetPrayer = SPrayerSubmissionScript.WaitingForcedPrayers[0];
+            SPrayerSubmissionScript.WaitingForcedPrayers.Remove(targetPrayer);
+
+            List<string> PrayerText = new List<string>();
+            foreach(SpecialPrayerData prayerData in targetPrayer.PrayerOptions)
+            {
+                PrayerText.Add(prayerData.Option);
+            }
+            CreateVariableLenghtOptions(PrayerText);
+
+            if (targetPrayer.PrayerOptions.Length == 1)
+            {
+                SetSpecialPrayers[1] = targetPrayer.PrayerOptions[0];
+            }
+            else if (targetPrayer.PrayerOptions.Length == 2)
+            {
+                SetSpecialPrayers[0] = targetPrayer.PrayerOptions[0];
+                SetSpecialPrayers[2] = targetPrayer.PrayerOptions[1];
+            }
+            else
+            {
+                SetSpecialPrayers[0] = targetPrayer.PrayerOptions[0];
+                SetSpecialPrayers[1] = targetPrayer.PrayerOptions[1];
+                SetSpecialPrayers[2] = targetPrayer.PrayerOptions[2];
+            }
+
+            RestartMessages();
+            return;
+        }
 
         List<string> selectedGoodLine = GetRandomUniqueLines(GoodLines, 1);
         List<string> selectedBadLines = GetRandomUniqueLines(BadLines, 2);
 
         GoodIdx = Random.Range(0, 3);
         int badCount = 0;
-        for (int i = 0; i < ButtonText.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
+            int SpecialPrayerCount = SPrayerSubmissionScript.WaitingSpecialPrayers.Count;
+            if (SPrayerSubmissionScript.WaitingSpecialPrayers.Count > 0)
+            {
+                if(Random.value < 0.9f)
+                {
+                    SpecialPrayerData selectedPrayer = SPrayerSubmissionScript.WaitingSpecialPrayers[Random.Range(0, SpecialPrayerCount)];
+
+                    if (!SetSpecialPrayers.Contains(selectedPrayer))
+                    {
+                        SubmissionButtons[i].SetButtonText(selectedPrayer.Option);
+                        SubmissionButtons[i].SetAuthorName(selectedPrayer.AuthorName);
+                        SubmissionButtons[i].SetSpecialResponse();
+                        SetSpecialPrayers[i] = selectedPrayer;
+
+                        continue;
+                    }
+                }
+            }
+
+
             string[] split;
             if (GoodIdx == i)
             {
                 split = selectedGoodLine[0].Split(" @");
-                ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
-                AuthorText[i].text = split[1];
+                SubmissionButtons[i].SetButtonText(split[0]);
+                SubmissionButtons[i].SetAuthorName(split[1]);
                 continue;
             }
             split = selectedBadLines[badCount].Split(" @");
-            ButtonText[i].GetComponentInChildren<TMP_Text>().text = split[0];
-            AuthorText[i].text = split[1];
+            SubmissionButtons[i].SetButtonText(split[0]);
+            SubmissionButtons[i].SetAuthorName(split[1]);
             badCount++;
         }
+        RestartMessages();
+    }
 
-        for (int i = 0; i < ButtonText.Count; i++)
+    public void RestartMessages()
+    {
+        for (int i = 0; i < 3; i++)
         {
-            ButtonText[i].GetComponent<MessageSendScript>().RestartMessage();
+            SubmissionButtons[i].RestartMessage();
         }
     }
 
