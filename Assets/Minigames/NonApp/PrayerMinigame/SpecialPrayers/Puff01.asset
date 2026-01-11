@@ -17,17 +17,23 @@ MonoBehaviour:
   ForceSelection: 1
   PrayerOptions:
   - Option: Your wool turned pink for a second.
+    AuthorName: 
     GoodPrayer: 1
-    SpecialResponse: {fileID: 11400000, guid: 25f67183eb10f01418c9dc0e77d325d6, type: 2}
+    SpecialResponseChain:
+    - {fileID: 11400000, guid: 67f8498e761be6f4484aac594c144842, type: 2}
     TriggerDialogue: 
     TriggerActivation: 
   - Option: I fucking hate people who vape.
+    AuthorName: 
     GoodPrayer: 0
-    SpecialResponse: {fileID: 11400000, guid: 914266503be1bb4479f9b9444300261a, type: 2}
+    SpecialResponseChain:
+    - {fileID: 11400000, guid: 81af77619ff24f6448d0837426940cd2, type: 2}
     TriggerDialogue: 
     TriggerActivation: 
   - Option: Who turned on the air purifiers!? God, smite them!!!
+    AuthorName: 
     GoodPrayer: 1
-    SpecialResponse: {fileID: 11400000, guid: b61a4cdc267bbe24a8009386c0569f8a, type: 2}
+    SpecialResponseChain:
+    - {fileID: 11400000, guid: 80a0693d64b2cb34b9fa96c03d7f75c4, type: 2}
     TriggerDialogue: 
     TriggerActivation: 

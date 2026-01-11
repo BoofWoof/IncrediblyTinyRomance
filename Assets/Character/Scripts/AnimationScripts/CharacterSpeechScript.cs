@@ -8,6 +8,9 @@ using System.IO;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
+    public bool IsCentralNode = false;
+    public static CharacterSpeechScript CentralNode;
+
     public string SpeakerName;
     public string NickName;
     public bool MacroSpeech = false;
@@ -25,7 +28,8 @@ public class CharacterSpeechScript : MonoBehaviour
 
     private void OnEnable()
     {
-        CharacterSpeechInstances.Add(this);
+        if (IsCentralNode) CentralNode = this;
+        else CharacterSpeechInstances.Add(this);
 
         ConversationManagerScript.instance.GetComponent<DialogueSystemEvents>().conversationEvents.onConversationLine.AddListener(OnConversationLine);
     }
@@ -129,9 +133,30 @@ public class CharacterSpeechScript : MonoBehaviour
     {
         foreach (CharacterSpeechScript c in CharacterSpeechInstances)
         {
+            if (voiceLine.SpeakerOverride.Length > 0) name = voiceLine.SpeakerOverride;
             c.PlaySpeech(name, voiceLine);
         }
     }
+    public static void BroadcastSpeechAttempt(string name, List<VoiceLineSO> voiceLines)
+    {
+        CentralNode.StartCoroutine(SpeakNoDialogueChain(name, voiceLines));
+    }
+
+    public static IEnumerator SpeakNoDialogueChain(string name, List<VoiceLineSO> voiceLines)
+    {
+        foreach (VoiceLineSO voiceLine in voiceLines)
+        {
+            foreach (CharacterSpeechScript c in CharacterSpeechInstances)
+            {
+                string finalName;
+                if (voiceLine.SpeakerOverride.Length > 0) finalName = voiceLine.SpeakerOverride;
+                else finalName = name;
+                if (c.SpeakerName.ToLower() != finalName.ToLower() && c.NickName.ToLower() != finalName.ToLower()) continue;
+                yield return c.SpeakNoDialogue(voiceLine);
+            }
+        }
+    }
+
     public void PlaySpeech(string name, VoiceLineSO voiceLine)
     {
         if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;

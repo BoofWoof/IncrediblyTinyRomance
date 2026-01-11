@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -26,6 +21,7 @@ public class PlayerCam : MonoBehaviour
 
     [Header("Activation")]
     public float MaxActivationDistance = 2f;
+    private GameObject TargetActivationObject = null;
 
     public static bool EnableCameraMovement = true;
 
@@ -34,7 +30,6 @@ public class PlayerCam : MonoBehaviour
     private static float MouseSensitivityMultiplier = 1f;
     private float SlowModeMultiplier = 1f;
 
-    private GameObject TargetActivationObject = null;
 
     private void Awake()
     {
@@ -140,15 +135,24 @@ public class PlayerCam : MonoBehaviour
             ActivatableObjectScript aos = hit.collider.gameObject.GetComponent<ActivatableObjectScript>();
             if (aos != null)
             {
-                if (TargetActivationObject != null) TargetActivationObject.layer = LayerMask.NameToLayer("Default");
+                if (TargetActivationObject != null)
+                {
+                    TargetActivationObject.layer = LayerMask.NameToLayer("Default");
+                    ReticleScript.instance.SetDefault();
+                }
                 TargetActivationObject = hit.collider.gameObject;
-                if(aos.ObjectEnabled) TargetActivationObject.layer = LayerMask.NameToLayer("Outline");
+                if (aos.ObjectEnabled)
+                {
+                    TargetActivationObject.layer = LayerMask.NameToLayer("Outline");
+                    ReticleScript.instance.SetInspector();
+                }
             } else
             {
                 if (TargetActivationObject != null)
                 {
                     TargetActivationObject.layer = LayerMask.NameToLayer("Default");
                     TargetActivationObject = null;
+                    ReticleScript.instance.SetDefault();
                 }
             }
         } else
@@ -157,7 +161,15 @@ public class PlayerCam : MonoBehaviour
             {
                 TargetActivationObject.layer = LayerMask.NameToLayer("Default");
                 TargetActivationObject = null;
+                ReticleScript.instance.SetDefault();
             }
+        }
+        if(!Physics.Raycast(ray, 20))
+        {
+            BigCameraPoint.instance.ScanForTarget();
+        } else
+        {
+            BigCameraPoint.instance.Clear();
         }
     }
 }

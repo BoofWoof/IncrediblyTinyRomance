@@ -42,5 +42,11 @@ public class SPrayerSubmissionScript : MonoBehaviour
             }
         }
         Submitted = true;
+
+        ActivatableObjectScript aoS = GetComponent<ActivatableObjectScript>();
+        if(aoS != null)
+        {
+            Destroy(aoS);
+        }
     }
 }

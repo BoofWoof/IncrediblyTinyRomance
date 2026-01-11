@@ -262,10 +262,10 @@ public class PrayerScript : MonoBehaviour
 
             int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
             
-            if(SetSpecialPrayers[answerIdx].SpecialResponse != null)
+            if(SetSpecialPrayers[answerIdx].SpecialResponseChain != null && SetSpecialPrayers[answerIdx].SpecialResponseChain.Count > 0)
             {
                 SPrayerSubmissionScript.WaitingSpecialPrayers.Remove(SetSpecialPrayers[answerIdx]);
-                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", SetSpecialPrayers[answerIdx].SpecialResponse);
+                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", SetSpecialPrayers[answerIdx].SpecialResponseChain);
             } else
             {
                 if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);

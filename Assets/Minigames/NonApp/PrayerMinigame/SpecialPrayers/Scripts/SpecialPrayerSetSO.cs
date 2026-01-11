@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -7,7 +8,7 @@ public struct SpecialPrayerData
     public string Option;
     public string AuthorName;
     public bool GoodPrayer;
-    public VoiceLineSO SpecialResponse;
+    public List<VoiceLineSO> SpecialResponseChain;
     public string TriggerDialogue;
     public string TriggerActivation;
 }

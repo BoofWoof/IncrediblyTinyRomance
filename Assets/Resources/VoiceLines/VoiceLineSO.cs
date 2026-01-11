@@ -10,4 +10,6 @@ public class VoiceLineSO : ScriptableObject
     public float FocusLevel = 1;
     public float PauseBeforeStart = 0;
     public float PauseAfterEnd = 0;
+
+    public string SpeakerOverride;
 }

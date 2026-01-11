@@ -20,6 +20,8 @@ MonoBehaviour:
       energy?
     AuthorName: nEEd
     GoodPrayer: 1
-    SpecialResponse: {fileID: 11400000, guid: d577d1faaca260045b2d054cc371a534, type: 2}
+    SpecialResponseChain:
+    - {fileID: 11400000, guid: e5eac621adb531a47bcd881db1cfc5b5, type: 2}
+    - {fileID: 11400000, guid: 42ecb9ef9bc7ef74ab224279d71d9186, type: 2}
     TriggerDialogue: 
     TriggerActivation: 
