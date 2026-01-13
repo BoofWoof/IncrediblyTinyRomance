@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,11 +7,14 @@ public class BigCameraPoint : MonoBehaviour
     public float MaxActivationDistance = 5f;
     private GameObject TargetActivationObject = null;
 
+    public static int QuestionsAvailable = 0;
+
     public static BigCameraPoint instance;
 
     public void OnEnable()
     {
         instance = this;
+        Lua.RegisterFunction("AddQuestion", this, SymbolExtensions.GetMethodInfo(() => AddQuestion()));
     }
 
     public void ActivateObjects(InputAction.CallbackContext context)
@@ -22,7 +26,13 @@ public class BigCameraPoint : MonoBehaviour
         if (aos != null)
         {
             aos.Activate();
+            QuestionsAvailable--;
         }
+    }
+
+    public void AddQuestion()
+    {
+        QuestionsAvailable++;
     }
 
     public void Clear()
@@ -37,6 +47,16 @@ public class BigCameraPoint : MonoBehaviour
     // Update is called once per frame
     public void ScanForTarget()
     {
+        if(QuestionsAvailable <= 0)
+        {
+            if (TargetActivationObject != null)
+            {
+                TargetActivationObject = null;
+                ReticleScript.instance.SetDefault();
+            }
+            return;
+        }
+
         // Create a ray from the center of the screen
         Ray ray = GetComponent<Camera>().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;

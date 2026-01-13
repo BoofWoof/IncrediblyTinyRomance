@@ -10,11 +10,15 @@ public class ActivatableObjectScript : MonoBehaviour
     public UnityEvent onActivate;
 
     public bool ObjectEnabled = true;
+
+    public bool OneTimeTrigger = false;
     public void Activate()
     {
         if (!ObjectEnabled) return;
 
         StartCoroutine(ActivationWait());
+
+        if (OneTimeTrigger) ObjectEnabled = false;
     }
 
     IEnumerator ActivationWait()
