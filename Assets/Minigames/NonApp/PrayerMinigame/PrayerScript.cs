@@ -401,11 +401,13 @@ public class PrayerScript : MonoBehaviour
                 split = selectedGoodLine[0].Split(" @");
                 SubmissionButtons[i].SetButtonText(split[0]);
                 SubmissionButtons[i].SetAuthorName(split[1]);
+                SubmissionButtons[i].SetNormalResponse();
                 continue;
             }
             split = selectedBadLines[badCount].Split(" @");
             SubmissionButtons[i].SetButtonText(split[0]);
             SubmissionButtons[i].SetAuthorName(split[1]);
+            SubmissionButtons[i].SetNormalResponse();
             badCount++;
         }
         RestartMessages();
