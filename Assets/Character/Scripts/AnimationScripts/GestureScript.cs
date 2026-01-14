@@ -113,6 +113,12 @@ public class GestureScript : MonoBehaviour
             case "CheckPhone":
                 CharacterAnimator.SetTrigger("CheckPhone");
                 break;
+            case "PointRight":
+                CharacterAnimator.SetTrigger("PointRight");
+                break;
+            case "TapChest":
+                CharacterAnimator.SetTrigger("TapChest");
+                break;
         }
     }
 

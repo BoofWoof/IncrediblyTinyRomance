@@ -69421,7 +69421,7 @@ MonoBehaviour:
       - originConversationID: 30
         originDialogueID: 83
         destinationConversationID: 30
-        destinationDialogueID: 84
+        destinationDialogueID: 137
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -72601,8 +72601,67 @@ MonoBehaviour:
         y: 7275.177
         width: 160
         height: 30
+    - id: 137
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 13
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: i recently had an idea
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 30
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 30
+        originDialogueID: 137
+        destinationConversationID: 30
+        destinationDialogueID: 85
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 1276.2351
+        y: 3755.5295
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 7.058838, y: 6792.4365}
+    canvasScrollPosition: {x: 487.05896, y: 3534.7898}
     canvasZoom: 0.85000014
   syncInfo:
     syncActors: 0

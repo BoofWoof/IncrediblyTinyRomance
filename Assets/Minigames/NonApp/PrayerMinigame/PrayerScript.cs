@@ -252,7 +252,7 @@ public class PrayerScript : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         TotalPrayerCount += 1;
-        if (GoodIdx == answerIdx || SubmissionButtons[answerIdx].SpecialReply)
+        if (GoodIdx == answerIdx || SubmissionButtons[answerIdx].IsSpecial)
         {
             Debug.Log("You win!");
             RamAngyLevel -= AngerReduction;
