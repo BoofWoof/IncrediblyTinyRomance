@@ -26,6 +26,11 @@ public class TimeList<T> : IEnumerable
         set => _list[index] = value;
     }
 
+    public int GetSize()
+    {
+        return _list.Count;
+    }
+
     // Assumes that you don't go backwards in time.
     public (TimeMarker<T> low, TimeMarker<T> high) GetNearestData(float time)
     {

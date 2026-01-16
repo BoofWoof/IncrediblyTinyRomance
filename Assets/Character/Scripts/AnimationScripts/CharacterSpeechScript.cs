@@ -226,7 +226,7 @@ public class CharacterSpeechScript : MonoBehaviour
     {
         AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource.clip == null) Debug.LogError("NO AUDIO FILE ASSIGNED TO DIALOGUE");
-        if(!audioSource.isPlaying && (audioSource.timeSamples >= audioSource.clip.samples || audioSource.timeSamples == 0)) return false;
+        if(!audioSource.isPlaying && (audioSource.timeSamples >= audioSource.clip.samples || audioSource.timeSamples == 0) && MenuTrigger.GetMenuCount() == 0) return false;
 
         return true;
     }

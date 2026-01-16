@@ -24,6 +24,11 @@ public class MenuTrigger : MonoBehaviour
         Debug.Log("MenuCount: " + MenuOpenCount.ToString());
     }
 
+    public static int GetMenuCount()
+    {
+        return MenuOpenCount;
+    }
+
     public void UnPauseGame()
     {
         AudioListener.pause = false; // Mute audio when losing focus
