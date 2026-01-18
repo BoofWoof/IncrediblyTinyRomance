@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class GameOverScript : MonoBehaviour
 {
@@ -39,8 +38,8 @@ public class GameOverScript : MonoBehaviour
 
     IEnumerator GameoverCoroutine()
     {
-        ClearScreen();
-        gameObject.SetActive(true);
+        Debug.Log("GameoverStarted");
+
         Panel.gameObject.SetActive(true);
 
         float timePassed = 0f;
@@ -48,6 +47,7 @@ public class GameOverScript : MonoBehaviour
         while (timePassed < FadePeriod)
         {
             timePassed += Time.unscaledDeltaTime;
+            Debug.Log(timePassed);
             Panel.color = new Color(0, 0, 0, timePassed/FadePeriod);
             yield return null;
         }

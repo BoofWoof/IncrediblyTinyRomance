@@ -17,6 +17,12 @@ public class PipeStackEditor : Editor
             SceneView.RepaintAll();
         }
 
+        if (GUILayout.Button("Set Normal With Caps"))
+        {
+            pipeScript.SetNormalWithCaps();
+            SceneView.RepaintAll();
+        }
+
         if (GUILayout.Button("Set Cap"))
         {
             pipeScript.SetCap();

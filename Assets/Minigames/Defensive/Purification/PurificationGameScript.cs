@@ -18,6 +18,9 @@ struct VentRouteData
 }
 public class PurificationGameScript : MonoBehaviour
 {
+    public static PurificationGameScript instance;
+    public static PurificationHolderScript associatedLevelHolder;
+
     public PurificationLevelPacksSO CurrentLevelPack;
     public int CurrentLevelInPack = 0;
 
@@ -34,8 +37,14 @@ public class PurificationGameScript : MonoBehaviour
 
     public void Start()
     {
+        instance = this;
         PipeStackScript.VentRotationEvent += UpdatePipeRoutes;
         PipeStackScript.VentRotationStartEvent += VentRotationAS.Play;
+    }
+
+    public static void SetLevelSet(PurificationLevelPacksSO newLevelPack)
+    {
+        instance.CurrentLevelPack = newLevelPack;
     }
 
     public void StartGame()

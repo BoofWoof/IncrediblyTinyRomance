@@ -46,6 +46,7 @@ public class VentGridEditor : Editor
                 newPipeData.PipeTypeID = pipeStackScript.PipeTypeIdx;
                 newPipeData.Rotations = pipeStackScript.RotationTracker;
 
+                newPipeData.isNormalWithCaps = pipeStackScript.isNormalWithCaps;
                 newPipeData.isCap = pipeStackScript.isCapped;
                 newPipeData.isSource = pipeStackScript.isSource;
                 newPipeData.isSink = pipeStackScript.isGoal;

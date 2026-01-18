@@ -15,10 +15,6 @@ public class AriesAnimationTriggers : MonoBehaviour
     {
         PushupEventScript.Pushup();
     }
-    public void Puff()
-    {
-        PuffSystem.Play();
-    }
 
     public void SetMood(float newAnger)
     {
@@ -32,5 +28,9 @@ public class AriesAnimationTriggers : MonoBehaviour
     public void StartPuffAttack()
     {
         PurificationGame.StartGame();
+    }
+    public void Puff()
+    {
+        PuffSystem.Play();
     }
 }

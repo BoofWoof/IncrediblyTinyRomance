@@ -117,6 +117,7 @@ public class VentGridScript : MonoBehaviour
 
             pipeStackScript.RotationTracker = pipeData.Rotations;
 
+            pipeStackScript.isNormalWithCaps = pipeData.isNormalWithCaps;
             pipeStackScript.isCapped = pipeData.isCap;
             pipeStackScript.isSource = pipeData.isSource;
             pipeStackScript.isGoal = pipeData.isSink;

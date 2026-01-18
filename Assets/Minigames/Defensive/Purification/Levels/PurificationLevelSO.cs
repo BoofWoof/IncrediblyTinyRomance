@@ -7,6 +7,7 @@ public struct PipeData
     public int PipeTypeID;
     public int Rotations;
 
+    public bool isNormalWithCaps;
     public bool isCap;
     public bool isSource;
     public bool isSink;

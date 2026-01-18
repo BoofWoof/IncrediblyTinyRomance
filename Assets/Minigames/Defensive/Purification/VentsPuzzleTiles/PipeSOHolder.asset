@@ -15,6 +15,7 @@ MonoBehaviour:
   PipeStructs:
   - PipeSprite: {fileID: 0}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 0}
     SourceVersion: {fileID: 0}
     SinkVersion: {fileID: 0}
     CapVersion: {fileID: 0}
@@ -31,6 +32,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: e22fb0d645438d8449d7dd66b79503c5, type: 3}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 5b31a64464871d74d8ae36843dd9810e, type: 3}
     SinkVersion: {fileID: 21300000, guid: 2f49ec714c7bb064dbbdac8bea925448, type: 3}
     CapVersion: {fileID: 21300000, guid: 64165b07685a8b04a9599d8d9420f950, type: 3}
@@ -47,6 +49,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: b1824187cc2d2aa428ddc8d4e51e0638, type: 3}
     SecondaryPipeSprite: {fileID: 21300000, guid: 154cbe1d560fd72409f771c115b26df3, type: 3}
+    SecondaryCapSprite: {fileID: 0}
     SourceVersion: {fileID: 0}
     SinkVersion: {fileID: 0}
     CapVersion: {fileID: 0}
@@ -63,6 +66,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: 43c781ce1e242b848bfe2cb15aaee2cf, type: 3}
     SecondaryPipeSprite: {fileID: 21300000, guid: 07cd143ce86d2e0468b420a317c00f30, type: 3}
+    SecondaryCapSprite: {fileID: 0}
     SourceVersion: {fileID: 0}
     SinkVersion: {fileID: 0}
     CapVersion: {fileID: 0}
@@ -79,6 +83,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: 43c781ce1e242b848bfe2cb15aaee2cf, type: 3}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 21300000, guid: 40e1da3539b67ac4cb76f9a77d1c6aa2, type: 3}
     SourceVersion: {fileID: 21300000, guid: 23a8a1dbfc5beb7428e99f6e71415efd, type: 3}
     SinkVersion: {fileID: 21300000, guid: d60e122ddb676c342977f89baca62830, type: 3}
     CapVersion: {fileID: 21300000, guid: ef02dc6dd6db94c48ae8b21e72ac2b5e, type: 3}
@@ -95,6 +100,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: 154cbe1d560fd72409f771c115b26df3, type: 3}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 21300000, guid: 90f81acff5173ff49a6f2cbf341416dd, type: 3}
     SourceVersion: {fileID: 21300000, guid: 51c77db2fcc119c46a1846d35e661ba8, type: 3}
     SinkVersion: {fileID: 21300000, guid: 67e14208b3f608e4882fa5d102ec97f8, type: 3}
     CapVersion: {fileID: 21300000, guid: db1127605ec5d454eb299214766e0b2f, type: 3}
@@ -111,6 +117,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: fd81f0f518f3da343bbe8afe1ef33f3c, type: 3}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 21300000, guid: 4d6cb6a324301744f8809a834b9171b0, type: 3}
     SourceVersion: {fileID: 21300000, guid: 0c7db0d8f4d56954187060cb8bdc7e12, type: 3}
     SinkVersion: {fileID: 21300000, guid: 5eca1a3e2c52d63428dab1d7fae47883, type: 3}
     CapVersion: {fileID: 21300000, guid: 822a86173d382ec449698211c8ddcc48, type: 3}
@@ -127,6 +134,7 @@ MonoBehaviour:
     ForceCapped: 0
   - PipeSprite: {fileID: 21300000, guid: decef8565d4794c45b898c0cba231293, type: 3}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 0}
     SourceVersion: {fileID: 21300000, guid: 65b4835308839e441b64aff91cded686, type: 3}
     SinkVersion: {fileID: 21300000, guid: be638006b8861f243bfd2d465615fe40, type: 3}
     CapVersion: {fileID: 21300000, guid: decef8565d4794c45b898c0cba231293, type: 3}

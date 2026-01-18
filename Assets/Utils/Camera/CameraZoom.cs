@@ -27,6 +27,16 @@ public class CameraZoom : MonoBehaviour
         CurrentFOV = Mathf.MoveTowards(CurrentFOV, TargetFOV, FOVSpeed * Time.deltaTime);
 
         TargetCamera.fieldOfView = CurrentFOV;
+        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.CompareTag("NoZoom"))
+            {
+                TargetCamera.fieldOfView = DefaultFOV;
+            }
+        }
     }
 
     public void ZoomChange(InputAction.CallbackContext context)

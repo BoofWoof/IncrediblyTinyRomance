@@ -55,6 +55,7 @@ public class PipeStackScript : MonoBehaviour
     public bool canRotate = true;
     public bool fanSpinning = false;
 
+    public bool isNormalWithCaps = false;
     public bool isGoal = false;
     public bool isSource = false;
     public bool isCapped = false;
@@ -103,6 +104,7 @@ public class PipeStackScript : MonoBehaviour
         isCapped = true;
         isGoal = false;
         isSource = true;
+        isNormalWithCaps = false;
 
         Pipe.GetComponent<Image>().sprite = PipeStructData.SourceVersion;
         PipeSecondLayer.SetActive(false);
@@ -128,6 +130,7 @@ public class PipeStackScript : MonoBehaviour
         isCapped = true;
         isGoal = true;
         isSource = false;
+        isNormalWithCaps = false;
 
         Pipe.GetComponent<Image>().sprite = PipeStructData.SinkVersion;
         PipeSecondLayer.SetActive(false);
@@ -152,6 +155,7 @@ public class PipeStackScript : MonoBehaviour
         isCapped = true;
         isGoal = false;
         isSource = false;
+        isNormalWithCaps = false;
 
         Pipe.GetComponent<Image>().sprite = PipeStructData.CapVersion;
         PipeSecondLayer.SetActive(false);
@@ -173,6 +177,7 @@ public class PipeStackScript : MonoBehaviour
         isCapped = PipeStructData.ForceCapped;
         isGoal = false;
         isSource = false;
+        isNormalWithCaps = false;
 
         if (PipeStructData.ShowFan)
         {
@@ -210,6 +215,53 @@ public class PipeStackScript : MonoBehaviour
 
         ConnectionRotationUpdate();
         CapOverride();
+    }
+
+    public void SetNormalWithCaps()
+    {
+        if (PipeTypeIdx <= 3 || PipeTypeIdx == 7) return;
+
+        isNormalWithCaps = true;
+        isCapped = false;
+        isGoal = false;
+        isSource = false;
+
+        if (PipeStructData.ShowFan)
+        {
+            FanLayer.SetActive(true);
+        }
+        else
+        {
+            FanLayer.SetActive(false);
+        }
+
+        Pipe.SetActive(true);
+        Pipe.GetComponent<Image>().sprite = PipeStructData.PipeSprite;
+
+        Image secondaryImage = PipeSecondLayer.GetComponent<Image>();
+        PipeSecondLayer.SetActive(true);
+        secondaryImage.sprite = PipeStructData.SecondaryCapSprite;
+
+        GridSource.Sources.Remove(this);
+        GridSource.Goals.Remove(this);
+
+        SourceParticles.SetActive(false);
+        SinkParticles.SetActive(false);
+
+        ConnectionRotationUpdate();
+        CloseOpenings();
+    }
+
+    public void CloseOpenings()
+    {
+        if (!isNormalWithCaps) return;
+        if (UpConnection == PipeConnectionType.Closed) UpConnection = PipeConnectionType.Capped;
+
+        if (RightConnection == PipeConnectionType.Closed) RightConnection = PipeConnectionType.Capped;
+
+        if (DownConnection == PipeConnectionType.Closed) DownConnection = PipeConnectionType.Capped;
+
+        if (LeftConnection == PipeConnectionType.Closed) LeftConnection = PipeConnectionType.Capped;
     }
 
     public void CapOverride()
@@ -281,12 +333,13 @@ public class PipeStackScript : MonoBehaviour
         if (isGoal) SinkParticles.SetActive(lightActive);
         if (isSource || fanSpinning) FanLayer.transform.Rotate(0, 0, - Time.deltaTime * 1000f);
 
+        int mask = ~(1 << LayerMask.NameToLayer("ZoomRaycast"));
         if (Input.GetMouseButtonDown(0)) // Right click
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 5, mask))
             {
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
@@ -300,7 +353,7 @@ public class PipeStackScript : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 5, mask))
             {
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
@@ -369,7 +422,8 @@ public class PipeStackScript : MonoBehaviour
         Rotating = false;
 
         ConnectionRotationUpdate();
-        if(isCapped) CapOverride();
+        CapOverride();
+        CloseOpenings();
 
         VentRotationEvent?.Invoke();
     }
@@ -388,6 +442,7 @@ public class PipeStackScript : MonoBehaviour
         if (isSource) SetSource();
         else if (isGoal) SetSink();
         else if (isCapped) SetCap();
+        else if (isNormalWithCaps) SetNormalWithCaps();
         else SetNormal();
 
         if (!pipeData.EnableBackdrop) HideBackdrop();

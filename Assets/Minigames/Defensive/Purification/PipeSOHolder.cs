@@ -19,6 +19,7 @@ public struct PipeStruct
     [Header("Sprites")]
     public Sprite PipeSprite;
     public Sprite SecondaryPipeSprite;
+    public Sprite SecondaryCapSprite;
 
     [Header("Sprite Alts")]
     public Sprite SourceVersion;
