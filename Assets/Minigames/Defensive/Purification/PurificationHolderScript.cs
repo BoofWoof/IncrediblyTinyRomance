@@ -8,8 +8,7 @@ public class PurificationHolderScript : MonoBehaviour
     public string SetName;
 
     public PurificationLevelPacksSO AssociatedLevels;
-    public UnityEvent HallucinationTriggers;
-    public UnityEvent HallucinationResets;
+    public List<BroadcastStruct> HallucinationResets;
 
     public static Dictionary<string, PurificationHolderScript> LevelHolders;
 
@@ -30,11 +29,6 @@ public class PurificationHolderScript : MonoBehaviour
     {
         PurificationGameScript.associatedLevelHolder = this;
         PurificationGameScript.SetLevelSet(AssociatedLevels);
-    }
-
-    public void Resets()
-    {
-        HallucinationResets?.Invoke();
     }
 
 }

@@ -25,6 +25,7 @@ public class PurificationLevelSO : ScriptableObject
     public float SquareSize;
 
     [Header("Events")]
+    public List<BroadcastStruct> HallucinationBroadcasts;
     public string ConnectedCutsceneName;
     public GameObject OnScreenData;
     public Vector3 OnScreenDataPos;

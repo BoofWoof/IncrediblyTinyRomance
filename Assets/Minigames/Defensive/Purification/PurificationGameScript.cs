@@ -61,6 +61,11 @@ public class PurificationGameScript : MonoBehaviour
 
     public void StartLevel()
     {
+        if(CurrentLevelPack.Levels[CurrentLevelInPack].HallucinationBroadcasts.Count > 0)
+        {
+            PlayerBlinkScript.StartBlink(CurrentLevelPack.Levels[CurrentLevelInPack].HallucinationBroadcasts);
+        }
+
         VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
         UpdatePipeRoutes();
         PipeStackScript.GlobalRotationAllowed = true;
@@ -151,7 +156,7 @@ public class PurificationGameScript : MonoBehaviour
 
                     foreach (BADdirections expansionDirection2 in possibleExpansionDirection)
                     {
-                        Debug.Log(expansionDirection2);
+                        //Debug.Log(expansionDirection2);
                         WaitingExpansion newWaitingExpansion2 = new WaitingExpansion();
                         newWaitingExpansion2.expansionDirection = expansionDirection2;
                         newWaitingExpansion2.sourceVent = nextVent;
@@ -268,6 +273,11 @@ public class PurificationGameScript : MonoBehaviour
 
             ChannelChanger.DangerActive = false;
             ChannelChanger.ActiveChannelChanger.LockSwitch();
+
+            if (associatedLevelHolder.HallucinationResets.Count > 0)
+            {
+                PlayerBlinkScript.StartBlink(associatedLevelHolder.HallucinationResets);
+            }
         }
     }
 

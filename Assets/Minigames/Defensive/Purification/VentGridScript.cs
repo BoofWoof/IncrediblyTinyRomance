@@ -50,9 +50,11 @@ public class VentGridScript : MonoBehaviour
             NewVentRect.localScale = Vector3.one;
             NewVentRect.localRotation = Quaternion.identity;
 
-            NewVentRect.sizeDelta = new Vector2(TileSize, TileSize);
+            //NewVentRect.sizeDelta = new Vector2(TileSize, TileSize);
+            NewVentRect.localScale = Vector3.one * TileSize / 300f;
             BoxCollider NewVentBoxCollider = NewVent.GetComponent<BoxCollider>();
-            NewVentBoxCollider.size = new Vector3(TileSize, TileSize, NewVentBoxCollider.size.z);
+            //NewVentBoxCollider.size = new Vector3(TileSize, TileSize, NewVentBoxCollider.size.z);
+            NewVentBoxCollider.size = new Vector3(300, 300, NewVentBoxCollider.size.z);
 
             (float xPos, float yPos) = IdxToPos(i);
             NewVentRect.anchoredPosition = new Vector2(xPos, yPos);
@@ -104,9 +106,11 @@ public class VentGridScript : MonoBehaviour
             NewVentRect.localScale = Vector3.one;
             NewVentRect.localRotation = Quaternion.identity;
 
-            NewVentRect.sizeDelta = new Vector2(TileSize, TileSize);
+            //NewVentRect.sizeDelta = new Vector2(TileSize, TileSize);
+            NewVentRect.localScale = Vector3.one * TileSize / 300f;
             BoxCollider NewVentBoxCollider = NewVent.GetComponent<BoxCollider>();
-            NewVentBoxCollider.size = new Vector3(TileSize, TileSize, NewVentBoxCollider.size.z);
+            //NewVentBoxCollider.size = new Vector3(TileSize, TileSize, NewVentBoxCollider.size.z);
+            NewVentBoxCollider.size = new Vector3(300, 300, NewVentBoxCollider.size.z);
 
             (float xPos, float yPos) = IdxToPos(i);
             NewVentRect.anchoredPosition = new Vector2(xPos, yPos);

@@ -5158,6 +5158,7 @@ MonoBehaviour:
   PipeStructData:
     PipeSprite: {fileID: 0}
     SecondaryPipeSprite: {fileID: 0}
+    SecondaryCapSprite: {fileID: 0}
     SourceVersion: {fileID: 0}
     SinkVersion: {fileID: 0}
     CapVersion: {fileID: 0}
@@ -5189,6 +5190,7 @@ MonoBehaviour:
   LeftLeakParticles: {fileID: 3950586462773709655}
   canRotate: 1
   fanSpinning: 0
+  isNormalWithCaps: 0
   isGoal: 0
   isSource: 0
   isCapped: 0
@@ -5259,10 +5261,10 @@ RectTransform:
   - {fileID: 6826526742028250394}
   m_Father: {fileID: 4412140516188564233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -95.5}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -200, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3590394668481918919
 GameObject:
@@ -5370,10 +5372,10 @@ RectTransform:
   - {fileID: 5308311211617931687}
   m_Father: {fileID: 4412140516188564233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.992}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -96.9, y: -0.8}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -96.899994, y: -0.80000305}
+  m_SizeDelta: {x: -200, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4366340647332017225
 GameObject:
@@ -5518,10 +5520,10 @@ RectTransform:
   - {fileID: 3073985136886774165}
   m_Father: {fileID: 4412140516188564233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -179.987}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 97.2}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -200, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7075294106029800998
 GameObject:
@@ -5636,10 +5638,10 @@ RectTransform:
   - {fileID: 1338001893926261483}
   m_Father: {fileID: 4412140516188564233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -269.984}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 100.3, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -200, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8334783325848549893
 GameObject:

@@ -255,13 +255,26 @@ public class PipeStackScript : MonoBehaviour
     public void CloseOpenings()
     {
         if (!isNormalWithCaps) return;
-        if (UpConnection == PipeConnectionType.Closed) UpConnection = PipeConnectionType.Capped;
+        if (UpConnection == PipeConnectionType.Closed) {
+            UpConnection = PipeConnectionType.Capped;
+            UpSecondary = true;
+        }
 
-        if (RightConnection == PipeConnectionType.Closed) RightConnection = PipeConnectionType.Capped;
+        if (RightConnection == PipeConnectionType.Closed) {
+            RightConnection = PipeConnectionType.Capped;
+            RightSecondary = true;
+        }
 
-        if (DownConnection == PipeConnectionType.Closed) DownConnection = PipeConnectionType.Capped;
+        if (DownConnection == PipeConnectionType.Closed) {
+            DownConnection = PipeConnectionType.Capped;
+            DownSecondary = true;
+        }
 
-        if (LeftConnection == PipeConnectionType.Closed) LeftConnection = PipeConnectionType.Capped;
+        if (LeftConnection == PipeConnectionType.Closed)
+        {
+            LeftConnection = PipeConnectionType.Capped;
+            LeftSecondary = true;
+        }
     }
 
     public void CapOverride()
@@ -579,7 +592,7 @@ public class PipeStackScript : MonoBehaviour
                 expansionList.Add(BADdirections.LEFT);
                 break;
             case PipeConnectionType.All:
-                expansionList = GetNullExpansions();
+                expansionList = GetNullExpansions(false);
                 expansionList.Remove(fumeEntranceVelocity.Flipped());
                 break;
         }
@@ -587,14 +600,22 @@ public class PipeStackScript : MonoBehaviour
         return expansionList;
     }
 
-    private List<BADdirections> GetNullExpansions()
+    private List<BADdirections> GetNullExpansions(bool allowCapped = true)
     {
         List<BADdirections> expansionList = new List<BADdirections>();
-
-        if (UpConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.UP);
-        if (DownConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.DOWN);
-        if (LeftConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.LEFT);
-        if (RightConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.RIGHT);
+        if (allowCapped)
+        {
+            if (UpConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.UP);
+            if (DownConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.DOWN);
+            if (LeftConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.LEFT);
+            if (RightConnection != PipeConnectionType.Closed) expansionList.Add(BADdirections.RIGHT);
+        } else
+        {
+            if (UpConnection != PipeConnectionType.Closed && UpConnection != PipeConnectionType.Capped) expansionList.Add(BADdirections.UP);
+            if (DownConnection != PipeConnectionType.Closed && DownConnection != PipeConnectionType.Capped) expansionList.Add(BADdirections.DOWN);
+            if (LeftConnection != PipeConnectionType.Closed && LeftConnection != PipeConnectionType.Capped) expansionList.Add(BADdirections.LEFT);
+            if (RightConnection != PipeConnectionType.Closed && RightConnection != PipeConnectionType.Capped) expansionList.Add(BADdirections.RIGHT);
+        }
 
         return expansionList;
     }

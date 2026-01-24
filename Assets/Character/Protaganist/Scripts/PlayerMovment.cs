@@ -88,7 +88,7 @@ public class PlayerMovment : MonoBehaviour
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * SpeedMultiplier, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * Mathf.Sqrt(transform.lossyScale.x) * SpeedMultiplier, ForceMode.Force);
         if(rb.linearVelocity.magnitude > 0.1f)
         {
             if(!WalkingSounds.isPlaying) WalkingSounds.Play();

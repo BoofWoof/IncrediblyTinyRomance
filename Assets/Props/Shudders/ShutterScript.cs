@@ -29,6 +29,8 @@ public class ShutterScript : MonoBehaviour
 
     public static ShutterScript instance;
 
+    public bool ForceShutdown = false;
+
     public void Awake()
     {
         instance = this;
@@ -42,6 +44,20 @@ public class ShutterScript : MonoBehaviour
             animator.Play(animator.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, 1f);
             animator.Update(0f); // Force immediate update
         };
+    }
+
+    public void ForceShutterLockdownToggle()
+    {
+        ForceShutdown = !ForceShutdown;
+        if (!ShuttersLowered && ForceShutdown)
+        {
+            Debug.Log("Triggered");
+            ActivateShutters();
+        }
+        if(ShuttersLowered && !ForceShutdown)
+        {
+            ActivateShutters();
+        }
     }
 
 
@@ -58,6 +74,7 @@ public class ShutterScript : MonoBehaviour
         Debug.Log("Shutters Raising");
         if (ShuttersLowered)
         {
+            if (ForceShutdown) return;
             if (RaiseShutters())
             {
                 CrossfadeScript.SetLowpassOn(false);
