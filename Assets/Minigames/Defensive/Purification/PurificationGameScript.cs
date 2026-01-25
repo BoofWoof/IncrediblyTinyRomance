@@ -268,7 +268,7 @@ public class PurificationGameScript : MonoBehaviour
         {
             Debug.Log("LevelPackComplete");
             VentGridData.ClearGrid();
-            FogSource.Stop();
+            FogSource.Stop(false, ParticleSystemStopBehavior.StopEmitting);
             MusicSelectorScript.SetOverworldSong(1);
 
             ChannelChanger.DangerActive = false;

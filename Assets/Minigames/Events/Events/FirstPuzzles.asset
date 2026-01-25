@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34718ba954bc0844b82cb6e2899427e5, type: 3}
   m_Name: FirstPuzzles
   m_EditorClassIdentifier: 
+  HasBeenTriggered: 0
   ActivationDay: 1
   RequiredQuest: Visions
   Threshold: 4
   StartDialogue: FirstPuzzlesVision
+  DialogueDelay: 0
   AdditionalActivations: []
   NextQuestName: 

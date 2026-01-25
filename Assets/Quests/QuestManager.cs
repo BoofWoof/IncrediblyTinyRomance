@@ -10,7 +10,7 @@ public class QuestManager : MonoBehaviour
     public TMP_Text questText;
 
     public static string currentQuest;
-    public static int currentQuestIndex;
+    public static int currentQuestIndex = 0;
 
     public delegate void QuestChangedDelegate(string newQuest);
     public static QuestChangedDelegate NewQuest;

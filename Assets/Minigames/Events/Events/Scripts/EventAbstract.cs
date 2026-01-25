@@ -10,13 +10,13 @@ public abstract class EventAbstract : ScriptableObject
 
     public bool HasBeenTriggered = false;
 
-    public int ActivationDay = 0; //0 is all day.
+    public int ActivationDay = 0; //0 is all days.
     public string RequiredQuest = "";
     public float Threshold = 1f;
     public string StartDialogue = "";
     public float DialogueDelay = 0f;
 
-    public List<string> AdditionalActivations = new List<string>();
+    public List<BroadcastStruct> AdditionalActivations = new List<BroadcastStruct>();
 
     public bool CheckIfValid(float Value)
     {
@@ -44,9 +44,9 @@ public abstract class EventAbstract : ScriptableObject
 
     public virtual void ActivateAdditionalConnections()
     {
-        foreach (string activationName in AdditionalActivations)
+        foreach (BroadcastStruct broadcastData in AdditionalActivations)
         {
-            ActiveBroadcast.BroadcastActivation(activationName);
+            ActiveBroadcast.BroadcastActivation(broadcastData);
         }
     }
 

@@ -55,7 +55,7 @@ public class VisionEvents : MonoBehaviour
         List<EventAbstract> eventCopy = new List<EventAbstract>(PuzzleCompleteEvents);
         foreach (EventAbstract possibleEvent in eventCopy)
         {
-            if (possibleEvent.ActivationDay != DayInfo.CurrentDay && possibleEvent.ActivationDay != 0)
+            if (possibleEvent.ActivationDay != DayInfo.CurrentDay && possibleEvent.ActivationDay != 0 && DayInfo.CurrentDay != 0)
             {
                 PuzzleCompleteEvents.Remove(possibleEvent);
                 continue;
@@ -77,7 +77,7 @@ public class VisionEvents : MonoBehaviour
         List<EventAbstract> eventCopy = new List<EventAbstract>(UpgradeBoughtEvents);
         foreach (EventAbstract possibleEvent in eventCopy)
         {
-            if (possibleEvent.ActivationDay != DayInfo.CurrentDay && possibleEvent.ActivationDay != 0)
+            if (possibleEvent.ActivationDay != DayInfo.CurrentDay && possibleEvent.ActivationDay != 0 && DayInfo.CurrentDay != 0)
             {
                 UpgradeBoughtEvents.Remove(possibleEvent);
                 continue;
@@ -95,7 +95,7 @@ public class VisionEvents : MonoBehaviour
         List<EventAbstract> eventCopy = new List<EventAbstract>(MoneyEarnedEvents);
         foreach (EventAbstract possibleEvent in eventCopy)
         {
-            if (possibleEvent.ActivationDay != DayInfo.CurrentDay && possibleEvent.ActivationDay != 0)
+            if (possibleEvent.ActivationDay != DayInfo.CurrentDay && possibleEvent.ActivationDay != 0 && DayInfo.CurrentDay != 0)
             {
                 MoneyEarnedEvents.Remove(possibleEvent);
                 continue;

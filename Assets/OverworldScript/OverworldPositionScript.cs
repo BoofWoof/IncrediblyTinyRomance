@@ -36,6 +36,7 @@ public class OverworldPositionScript : MonoBehaviour
 
         Lua.RegisterFunction("SetWaitStation", null, SymbolExtensions.GetMethodInfo(() => SetWaitStation(0)));
         Lua.RegisterFunction("StartWalkTo", null, SymbolExtensions.GetMethodInfo(() => StartWalkTo("Name", 0.0f)));
+        Lua.RegisterFunction("StartWaitWalkTo", null, SymbolExtensions.GetMethodInfo(() => StartWaitWalkTo("Name", 0.0f, 0.0f)));
     }
 
     public static void SetWaitStation(float StationIdx)
@@ -83,23 +84,29 @@ public class OverworldPositionScript : MonoBehaviour
     {
         StartWalkTo(name, (int)CurrentStationIdx);
     }
+    public static void StartWaitWalkTo(string name, float CurrentStationIdx, float Wait)
+    {
+        StartWalkTo(name, (int)CurrentStationIdx, Wait);
+    }
 
-    public static void StartWalkTo(string name, int CurrentStationIdx)
+    public static void StartWalkTo(string name, int CurrentStationIdx, float Wait = 0f)
     {
         foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
         {
             if (overworldPositionScript.CharacterName != name && overworldPositionScript.NameSource.NickName != name) continue;
-            overworldPositionScript.StartWalkTo(CurrentStationIdx);
+            overworldPositionScript.StartWalkTo(CurrentStationIdx, Wait);
         }
     }
 
-    public void StartWalkTo(int CurrentStationIdx)
+    public void StartWalkTo(int CurrentStationIdx, float Wait = 0f)
     {
         Debug.Log("AAAAAAAAA");
-        WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx));
+        WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx, Wait));
     }
-    public IEnumerator FollowRouteTo(int CurrentStationIdx)
+    public IEnumerator FollowRouteTo(int CurrentStationIdx, float Wait = 0f)
     {
+        yield return new WaitForSeconds(Wait);
+
         GestureControl.CharacterAnimator.SetBool("Sitting", false);
         GestureControl.CharacterAnimator.SetBool("Looming", false);
         GestureControl.CharacterAnimator.SetBool("WalkTo", true);

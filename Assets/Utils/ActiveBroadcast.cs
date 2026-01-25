@@ -10,6 +10,8 @@ public struct BroadcastStruct
     public string BroadcastName;
     public bool UseValue;
     public float BroadcastValue;
+    public bool UseString;
+    public string BroadcastString;
 }
 public class ActiveBroadcast : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class ActiveBroadcast : MonoBehaviour
 
     public UnityEvent ActivationEvents;
     public UnityEvent<float> ActivationWithValueEvents;
+    public UnityEvent<string> ActivationWithStringEvents;
 
     static Dictionary<string, ActiveBroadcast> ActiveBroadcastItems = new Dictionary<string, ActiveBroadcast>();
 
@@ -39,6 +42,9 @@ public class ActiveBroadcast : MonoBehaviour
         if (broadcastData.UseValue)
         {
             ActiveBroadcastItems[broadcastData.BroadcastName.ToLower()].ActivationWithValueEvents?.Invoke(broadcastData.BroadcastValue);
+        } else if (broadcastData.UseString)
+        {
+            ActiveBroadcastItems[broadcastData.BroadcastName.ToLower()].ActivationWithStringEvents?.Invoke(broadcastData.BroadcastString);
         } else
         {
             ActiveBroadcastItems[broadcastData.BroadcastName.ToLower()].ActivationEvents?.Invoke();
@@ -47,6 +53,10 @@ public class ActiveBroadcast : MonoBehaviour
     public static void BroadcastWithValueActivation(string triggerName, float value)
     {
         ActiveBroadcastItems[triggerName.ToLower()].ActivationWithValueEvents?.Invoke(value);
+    }
+    public static void BroadcastWithStringActivation(string triggerName, string activationName)
+    {
+        ActiveBroadcastItems[triggerName.ToLower()].ActivationWithStringEvents?.Invoke(activationName);
     }
 
 

@@ -12,6 +12,7 @@ public class OverworldBehavior : MonoBehaviour
     {
         OverworldBehaviors.Add(this);
         Lua.RegisterFunction("AriesBehavior", null, SymbolExtensions.GetMethodInfo(() => AriesBehavior("")));
+        Lua.RegisterFunction("AriesWaitBehavior", null, SymbolExtensions.GetMethodInfo(() => AriesWaitBehavior("", 0f)));
     }
 
     public void OnDestroy()
@@ -19,20 +20,25 @@ public class OverworldBehavior : MonoBehaviour
         OverworldBehaviors.Remove(this);
     }
 
-    public static void BroadcastBehaviors(string name, string behavior)
+    public static void BroadcastBehaviors(string name, string behavior, float wait = 0f)
     {
         foreach (OverworldBehavior overworldBehavior in OverworldBehaviors)
         {
-            overworldBehavior.ExecuteBehavior(name, behavior);
+            overworldBehavior.ExecuteBehavior(name, behavior, wait);
         }
     }
 
-    virtual public void ExecuteBehavior(string submitName, string behavior)
+    virtual public void ExecuteBehavior(string submitName, string behavior, float wait)
     {
     }
 
     public static void AriesBehavior(string behavior)
     {
-        BroadcastBehaviors("MacroAries", behavior);
+        BroadcastBehaviors("MacroAries", behavior, 0);
+    }
+
+    public static void AriesWaitBehavior(string behavior, float Wait)
+    {
+        BroadcastBehaviors("MacroAries", behavior, Wait);
     }
 }

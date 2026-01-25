@@ -52,9 +52,12 @@ public class AriesOverworldBehavior : OverworldBehavior
         thisAnimator.SetTrigger("Puff");
     }
 
-    public IEnumerator Judgement()
+    public IEnumerator Judgement(float wait)
     {
+        yield return new WaitForSeconds(wait);
+
         yield return StartCoroutine(WalkToStation(0));
+
         thisAnimator.SetBool("Sitting", true);
         thisAnimator.SetBool("Looming", false);
         thisAnimator.SetBool("SitForward", false);
@@ -110,7 +113,7 @@ public class AriesOverworldBehavior : OverworldBehavior
         yield return null;
     }
 
-    public override void ExecuteBehavior(string submitName, string behavior)
+    public override void ExecuteBehavior(string submitName, string behavior, float wait = 0f)
     {
         if (NameSource.SpeakerName.ToLower() != submitName.ToLower() && NameSource.NickName.ToLower() != submitName.ToLower()) return;
 
@@ -123,7 +126,7 @@ public class AriesOverworldBehavior : OverworldBehavior
 
         if (behavior.ToLower() == "judge")
         {
-            StartCoroutine(Judgement());
+            StartCoroutine(Judgement(wait));
         }
 
         if (behavior.ToLower() == "puff")

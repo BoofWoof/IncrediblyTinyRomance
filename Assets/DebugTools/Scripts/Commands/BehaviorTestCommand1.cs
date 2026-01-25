@@ -12,7 +12,7 @@ public class BehaviorTestCommand : ConsoleCommand
 
         foreach (OverworldBehavior overworldBehaviors in OverworldBehavior.OverworldBehaviors)
         {
-            overworldBehaviors.ExecuteBehavior(CharacterName, BehaviorName);
+            overworldBehaviors.ExecuteBehavior(CharacterName, BehaviorName, 0f);
         }
 
         return true;

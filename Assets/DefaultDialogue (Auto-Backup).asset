@@ -11926,7 +11926,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
+    canvasScrollPosition: {x: 10, y: 1515.7139}
     canvasZoom: 0.7000003
   - id: 11
     fields:
@@ -64283,8 +64283,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.64000034
+    canvasScrollPosition: {x: 1.369873, y: 0}
+    canvasZoom: 0.7300003
   - id: 29
     fields:
     - title: Title
@@ -73980,7 +73980,7 @@ MonoBehaviour:
       - originConversationID: 31
         originDialogueID: 20
         destinationConversationID: 31
-        destinationDialogueID: 21
+        destinationDialogueID: 25
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -73991,60 +73991,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 78.82353
-        y: 1900.353
-        width: 160
-        height: 30
-    - id: 21
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: Assets/Resources/VoiceLines/Sid/Delivery/Milo/SucksDownShawarma.asset
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 7
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: He'll be back soon.
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 31
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks: []
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 80
-        y: 1982
+        y: 1899.2167
         width: 160
         height: 30
     - id: 22
@@ -74167,9 +74114,62 @@ MonoBehaviour:
         y: 890
         width: 160
         height: 30
+    - id: 25
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 8
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 31
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: AriesWaitBehavior("judge", 45)
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 75.574844
+        y: 2008.7915
+        width: 160
+        height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 592.94104}
-    canvasZoom: 0.8500002
+    canvasScrollPosition: {x: 13.890348, y: 1710.941}
+    canvasZoom: 0.8800002
   syncInfo:
     syncActors: 0
     syncItems: 0

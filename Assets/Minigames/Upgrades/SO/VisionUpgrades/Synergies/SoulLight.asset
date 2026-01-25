@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e079fb223dbbe947afd73862cc21325, type: 3}
   m_Name: SoulLight
   m_EditorClassIdentifier: 
+  UpgradeID: 0
   UpgradeName: Calm Soul
   UpgradeIcon: {fileID: 1451810913, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: A tranquil soul can sense more. (Increase your cursor's vision
     range based on how calm The Great Ram is.)
-  Credits: 0.00000001
+  Credits: 0.000000005
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0
