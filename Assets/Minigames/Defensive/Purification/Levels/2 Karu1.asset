@@ -17,12 +17,18 @@ MonoBehaviour:
   VentGridPos: {x: 0, y: 0, z: 0}
   SquareSize: 250
   HallucinationBroadcasts:
-  - BroadcastName: ShadowAriesToggle
-    UseValue: 0
-    BroadcastValue: 0
   - BroadcastName: ForceShutters
     UseValue: 0
     BroadcastValue: 0
+    UseString: 0
+    BroadcastString: 
+  - BroadcastName: ShadowAriesAnimate
+    UseValue: 1
+    BroadcastValue: 0
+    UseString: 0
+    BroadcastString: 
+  VoiceLineTargetName: ShadowAries
+  VoiceLine: {fileID: 11400000, guid: 41a3aab588deb0c49b4174cd5e1e84e2, type: 2}
   ConnectedCutsceneName: 
   OnScreenData: {fileID: 0}
   OnScreenDataPos: {x: 0, y: 0, z: 0}

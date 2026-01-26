@@ -28,8 +28,22 @@ public class PhonePositionScript : MonoBehaviour
     public static bool AllowPhoneToggle = false;
     public static bool FirstPhoneRaise = true;
 
+    public static PhonePositionScript instance;
+
+    public static void LockPhoneDown()
+    {
+        if (raised) instance.StartCoroutine(instance.LowerPhone());
+        AllowPhoneToggle = false;
+    }
+
+    public static void UnlockPhone()
+    {
+        AllowPhoneToggle = true;
+    }
+
     private void OnEnable()
     {
+        instance = this;
         InputManager.PlayerInputs.Overworld.TogglePhone.performed += TogglePhone;
         InputManager.PlayerInputs.Phone.TogglePhone.performed += TogglePhone;
     }

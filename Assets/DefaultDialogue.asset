@@ -46024,7 +46024,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1242.105, y: 2029.6475}
+    canvasScrollPosition: {x: 2563.1572, y: 2079.6475}
     canvasZoom: 0.7600003
   - id: 22
     fields:
@@ -47178,9 +47178,10 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: His body is more metal than flesh, and I'm not sure why. However,
-          he's been direct with our government that he needs frequent injections
-          to keep the 'real' part of himself alive.
+        value: He has informed us that his body is more metal than flesh, although
+          he never answered why. He has also been direct with our government that
+          he requires frequent injections of some sort to keep the remaining organic
+          parts of himself alive.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -47299,7 +47300,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: The law is too focused on finding him, and the substance is too regulated.
+        value: His people's law enforcement is too focused on finding him for him
+          to go out, and the substance he need is apparently closely regulated.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -52510,8 +52512,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 5558.7573}
-    canvasZoom: 0.8500001
+    canvasScrollPosition: {x: 1415.7954, y: 7.3170776}
+    canvasZoom: 0.8200001
   - id: 23
     fields:
     - title: Title
@@ -73876,7 +73878,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: AriesWaitBehavior("judge", 45)
+      userScript: AriesWaitBehavior("card", 45)
       onExecute:
         m_PersistentCalls:
           m_Calls: []

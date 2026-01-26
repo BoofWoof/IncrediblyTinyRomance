@@ -59,6 +59,7 @@ public class GestureScript : MonoBehaviour
             return;
         }
         CharacterAnimator.Play(stateName);
+        CharacterAnimator.Update(0f);
     }
 
     public void ProcessGesture(string GestureName)

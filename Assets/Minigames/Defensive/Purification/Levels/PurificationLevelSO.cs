@@ -26,6 +26,8 @@ public class PurificationLevelSO : ScriptableObject
 
     [Header("Events")]
     public List<BroadcastStruct> HallucinationBroadcasts;
+    public string VoiceLineTargetName;
+    public VoiceLineSO VoiceLine;
     public string ConnectedCutsceneName;
     public GameObject OnScreenData;
     public Vector3 OnScreenDataPos;

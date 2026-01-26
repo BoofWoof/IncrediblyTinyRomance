@@ -60,6 +60,7 @@ public class PrayerScript : MonoBehaviour
         JudgementActive = true;
         RamAngyLevel = 0;
         JudgementFocus = false;
+        BalconyEventsScript.instance.StartSystem();
     }
 
     public void DeactivateJudgement()
@@ -67,6 +68,7 @@ public class PrayerScript : MonoBehaviour
         Debug.Log("Deactivating Judgement");
         JudgementActive = false;
         JudgementFocus = false;
+        BalconyEventsScript.instance.StopSystem();
     }
 
     public void IncreaseAngerThreshold(float AdditionalThreshold)
@@ -156,6 +158,9 @@ public class PrayerScript : MonoBehaviour
     public void OnConversationResponseMenu(Response[] responses)
     {
         if (!ConversationManagerScript.isMacroConvo) return;
+
+        BalconyEventsScript.instance.StartSystem();
+
         Debug.Log("Creating choices: " + responses.Length.ToString());
 
         Responses = responses;

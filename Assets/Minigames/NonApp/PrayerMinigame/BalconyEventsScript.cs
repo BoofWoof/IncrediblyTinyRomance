@@ -6,13 +6,15 @@ public class BalconyEventsScript : MonoBehaviour
 {
     public GameObject PrayerScreen;
 
-    private bool BalconyActivated = false;
+    public bool BalconyActivated = false;
     private bool OnBalcony = false;
 
     public List<PrayerStatueScript> PrayerStatues = new List<PrayerStatueScript>();
 
     public AudioSource RaiseAudio;
     public AudioSource LowerAudio;
+
+    public bool Raised = false;
 
     public static BalconyEventsScript instance;
 
@@ -60,15 +62,25 @@ public class BalconyEventsScript : MonoBehaviour
 
     public void StartSystem()
     {
+        if (BalconyActivated) return;
         BalconyActivated = true;
-        if (OnBalcony)
+        if (OnBalcony && !Raised)
         {
             RaiseStatues();
         }
     }
-
+    public void StopSystem()
+    {
+        if (!BalconyActivated) return;
+        BalconyActivated = false;
+        if (Raised)
+        {
+            LowerStatues();
+        }
+    }
     public void RaiseStatues()
     {
+        Raised = true;
         RaiseAudio.Stop();
         LowerAudio.Stop();
         RaiseAudio.Play();
@@ -80,6 +92,7 @@ public class BalconyEventsScript : MonoBehaviour
 
     public void LowerStatues()
     {
+        Raised = false;
         RaiseAudio.Stop();
         LowerAudio.Stop();
         LowerAudio.Play();

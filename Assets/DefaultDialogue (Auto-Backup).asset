@@ -46024,7 +46024,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1242.105, y: 2029.6475}
+    canvasScrollPosition: {x: 2563.1572, y: 2079.6475}
     canvasZoom: 0.7600003
   - id: 22
     fields:
@@ -47178,9 +47178,10 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: His body is more metal than flesh, and I'm not sure why. However,
-          he's been direct with our government that he needs frequent injections
-          to keep the 'real' part of himself alive.
+        value: He has informed us that his body is more metal than flesh, although
+          he never answered why. He has also been direct with our government that
+          he requires frequent injections of some sort to keep the remaining organic
+          parts of himself alive.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -47299,7 +47300,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: The law is too focused on finding him, and the substance is too regulated.
+        value: His people's law enforcement is too focused on finding him for him
+          to go out, and the substance he need is apparently closely regulated.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -52510,7 +52512,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 5558.7573}
+    canvasScrollPosition: {x: 1208.2352, y: 907.05884}
     canvasZoom: 0.8500001
   - id: 23
     fields:
@@ -62368,13 +62370,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 1
-        destinationConversationID: 25
-        destinationDialogueID: 4
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: (Variable["SocialScore"] > Variable["WorkerScore"]) and (Variable["SocialScore"]
         > Variable["SpiritScore"])
       userScript: BroadcastActivate("VisionAd")
@@ -62428,13 +62424,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 2
-        destinationConversationID: 25
-        destinationDialogueID: 4
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 'Variable["WorkerScore"] > Variable["SpiritScore"]'
       userScript: BroadcastActivate("VisionAd")
       onExecute:
@@ -62487,13 +62477,7 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 3
-        destinationConversationID: 25
-        destinationDialogueID: 4
-        isConnector: 0
-        priority: 2
+      outgoingLinks: []
       conditionsString: 
       userScript: BroadcastActivate("VisionAd")
       onExecute:
@@ -62501,271 +62485,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 490
-        y: 182
-        width: 160
-        height: 30
-    - id: 4
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: Wanna test another?
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 25
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 4
-        destinationConversationID: 25
-        destinationDialogueID: 5
-        isConnector: 0
-        priority: 2
-      - originConversationID: 25
-        originDialogueID: 4
-        destinationConversationID: 25
-        destinationDialogueID: 6
-        isConnector: 0
-        priority: 2
-      - originConversationID: 25
-        originDialogueID: 4
-        destinationConversationID: 25
-        destinationDialogueID: 7
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 171
-        y: 294
-        width: 160
-        height: 30
-    - id: 5
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: Social
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 25
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 5
-        destinationConversationID: 25
-        destinationDialogueID: 1
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 'Variable["SocialScore"] = 5
-
-        Variable["WorkerScore"] =
-        0
-
-        Variable["SpiritScore"] = 0'
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 83
-        y: 411
-        width: 160
-        height: 30
-    - id: 6
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: Worker
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 25
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 6
-        destinationConversationID: 25
-        destinationDialogueID: 2
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 'Variable["WorkerScore"] = 5
-
-        Variable["SocialScore"] =
-        0
-
-        Variable["SpiritScore"] = 0'
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 280
-        y: 418
-        width: 160
-        height: 30
-    - id: 7
-      fields:
-      - title: Title
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Description
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: VoiceLinesSO
-        value: 
-        type: 0
-        typeString: CustomFieldType_Files
-      - title: Actor
-        value: 4
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Conversant
-        value: 3
-        type: 5
-        typeString: CustomFieldType_Actor
-      - title: Menu Text
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Dialogue Text
-        value: Spiritual
-        type: 0
-        typeString: CustomFieldType_Text
-      - title: Sequence
-        value: 
-        type: 0
-        typeString: CustomFieldType_Text
-      conversationID: 25
-      isRoot: 0
-      isGroup: 0
-      nodeColor: 
-      delaySimStatus: 0
-      falseConditionAction: Block
-      conditionPriority: 2
-      outgoingLinks:
-      - originConversationID: 25
-        originDialogueID: 7
-        destinationConversationID: 25
-        destinationDialogueID: 3
-        isConnector: 0
-        priority: 2
-      conditionsString: 
-      userScript: 'Variable["SpiritScore"] = 5
-
-        Variable["SocialScore"] =
-        0
-
-        Variable["WorkerScore"] = 0'
-      onExecute:
-        m_PersistentCalls:
-          m_Calls: []
-      canvasRect:
-        serializedVersion: 2
-        x: 490
-        y: 409
+        x: 508
+        y: 201
         width: 160
         height: 30
     entryGroups: []

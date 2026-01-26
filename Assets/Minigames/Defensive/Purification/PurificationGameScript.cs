@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 struct WaitingExpansion
 {
@@ -35,11 +37,15 @@ public class PurificationGameScript : MonoBehaviour
     public AudioSource VentRotationAS;
     public AudioSource WinAS;
 
+    public Volume PuffVolume;
+
     public void Start()
     {
         instance = this;
         PipeStackScript.VentRotationEvent += UpdatePipeRoutes;
         PipeStackScript.VentRotationStartEvent += VentRotationAS.Play;
+
+        PuffVolume.weight = 0f;
     }
 
     public static void SetLevelSet(PurificationLevelPacksSO newLevelPack)
@@ -49,6 +55,8 @@ public class PurificationGameScript : MonoBehaviour
 
     public void StartGame()
     {
+        ChannelChanger.instance.StartCoroutine(VolumeFade(1f));
+
         if (ChannelChanger.DangerActive) return;
         ChannelChanger.ActiveChannelChanger.PuritySwitch();
         ChannelChanger.DangerActive = true;
@@ -64,6 +72,11 @@ public class PurificationGameScript : MonoBehaviour
         if(CurrentLevelPack.Levels[CurrentLevelInPack].HallucinationBroadcasts.Count > 0)
         {
             PlayerBlinkScript.StartBlink(CurrentLevelPack.Levels[CurrentLevelInPack].HallucinationBroadcasts);
+        }
+
+        if (CurrentLevelPack.Levels[CurrentLevelInPack].VoiceLine != null)
+        {
+            CharacterSpeechScript.BroadcastSpeechAttempt(CurrentLevelPack.Levels[CurrentLevelInPack].VoiceLineTargetName, CurrentLevelPack.Levels[CurrentLevelInPack].VoiceLine);
         }
 
         VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
@@ -266,6 +279,8 @@ public class PurificationGameScript : MonoBehaviour
         }
         else
         {
+            ChannelChanger.instance.StartCoroutine(VolumeFade(0f));
+
             Debug.Log("LevelPackComplete");
             VentGridData.ClearGrid();
             FogSource.Stop(false, ParticleSystemStopBehavior.StopEmitting);
@@ -278,6 +293,8 @@ public class PurificationGameScript : MonoBehaviour
             {
                 PlayerBlinkScript.StartBlink(associatedLevelHolder.HallucinationResets);
             }
+
+            OverworldBehavior.AriesBehavior("judge");
         }
     }
 
@@ -290,5 +307,25 @@ public class PurificationGameScript : MonoBehaviour
         newWinText.transform.localPosition = Vector3.zero;
 
         newWinText.GetComponent<MaterialGradient>().OnCompletion.AddListener(NextLevel);
+    }
+
+    public IEnumerator VolumeFade(float finalValue)
+    {
+        float timePassed = 0f;
+        float transitionPeriod = 4f;
+
+        float startingValue = PuffVolume.weight;
+
+        while (timePassed < transitionPeriod)
+        {
+            timePassed += Time.deltaTime;
+            float progress = timePassed / transitionPeriod;
+
+            PuffVolume.weight = Mathf.Lerp(startingValue, finalValue, progress);
+
+            yield return null;
+        }
+
+        PuffVolume.weight = finalValue;
     }
 }

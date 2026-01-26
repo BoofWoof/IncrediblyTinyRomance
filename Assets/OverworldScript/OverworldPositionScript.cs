@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OverworldPositionScript : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class OverworldPositionScript : MonoBehaviour
     public static List<OverworldPositionScript> PositionScripts = new List<OverworldPositionScript>();
 
     [HideInInspector] public Coroutine WalkToCoroutine;
+
+    public UnityEvent OnWalkStart;
 
     public void Start()
     {
@@ -100,12 +103,13 @@ public class OverworldPositionScript : MonoBehaviour
 
     public void StartWalkTo(int CurrentStationIdx, float Wait = 0f)
     {
-        Debug.Log("AAAAAAAAA");
         WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx, Wait));
     }
     public IEnumerator FollowRouteTo(int CurrentStationIdx, float Wait = 0f)
     {
         yield return new WaitForSeconds(Wait);
+
+        OnWalkStart?.Invoke();
 
         GestureControl.CharacterAnimator.SetBool("Sitting", false);
         GestureControl.CharacterAnimator.SetBool("Looming", false);

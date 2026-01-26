@@ -16,6 +16,14 @@ MonoBehaviour:
   LevelDescription: Teach How To Rotate Also
   VentGridPos: {x: 0, y: 193, z: 0}
   SquareSize: 300
+  HallucinationBroadcasts:
+  - BroadcastName: UnlockPhone
+    UseValue: 0
+    BroadcastValue: 0
+    UseString: 0
+    BroadcastString: 
+  VoiceLineTargetName: 
+  VoiceLine: {fileID: 0}
   ConnectedCutsceneName: 
   OnScreenData: {fileID: 2840222069706360137, guid: 904f12043b92d9645b4822c3c74dae27, type: 3}
   OnScreenDataPos: {x: 0, y: -326, z: 0}
@@ -24,30 +32,35 @@ MonoBehaviour:
   Data:
   - PipeTypeID: 7
     Rotations: 3
+    isNormalWithCaps: 0
     isCap: 1
     isSource: 1
     isSink: 0
     canRotate: 0
   - PipeTypeID: 5
     Rotations: 1
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 5
     Rotations: 0
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 1
   - PipeTypeID: 5
     Rotations: 3
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 7
     Rotations: 1
+    isNormalWithCaps: 0
     isCap: 1
     isSource: 0
     isSink: 1

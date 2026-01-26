@@ -10,6 +10,8 @@ public class AriesOverworldBehavior : OverworldBehavior
     public VoiceLineSO AttackTapAriesVoice;
     public VoiceLineSO AttackTapMiloVoice;
 
+    public LookScript AriesLook;
+
     void Start()
     {
         thisAnimator = GetComponent<Animator>();
@@ -56,12 +58,37 @@ public class AriesOverworldBehavior : OverworldBehavior
     {
         yield return new WaitForSeconds(wait);
 
+        AriesLook.HeadLookWeight = 1;
+
         yield return StartCoroutine(WalkToStation(0));
 
         thisAnimator.SetBool("Sitting", true);
         thisAnimator.SetBool("Looming", false);
         thisAnimator.SetBool("SitForward", false);
+
         PrayerScript.instance.ActivateJudgement();
+    }
+
+    public IEnumerator PlaceCard(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+
+        AriesLook.HeadLookWeight = 1;
+
+        yield return StartCoroutine(WalkToStation(0));
+
+        thisAnimator.SetBool("Sitting", false);
+        thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", false);
+
+        yield return StartCoroutine(WaitForAnimation("StandingIdle"));
+
+        thisAnimator.SetTrigger("SetDownCard");
+
+        yield return StartCoroutine(WaitForAnimation("SetDownCard"));
+        yield return StartCoroutine(WaitForAnimation("StandingIdle"));
+
+        StartCoroutine(Judgement(0));
     }
 
     public IEnumerator GrabSoda()
@@ -137,6 +164,11 @@ public class AriesOverworldBehavior : OverworldBehavior
         if (behavior.ToLower() == "tap")
         {
             StartCoroutine(AttackTap());
+        }
+
+        if (behavior.ToLower() == "card")
+        {
+            StartCoroutine(PlaceCard(wait));
         }
     }
 }

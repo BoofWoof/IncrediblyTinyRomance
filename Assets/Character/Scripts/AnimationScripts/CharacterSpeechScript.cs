@@ -160,7 +160,6 @@ public class CharacterSpeechScript : MonoBehaviour
     public void PlaySpeech(string name, VoiceLineSO voiceLine)
     {
         if (SpeakerName.ToLower() != name.ToLower() && NickName.ToLower() != name.ToLower()) return;
-
         StartCoroutine(SpeakNoDialogue(voiceLine));
     }
     public IEnumerator SpeakNoDialogue(VoiceLineSO voiceLine)

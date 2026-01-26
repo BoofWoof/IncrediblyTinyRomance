@@ -28,6 +28,7 @@ public class PurificationHolderScript : MonoBehaviour
     public void LevelStart()
     {
         PurificationGameScript.associatedLevelHolder = this;
+        Debug.Log(AssociatedLevels);
         PurificationGameScript.SetLevelSet(AssociatedLevels);
     }
 

@@ -16,7 +16,14 @@ MonoBehaviour:
   LevelDescription: MakeMulipleSinkClear
   VentGridPos: {x: 0, y: 0, z: 0}
   SquareSize: 200
-  HallucinationBroadcasts: []
+  HallucinationBroadcasts:
+  - BroadcastName: ShadowAriesToggle
+    UseValue: 0
+    BroadcastValue: 0
+    UseString: 0
+    BroadcastString: 
+  VoiceLineTargetName: OffScreenMacro
+  VoiceLine: {fileID: 11400000, guid: ec28621e5a4523d4b8aaeaddae8bf1c3, type: 2}
   ConnectedCutsceneName: 
   OnScreenData: {fileID: 0}
   OnScreenDataPos: {x: 0, y: 0, z: 0}

@@ -10,7 +10,7 @@ public class TurkPuzzleScript : MonoBehaviour
     public static TurkPuzzleScript instance;
 
     public int RepeatsBannedFor = 3;
-    public List<int> Repeats = new List<int>();
+    public List<int> WaitingPuzzles = new List<int>();
 
     public AudioSource Win;
     public AudioSource Pickup;
@@ -58,6 +58,9 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public ModifierMenuText modifierMenuText;
     private static ModifierMenuText.RewardModifier rewardBaseModifier;
+
+    public Image CloudPanel;
+    public List<float> DifficultyOpenness;
     public static ModifierMenuText.RewardModifier RewardBaseModifier 
     { 
         get => rewardBaseModifier;
@@ -101,7 +104,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public void IncreaseDifficulty()
     {
-        Repeats.Clear();
+        WaitingPuzzles.Clear();
 
         CurrentDifficutly++;
         if (CurrentDifficutly >= DifficultiesUnlocked - 1) CurrentDifficutly = DifficultiesUnlocked - 1;
@@ -111,7 +114,7 @@ public class TurkPuzzleScript : MonoBehaviour
     }
     public void DecreaseDifficulty()
     {
-        Repeats.Clear();
+        WaitingPuzzles.Clear();
 
         CurrentDifficutly--;
         if (CurrentDifficutly < 0) CurrentDifficutly = 0;
@@ -147,29 +150,27 @@ public class TurkPuzzleScript : MonoBehaviour
     {
         DifficultyDecreaseButton.interactable = (CurrentDifficutly != 0);
         DifficultyIncreaseButton.interactable = !(CurrentDifficutly >= DifficultiesUnlocked - 1);
+
+        StartCoroutine(OpenSkyHole(DifficultyOpenness[CurrentDifficutly]));
     }
 
     public static PuzzleShapeSO SamplePuzzles()
     {
         List<PuzzleShapeSO> PuzzleSamples = PuzzlesList[CurrentDifficutly];
 
-        int sampledPuzzleIdx = 0;
-        bool validPuzzleIdx = false;
-        if (PuzzleSamples.Count > instance.RepeatsBannedFor)
+        if(instance.WaitingPuzzles.Count == 0)
         {
-            while (!validPuzzleIdx)
+            for(int i = 0; i < PuzzleSamples.Count(); i++)
             {
-                sampledPuzzleIdx = Random.Range(0, PuzzleSamples.Count);
-                validPuzzleIdx = !instance.Repeats.Contains(sampledPuzzleIdx);
+                instance.WaitingPuzzles.Add(i);
             }
-        } else
-        {
-            sampledPuzzleIdx = Random.Range(0, PuzzleSamples.Count);
         }
-        instance.Repeats.Add(sampledPuzzleIdx);
-        if (instance.Repeats.Count > instance.RepeatsBannedFor) instance.Repeats.RemoveAt(0);
 
-        return PuzzleSamples[sampledPuzzleIdx];
+        int sampledPuzzleIdx = Random.Range(0, instance.WaitingPuzzles.Count);
+        int puzzleIdx = instance.WaitingPuzzles[sampledPuzzleIdx];
+        instance.WaitingPuzzles.RemoveAt(sampledPuzzleIdx);
+
+        return PuzzleSamples[puzzleIdx];
     }
 
     private void GeneratePuzzle()
@@ -496,5 +497,23 @@ public class TurkPuzzleScript : MonoBehaviour
             if(piece.GetComponent<TurkCubeScript>().cord == testCord) return true;
         }
         return false;
+    }
+    public IEnumerator OpenSkyHole(float finalValue)
+    {
+        float timePassed = 0f;
+        float transitionPeriod = 2f;
+
+        float startingValue = CloudPanel.materialForRendering.GetFloat("_HoleSize");
+
+        while (timePassed < transitionPeriod)
+        {
+            timePassed += Time.deltaTime;
+            float progress = timePassed / transitionPeriod;
+
+            CloudPanel.materialForRendering.SetFloat("_HoleSize", Mathf.Lerp(startingValue, finalValue, progress));
+
+            yield return null;
+        }
+        CloudPanel.materialForRendering.SetFloat("_HoleSize", finalValue);
     }
 }
