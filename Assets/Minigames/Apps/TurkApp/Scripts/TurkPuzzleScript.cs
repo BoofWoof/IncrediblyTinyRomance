@@ -9,6 +9,23 @@ public class TurkPuzzleScript : MonoBehaviour
 {
     public static TurkPuzzleScript instance;
 
+    private bool FirstOpen = true;
+
+    [Header("Stats")]
+    private float StartingTime;
+    public static Dictionary<int, float> TimeRecords = new Dictionary<int, float>();
+    public static Dictionary<int, int> PuzzlesCompleted = new Dictionary<int, int>();
+
+    public TMP_Text PuzzleSolvedText;
+    public TMP_Text BestTimeText;
+
+    [Header("Objects")]
+    public TMP_Text PuzzleName;
+    public TMP_Text NewRecordText;
+
+    public AudioClip NormalWin;
+    public AudioClip SuperWin;
+
     public int RepeatsBannedFor = 3;
     public List<int> WaitingPuzzles = new List<int>();
 
@@ -18,7 +35,6 @@ public class TurkPuzzleScript : MonoBehaviour
     public AudioSource DropBad;
 
     public GameObject EmptyTile;
-    public TMP_Text PuzzleName;
     public Material ConstMat;
 
     public TMP_Text ArtistCredit;
@@ -87,6 +103,32 @@ public class TurkPuzzleScript : MonoBehaviour
     public delegate void PuzzleCompleteCallback(int PuzzlesComplete, TurkPuzzleScript puzzleScript);
     public static PuzzleCompleteCallback OnPuzzleComplete;
 
+
+    public void OnAppOpen()
+    {
+        if (!FirstOpen) return;
+        FirstOpen = false;
+        StartingTime = Time.time;
+    }
+    public void UpdateStatText()
+    {
+        if (!PuzzlesCompleted.ContainsKey(CurrentDifficutly))
+        {
+            PuzzleSolvedText.text = "<b>Puzzles Solved:</b> 0";
+        } else
+        {
+            PuzzleSolvedText.text = "<b>Puzzles Solved:</b> " + PuzzlesCompleted[CurrentDifficutly].ToString();
+        }
+        if (!TimeRecords.ContainsKey(CurrentDifficutly))
+        {
+            BestTimeText.text = "<b>Fastest Time:</b> ?:??";
+        }
+        else
+        {
+            BestTimeText.text = "<b>Fastest Time:</b> " + System.TimeSpan.FromSeconds(TimeRecords[CurrentDifficutly]).ToString("m\\:ss");
+        }
+    }
+
     public void UnlockNewDifficulty()
     {
         DifficultiesUnlocked++;
@@ -128,6 +170,7 @@ public class TurkPuzzleScript : MonoBehaviour
     {
         instance = this;
 
+        NewRecordText.gameObject.SetActive(false);
         ArtistCredit.text = "";
 
         ModifierUpdate();
@@ -188,6 +231,8 @@ public class TurkPuzzleScript : MonoBehaviour
         PlacePieces();
         ScrambleCords();
         ShowArtist();
+        UpdateStatText();
+        StartingTime = Time.time;
     }
 
     public void ShowArtist()
@@ -228,6 +273,38 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public IEnumerator WinCutscene()
     {
+        Win.clip = NormalWin;
+
+        bool newBestTime = false;
+        if (!PuzzlesCompleted.ContainsKey(CurrentDifficutly))
+        {
+            PuzzlesCompleted[CurrentDifficutly] = 1;
+        }
+        else
+        {
+            PuzzlesCompleted[CurrentDifficutly] += 1;
+        }
+        float TotalTime = Time.time - StartingTime;
+        if (!TimeRecords.ContainsKey(CurrentDifficutly))
+        {
+            Win.clip = SuperWin;
+            newBestTime = true;
+            TimeRecords[CurrentDifficutly] = TotalTime;
+            NewRecordText.text = "NEW BEST TIME " + System.TimeSpan.FromSeconds(TimeRecords[CurrentDifficutly]).ToString("m\\:ss");
+        }
+        else
+        {
+            if ( TotalTime < TimeRecords[CurrentDifficutly])
+            {
+                Win.clip = SuperWin;
+                newBestTime = true;
+                TimeRecords[CurrentDifficutly] = TotalTime;
+                NewRecordText.text = "NEW BEST TIME " + System.TimeSpan.FromSeconds(TimeRecords[CurrentDifficutly]).ToString("m\\:ss");
+            }
+        }
+        UpdateStatText();
+
+
         TurkCubeScript.PickupEnabled = false;
         Win.Play();
 
@@ -249,10 +326,12 @@ public class TurkPuzzleScript : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         PuzzleName.text = selectedGridData.Name;
         PuzzleName.gameObject.SetActive(true);
+        if (newBestTime) NewRecordText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         PuzzleName.gameObject.SetActive(false);
+        NewRecordText.gameObject.SetActive(false);
         Shader.SetGlobalFloat("_TurkCompletion", 0);
         OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved, this);
         puzzleScript.GeneratePuzzle();

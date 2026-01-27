@@ -39,6 +39,9 @@ public class PurificationGameScript : MonoBehaviour
 
     public Volume PuffVolume;
 
+    public static float TotalTime = 0;
+    public float StartingTime;
+
     public void Start()
     {
         instance = this;
@@ -60,6 +63,8 @@ public class PurificationGameScript : MonoBehaviour
         if (ChannelChanger.DangerActive) return;
         ChannelChanger.ActiveChannelChanger.PuritySwitch();
         ChannelChanger.DangerActive = true;
+
+        StartingTime = Time.time;
 
         CurrentLevelInPack = 0;
         MusicSelectorScript.SetOverworldSong(5);
@@ -279,6 +284,8 @@ public class PurificationGameScript : MonoBehaviour
         }
         else
         {
+            TotalTime += Time.time - StartingTime;
+
             ChannelChanger.instance.StartCoroutine(VolumeFade(0f));
 
             Debug.Log("LevelPackComplete");

@@ -21,6 +21,12 @@ public class InputManager : MonoBehaviour
         PlayerInputs.Overworld.Enable();
         PlayerInputs.Phone.Disable();
     }
+    public static void GameEnd()
+    {
+        PlayerInputs.Disable();
+        PlayerInputs.Overworld.Disable();
+        PlayerInputs.Phone.Disable();
+    }
 
     private void OnDisable()
     {

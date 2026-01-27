@@ -23,6 +23,8 @@ public class UnlockablesManager: MonoBehaviour
 
     public static UnlockablesManager instance;
 
+    public static int PostersUnlockedCount;
+
     public void Awake()
     {
         instance = this;
@@ -45,6 +47,8 @@ public class UnlockablesManager: MonoBehaviour
             Debug.LogError("Poster name not found: " + posterName);
             return;
         }
+
+        PostersUnlockedCount++;
 
         Debug.Log("Unlocking: " + posterName);
 

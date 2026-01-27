@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AppScript : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class AppScript : MonoBehaviour
     public event HideApp OnHideApp;
     public delegate void ShowApp();
     public event ShowApp OnShowApp;
+
+    public UnityEvent OnActivateApp;
 
     public void Start()
     {
@@ -38,6 +41,7 @@ public class AppScript : MonoBehaviour
     public void Show(GameObject previousApp)
     {
         Active = true;
+        OnActivateApp?.Invoke();
         if (previousApp != null)
         {
             PreviousApp = previousApp;

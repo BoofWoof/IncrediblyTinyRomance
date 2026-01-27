@@ -246,6 +246,8 @@ public class PrayerScript : MonoBehaviour
     #region MiniGame
     IEnumerator SubmitPrayer(int answerIdx)
     {
+        bool isSpecialPrayer = SubmissionButtons[answerIdx].IsSpecial;
+
         FireworkLauncher.ActivateMessage();
         string answerText = SubmissionButtons[answerIdx].SubmissionButton.GetComponentInChildren<TMP_Text>().text;
         PrayerFireworkTextScript.ActivateFirework(answerText);
@@ -257,16 +259,16 @@ public class PrayerScript : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         TotalPrayerCount += 1;
-        if (GoodIdx == answerIdx || SubmissionButtons[answerIdx].IsSpecial)
+        if (GoodIdx == answerIdx || isSpecialPrayer)
         {
-            Debug.Log("You win!");
+            Debug.Log("A good prayer was sent.");
             RamAngyLevel -= AngerReduction;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
             PrayerSubmitted.Invoke(true);
             GoodPrayerCount++;
 
             int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
-            
+
             if(SetSpecialPrayers[answerIdx].SpecialResponseChain != null && SetSpecialPrayers[answerIdx].SpecialResponseChain.Count > 0)
             {
                 SPrayerSubmissionScript.WaitingSpecialPrayers.Remove(SetSpecialPrayers[answerIdx]);
@@ -383,7 +385,7 @@ public class PrayerScript : MonoBehaviour
             int SpecialPrayerCount = SPrayerSubmissionScript.WaitingSpecialPrayers.Count;
             if (SPrayerSubmissionScript.WaitingSpecialPrayers.Count > 0)
             {
-                if(Random.value < 0.9f)
+                if(Random.value < 1f/6f)
                 {
                     SpecialPrayerData selectedPrayer = SPrayerSubmissionScript.WaitingSpecialPrayers[Random.Range(0, SpecialPrayerCount)];
 
