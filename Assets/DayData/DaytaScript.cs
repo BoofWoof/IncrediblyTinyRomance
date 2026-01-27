@@ -10,6 +10,8 @@ public static class DayInfo
 
 public class DaytaScript : MonoBehaviour
 {
+    private static DaytaScript instance; 
+
     public static bool SkipStart = false;
     public bool SkipStartInit = false;
 
@@ -22,6 +24,7 @@ public class DaytaScript : MonoBehaviour
 
     public void Awake()
     {
+        instance = this;
         DayInfo.CurrentDay = DayInit;
         SkipStart = SkipStartInit;
     }
@@ -38,6 +41,10 @@ public class DaytaScript : MonoBehaviour
         {
             StartDay();
         }
+    }
+    public static void StaticStartDay()
+    {
+        instance.StartDay();
     }
     public void StartDay()
     {
@@ -56,14 +63,11 @@ public class DaytaScript : MonoBehaviour
         QuestManager.SetQuestByIndex(0);
         CharacterSpeechScript.BroadcastForceGesture("MacroAries", "BannEnterPuff");
 
-        yield return new WaitForSeconds(0.1f);
-
-        OverworldPositionScript.GoTo("A", 6);
-
         TitleCard.gameObject.SetActive(true);
         AudioBoom.Play();
 
         yield return new WaitForSeconds(2);
+        OverworldPositionScript.GoTo("A", 6);
 
         TitleText.gameObject.SetActive(true);
         AudioBoom.Play();

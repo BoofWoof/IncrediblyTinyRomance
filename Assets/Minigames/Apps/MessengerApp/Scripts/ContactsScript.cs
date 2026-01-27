@@ -31,6 +31,8 @@ public class ContactsScript : MonoBehaviour
 
     private static bool QuickMessaging = false;
 
+    PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter;
+
     public void Start()
     {
         instance = this;
@@ -38,6 +40,7 @@ public class ContactsScript : MonoBehaviour
         messengerApp = MessagingApp.GetComponent<MessengerApp>();
         GetComponent<AppScript>().OnShowApp += DeselectCharacter;
 
+        PhonePositionScript.PhoneToggled += OnPhoneRaise;
     }
 
     public void OnConversationLine(Subtitle subtitle)
@@ -54,13 +57,13 @@ public class ContactsScript : MonoBehaviour
         }
         if (subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
         if (subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
-        PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter = subtitle.speakerInfo;
+        tempSpeakingCharacter = subtitle.speakerInfo;
         if (tempSpeakingCharacter.Name == "Player") return;
         if (speakingCharacterId != -1 && speakingCharacterId != tempSpeakingCharacter.id) {
             AddEndBar();
         }
 
-        if(activeCharacter == null || (activeCharacter.id != tempSpeakingCharacter.id))
+        if(activeCharacter == null || (activeCharacter.id != tempSpeakingCharacter.id) || !messengerApp.Active || !PhonePositionScript.raised)
         {
             HudScript.ShowMessageNotification(true);
             if (!UncheckedMessages.Contains(tempSpeakingCharacter.id))
@@ -265,6 +268,23 @@ public class ContactsScript : MonoBehaviour
     {
         DeleteContactButtons();
         MakeContactButtons();
+    }
+    public void OnPhoneRaise(bool phoneRaised)
+    {
+        Debug.Log("A");
+        if (activeCharacter == null) return;
+        if (UncheckedMessages.Contains(activeCharacter.id))
+        {
+            UncheckedMessages.Remove(activeCharacter.id);
+        }
+        Debug.Log("B");
+        if ((activeCharacter.id != instance.tempSpeakingCharacter.id) || !messengerApp.Active)
+        {
+            return;
+        }
+        Debug.Log("C");
+        Debug.Log(instance.UncheckedMessages.Count);
+        HudScript.ShowMessageNotification(instance.UncheckedMessages.Count > 0);
     }
 
     public static void CheckShowMessageNotification()

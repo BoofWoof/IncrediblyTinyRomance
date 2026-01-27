@@ -11926,8 +11926,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 10, y: 1515.7139}
-    canvasZoom: 0.7000003
+    canvasScrollPosition: {x: 82.52661, y: 0}
+    canvasZoom: 0.88000023
   - id: 11
     fields:
     - title: Title
@@ -14873,7 +14873,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: There is a panaceas far beyond our walls that would treat his disease.
+        value: There is a panacea far beyond our walls that would treat his disease.
           But they're not ones that mortal hands could ever touch.
         type: 0
         typeString: CustomFieldType_Text
@@ -15255,7 +15255,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 15.78949, y: 3432.4336}
+    canvasScrollPosition: {x: 0, y: 2981.1172}
     canvasZoom: 0.7600002
   - id: 12
     fields:
@@ -19867,7 +19867,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 912
-        y: 3326
+        y: 3324.684
         width: 160
         height: 30
     - id: 76
@@ -21913,7 +21913,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 5601.471}
+    canvasScrollPosition: {x: 444.73718, y: 1999.9996}
     canvasZoom: 0.7600001
   - id: 13
     fields:
@@ -23391,7 +23391,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 15.714294, y: 0}
+    canvasScrollPosition: {x: 0, y: 12.857117}
     canvasZoom: 0.7000002
   - id: 14
     fields:
@@ -43419,7 +43419,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: And do you think our God loves us?
+        value: Do you really think that our god loves us?
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -43478,8 +43478,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: HE SMITES US CONSTANTLY WITHOUT REASON, HE INSULTS US, OUR GOD HATES
-          US!
+        value: HOW CAN YOU THINK THAT WHEN HE SMITES US ALL CONSTANTLY WITHOUT REASON,
+          HE INSULTS US, HE HATES US!
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -43684,7 +43684,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 300.54788
+        x: 299.2321
         y: 5134.931
         width: 160
         height: 30
@@ -46024,7 +46024,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 2563.1572, y: 2079.6475}
+    canvasScrollPosition: {x: 0, y: 4170.4316}
     canvasZoom: 0.7600003
   - id: 22
     fields:
@@ -52512,8 +52512,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1208.2352, y: 907.05884}
-    canvasZoom: 0.8500001
+    canvasScrollPosition: {x: 1419.4543, y: 581.7072}
+    canvasZoom: 0.8200001
   - id: 23
     fields:
     - title: Title
@@ -57313,7 +57313,10 @@ MonoBehaviour:
 
         ReleaseSong()
 
-        SetTextSong(-1)'
+        SetTextSong(-1)
+
+        StartWalkTo("MacroAries",
+        12)'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -57324,7 +57327,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 75.29419, y: 0}
+    canvasScrollPosition: {x: 52.941345, y: 3088.2354}
     canvasZoom: 0.85
   - id: 24
     fields:
@@ -73878,7 +73881,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: AriesWaitBehavior("judge", 45)
+      userScript: AriesWaitBehavior("card", 45)
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -73889,7 +73892,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 13.890348, y: 1710.941}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.8800002
   syncInfo:
     syncActors: 0

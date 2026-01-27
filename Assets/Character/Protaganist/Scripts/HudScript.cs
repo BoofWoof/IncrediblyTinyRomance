@@ -56,7 +56,10 @@ public class HudScript : MonoBehaviour
     {
         PhonePositionScript.PhoneToggled += ShowReticle;
 
-        TutorialCoroutine = StartCoroutine(Tutorial());
+        if(DayInfo.CurrentDay == 1)
+        {
+            TutorialCoroutine = StartCoroutine(Tutorial());
+        }
     }
 
     public void OnDisable()
@@ -82,7 +85,7 @@ public class HudScript : MonoBehaviour
 
     public void SkipTutorial()
     {
-        StopCoroutine(TutorialCoroutine);
+        if(TutorialCoroutine!= null) StopCoroutine(TutorialCoroutine);
 
         ShutterButton.ObjectEnabled = true;
 

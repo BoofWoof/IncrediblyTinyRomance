@@ -15,6 +15,12 @@ public class IntroSoundEffects : MonoBehaviour
     public void Start()
     {
         ThisAudioSource = GetComponent<AudioSource>();
+
+        if (DaytaScript.SkipStart)
+        {
+            DaytaScript.StaticStartDay();
+            Destroy(gameObject);
+        }
     }
 
     public void TakeStep()

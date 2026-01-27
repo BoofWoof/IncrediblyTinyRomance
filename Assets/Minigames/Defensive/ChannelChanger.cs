@@ -16,13 +16,13 @@ public class ChannelChanger : MonoBehaviour
         instance = this;
 
         ActiveChannelChanger = this;
-        LockSwitch();
+        LockSwitch(false);
     }
 
-    public void LockSwitch()
+    public void LockSwitch(bool PhoneUnlock = true)
     {
         if (DangerActive) return;
-        PhonePositionScript.UnlockPhone();
+        if (PhoneUnlock) PhonePositionScript.UnlockPhone();
 
         AerialDefense.SetActive(false);
         PurityDefense.SetActive(false);

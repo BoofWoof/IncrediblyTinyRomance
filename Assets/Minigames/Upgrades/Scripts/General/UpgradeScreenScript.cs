@@ -68,10 +68,13 @@ public class UpgradeScreenScript : MonoBehaviour
     {
         if(WaitToOpen) (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
         UpgradeBoughtEvent += UpgradeAudioPlay;
+        UpgradeItemScript.UpgradesAnimating = 0;
+        Refresh();
     }
     public void OnDisable()
     {
         UpgradeBoughtEvent -= UpgradeAudioPlay;
+
     }
 
     public static void EnableWaitTrigger()

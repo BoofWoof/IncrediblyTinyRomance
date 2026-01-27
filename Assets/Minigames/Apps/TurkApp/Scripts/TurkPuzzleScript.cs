@@ -21,6 +21,8 @@ public class TurkPuzzleScript : MonoBehaviour
     public TMP_Text PuzzleName;
     public Material ConstMat;
 
+    public TMP_Text ArtistCredit;
+
     [Header("Grid Settings")]
     public List<PuzzleShapeSO> VeryEasyPuzzles = new List<PuzzleShapeSO>();
     public List<PuzzleShapeSO> EasyPuzzles = new List<PuzzleShapeSO>();
@@ -126,6 +128,8 @@ public class TurkPuzzleScript : MonoBehaviour
     {
         instance = this;
 
+        ArtistCredit.text = "";
+
         ModifierUpdate();
 
         PuzzleName.gameObject.SetActive(false);
@@ -144,6 +148,7 @@ public class TurkPuzzleScript : MonoBehaviour
         GeneratePuzzle();
 
         UpdateDifficultyButtons();
+
     }
 
     public void UpdateDifficultyButtons()
@@ -182,6 +187,18 @@ public class TurkPuzzleScript : MonoBehaviour
         UpdateTileSprites();
         PlacePieces();
         ScrambleCords();
+        ShowArtist();
+    }
+
+    public void ShowArtist()
+    {
+        if (selectedGridData.Artist.Length > 0)
+        {
+            ArtistCredit.text = "Artist: " + selectedGridData.Artist;
+        } else
+        {
+            ArtistCredit.text = "";
+        }
     }
 
     private void UpdateTileSprites()

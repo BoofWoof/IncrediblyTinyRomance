@@ -34,11 +34,13 @@ public class PhonePositionScript : MonoBehaviour
     {
         if (raised) instance.StartCoroutine(instance.LowerPhone());
         AllowPhoneToggle = false;
+        Debug.Log("Locking Phone");
     }
 
     public static void UnlockPhone()
     {
         AllowPhoneToggle = true;
+        Debug.Log("Unlocking Phone");
     }
 
     private void OnEnable()
