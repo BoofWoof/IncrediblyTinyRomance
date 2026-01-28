@@ -56,4 +56,24 @@ public static class NumberConversion
         float shifted = Mathf.Round(num * magnitude);
         return shifted / magnitude;
     }
+    public static string AllSignificantDigits(this float value, int sig)
+    {
+        if (value == 0f)
+            return "0";
+
+        double v = value;
+        int digits = (int)Math.Floor(Math.Log10(Math.Abs(v))) + 1;
+        int decimals = sig - digits;
+
+
+        double rounded = Math.Round(v, Math.Max(decimals, 0));
+
+
+        string s = rounded.ToString("F" + Math.Max(decimals, 0));
+
+
+        s = s.TrimEnd('0').TrimEnd('.');
+
+        return s;
+    }
 }

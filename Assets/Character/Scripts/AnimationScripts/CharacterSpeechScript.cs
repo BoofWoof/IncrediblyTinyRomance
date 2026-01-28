@@ -108,8 +108,6 @@ public class CharacterSpeechScript : MonoBehaviour
         string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
         voiceFilePath = voiceFilePath.CleanResourcePath();
 
-        Debug.Log(subtitle.formattedText.text);
-
         StartCoroutine(LoadConversationLine(voiceFilePath));
         //VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(voiceFilePath);
     }

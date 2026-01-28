@@ -18,6 +18,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public TMP_Text PuzzleSolvedText;
     public TMP_Text BestTimeText;
+    public TMP_Text PuzzleEarnings;
 
     [Header("Objects")]
     public TMP_Text PuzzleName;
@@ -223,6 +224,8 @@ public class TurkPuzzleScript : MonoBehaviour
 
     private void GeneratePuzzle()
     {
+        PuzzleEarnings.gameObject.SetActive(false);
+
         selectedGridData = SamplePuzzles();
         GenerateGrid();
         GeneratePuzzlePieces();
@@ -309,7 +312,7 @@ public class TurkPuzzleScript : MonoBehaviour
         Win.Play();
 
         Debug.Log("Turk Puzzle Complete!");
-        ApplyReward(CurrentDifficutly);
+        float reward = ApplyReward(CurrentDifficutly);
 
         float timePass = 0f;
         float transitionPeriod = 1.5f;
@@ -326,9 +329,27 @@ public class TurkPuzzleScript : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         PuzzleName.text = selectedGridData.Name;
         PuzzleName.gameObject.SetActive(true);
+        PuzzleEarnings.gameObject.SetActive(true);
+        PuzzleEarnings.text = "";
         if (newBestTime) NewRecordText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
+        PuzzleEarnings.text = "+ <sprite index=1> ";
+        string finalEarningText = reward.AllSignificantDigits(3);
+
+        timePass = 0f;
+        transitionPeriod = 0.5f;
+        while (timePass < transitionPeriod)
+        {
+            timePass += Time.deltaTime;
+            int showCharacters = (int)Mathf.Lerp(0, finalEarningText.Length, timePass / transitionPeriod);
+            PuzzleEarnings.text = "+ <sprite index=1> " + finalEarningText.Substring(0, showCharacters);
+
+            yield return null;
+        }
+        PuzzleEarnings.text = "+ <sprite index=1> " + finalEarningText;
+
+
+        yield return new WaitForSeconds(1.5f);
 
         PuzzleName.gameObject.SetActive(false);
         NewRecordText.gameObject.SetActive(false);
@@ -338,7 +359,7 @@ public class TurkPuzzleScript : MonoBehaviour
         TurkCubeScript.PickupEnabled = true;
     }
 
-    public void ApplyReward(int completitionDifficulty)
+    public float ApplyReward(int completitionDifficulty)
     {
         int tempDifficulty = CurrentDifficutly;
         CurrentDifficutly = completitionDifficulty;
@@ -350,6 +371,8 @@ public class TurkPuzzleScript : MonoBehaviour
         CurrencyData.Credits += reward;
 
         CurrentDifficutly = tempDifficulty;
+
+        return reward;
     }
 
     private void ScrambleCords()

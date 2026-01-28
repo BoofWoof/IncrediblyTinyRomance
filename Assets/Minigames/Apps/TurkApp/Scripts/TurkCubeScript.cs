@@ -49,6 +49,34 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public static bool PickupEnabled = true;
     public static bool PieceHolderRestraint = true;
 
+
+    public void OnEnable()
+    {
+        PhonePositionScript.PhoneToggled += InterruptDrag;
+    }
+    public void OnDisable()
+    {
+        PhonePositionScript.PhoneToggled -= InterruptDrag;
+    }
+    public void InterruptDrag(bool phoneUp)
+    {
+        if (phoneUp) return;
+
+        GameObject rootPiece;
+        if (PieceRoot)
+        {
+            rootPiece = gameObject;
+        }
+        else
+        {
+            rootPiece = transform.parent.gameObject;
+        }
+        TurkCubeScript rootPieceScript = rootPiece.GetComponent<TurkCubeScript>();
+
+        isDragging = false;
+        rootPiece.GetComponent<RectTransform>().anchoredPosition = TurkPuzzleScript.GridIdxToPos(rootPieceScript.cord);
+    }
+
     #region Follow Mouse
     void Update()
     {
