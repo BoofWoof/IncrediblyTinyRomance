@@ -12,13 +12,17 @@ public class TurkPuzzleScript : MonoBehaviour
     private bool FirstOpen = true;
 
     [Header("Stats")]
-    private float StartingTime;
+    [HideInInspector] public float StartingTime;
     public static Dictionary<int, float> TimeRecords = new Dictionary<int, float>();
     public static Dictionary<int, int> PuzzlesCompleted = new Dictionary<int, int>();
 
     public TMP_Text PuzzleSolvedText;
     public TMP_Text BestTimeText;
-    public TMP_Text PuzzleEarnings;
+    public TMP_Text PuzzleEarningsText;
+    public TMP_Text UniquePuzzlesSolvedText;
+    public TMP_Text ScoreMultiplierText;
+
+    [HideInInspector] public float DisplayedMultiplier = 1;
 
     [Header("Objects")]
     public TMP_Text PuzzleName;
@@ -28,7 +32,6 @@ public class TurkPuzzleScript : MonoBehaviour
     public AudioClip SuperWin;
 
     public int RepeatsBannedFor = 3;
-    public List<int> WaitingPuzzles = new List<int>();
 
     public AudioSource Win;
     public AudioSource Pickup;
@@ -149,8 +152,6 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public void IncreaseDifficulty()
     {
-        WaitingPuzzles.Clear();
-
         CurrentDifficutly++;
         if (CurrentDifficutly >= DifficultiesUnlocked - 1) CurrentDifficutly = DifficultiesUnlocked - 1;
         puzzleScript.GeneratePuzzle();
@@ -159,8 +160,6 @@ public class TurkPuzzleScript : MonoBehaviour
     }
     public void DecreaseDifficulty()
     {
-        WaitingPuzzles.Clear();
-
         CurrentDifficutly--;
         if (CurrentDifficutly < 0) CurrentDifficutly = 0;
         puzzleScript.GeneratePuzzle();
@@ -172,6 +171,9 @@ public class TurkPuzzleScript : MonoBehaviour
         instance = this;
 
         NewRecordText.gameObject.SetActive(false);
+        ScoreMultiplierText.gameObject.SetActive(false);
+
+
         ArtistCredit.text = "";
 
         ModifierUpdate();
@@ -207,24 +209,37 @@ public class TurkPuzzleScript : MonoBehaviour
     {
         List<PuzzleShapeSO> PuzzleSamples = PuzzlesList[CurrentDifficutly];
 
-        if(instance.WaitingPuzzles.Count == 0)
+        int puzzleIdx = 0;
+        if (PuzzlesCompleted.ContainsKey(CurrentDifficutly))
         {
-            for(int i = 0; i < PuzzleSamples.Count(); i++)
-            {
-                instance.WaitingPuzzles.Add(i);
-            }
+            puzzleIdx = PuzzlesCompleted[CurrentDifficutly]%PuzzleSamples.Count;   
         }
-
-        int sampledPuzzleIdx = Random.Range(0, instance.WaitingPuzzles.Count);
-        int puzzleIdx = instance.WaitingPuzzles[sampledPuzzleIdx];
-        instance.WaitingPuzzles.RemoveAt(sampledPuzzleIdx);
 
         return PuzzleSamples[puzzleIdx];
     }
 
+    private void UpdatePuzzleIdx()
+    {
+        UniquePuzzlesSolvedText.color = Color.white;
+        int puzzleIdx = 0;
+        if (PuzzlesCompleted.ContainsKey(CurrentDifficutly))
+        {
+            puzzleIdx = PuzzlesCompleted[CurrentDifficutly];
+        }
+        int maxLength = PuzzlesList[CurrentDifficutly].Count;
+        if (puzzleIdx >= maxLength)
+        {
+            UniquePuzzlesSolvedText.color = Color.green;
+            puzzleIdx = maxLength;
+        }
+        UniquePuzzlesSolvedText.text = puzzleIdx.ToString() + "/" + maxLength.ToString();
+    }
+
     private void GeneratePuzzle()
     {
-        PuzzleEarnings.gameObject.SetActive(false);
+        DisplayedMultiplier = 1;
+        PuzzleEarningsText.gameObject.SetActive(false);
+        UpdatePuzzleIdx();
 
         selectedGridData = SamplePuzzles();
         GenerateGrid();
@@ -329,11 +344,11 @@ public class TurkPuzzleScript : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         PuzzleName.text = selectedGridData.Name;
         PuzzleName.gameObject.SetActive(true);
-        PuzzleEarnings.gameObject.SetActive(true);
-        PuzzleEarnings.text = "";
+        PuzzleEarningsText.gameObject.SetActive(true);
+        PuzzleEarningsText.text = "";
         if (newBestTime) NewRecordText.gameObject.SetActive(true);
 
-        PuzzleEarnings.text = "+ <sprite index=1> ";
+        PuzzleEarningsText.text = "+ <sprite index=1> ";
         string finalEarningText = reward.AllSignificantDigits(3);
 
         timePass = 0f;
@@ -342,14 +357,21 @@ public class TurkPuzzleScript : MonoBehaviour
         {
             timePass += Time.deltaTime;
             int showCharacters = (int)Mathf.Lerp(0, finalEarningText.Length, timePass / transitionPeriod);
-            PuzzleEarnings.text = "+ <sprite index=1> " + finalEarningText.Substring(0, showCharacters);
+            PuzzleEarningsText.text = "+ <sprite index=1> " + finalEarningText.Substring(0, showCharacters);
 
             yield return null;
         }
-        PuzzleEarnings.text = "+ <sprite index=1> " + finalEarningText;
+        PuzzleEarningsText.text = "+ <sprite index=1> " + finalEarningText;
 
+        if(DisplayedMultiplier > 1.01f)
+        {
+            ScoreMultiplierText.gameObject.SetActive(true);
+            ScoreMultiplierText.text = "x" + DisplayedMultiplier.AllSignificantDigits(3);
+        }
 
         yield return new WaitForSeconds(1.5f);
+
+        ScoreMultiplierText.gameObject.SetActive(false);
 
         PuzzleName.gameObject.SetActive(false);
         NewRecordText.gameObject.SetActive(false);
@@ -368,7 +390,7 @@ public class TurkPuzzleScript : MonoBehaviour
         float reward = TurkData.CreditsPerPuzzle;
         RewardBaseModifier?.Invoke(ref reward);
         RewardMultiplier?.Invoke(ref reward);
-        CurrencyData.Credits += reward;
+        CurrencyData.Credits += reward * DisplayedMultiplier;
 
         CurrentDifficutly = tempDifficulty;
 

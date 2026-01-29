@@ -60,8 +60,15 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     }
     public void InterruptDrag(bool phoneUp)
     {
-        if (phoneUp) return;
+        PickupEnabled = phoneUp;
 
+        if (phoneUp || !isDragging)
+        {
+            isDragging = false;
+            return;
+        }
+
+        isDragging = false;
         GameObject rootPiece;
         if (PieceRoot)
         {
@@ -73,8 +80,16 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
         TurkCubeScript rootPieceScript = rootPiece.GetComponent<TurkCubeScript>();
 
-        isDragging = false;
+        if (rootPieceScript.FirstRelease)
+        {
+            Debug.Log("Back To Holder");
+            SendToPieceHolder();
+            return;
+        }
+        Debug.Log("Back To Place");
+
         rootPiece.GetComponent<RectTransform>().anchoredPosition = TurkPuzzleScript.GridIdxToPos(rootPieceScript.cord);
+
     }
 
     #region Follow Mouse
@@ -152,7 +167,7 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!PickupEnabled) return;
+        if (!PickupEnabled || !isDragging) return;
         isDragging = false;
         TurkPuzzleScript.instance.Pickup.Stop();
 
@@ -213,8 +228,14 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             rootPiece = transform.parent.gameObject;
         }
         TurkCubeScript rootPieceScript = rootPiece.GetComponent<TurkCubeScript>();
+
         rootPiece.transform.parent = TurkPuzzleScript.puzzleScript.PieceHolder.transform;
-        rootPiece.GetComponent<RectTransform>().anchoredPosition = -rootPieceScript.CalcualteCenterOffset();
+
+        Vector2 Offset = -rootPieceScript.CalcualteCenterOffset();
+
+        Debug.Log(Offset);
+
+        rootPiece.GetComponent<RectTransform>().anchoredPosition = Offset;
     }
 
     public bool UpdateCord()

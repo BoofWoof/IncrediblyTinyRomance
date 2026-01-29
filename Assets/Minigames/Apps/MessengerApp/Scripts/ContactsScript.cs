@@ -271,18 +271,15 @@ public class ContactsScript : MonoBehaviour
     }
     public void OnPhoneRaise(bool phoneRaised)
     {
-        Debug.Log("A");
         if (activeCharacter == null) return;
         if (UncheckedMessages.Contains(activeCharacter.id))
         {
             UncheckedMessages.Remove(activeCharacter.id);
         }
-        Debug.Log("B");
         if ((activeCharacter.id != instance.tempSpeakingCharacter.id) || !messengerApp.Active)
         {
             return;
         }
-        Debug.Log("C");
         Debug.Log(instance.UncheckedMessages.Count);
         HudScript.ShowMessageNotification(instance.UncheckedMessages.Count > 0);
     }

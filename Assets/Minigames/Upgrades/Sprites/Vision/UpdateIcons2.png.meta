@@ -105,7 +105,7 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -127,7 +127,7 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,7 +149,7 @@ TextureImporter:
         width: 320
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,6 +158,50 @@ TextureImporter:
       bones: []
       spriteID: 236b5ddfbdf4efb439661ef40aefc77f
       internalID: 457129494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpdateIcons2_3
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 1860
+        width: 249
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef191dd9de611da4b998cbb79bd26e49
+      internalID: -1538940867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpdateIcons2_4
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1844
+        width: 280
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06bef6ffda3577348b856ba2b6b89644
+      internalID: -645817226
       vertices: []
       indices: 
       edges: []
@@ -179,6 +223,8 @@ TextureImporter:
       UpdateIcons2_0: 1564960068
       UpdateIcons2_1: 1563813400
       UpdateIcons2_2: 457129494
+      UpdateIcons2_3: -1538940867
+      UpdateIcons2_4: -645817226
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
