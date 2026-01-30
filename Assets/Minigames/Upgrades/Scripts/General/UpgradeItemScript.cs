@@ -52,14 +52,16 @@ public class UpgradeItemScript : MonoBehaviour
 
     public IEnumerator AffordCheck()
     {
-        if (AssociatedUpgrade.CanBuy()) UpgradeImage.color = new Color(1f, 1f, 1f);
-        else UpgradeImage.color = new Color(0.35f, 0.3f, 0.3f);
-        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            if (AssociatedUpgrade.CanBuy()) UpgradeImage.color = new Color(1f, 1f, 1f);
+            else UpgradeImage.color = new Color(0.35f, 0.3f, 0.3f);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     public IEnumerator UpgradeBoughtAnimation()
     {
-        UpgradesAnimating++;
         Image image = GetComponent<Image>();
         Material runtimeMaterial = Instantiate(image.material);
         image.material = runtimeMaterial;
@@ -77,12 +79,8 @@ public class UpgradeItemScript : MonoBehaviour
         // Ensure it ends at 1
         image.materialForRendering.SetFloat("_Disappear", 1f);
 
-        UpgradesAnimating--;
-
-        if(UpgradesAnimating == 0)
-        {
-            SourceScreen.Refresh();
-        }
+        SourceScreen.UpgradeObjects.Remove(gameObject);
+        Destroy(gameObject);
     }
 
 }

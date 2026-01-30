@@ -7,6 +7,8 @@ public class TurkMaterialUpdaterScript : MonoBehaviour
     public delegate void MaterialValueModifier(ref float originalStrength);
     public static MaterialValueModifier VisionStrengthModifier;
 
+    public float MaxVisionStrength = 3;
+
     // Update is called once per frame
     void Update()
     {
@@ -18,7 +20,8 @@ public class TurkMaterialUpdaterScript : MonoBehaviour
 
         float visionStrength = TurkData.VisionStrength;
         VisionStrengthModifier?.Invoke(ref visionStrength);
-        if(visionStrength < TurkData.VisionStrength) visionStrength = TurkData.VisionStrength;
+        if (visionStrength < TurkData.VisionStrength) visionStrength = TurkData.VisionStrength;
+        if (visionStrength > MaxVisionStrength) visionStrength = MaxVisionStrength;
         Shader.SetGlobalFloat("_RevealStrength", visionStrength);
     }
 }

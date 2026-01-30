@@ -68,9 +68,13 @@ public class GameOverScript : MonoBehaviour
     public void ResumeGame()
     {
         ClearScreen();
-        CharacterSpeechScript.BroadcastForceGesture("A", "FeetUpIdle");
+        CharacterSpeechScript.BroadcastForceGesture("A", "StandingIdle");
         OverworldBehavior.BroadcastBehaviors("A", "judge");
         CrossfadeScript.ResumeMusic();
         MusicSelectorScript.RevertOverworldSong();
+
+        DefenseStats.DamageCity(35f);
+        AnnouncementScript.StartAnnouncement("Your lands are in ruin. Your life was nearly lost.");
+        AnnouncementScript.StartAnnouncement("The ram still waits...");
     }
 }

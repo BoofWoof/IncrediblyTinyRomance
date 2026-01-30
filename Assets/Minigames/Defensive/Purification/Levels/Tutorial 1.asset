@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e2b563fdec3184894eea8db8fdb6ba, type: 3}
   m_Name: Tutorial 1
   m_EditorClassIdentifier: 
+  EnableTimer: 0
+  PuzzleTimeLimit: 30
   LevelName: Tutorial 1
   LevelDescription: Teach How To Rotate
   VentGridPos: {x: 0, y: 193, z: 0}
   SquareSize: 300
+  HallucinationBroadcasts: []
+  VoiceLineTargetName: 
+  VoiceLine: {fileID: 0}
   ConnectedCutsceneName: 
   OnScreenData: {fileID: 2840222069706360137, guid: 904f12043b92d9645b4822c3c74dae27, type: 3}
   OnScreenDataPos: {x: 0, y: -326, z: 0}
@@ -24,60 +29,70 @@ MonoBehaviour:
   Data:
   - PipeTypeID: 7
     Rotations: 3
+    isNormalWithCaps: 0
     isCap: 1
     isSource: 1
     isSink: 0
     canRotate: 0
   - PipeTypeID: 4
     Rotations: 0
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 0
     Rotations: 2
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 0
     Rotations: 3
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 7
     Rotations: 2
+    isNormalWithCaps: 0
     isCap: 1
     isSource: 0
     isSink: 1
     canRotate: 0
   - PipeTypeID: 0
     Rotations: 0
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 4
     Rotations: 0
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 1
   - PipeTypeID: 5
     Rotations: 1
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 0
   - PipeTypeID: 5
     Rotations: 2
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0
     canRotate: 1
   - PipeTypeID: 4
     Rotations: 1
+    isNormalWithCaps: 0
     isCap: 0
     isSource: 0
     isSink: 0

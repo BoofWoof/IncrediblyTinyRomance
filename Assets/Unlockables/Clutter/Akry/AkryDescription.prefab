@@ -493,10 +493,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3425333806113158601}
+  - component: {fileID: -705230027677977202}
   - component: {fileID: 247268818774514653}
   - component: {fileID: 6714067594310627894}
   - component: {fileID: 8397814772994014837}
-  - component: {fileID: 6164188433519724861}
   - component: {fileID: 2844806552093310922}
   m_Layer: 5
   m_Name: AkryDescription
@@ -526,6 +526,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &-705230027677977202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261258919526795631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316e88ad808ad834e9a47c8485ca2191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &247268818774514653
 Canvas:
   m_ObjectHideFlags: 0
@@ -589,18 +601,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6164188433519724861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7261258919526795631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d391d92ec4ac0e40a963cf3ca4099fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2844806552093310922
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,10 @@ public struct PipeData
 [CreateAssetMenu(fileName = "PurificationLevelSO", menuName = "PurificationGame/LevelSO")]
 public class PurificationLevelSO : ScriptableObject
 {
+    [Header("Timer Data")]
+    public bool EnableTimer = true;
+    public float PuzzleTimeLimit = 30f;
+
     [Header("Meta Data")]
     public string LevelName;
     public string LevelDescription;

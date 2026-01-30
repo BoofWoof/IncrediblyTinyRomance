@@ -19,6 +19,8 @@ public class PhoneTutorialScript : MonoBehaviour
 
     public void StartTutorial()
     {
+        TutorialStep = 0;
+
         gameObject.SetActive(true);
         TutorialScreens = new List<Transform>();
 

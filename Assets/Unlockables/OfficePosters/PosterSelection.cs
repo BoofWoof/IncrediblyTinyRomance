@@ -65,10 +65,7 @@ public class PosterSelection : MonoBehaviour
             rect.localScale = Vector2.one;
 
             rect.parent = Content;
-            rect.anchoredPosition = new Vector2(
-                LeftBuffer + (PortraitBuffer + Size.x)*col, 
-                -TopBuffer - (PortraitBuffer + Size.y)*row
-                );
+            rect.localPosition = Vector2.zero;
 
             Image img = rect.AddComponent<Image>();
             img.sprite = poster.Image;

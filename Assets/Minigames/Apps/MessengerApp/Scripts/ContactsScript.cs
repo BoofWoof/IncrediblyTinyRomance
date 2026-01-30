@@ -31,6 +31,8 @@ public class ContactsScript : MonoBehaviour
 
     private static bool QuickMessaging = false;
 
+    public bool ConversationIsActive = false;
+
     PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter;
 
     public void Start()
@@ -55,15 +57,25 @@ public class ContactsScript : MonoBehaviour
             (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
             return;
         }
-        if (subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
-        if (subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
+        if (subtitle.speakerInfo.GetFieldBool("IsRadio")) {
+            ConversationIsActive = false;
+            return;
+        }
+        if (subtitle.speakerInfo.GetFieldBool("IsMacro"))
+        {
+            ConversationIsActive = false;
+            return;
+        }
         tempSpeakingCharacter = subtitle.speakerInfo;
+
         if (tempSpeakingCharacter.Name == "Player") return;
         if (speakingCharacterId != -1 && speakingCharacterId != tempSpeakingCharacter.id) {
             AddEndBar();
         }
 
-        if(activeCharacter == null || (activeCharacter.id != tempSpeakingCharacter.id) || !messengerApp.Active || !PhonePositionScript.raised)
+        ConversationIsActive = true;
+
+        if (activeCharacter == null || (activeCharacter.id != tempSpeakingCharacter.id) || !messengerApp.Active || !PhonePositionScript.raised)
         {
             HudScript.ShowMessageNotification(true);
             if (!UncheckedMessages.Contains(tempSpeakingCharacter.id))
@@ -178,9 +190,11 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationEnd(Transform actor)
     {
-        if (ConversationManagerScript.isMacroConvo) return;
+        if (!isActiveAndEnabled) return;
         AddEndBar();
         speakingCharacterId = -1;
+        ConversationIsActive = false;
+        HudScript.ShowMessageNotification(false);
     }
 
     public void AddEndBar()
@@ -271,17 +285,8 @@ public class ContactsScript : MonoBehaviour
     }
     public void OnPhoneRaise(bool phoneRaised)
     {
-        if (activeCharacter == null) return;
-        if (UncheckedMessages.Contains(activeCharacter.id))
-        {
-            UncheckedMessages.Remove(activeCharacter.id);
-        }
-        if ((activeCharacter.id != instance.tempSpeakingCharacter.id) || !messengerApp.Active)
-        {
-            return;
-        }
-        Debug.Log(instance.UncheckedMessages.Count);
-        HudScript.ShowMessageNotification(instance.UncheckedMessages.Count > 0);
+        if (phoneRaised) return;
+        HudScript.ShowMessageNotification(ConversationIsActive);
     }
 
     public static void CheckShowMessageNotification()
@@ -317,7 +322,7 @@ public class ContactsScript : MonoBehaviour
     public void DeselectCharacter()
     {
         activeCharacter = null;
-        CheckShowMessageNotification();
+        HudScript.ShowMessageNotification(ConversationIsActive);
         if (messengerApp.WaitingForChoice) HudScript.ShowMessageNotification(true);
 
         RebuildContacts();

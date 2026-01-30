@@ -157,7 +157,7 @@ public class UpgradeScreenScript : MonoBehaviour
         newUpgradeObject.GetComponent<UpgradeItemScript>().AssociatedUpgrade.AssociatedMinigame = AssociatedMinigame;
 
         RectTransform rect = newUpgradeObject.GetComponent<RectTransform>();
-        rect.anchoredPosition = Vector2.down * (ContentHeight + InitialContentHeight);
+        rect.localPosition = Vector3.zero;
         ContentHeight += rect.sizeDelta.y + GapHeight;
 
         ContentHolder.sizeDelta = new Vector2(ContentHolder.sizeDelta.x, ContentHeight + InitialContentHeight);

@@ -15,7 +15,8 @@ public class LoveBombingSO : UpgradesAbstract
     {
         if (goodPrayer)
         {
-            TurkPuzzleScript.instance.ApplyReward(CompletionDifficulty);
+            float reward = TurkPuzzleScript.instance.CalculateReward(CompletionDifficulty);
+            CurrencyData.Credits += reward;
         }
     }
 }

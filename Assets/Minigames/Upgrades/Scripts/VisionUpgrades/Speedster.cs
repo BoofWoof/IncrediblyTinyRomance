@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Speedster", menuName = "Upgrades/Challenges/Speedster")]
@@ -8,6 +10,8 @@ public class SpeedsterSO : ValueModifierAbstract
     public float MaxMultiplier;
     public float MinMultiplier;
 
+    public Color DisplayColor = Color.green;
+
     public override string ModifierDescription()
     {
         return "";
@@ -15,13 +19,27 @@ public class SpeedsterSO : ValueModifierAbstract
 
     public override void OnBuy()
     {
-        TurkPuzzleScript.RewardMultiplier += ValueModifier;
+        TurkPuzzleScript.secondaryMuliplierListModifier += ListModifier;
     }
 
-    public override void ValueModifier(ref float referenceValue)
+    public void ListModifier(ref List<SecondaryMultiplier> referenceValue)
     {
         float multiplier = CalculateSpeedMultiplier();
-        TurkPuzzleScript.instance.DisplayedMultiplier *= multiplier;
+
+        if(multiplier > 1.01f)
+        {
+            //string hex = DisplayColor.ToHexString().Substring(0, 6);
+            referenceValue.Add(
+                new SecondaryMultiplier
+                {
+                    multiplier = multiplier,
+                    description = "<color=#" + DisplayColor.ToHexString() + "><b>SPEED: x</b>" + multiplier.AllSignificantDigits(3) + "</color>"
+                }
+                );
+        }
+    }
+    public override void ValueModifier(ref float referenceValue)
+    {
     }
 
     public float CalculateSpeedMultiplier()

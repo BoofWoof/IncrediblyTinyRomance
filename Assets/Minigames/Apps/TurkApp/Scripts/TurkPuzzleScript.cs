@@ -5,6 +5,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct SecondaryMultiplier
+{
+    public float multiplier;
+    public string description;
+}
+
 public class TurkPuzzleScript : MonoBehaviour
 {
     public static TurkPuzzleScript instance;
@@ -21,8 +27,6 @@ public class TurkPuzzleScript : MonoBehaviour
     public TMP_Text PuzzleEarningsText;
     public TMP_Text UniquePuzzlesSolvedText;
     public TMP_Text ScoreMultiplierText;
-
-    [HideInInspector] public float DisplayedMultiplier = 1;
 
     [Header("Objects")]
     public TMP_Text PuzzleName;
@@ -77,6 +81,9 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public delegate void PieceModifier(ref float BaseValue);
     public static PieceModifier pieceCountModifier;
+
+    public delegate void SecondaryMuliplierListModifier(ref List<SecondaryMultiplier> BaseList);
+    public static SecondaryMuliplierListModifier secondaryMuliplierListModifier;
 
     public ModifierMenuText modifierMenuText;
     private static ModifierMenuText.RewardModifier rewardBaseModifier;
@@ -237,7 +244,6 @@ public class TurkPuzzleScript : MonoBehaviour
 
     private void GeneratePuzzle()
     {
-        DisplayedMultiplier = 1;
         PuzzleEarningsText.gameObject.SetActive(false);
         UpdatePuzzleIdx();
 
@@ -327,11 +333,10 @@ public class TurkPuzzleScript : MonoBehaviour
         Win.Play();
 
         Debug.Log("Turk Puzzle Complete!");
-        float reward = ApplyReward(CurrentDifficutly);
 
+        //Puzzle Material Update
         float timePass = 0f;
         float transitionPeriod = 1.5f;
-
         while (timePass < transitionPeriod)
         {
             timePass += Time.deltaTime;
@@ -342,11 +347,15 @@ public class TurkPuzzleScript : MonoBehaviour
         Shader.SetGlobalFloat("_TurkCompletion", 1);
 
         yield return new WaitForSeconds(0.2f);
+
+        //Show Earnings
         PuzzleName.text = selectedGridData.Name;
         PuzzleName.gameObject.SetActive(true);
         PuzzleEarningsText.gameObject.SetActive(true);
         PuzzleEarningsText.text = "";
         if (newBestTime) NewRecordText.gameObject.SetActive(true);
+
+        float reward = CalculateReward(CurrentDifficutly);
 
         PuzzleEarningsText.text = "+ <sprite index=1> ";
         string finalEarningText = reward.AllSignificantDigits(3);
@@ -363,13 +372,22 @@ public class TurkPuzzleScript : MonoBehaviour
         }
         PuzzleEarningsText.text = "+ <sprite index=1> " + finalEarningText;
 
-        if(DisplayedMultiplier > 1.01f)
+        //Show Multipliers
+        List<SecondaryMultiplier> secondaryMultipliers = new List<SecondaryMultiplier>();
+        secondaryMuliplierListModifier?.Invoke(ref secondaryMultipliers);
+        ScoreMultiplierText.text = "";
+        foreach (SecondaryMultiplier secondaryMultiplier in secondaryMultipliers)
         {
+            yield return new WaitForSeconds(0.4f);
             ScoreMultiplierText.gameObject.SetActive(true);
-            ScoreMultiplierText.text = "x" + DisplayedMultiplier.AllSignificantDigits(3);
+            ScoreMultiplierText.text += secondaryMultiplier.description + "\r\n";
+            reward *= secondaryMultiplier.multiplier;
+            PuzzleEarningsText.text = "+ <sprite index=1> " + reward.AllSignificantDigits(2);
         }
 
         yield return new WaitForSeconds(1.5f);
+
+        CurrencyData.Credits += reward;
 
         ScoreMultiplierText.gameObject.SetActive(false);
 
@@ -381,7 +399,7 @@ public class TurkPuzzleScript : MonoBehaviour
         TurkCubeScript.PickupEnabled = true;
     }
 
-    public float ApplyReward(int completitionDifficulty)
+    public float CalculateReward(int completitionDifficulty)
     {
         int tempDifficulty = CurrentDifficutly;
         CurrentDifficutly = completitionDifficulty;
@@ -390,7 +408,6 @@ public class TurkPuzzleScript : MonoBehaviour
         float reward = TurkData.CreditsPerPuzzle;
         RewardBaseModifier?.Invoke(ref reward);
         RewardMultiplier?.Invoke(ref reward);
-        CurrencyData.Credits += reward * DisplayedMultiplier;
 
         CurrentDifficutly = tempDifficulty;
 

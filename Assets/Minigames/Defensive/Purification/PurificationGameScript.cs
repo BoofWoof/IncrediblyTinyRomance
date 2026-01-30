@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -39,6 +40,12 @@ public class PurificationGameScript : MonoBehaviour
 
     public Volume PuffVolume;
 
+    public float StartingTimerTime = 60f;
+    public float TimerTime;
+    public TMP_Text TimerText;
+    public bool TimerEnabled = true;
+    public bool LevelRunning = false;
+
     public static float TotalTime = 0;
     public float StartingTime;
 
@@ -69,6 +76,7 @@ public class PurificationGameScript : MonoBehaviour
         CurrentLevelInPack = 0;
         MusicSelectorScript.SetOverworldSong(5);
         FogSource.Play();
+        LevelRunning = true;
         StartLevel();
     }
 
@@ -84,9 +92,31 @@ public class PurificationGameScript : MonoBehaviour
             CharacterSpeechScript.BroadcastSpeechAttempt(CurrentLevelPack.Levels[CurrentLevelInPack].VoiceLineTargetName, CurrentLevelPack.Levels[CurrentLevelInPack].VoiceLine);
         }
 
-        VentGridData.SpawnGridFromSaveData(CurrentLevelPack.Levels[CurrentLevelInPack]);
+
+        PurificationLevelSO LevelData = CurrentLevelPack.Levels[CurrentLevelInPack];
+        TimerEnabled = LevelData.EnableTimer;
+        TimerText.gameObject.SetActive(TimerEnabled);
+        StartingTimerTime = LevelData.PuzzleTimeLimit;
+        TimerTime = StartingTimerTime;
+
+        VentGridData.SpawnGridFromSaveData(LevelData);
         UpdatePipeRoutes();
         PipeStackScript.GlobalRotationAllowed = true;
+    }
+
+    public void Update()
+    {
+        if (!LevelRunning) return;
+        if (!TimerEnabled) return;
+
+        TimerTime -= Time.deltaTime;
+        if(TimerTime <= 0)
+        {
+            AnnouncementScript.StartAnnouncement("The air grows thicker. Your people are losing their grip on reality.");
+            DefenseStats.DamageCity(10f);
+            TimerTime = StartingTimerTime;
+        }
+        TimerText.text = "Oversaturation In: <b>" + System.TimeSpan.FromSeconds(TimerTime).ToString("m\\:ss") + "</b>";
     }
 
     public void UpdatePipeRoutes()
@@ -300,6 +330,8 @@ public class PurificationGameScript : MonoBehaviour
             {
                 PlayerBlinkScript.StartBlink(associatedLevelHolder.HallucinationResets);
             }
+
+            LevelRunning = false;
 
             OverworldBehavior.AriesBehavior("judge");
         }
