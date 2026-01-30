@@ -11,8 +11,6 @@ public class MenuTrigger : MonoBehaviour
     {
         if (MenuOpenCount == 0) PauseGame();
         MenuOpenCount++;
-
-        Debug.Log("MenuCount: " + MenuOpenCount.ToString());
     }
 
     public void OnDisable()
@@ -20,8 +18,6 @@ public class MenuTrigger : MonoBehaviour
         if (MenuOpenCount == 0) return;
         MenuOpenCount--;
         if (MenuOpenCount <= 0) UnPauseGame();
-
-        Debug.Log("MenuCount: " + MenuOpenCount.ToString());
     }
 
     public static int GetMenuCount()

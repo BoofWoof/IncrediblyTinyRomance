@@ -17,6 +17,7 @@ public class AppScript : MonoBehaviour
     public event ShowApp OnShowApp;
 
     public UnityEvent OnActivateApp;
+    public UnityEvent OnDeactivateApp;
 
     public void Start()
     {
@@ -41,13 +42,13 @@ public class AppScript : MonoBehaviour
     public void Show(GameObject previousApp)
     {
         Active = true;
-        OnActivateApp?.Invoke();
         if (previousApp != null)
         {
             PreviousApp = previousApp;
         }
         AppRoot.transform.localPosition = new Vector3(0, 0, 0);
 
+        OnActivateApp?.Invoke();
         OnShowApp?.Invoke();
     }
 
@@ -62,6 +63,7 @@ public class AppScript : MonoBehaviour
         }
         AppRoot.transform.position = new Vector3(0, -100, 0);
 
+        OnDeactivateApp?.Invoke();
         OnHideApp?.Invoke();
     }
 }

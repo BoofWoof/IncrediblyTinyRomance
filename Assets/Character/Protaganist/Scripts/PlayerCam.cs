@@ -40,6 +40,8 @@ public class PlayerCam : MonoBehaviour
         Instance = this;
         EnableCameraMovement = false;
         PhonePositionScript.PhoneToggled += PhoneToggle;
+        PhonePositionScript.PhoneToggled += ClearScreenPointSelection;
+
     }
     private void RegisterInputActions()
     {
@@ -106,6 +108,18 @@ public class PlayerCam : MonoBehaviour
         {
             Time.timeScale = 0f;
             AudioListener.pause = true; // Mute audio when losing focus
+        }
+    }
+
+    public void ClearScreenPointSelection(bool PhoneUp)
+    {
+        if (!PhoneUp) return;
+
+        if (TargetActivationObject != null)
+        {
+            TargetActivationObject.layer = LayerMask.NameToLayer("Default");
+            TargetActivationObject = null;
+            ReticleScript.instance.SetDefault();
         }
     }
 

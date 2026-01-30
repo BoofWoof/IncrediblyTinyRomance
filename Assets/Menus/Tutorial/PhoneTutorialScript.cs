@@ -9,6 +9,17 @@ public class PhoneTutorialScript : MonoBehaviour
 
     private void Start()
     {
+        StartTutorial();
+    }
+
+    public void RestartTutorial()
+    {
+        StartTutorial();
+    }
+
+    public void StartTutorial()
+    {
+        gameObject.SetActive(true);
         TutorialScreens = new List<Transform>();
 
         for (int i = 0; i < transform.childCount; i++)
@@ -20,16 +31,17 @@ public class PhoneTutorialScript : MonoBehaviour
 
         if (TutorialScreens.Count <= 0) return;
         TutorialScreens[0].gameObject.SetActive(true);
+
     }
 
     public void ProgressTutorial()
     {
         if (TutorialScreens.Count <= 0) return;
-        Destroy(TutorialScreens[TutorialStep].gameObject);
+        TutorialScreens[TutorialStep].gameObject.SetActive(false);
         TutorialStep++;
         if(TutorialStep >= TutorialScreens.Count)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             return;
         }
         TutorialScreens[TutorialStep].gameObject.SetActive(true);

@@ -67,6 +67,7 @@ public class ShutterScript : MonoBehaviour
         {
             FirstRaise = false;
             HudScript.SetContinueTutorial();
+            PhonePositionScript.AllowPhoneToggle = true;
         }
 
         if (ShudderAudioSource.isPlaying) return;
@@ -82,7 +83,6 @@ public class ShutterScript : MonoBehaviour
 
                 Siren.Pause();
                 ShuttersLowered = false;
-                PhonePositionScript.AllowPhoneToggle = true;
             } 
         }
         else
@@ -95,7 +95,6 @@ public class ShutterScript : MonoBehaviour
 
                 Siren.Play();
                 ShuttersLowered = true;
-                PhonePositionScript.AllowPhoneToggle = false;
             } 
         }
     }

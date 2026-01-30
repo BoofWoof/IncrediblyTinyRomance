@@ -39,6 +39,7 @@ public class ActiveBroadcast : MonoBehaviour
 
     public static void BroadcastActivation(BroadcastStruct broadcastData)
     {
+        if (broadcastData.BroadcastName.Length == 0) return;
         if (broadcastData.UseValue)
         {
             ActiveBroadcastItems[broadcastData.BroadcastName.ToLower()].ActivationWithValueEvents?.Invoke(broadcastData.BroadcastValue);

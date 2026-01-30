@@ -51,6 +51,7 @@ public class VisionEvents : MonoBehaviour
     {
         int allCount = DialogueLua.GetVariable("PuzzlesCompleted").asInt + 1;
         DialogueLua.SetVariable("PuzzlesCompleted", allCount);
+        QuestManager.QuestManagerInstance.QuickUpdate();
 
         List<EventAbstract> eventCopy = new List<EventAbstract>(PuzzleCompleteEvents);
         foreach (EventAbstract possibleEvent in eventCopy)

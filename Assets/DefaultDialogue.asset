@@ -813,8 +813,8 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: Submit [lua(3-Variable["SuccessfulPrayersSubmitted"])] more successful
-        prayers.
+      value: Submit [lua(math.max(0, 3-Variable["SuccessfulPrayersSubmitted"]))]
+        more successful prayers.
       type: 0
       typeString: CustomFieldType_Text
     - title: Success Description
@@ -844,7 +844,7 @@ MonoBehaviour:
   - id: 8
     fields:
     - title: Name
-      value: OH GOD
+      value: OH HIM
       type: 0
       typeString: 
     - title: Pictures
@@ -852,7 +852,7 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: 'OH GOD OH GOD OH GOD OH GOD OH GOD OH GOD OH GOD OH GOD '
+      value: Survive a conversation with you deity.
       type: 0
       typeString: 
     - title: Success Description
@@ -886,8 +886,8 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: Submit [lua(7-Variable["SuccessfulPrayersSubmitted"])] more successful
-        prayers.
+      value: Submit [lua(math.max(0, 7-Variable["SuccessfulPrayersSubmitted"]))]
+        more successful prayers.
       type: 0
       typeString: 
     - title: Success Description
@@ -921,8 +921,8 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: Submit [lua(11-Variable["SuccessfulPrayersSubmitted"])] more successful
-        prayers.
+      value: Submit [lua(math.max(0, 11-Variable["SuccessfulPrayersSubmitted"]))]
+        more successful prayers.
       type: 0
       typeString: 
     - title: Success Description
@@ -956,7 +956,7 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: Complete [lua(4-Variable["PuzzlesCompleted"])] more puzzles.
+      value: Complete [lua(math.max(0, 4-Variable["PuzzlesCompleted"]))] more puzzles.
       type: 0
       typeString: 
     - title: Success Description
@@ -33640,7 +33640,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 148}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 1
   - id: 21
     fields:

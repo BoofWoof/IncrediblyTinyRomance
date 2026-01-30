@@ -657,4 +657,10 @@ public class TurkPuzzleScript : MonoBehaviour
         }
         CloudPanel.materialForRendering.SetFloat("_HoleSize", finalValue);
     }
+
+    public static bool isDifficultyCompleted(int difficultyLevel)
+    {
+        if (!PuzzlesCompleted.ContainsKey(difficultyLevel)) return false;
+        return PuzzlesCompleted[difficultyLevel] >= PuzzlesList[difficultyLevel].Count;
+    }
 }

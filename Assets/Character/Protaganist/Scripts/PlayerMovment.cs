@@ -58,7 +58,7 @@ public class PlayerMovment : MonoBehaviour
         }
         else
         {
-            rb.linearDamping = 0;
+            //rb.linearDamping = 0;
         }
     }
 

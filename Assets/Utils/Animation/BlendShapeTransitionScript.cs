@@ -12,6 +12,13 @@ public class BlendShapeTransitionScript : MonoBehaviour
 
     public int ShapekeyIdx;
 
+    public bool StartWithMeshRendererHidden = true;
+
+    public void Awake()
+    {
+        targetSkinnedMesh.enabled = !StartWithMeshRendererHidden;
+    }
+
     public void StartTransition()
     {
         StartCoroutine(TransitionBlendshape());
@@ -19,6 +26,8 @@ public class BlendShapeTransitionScript : MonoBehaviour
 
     public IEnumerator TransitionBlendshape()
     {
+        targetSkinnedMesh.enabled = true;
+
         float timePassed = 0f;
 
         while (timePassed < TransitionPeriod)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f937fa18c0ae2b84ead70ea8b1561665, type: 3}
+  m_Name: 2EasyCompletion
+  m_EditorClassIdentifier: 
+  Title: Scanner
+  Objective: Complete all easy puzzles in <b>Vision</b>.
+  Flavor: Everything near and dear to you in one place.
+  ButtonText: I AM LITERALLY VIBRATING
+  OnBuyAnnouncement: A <color=#FFAAAA><b>deligent plushie</b></color> has been added
+    to your room.
+  ActivationData:
+    BroadcastName: UnlockZyyph
+    UseValue: 0
+    BroadcastValue: 0
+    UseString: 0
+    BroadcastString: 
+  DifficultyCompletion: 1

@@ -21,7 +21,7 @@ namespace DebugTools.DeveloperConsole.Commands
             if (int.Parse(args[0]) == 2)
             {
                 QuestManager.ChangeQuest("Visions");
-                AppMenuScript.SetAppsRevealed(2);
+                AppMenuScript.SetAppsRevealed(3);
             }
 
             return true;

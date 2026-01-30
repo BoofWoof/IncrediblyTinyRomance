@@ -28,7 +28,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: -5.333, y: -5.577, z: -8.171}
+        value: {x: 4.858, y: -12.897, z: -8.523}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1067,7 +1067,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: 11.608, y: -8.642, z: -1.781}
+        value: {x: 1.439, y: -8.327, z: -1.745}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1092,7 +1092,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: 238.332, y: -12.626007, z: -240.008}
+        value: {x: 238.332, y: -23.002014, z: -240.008}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1117,7 +1117,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: 196.01, y: 60.583, z: 174.108}
+        value: {x: 189.115, y: 61.434, z: 170.197}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1153,6 +1153,38 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: Aries/Armature
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: {x: 38.822, y: -41.074, z: -76.47}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: {x: 37.237, y: 33.939, z: 72.07}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -1645,15 +1677,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.6833333
         value: {x: 0.00072, y: 0.00382, z: 0.0105}
-        inSlope: {x: -0.0007481167, y: 0.0005522898, z: -0.0014736155}
-        outSlope: {x: -0.0007481167, y: 0.0005522898, z: -0.0014736155}
+        inSlope: {x: -0.0007481167, y: 0.0005522898, z: -0.0015003128}
+        outSlope: {x: -0.0007481167, y: 0.0005522898, z: -0.0015003128}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: -0.000369999, y: 0.0043699886, z: 0.006890098}
+        value: {x: -0.000369999, y: 0.0043699886, z: 0.0067837536}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1712,7 +1744,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: -0.00594, y: 0.00392, z: 0.00706}
+        value: {x: -0.006646213, y: 0.003920006, z: 0.0065773204}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1737,7 +1769,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: -0.026, y: -0.284, z: 0.116}
+        value: {x: -0.0260001, y: -0.3626401, z: 0.17270774}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1803,7 +1835,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 3.9833333
-        value: {x: 0, y: 0.0027404847, z: 0.000000055413693}
+        value: {x: -0.000000009313226, y: 0.00274044, z: -0.00000012211967}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -1814,6 +1846,22 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: Aries/Armature/Bone/Belly/Chest
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: {x: 0.000000038562575, y: 0.002996681, z: 0.00000013050158}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: Aries/Armature/Bone/Belly/Chest/Neck
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -2201,6 +2249,15 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
+      path: 205907911
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
       path: 3590460614
       attribute: 1
       script: {fileID: 0}
@@ -2299,6 +2356,24 @@ AnimationClip:
       isPPtrCurve: 0
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 825353116
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 3409895167
+      attribute: 4
+      script: {fileID: 0}
+      typeID: 4
+      customType: 4
+      isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -2336,7 +2411,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -5.333
+        value: 4.858
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2366,7 +2441,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -5.577
+        value: -12.897
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -2396,7 +2471,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -8.171
+        value: -8.523
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -5828,7 +5903,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 11.608
+        value: 1.439
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -5858,7 +5933,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -8.642
+        value: -8.327
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -5888,7 +5963,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -1.781
+        value: -1.745
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7635,15 +7710,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 1.6833333
         value: 0.0105
-        inSlope: -0.0014736155
-        outSlope: -0.0014736155
+        inSlope: -0.0015003128
+        outSlope: -0.0015003128
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 0.006890098
+        value: 0.0067837536
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7703,7 +7778,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -12.626007
+        value: -23.002014
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7880,7 +7955,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -0.00594
+        value: -0.006646213
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7910,7 +7985,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 0.00392
+        value: 0.003920006
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7940,7 +8015,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 0.00706
+        value: 0.0065773204
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -7970,7 +8045,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 196.01
+        value: 189.115
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8000,7 +8075,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 60.583
+        value: 61.434
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8030,7 +8105,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 174.108
+        value: 170.197
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8060,7 +8135,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -0.026
+        value: -0.0260001
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8090,7 +8165,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: -0.284
+        value: -0.3626401
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8120,7 +8195,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 3.9833333
-        value: 0.116
+        value: 0.17270774
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8411,7 +8486,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 3.9833333
-        value: 0
+        value: -0.000000009313226
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8432,7 +8507,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 3.9833333
-        value: 0.0027404847
+        value: 0.00274044
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8453,7 +8528,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 3.9833333
-        value: 0.000000055413693
+        value: -0.00000012211967
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -8468,6 +8543,195 @@ AnimationClip:
     classID: 4
     script: {fileID: 0}
     flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 0.000000038562575
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: Aries/Armature/Bone/Belly/Chest/Neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 0.002996681
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: Aries/Armature/Bone/Belly/Chest/Neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 0.00000013050158
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: Aries/Armature/Bone/Belly/Chest/Neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 38.822
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: -41.074
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: -76.47
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 37.237
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.x
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 33.939
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.y
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 3.9833333
+        value: 72.07
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: localEulerAnglesRaw.z
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 16
   - serializedVersion: 2
     curve:
       serializedVersion: 2
@@ -8540,7 +8804,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8552,7 +8816,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8564,223 +8828,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L/Pointer.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L/Pointer.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L/Pointer.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8828,7 +8876,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L/Pinky.03.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8840,7 +8888,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L/Pinky.03.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -8852,331 +8900,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Rig/RightHandIK
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Rig/RightHandIK
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Rig/RightHandIK
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L/Middle.03.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L/Middle.03.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L/Middle.03.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R/Pinky.02.R/Pinky.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R/Pinky.02.R/Pinky.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R/Pinky.02.R/Pinky.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R/Middle.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R/Middle.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R/Middle.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R/Thumb.02.R/Thumb.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R/Thumb.02.R/Thumb.03.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R/Thumb.02.R/Thumb.03.R
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L/Pinky.03.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9224,7 +8948,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L/Thumb.03.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9236,7 +8960,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L/Thumb.03.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9248,7 +8972,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L/Thumb.03.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9260,7 +8984,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/Neck
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L/Pointer.02.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9272,7 +8996,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/Neck
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L/Pointer.02.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9284,7 +9008,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/Neck
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L/Pointer.02.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9296,7 +9020,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9308,7 +9032,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9320,7 +9044,439 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R/Thumb.02.R/Thumb.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R/Thumb.02.R/Thumb.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R/Thumb.02.R/Thumb.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R/Pinky.02.R/Pinky.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R/Pinky.02.R/Pinky.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R/Pinky.02.R/Pinky.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L/Middle.03.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L/Middle.03.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L/Middle.03.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pinky.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Thumb.01.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R/Middle.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R/Middle.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R/Middle.03.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9404,7 +9560,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9416,7 +9572,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9428,7 +9584,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9440,7 +9596,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9452,7 +9608,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9464,79 +9620,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Middle.01.L/Middle.02.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Middle.01.R/Middle.02.R
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L/Pinky.03.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L/Pinky.03.L
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L/Pinky.02.L/Pinky.03.L
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pointer.01.L
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -9573,6 +9657,258 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: Aries/Armature/Bone/Belly/Chest/CollarBone.R/UpperArm.R/ForeArm.R/Hand.R/Pointer.01.R/Pointer.02.R/Pointer.03.R
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L/Thumb.03.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L/Thumb.03.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Thumb.01.L/Thumb.02.L/Thumb.03.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/CollarBone.L/UpperArm.L/ForeArm.L/Hand.L/Pinky.01.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/Neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/Neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/Neck
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Aries/Armature/Bone/Belly/Chest/Neck/HeadTracker/Head/Ear.L
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Rig/RightHandIK
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Rig/RightHandIK
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Rig/RightHandIK
     classID: 4
     script: {fileID: 0}
     flags: 0

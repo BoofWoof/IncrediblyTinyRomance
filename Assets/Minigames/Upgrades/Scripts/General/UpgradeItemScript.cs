@@ -38,8 +38,23 @@ public class UpgradeItemScript : MonoBehaviour
 
     public void Buy()
     {
-        if (!AssociatedUpgrade.Buy()) return;
+        if (!AssociatedUpgrade.Buy()) {
+            AnnouncementScript.StartAnnouncement("You can't afford this upgrade. Go do more puzzles!");
+            return;
+        } 
         StartCoroutine(UpgradeBoughtAnimation());
+    }
+
+    public void Start()
+    {
+        StartCoroutine(AffordCheck());
+    }
+
+    public IEnumerator AffordCheck()
+    {
+        if (AssociatedUpgrade.CanBuy()) UpgradeImage.color = new Color(1f, 1f, 1f);
+        else UpgradeImage.color = new Color(0.35f, 0.3f, 0.3f);
+        yield return new WaitForSeconds(1f);
     }
 
     public IEnumerator UpgradeBoughtAnimation()

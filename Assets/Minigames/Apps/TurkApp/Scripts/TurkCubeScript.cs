@@ -233,8 +233,6 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         Vector2 Offset = -rootPieceScript.CalcualteCenterOffset();
 
-        Debug.Log(Offset);
-
         rootPiece.GetComponent<RectTransform>().anchoredPosition = Offset;
     }
 
