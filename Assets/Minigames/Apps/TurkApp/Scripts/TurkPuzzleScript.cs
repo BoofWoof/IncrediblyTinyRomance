@@ -261,6 +261,11 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public void ShowArtist()
     {
+        if (selectedGridData == null)
+        {
+            ArtistCredit.text = "";
+            return;
+        }
         if (selectedGridData.Artist.Length > 0)
         {
             ArtistCredit.text = "Artist: " + selectedGridData.Artist;

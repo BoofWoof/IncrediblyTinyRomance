@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class AppMenuScript : AppScript
 {
     public static AppMenuScript Instance;
-    public static int RevealedApps = 1;
+    public static int RevealedApps = 2;
+
+    public int StartingAppsRevealed = 2;
 
     public List<Sprite> AppSprites;
     public Sprite EmptyAppSprite;
@@ -26,6 +28,11 @@ public class AppMenuScript : AppScript
 
     private List<GameObject> appButtons = new List<GameObject>();
     private List<GameObject> UIElements = new List<GameObject>();
+
+    public void Awake()
+    {
+        RevealedApps = StartingAppsRevealed;
+    }
 
     private void OnEnable()
     {
