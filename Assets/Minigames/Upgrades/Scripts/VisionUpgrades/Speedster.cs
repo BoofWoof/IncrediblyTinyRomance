@@ -33,7 +33,7 @@ public class SpeedsterSO : ValueModifierAbstract
                 new SecondaryMultiplier
                 {
                     multiplier = multiplier,
-                    description = "<color=#" + DisplayColor.ToHexString() + "><b>SPEED: x</b>" + multiplier.AllSignificantDigits(3) + "</color>"
+                    description = "<color=#" + DisplayColor.ToHexString() + "><b>FALCON SPEED: x</b>" + multiplier.AllSignificantDigits(3) + "</color>"
                 }
                 );
         }

@@ -123,6 +123,12 @@ public class PurificationGameScript : MonoBehaviour
     {
         ResetPipeRoutes();
 
+
+        foreach (GameObject pipestack in VentGridData.PipeStacks)
+        {
+            pipestack.GetComponent<PipeStackScript>().ResetParticleBools();
+        }
+
         List<VentRouteData> ventRoutes = new List<VentRouteData>();
         List<WaitingExpansion> DeadEndExpansions = new List<WaitingExpansion>();
 
@@ -257,32 +263,15 @@ public class PurificationGameScript : MonoBehaviour
                         break;
                     }
                 }
-                if (!stillDeadEnd)
-                {
-                    int adjacentVentID = VentGridData.ConvertVector2ToPosID(prevDeadEnd.sourceVent.VentPosID, prevDeadEnd.expansionDirection);
-                    if (adjacentVentID > 0)
-                    {
-                        PipeStackScript adjacentVentScript = VentGridData.PipeStacks[adjacentVentID].GetComponent<PipeStackScript>();
-                        switch (prevDeadEnd.expansionDirection)
-                        {
-                            case BADdirections.UP:
-                                adjacentVentScript.DownLeakParticles.SetActive(false);
-                                break;
-                            case BADdirections.RIGHT:
-                                adjacentVentScript.LeftLeakParticles.SetActive(false);
-                                break;
-                            case BADdirections.DOWN:
-                                adjacentVentScript.UpLeakParticles.SetActive(false);
-                                break;
-                            case BADdirections.LEFT:
-                                adjacentVentScript.RightLeakParticles.SetActive(false);
-                                break;
-                        }
-                    }
-                }
             }
         }
         PrevDeadEndExpansions = DeadEndExpansions;
+
+
+        foreach (GameObject pipestack in VentGridData.PipeStacks)
+        {
+            pipestack.GetComponent<PipeStackScript>().UpdateParticleLeaks();
+        }
     }
 
     public void Win()

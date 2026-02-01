@@ -190,57 +190,74 @@ public class VentGridScript : MonoBehaviour
     {
         bool validExpansion = false;
         bool secondaryExpansion = true;
+        PipeStackScript sourceVent = PipeStacks[sourceVentID].GetComponent<PipeStackScript>(); ;
         PipeStackScript nextVent = null;
 
         int nextVentId = ConvertVector2ToPosID(sourceVentID, expansionDirection);
-        if(nextVentId < 0) return (validExpansion, secondaryExpansion, nextVent);
+        if (nextVentId < 0)
+        {
+            switch (expansionDirection)
+            {
+                case BADdirections.UP:
+                    sourceVent.LeakingUp = true;
+                    sourceVent.UpLeakParticles.transform.localPosition = new Vector2(0, 150);
+                    break;
+                case BADdirections.DOWN:
+                    sourceVent.LeakingDown = true;
+                    sourceVent.DownLeakParticles.transform.localPosition = new Vector2(0, -150);
+                    break;
+                case BADdirections.LEFT:
+                    sourceVent.LeakingLeft = true;
+                    sourceVent.LeftLeakParticles.transform.localPosition = new Vector2(-150, 0);
+                    break;
+                case BADdirections.RIGHT:
+                    sourceVent.LeakingRight = true;
+                    sourceVent.RightLeakParticles.transform.localPosition = new Vector2(150, 0);
+                    break;
+            }
+            return (validExpansion, secondaryExpansion, nextVent);
+        }
 
         nextVent = PipeStacks[nextVentId].GetComponent<PipeStackScript>();
 
+        Debug.Log("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
         switch (expansionDirection)
         {
             case BADdirections.UP:
                 secondaryExpansion = nextVent.DownSecondary;
                 if (nextVent.DownConnection == PipeConnectionType.Closed)
                 {
-                    nextVent.DownLeakParticles.SetActive(true);
+                    sourceVent.UpLeakParticles.transform.parent = nextVent.transform;
+                    sourceVent.LeakingUp = true;
                     return (validExpansion, secondaryExpansion, nextVent);
-                } else
-                {
-                    nextVent.DownLeakParticles.SetActive(false);
                 }
                 break;
             case BADdirections.DOWN:
                 secondaryExpansion = nextVent.UpSecondary;
                 if (nextVent.UpConnection == PipeConnectionType.Closed)
                 {
-                    nextVent.UpLeakParticles.SetActive(true);
+                    sourceVent.DownLeakParticles.transform.parent = nextVent.transform;
+                    sourceVent.LeakingDown = true;
                     return (validExpansion, secondaryExpansion, nextVent);
-                }
-                {
-                    nextVent.UpLeakParticles.SetActive(false);
                 }
                 break;
             case BADdirections.LEFT:
                 secondaryExpansion = nextVent.RightSecondary;
                 if (nextVent.RightConnection == PipeConnectionType.Closed)
                 {
-                    nextVent.RightLeakParticles.SetActive(true);
+                    sourceVent.LeftLeakParticles.transform.parent = nextVent.transform;
+                    sourceVent.LeakingLeft = true;
                     return (validExpansion, secondaryExpansion, nextVent);
-                }
-                {
-                    nextVent.RightLeakParticles.SetActive(false);
                 }
                 break;
             case BADdirections.RIGHT:
                 secondaryExpansion = nextVent.LeftSecondary;
                 if (nextVent.LeftConnection == PipeConnectionType.Closed)
                 {
-                    nextVent.LeftLeakParticles.SetActive(true);
+                    Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAA");
+                    sourceVent.RightLeakParticles.transform.parent = nextVent.transform;
+                    sourceVent.LeakingRight = true;
                     return (validExpansion, secondaryExpansion, nextVent);
-                }
-                {
-                    nextVent.LeftLeakParticles.SetActive(false);
                 }
                 break;
         }

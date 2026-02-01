@@ -852,7 +852,7 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: Survive a conversation with you deity.
+      value: Survive a conversation with your deity.
       type: 0
       typeString: 
     - title: Success Description
@@ -10004,8 +10004,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 4519.04}
-    canvasZoom: 0.5500008
+    canvasScrollPosition: {x: 1111.0013, y: 360.34436}
+    canvasZoom: 0.58000076
   - id: 8
     fields:
     - title: Title
@@ -23380,7 +23380,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 'UnlockApp(2);
+      userScript: 'UnlockApp(3);
 
         IncrementQuest();'
       onExecute:

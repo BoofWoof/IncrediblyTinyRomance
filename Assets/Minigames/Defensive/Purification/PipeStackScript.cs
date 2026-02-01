@@ -48,9 +48,13 @@ public class PipeStackScript : MonoBehaviour
     public GameObject SourceParticles;
     public GameObject SinkParticles;
     public GameObject UpLeakParticles;
+    public bool LeakingUp = false;
     public GameObject RightLeakParticles;
+    public bool LeakingRight = false;
     public GameObject DownLeakParticles;
+    public bool LeakingDown = false;
     public GameObject LeftLeakParticles;
+    public bool LeakingLeft = false;
 
     public bool canRotate = true;
     public bool fanSpinning = false;
@@ -377,12 +381,26 @@ public class PipeStackScript : MonoBehaviour
         }
     }
 
+    public void ResetParticleBools()
+    {
+        LeakingDown = false;
+        LeakingLeft = false;
+        LeakingRight = false;
+        LeakingUp = false;
+    }
+
+    public void UpdateParticleLeaks()
+    {
+        LeftLeakParticles.SetActive(LeakingLeft);
+        RightLeakParticles.SetActive(LeakingRight);
+        UpLeakParticles.SetActive(LeakingUp);
+        DownLeakParticles.SetActive(LeakingDown);
+    }
+
     public void ResetParticleSystems()
     {
-        LeftLeakParticles.SetActive(false);
-        RightLeakParticles.SetActive(false);
-        UpLeakParticles.SetActive(false);
-        DownLeakParticles.SetActive(false);
+        ResetParticleBools();
+        UpdateParticleLeaks();
     }
 
     public void Start()
