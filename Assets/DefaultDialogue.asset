@@ -2160,8 +2160,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: For obvious reasons, that I've been avoiding it. I prefer a job that
-          lets me hide in a bunker!
+        value: For obvious reasons, I've been avoiding it. I prefer a job that lets
+          me hide in a bunker!
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3868,7 +3868,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1695.7167}
+    canvasScrollPosition: {x: 0, y: 1334.2854}
     canvasZoom: 0.70000035
   - id: 6
     fields:
@@ -6180,7 +6180,7 @@ MonoBehaviour:
         typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: And once the system was finished and turned online, he lasted a whole
-          3 minutes till God smited him.
+          three minutes 'till God smited him.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -6930,7 +6930,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1744
+        x: 1742.1818
         y: 2570
         width: 160
         height: 30
@@ -6990,7 +6990,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1952
-        y: 2570
+        y: 2568.1821
         width: 160
         height: 30
     - id: 51
@@ -10004,7 +10004,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 4474.521}
+    canvasScrollPosition: {x: 230.90869, y: 1356.3435}
     canvasZoom: 0.5500008
   - id: 8
     fields:
@@ -23380,7 +23380,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 'UnlockApp(2);
+      userScript: 'UnlockApp("Visions");
 
         IncrementQuest();'
       onExecute:
@@ -23393,7 +23393,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 425.7141}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 0.7000002
   - id: 14
     fields:

@@ -1,147 +1,126 @@
 using PixelCrushers.DialogueSystem;
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class AppMenuObjectData
+{
+    public Sprite AppIcon;
+    public GameObject TargetApp;
+    public bool Unlocked;
+    public string AppName;
+}
 
 public class AppMenuScript : AppScript
 {
     public static AppMenuScript Instance;
-    public static int RevealedApps = 2;
 
-    public int StartingAppsRevealed = 2;
+    public RectTransform MenuGridTarget;
 
-    public List<Sprite> AppSprites;
+    public List<AppMenuObjectData> AppDatas;
+    public Dictionary<string, AppMenuObjectData> NameToApp;
     public Sprite EmptyAppSprite;
-    public List<GameObject> Apps;
 
-    public float vertical_gap;
-    public float horizontal_count_max;
-    public float vertical_count_max;
-
-    public RectTransform parent_panel;
-    public float app_width = 200;
-    public float vertical_buffer = 0;
-    public float horizontal_buffer = 0;
-
-    private List<GameObject> appButtons = new List<GameObject>();
-    private List<GameObject> UIElements = new List<GameObject>();
-
-    public void Awake()
-    {
-        RevealedApps = StartingAppsRevealed;
-    }
+    public GameObject AppButtonPrefab;
 
     private void OnEnable()
     {
-        Lua.RegisterFunction("UnlockApp", null, SymbolExtensions.GetMethodInfo(() => SetAppsRevealed(0f)));
+        NameToApp = new Dictionary<string, AppMenuObjectData>();
+        foreach(AppMenuObjectData AppData in AppDatas)
+        {
+            NameToApp.Add(AppData.AppName.ToLower(), AppData);
+        }
+
+        Lua.RegisterFunction("UnlockApp", null, SymbolExtensions.GetMethodInfo(() => RevealApp("")));
         Instance = this;
         MakeButtons();
     }
 
     private void OnDisable()
     {
-        DeleteButtons();
+        ClearButtons();
     }
 
-    public static void SetAppsRevealed(float AppRevealed)
+    public static void UnlockAllApps()
     {
-        Instance.DeleteButtons();
-        RevealedApps = (int)AppRevealed;
+        Instance.ClearButtons();
+        foreach (AppMenuObjectData AppData in Instance.AppDatas)
+        {
+            AppData.Unlocked = true;
+        }
         Instance.MakeButtons();
     }
 
-    public static void SetAppsRevealed(int AppRevealed)
+    private void ClearButtons()
     {
-        Instance.DeleteButtons();
-        RevealedApps = AppRevealed;
+        foreach(Transform child in MenuGridTarget)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public static void RevealApp(string AppName)
+    {
+        Instance.ClearButtons();
+        if (Instance.NameToApp.ContainsKey(AppName.ToLower()))
+        {
+            Instance.NameToApp[AppName.ToLower()].Unlocked = true;
+        }
         Instance.MakeButtons();
     }
 
     private void MakeButtons()
     {
-        int appsAdded = 0;
-
-        float horizontal_gap = (parent_panel.sizeDelta.x - horizontal_buffer * 2f - app_width * horizontal_count_max) / (horizontal_count_max - 1f);
-        for (int y = 0; y < vertical_count_max; y++)
+        foreach (AppMenuObjectData AppData in AppDatas)
         {
-            for (int x = 0; x < horizontal_count_max; x++)
-            {
-                float horizontal_position = app_width / 2f + horizontal_buffer + (horizontal_gap + app_width) * x - parent_panel.sizeDelta.x / 2f;
-                float vertical_position = vertical_buffer - vertical_gap * y;
-                if (appsAdded < AppSprites.Count && appsAdded < RevealedApps)
-                {
-                    GameObject newButton = CreateButton(AppSprites[appsAdded], new Vector2(horizontal_position, vertical_position), appsAdded);
-                    appButtons.Add(newButton);
-                    UIElements.Add(newButton);
-                    appsAdded++;
-                }
-                else
-                {
-                    GameObject newEmpty = CreateButton(EmptyAppSprite, new Vector2(horizontal_position, vertical_position), -1);
-                    UIElements.Add(newEmpty);
-                }
-            }
+            GameObject newButton = CreateButton(AppData);
+            newButton.transform.parent = MenuGridTarget;
+            newButton.transform.localScale = Vector3.one;
+            newButton.transform.localPosition = Vector3.zero;
+            newButton.transform.localRotation = Quaternion.identity;
         }
     }
-    private void DeleteButtons()
+
+    private GameObject CreateButton(AppMenuObjectData appData)
     {
-        foreach (GameObject obj in UIElements)
+        GameObject newButton = Instantiate(AppButtonPrefab);
+        Image image = newButton.GetComponent<Image>();
+        TMP_Text imageText = newButton.GetComponentInChildren<TMP_Text>();
+        if(appData.AppIcon != null && appData.Unlocked == true)
         {
-            if (obj != null)
-            {
-                Destroy(obj);
-            }
-        }
-        appButtons.Clear();
-        UIElements.Clear();
-    }
-
-    private GameObject CreateButton(Sprite sprite, Vector2 position, int appIdx)
-    {
-        GameObject newButton = new GameObject("App Image");
-        newButton.transform.SetParent(transform);
-
-        RectTransform rectTransform = newButton.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(app_width, app_width);
-
-        Image image = newButton.AddComponent<Image>();
-        image.sprite = sprite;
-
-        if (appIdx >= 0)
+            image.sprite = appData.AppIcon;
+            imageText.text = appData.AppName;
+        } else
         {
-            Button button = newButton.AddComponent<Button>();
-
-            EventTrigger eventTrigger = newButton.AddComponent<EventTrigger>();
-
-            EventTrigger.Entry entry = new EventTrigger.Entry
-            {
-                eventID = EventTriggerType.PointerUp
-            };
-            entry.callback.AddListener((eventData) => { 
-                PointerEventData pointerData = (PointerEventData)eventData;
-                if (pointerData.button != PointerEventData.InputButton.Left) return;
-                OnAppRelease(appIdx); 
-            });
-            eventTrigger.triggers.Add(entry);
+            newButton.GetComponent<Button>().interactable = false;
+            imageText.text = "";
+            image.sprite = EmptyAppSprite;
+            return newButton;
         }
 
-        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        Button button = newButton.GetComponent<Button>();
 
-        rectTransform.localPosition = position;
-        rectTransform.localScale = Vector2.one;
-        rectTransform.localRotation = Quaternion.identity;
+        EventTrigger eventTrigger = newButton.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry entry = new EventTrigger.Entry
+        {
+            eventID = EventTriggerType.PointerUp
+        };
+        entry.callback.AddListener((eventData) => { 
+            PointerEventData pointerData = (PointerEventData)eventData;
+            if (pointerData.button != PointerEventData.InputButton.Left) return;
+            OnAppRelease(appData); 
+        });
+        eventTrigger.triggers.Add(entry);
 
         return newButton;
     }
-    private void OnAppRelease(int appIdx)
+    private void OnAppRelease(AppMenuObjectData appData)
     {
-        if (Apps.Count <= appIdx) return;
-        Apps[appIdx].GetComponent<AppScript>().Show(gameObject);
+        appData.TargetApp.GetComponent<AppScript>().Show(gameObject);
         Hide(false);
     }
 }

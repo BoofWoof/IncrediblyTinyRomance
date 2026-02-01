@@ -73,6 +73,6 @@ public class PrayerEventsScript : MonoBehaviour
 
     public void UnlockApps()
     {
-        AppMenuScript.SetAppsRevealed(2);
+        AppMenuScript.UnlockAllApps();
     }
 }
