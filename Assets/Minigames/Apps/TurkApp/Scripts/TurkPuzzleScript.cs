@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -503,23 +504,20 @@ public class TurkPuzzleScript : MonoBehaviour
         int linkedPieces = puzzlePiece.Count;
 
         int breakOutCheck = 0;
-        bool searchDiagonally = false;
+
         while (linkedPieces < puzzlePieceSquares.Count)
         {
-            bool newLinkFound = false;
             foreach (GameObject pieceRoot in puzzlePiece)
             {
                 TurkCubeScript pieceRootScript = pieceRoot.GetComponent<TurkCubeScript>();
-                GameObject newLink = pieceRootScript.AttemptRandomExpand(searchDiagonally);
+                GameObject newLink = pieceRootScript.AttemptRandomExpand();
 
                 if (newLink == null) continue;
-                newLinkFound = true;
                 linkedPieces++;
                 newLink.GetComponent<Image>().color = pieceRoot.GetComponent<Image>().color;
                 newLink.GetComponent<Image>().material.SetColor("_Tint", pieceRoot.GetComponent<Image>().color);
                 newLink.transform.parent = pieceRoot.transform;
             }
-            searchDiagonally = !newLinkFound;
 
             breakOutCheck++;
             if (breakOutCheck > 500)
@@ -544,7 +542,50 @@ public class TurkPuzzleScript : MonoBehaviour
             return new List<GameObject>(gridSquares);
         }
 
-        return puzzlePieceSquares.OrderBy(x => UnityEngine.Random.value).Take(numberOfSquares).ToList();
+        List<int> allPieceIndexes = Enumerable.Range(0,puzzlePieceSquares.Count).ToList();
+        int retryCount = 15;
+        List<int> selectedPieceIdx = new List<int>();
+        List<GameObject> selectedPieces = new List<GameObject>();
+
+        int sampleIdx = allPieceIndexes[UnityEngine.Random.Range(0, allPieceIndexes.Count)];
+
+        selectedPieceIdx.Add(sampleIdx);
+        selectedPieces.Add(puzzlePieceSquares[sampleIdx]);
+        allPieceIndexes.Remove(sampleIdx);
+
+        for (int i = 0; i < numberOfSquares-1; i++)
+        {
+            float furthestPiece = -1;
+            int bestIdx = -1;
+
+            for (int r = 0; r < retryCount; r++)
+            {
+                sampleIdx = allPieceIndexes[UnityEngine.Random.Range(0, allPieceIndexes.Count)];
+                Vector2Int selectCord = puzzlePieceSquares[sampleIdx].GetComponent<TurkCubeScript>().cord;
+
+                int closestDistance = 100000000;
+                foreach (int preselectedIdx in selectedPieceIdx)
+                {
+                    Vector2Int preSelectCord = puzzlePieceSquares[preselectedIdx].GetComponent<TurkCubeScript>().cord;
+                    int distance = Mathf.Abs(selectCord.x - preSelectCord.x) + Mathf.Abs(selectCord.x - preSelectCord.x);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                    }
+                }
+
+                if (closestDistance > furthestPiece)
+                {
+                    furthestPiece = closestDistance;
+                    bestIdx = sampleIdx;
+                }
+            }
+            selectedPieceIdx.Add(bestIdx);
+            selectedPieces.Add(puzzlePieceSquares[bestIdx]);
+            allPieceIndexes.Remove(bestIdx);
+        }
+
+        return selectedPieces;
     }
 
     private void GeneratePuzzlePieces()

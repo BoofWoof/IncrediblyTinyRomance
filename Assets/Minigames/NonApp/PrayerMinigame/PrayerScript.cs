@@ -61,6 +61,8 @@ public class PrayerScript : MonoBehaviour
         RamAngyLevel = 0;
         JudgementFocus = false;
         BalconyEventsScript.instance.StartSystem();
+
+        GenerateNewPrayers();
     }
 
     public void DeactivateJudgement()
@@ -97,6 +99,11 @@ public class PrayerScript : MonoBehaviour
         {
             CharacterSpeechScript.BroadcastGestureParameter("MacroAries", "SitBack");
             JudgementFocus = false;
+        }
+        if (RamAngyLevel > AngerThreshold)
+        {
+            RamAngyLevel = AngerThreshold;
+            ActivateGameOver();
         }
     }
 
@@ -284,8 +291,7 @@ public class PrayerScript : MonoBehaviour
             RamAngyLevel += AngerReduction * 2f / 3f;
             if (RamAngyLevel > AngerThreshold)
             {
-                RamAngyLevel = AngerThreshold;
-                ActivateGameOver();
+                yield break;
             }
             PrayerSubmitted.Invoke(false);
             BadPrayerCount++;

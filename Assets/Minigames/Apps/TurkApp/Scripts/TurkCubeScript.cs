@@ -297,11 +297,13 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     #region Find Other Pieces
 
-    public GameObject AttemptRandomExpand(bool expandDiagonally = false)
+    public GameObject AttemptRandomExpand()
     {
+        bool expandDiagonally = FullyCardinallyExpanded;
+
         foreach (TurkCubeScript ExpandedToScript in ExpandedToScripts)
         {
-            GameObject expandToObject = ExpandedToScript.AttemptRandomExpand(expandDiagonally);
+            GameObject expandToObject = ExpandedToScript.AttemptRandomExpand();
             if (expandToObject != null) return expandToObject;
         }
         if (FullyCardinallyExpanded && !expandDiagonally) return null;
