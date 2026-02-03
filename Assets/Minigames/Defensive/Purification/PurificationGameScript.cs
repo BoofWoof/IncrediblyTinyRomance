@@ -67,7 +67,6 @@ public class PurificationGameScript : MonoBehaviour
     {
         ChannelChanger.instance.StartCoroutine(VolumeFade(1f));
 
-        if (ChannelChanger.DangerActive) return;
         ChannelChanger.ActiveChannelChanger.PuritySwitch();
         ChannelChanger.DangerActive = true;
 
@@ -315,7 +314,7 @@ public class PurificationGameScript : MonoBehaviour
             ChannelChanger.DangerActive = false;
             ChannelChanger.ActiveChannelChanger.LockSwitch();
 
-            if (associatedLevelHolder.HallucinationResets.Count > 0)
+            if (associatedLevelHolder != null && associatedLevelHolder.HallucinationResets.Count > 0)
             {
                 PlayerBlinkScript.StartBlink(associatedLevelHolder.HallucinationResets);
             }

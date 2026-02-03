@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using UnityEngine;
 
@@ -42,8 +43,12 @@ public class AriesOverworldBehavior : OverworldBehavior
         CrossfadeScript.PauseMusic();
     }
 
-    public IEnumerator PuffAttack()
+    public IEnumerator PuffAttack(float wait)
     {
+        if (wait >= 0) yield return WaitForDialogueToEnd();
+
+        ChannelChanger.DangerActive = true;
+
         yield return StartCoroutine(WalkToStation(0));
         thisAnimator.SetBool("Sitting", true);
         thisAnimator.SetBool("Looming", false);
@@ -115,6 +120,14 @@ public class AriesOverworldBehavior : OverworldBehavior
         }
     }
 
+    public IEnumerator WaitForDialogueToEnd()
+    {
+        while (DialogueManager.IsConversationActive)
+        {
+            yield return null;
+        }
+    }
+
     public IEnumerator WaitForAnimation(string animationStateName)
     {
         while (!thisAnimator.GetCurrentAnimatorStateInfo(0).IsName(animationStateName))
@@ -158,7 +171,7 @@ public class AriesOverworldBehavior : OverworldBehavior
 
         if (behavior.ToLower() == "puff")
         {
-            StartCoroutine(PuffAttack());
+            StartCoroutine(PuffAttack(wait));
         }
 
         if (behavior.ToLower() == "tap")

@@ -32,13 +32,13 @@ public class TurkPuzzleScript : MonoBehaviour
     [Header("Objects")]
     public TMP_Text PuzzleName;
     public TMP_Text NewRecordText;
-
-    public AudioClip NormalWin;
-    public AudioClip SuperWin;
+    public ParticleSystem NewRecordParticles;
 
     public int RepeatsBannedFor = 3;
 
     public AudioSource Win;
+    public AudioSource MultiplierSource;
+    public AudioSource NewRecordSource;
     public AudioSource Pickup;
     public AudioSource Drop;
     public AudioSource DropBad;
@@ -303,8 +303,6 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public IEnumerator WinCutscene()
     {
-        Win.clip = NormalWin;
-
         bool newBestTime = false;
         if (!PuzzlesCompleted.ContainsKey(CurrentDifficutly))
         {
@@ -317,7 +315,6 @@ public class TurkPuzzleScript : MonoBehaviour
         float TotalTime = Time.time - StartingTime;
         if (!TimeRecords.ContainsKey(CurrentDifficutly))
         {
-            Win.clip = SuperWin;
             newBestTime = true;
             TimeRecords[CurrentDifficutly] = TotalTime;
             NewRecordText.text = "NEW BEST TIME " + System.TimeSpan.FromSeconds(TimeRecords[CurrentDifficutly]).ToString("m\\:ss");
@@ -326,7 +323,6 @@ public class TurkPuzzleScript : MonoBehaviour
         {
             if ( TotalTime < TimeRecords[CurrentDifficutly])
             {
-                Win.clip = SuperWin;
                 newBestTime = true;
                 TimeRecords[CurrentDifficutly] = TotalTime;
                 NewRecordText.text = "NEW BEST TIME " + System.TimeSpan.FromSeconds(TimeRecords[CurrentDifficutly]).ToString("m\\:ss");
@@ -359,7 +355,6 @@ public class TurkPuzzleScript : MonoBehaviour
         PuzzleName.gameObject.SetActive(true);
         PuzzleEarningsText.gameObject.SetActive(true);
         PuzzleEarningsText.text = "";
-        if (newBestTime) NewRecordText.gameObject.SetActive(true);
 
         float reward = CalculateReward(CurrentDifficutly);
 
@@ -367,7 +362,7 @@ public class TurkPuzzleScript : MonoBehaviour
         string finalEarningText = reward.AllSignificantDigits(3);
 
         timePass = 0f;
-        transitionPeriod = 0.5f;
+        transitionPeriod = 0.2f;
         while (timePass < transitionPeriod)
         {
             timePass += Time.deltaTime;
@@ -384,11 +379,21 @@ public class TurkPuzzleScript : MonoBehaviour
         ScoreMultiplierText.text = "";
         foreach (SecondaryMultiplier secondaryMultiplier in secondaryMultipliers)
         {
-            yield return new WaitForSeconds(0.4f);
+            MultiplierSource.Play();
             ScoreMultiplierText.gameObject.SetActive(true);
             ScoreMultiplierText.text += secondaryMultiplier.description + "\r\n";
             reward *= secondaryMultiplier.multiplier;
             PuzzleEarningsText.text = "+ <sprite index=1> " + reward.AllSignificantDigits(2);
+            yield return new WaitForSeconds(0.4f);
+        }
+
+
+        if (newBestTime)
+        {
+            NewRecordText.gameObject.SetActive(true);
+            NewRecordSource.Play();
+            NewRecordParticles.Play();
+            yield return new WaitForSeconds(1.5f);
         }
 
         yield return new WaitForSeconds(1.5f);

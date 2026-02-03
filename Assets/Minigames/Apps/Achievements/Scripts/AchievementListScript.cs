@@ -18,6 +18,10 @@ public class AchievementListScript : MonoBehaviour
 
     public GameObject EmptyQueueText;
 
+    public ParticleSystem AchievementParticles;
+
+    public AudioSource UnlockSound;
+
     public static AchievementListScript instance;
 
     public void Awake()
@@ -91,5 +95,7 @@ public class AchievementListScript : MonoBehaviour
     public static void AddFinishedAchievement(string AchievementName)
     {
         CompletedAchievementNames.Add(AchievementName);
+        instance.UnlockSound.Play();
+        instance.AchievementParticles.Play();
     }
 }

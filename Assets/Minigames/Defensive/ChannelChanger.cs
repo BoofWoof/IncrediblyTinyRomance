@@ -31,7 +31,6 @@ public class ChannelChanger : MonoBehaviour
 
     public void AerialSwitch()
     {
-        if (DangerActive) return;
         PhonePositionScript.LockPhoneDown();
 
         AerialDefense.SetActive(true);
@@ -41,7 +40,6 @@ public class ChannelChanger : MonoBehaviour
 
     public void PuritySwitch()
     {
-        if (DangerActive) return;
         PhonePositionScript.LockPhoneDown();
 
         AerialDefense.SetActive(false);

@@ -17,6 +17,7 @@ public class CrossfadeScript : MonoBehaviour
     public int CurrentSongID;
     public MusicDataStruct CurrentSong;
     public Coroutine TransitionCoroutine;
+    public Coroutine CutoffTransitionCoroutine;
 
     private static bool MusicPaused = true;
 
@@ -54,8 +55,8 @@ public class CrossfadeScript : MonoBehaviour
             InstantCutoff(newCutoff);
             return;
         }
-        if(MusicPlayer.TransitionCoroutine != null) MusicPlayer.StopCoroutine(MusicPlayer.TransitionCoroutine);
-        MusicPlayer.TransitionCoroutine = MusicPlayer.StartCoroutine(MusicPlayer.cutoffTransition(newCutoff));
+        if(MusicPlayer.CutoffTransitionCoroutine != null) MusicPlayer.StopCoroutine(MusicPlayer.CutoffTransitionCoroutine);
+        MusicPlayer.CutoffTransitionCoroutine = MusicPlayer.StartCoroutine(MusicPlayer.cutoffTransition(newCutoff));
     }
 
     public static void InstantCutoff(float cutoff)
@@ -99,6 +100,10 @@ public class CrossfadeScript : MonoBehaviour
     public static void InstantStartSong(int SongID)
     {
         if (MusicSelectorScript.instance.SongList[SongID].Name == MusicPlayer.CurrentSong.Name) return;
+
+        if (MusicPlayer.TransitionCoroutine != null) MusicPlayer.StopCoroutine(MusicPlayer.TransitionCoroutine);
+
+        MusicPlayer.oldTrack.volume = 0;
 
         MusicPlayer.CurrentSongID = SongID;
 

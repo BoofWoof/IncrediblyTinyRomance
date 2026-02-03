@@ -99,15 +99,9 @@ public class PlayerCam : MonoBehaviour
 
     public void OnApplicationFocus(bool focus)
     {
-        if (focus)
+        if (!focus)
         {
-            Time.timeScale = 1.0f;
-            AudioListener.pause = false; // Resume audio when gaining focus
-        }
-        else
-        {
-            Time.timeScale = 0f;
-            AudioListener.pause = true; // Mute audio when losing focus
+            ActiveBroadcast.BroadcastActivation("ForceGamePause");
         }
     }
 

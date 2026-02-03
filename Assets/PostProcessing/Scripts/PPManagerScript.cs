@@ -8,14 +8,17 @@ public class PPManagerScript : MonoBehaviour
     [Header("Emergency")]
     public Volume EmergencyPP;
     public float EmergencyFadePeriod = 2f;
+    private Coroutine EmergencyPPCoroutine;
 
     [Header("Phone")]
     public Volume PhonePP;
     public float PhoneFadePeriod = 2f;
+    private Coroutine PhonePPCoroutine;
 
     [Header("Standard")]
     public Volume StandardPP;
     public float StandardFadePeriod = 2f;
+    private Coroutine StandardPPCoroutine;
 
     private void Start()
     {
@@ -33,25 +36,29 @@ public class PPManagerScript : MonoBehaviour
 
     private void AdjustEmergencyPPFilter(bool raised)
     {
+        if(EmergencyPPCoroutine != null) StopCoroutine(EmergencyPPCoroutine);
         if (raised)
         {
-            StartCoroutine(AdjustPPFilter(EmergencyPP, 0, EmergencyFadePeriod));
+            EmergencyPPCoroutine = StartCoroutine(AdjustPPFilter(EmergencyPP, 0, EmergencyFadePeriod));
         } else
         {
-            StartCoroutine(AdjustPPFilter(EmergencyPP, 1, EmergencyFadePeriod/2f));
+            EmergencyPPCoroutine = StartCoroutine(AdjustPPFilter(EmergencyPP, 1, EmergencyFadePeriod/2f));
         }
     }
     private void AdjustPhonePPFilter(bool raised)
     {
+        if (PhonePPCoroutine != null) StopCoroutine(PhonePPCoroutine);
+        if (StandardPPCoroutine != null) StopCoroutine(StandardPPCoroutine);
+
         if (raised)
         {
-            StartCoroutine(AdjustPPFilter(PhonePP, 1, EmergencyFadePeriod));
-            StartCoroutine(AdjustPPFilter(StandardPP, 0, EmergencyFadePeriod));
+            PhonePPCoroutine = StartCoroutine(AdjustPPFilter(PhonePP, 1, EmergencyFadePeriod));
+            StandardPPCoroutine = StartCoroutine(AdjustPPFilter(StandardPP, 0, EmergencyFadePeriod));
         }
         else
         {
-            StartCoroutine(AdjustPPFilter(PhonePP, 0, EmergencyFadePeriod/2f));
-            StartCoroutine(AdjustPPFilter(StandardPP, 1, EmergencyFadePeriod/2f));
+            PhonePPCoroutine = StartCoroutine(AdjustPPFilter(PhonePP, 0, EmergencyFadePeriod/2f));
+            StandardPPCoroutine = StartCoroutine(AdjustPPFilter(StandardPP, 1, EmergencyFadePeriod/2f));
         }
     }
 

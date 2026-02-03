@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct ArchivePriorityData
 {
@@ -13,6 +14,11 @@ public class ArchiveScript : MonoBehaviour
 {
     public static ArchiveScript instance;
 
+    public List<RectTransform> ContentSizeFitterObjects;
+
+    public ScrollRect TargetScrollRect;
+
+    public GameObject TextBoxObject;
     public GameObject SelectAnArchiveText;
 
     public GameObject ArchiveButtonPrefab;
@@ -20,6 +26,8 @@ public class ArchiveScript : MonoBehaviour
     public Transform TargetArchiveSelectorTransform;
     public TMP_Text SourceText;
     public TMP_Text DocumentText;
+
+    public AudioSource ArchiveClick;
 
     public List<ArchivePriorityData> SortedData = new List<ArchivePriorityData>();
 
@@ -34,6 +42,7 @@ public class ArchiveScript : MonoBehaviour
         SourceText.text = "Cite Your Sources";
         DocumentText.text = "";
         SelectAnArchiveText.SetActive(true);
+        TextBoxObject.SetActive(false);
     }
     public void UpdateList()
     {
@@ -51,10 +60,28 @@ public class ArchiveScript : MonoBehaviour
 
     public static void SetDisplayedArchive(ArchiveDataSO archiveData)
     {
-        instance.SourceText.text = "Source:" + archiveData.Source;
+        instance.ArchiveClick.Play();
+
+        instance.TextBoxObject.SetActive(true);
+        instance.SourceText.text = "FROM: " + archiveData.Source;
         instance.DocumentText.text = archiveData.DocumentData.text;
         instance.SelectAnArchiveText.SetActive(false);
+
+        instance.UpdateContentFitters();
+
+        instance.TargetScrollRect.verticalNormalizedPosition = 1f;
     }
+
+    public void UpdateContentFitters()
+    {
+        foreach (RectTransform contentSizeFitterObject in ContentSizeFitterObjects)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(
+                contentSizeFitterObject
+            );
+        }
+    }
+
     public void ClearList()
     {
         foreach (Transform child in TargetArchiveSelectorTransform)
