@@ -18,13 +18,35 @@ public class MessageSendScript : MonoBehaviour
 
     Vector3 backupPos;
 
+    public bool SystemEnable = false;
+    public bool PhoneEnabled = false;
+    public TMP_Text MessageText;
+
+    private Color OriginalColor = Color.white;
+
+    public void OnPhoneToggle(bool PhoneRaised)
+    {
+        PhoneEnabled = PhoneRaised;
+        UpdateInteractability();
+    }
+
+    public void Awake()
+    {
+        OriginalColor = SubmissionButton.GetComponentInChildren<TMP_Text>().color;
+    }
+
     public void Start()
     {
+
         SpecialReply.SetActive(false);
 
         backupPos = transform.localPosition;
 
         IsSpecial = false;
+
+        OriginalColor = MessageText.color;
+
+        PhonePositionScript.PhoneToggled += OnPhoneToggle;
     }
 
     public void SetAuthorName(string newName)
@@ -51,7 +73,8 @@ public class MessageSendScript : MonoBehaviour
 
     public void RestartMessage()
     {
-        GetComponent<Button>().interactable = true;
+        SystemEnable = true;
+        UpdateInteractability();
         transform.localPosition = backupPos;
         transform.localScale = Vector3.one;
     }
@@ -61,10 +84,22 @@ public class MessageSendScript : MonoBehaviour
         StartCoroutine(SendMessage());
     }
 
+    private void UpdateInteractability()
+    {
+        bool ButtonEnabled = SystemEnable && !PhoneEnabled;
+        SubmissionButton.interactable = ButtonEnabled;
+
+        if(ButtonEnabled) MessageText.color = OriginalColor;
+        else MessageText.color = Color.clear;
+
+        AuthorText.gameObject.SetActive(ButtonEnabled);
+    }
+
     IEnumerator SendMessage()
     {
         float timePassed = 0f;
-        GetComponent<Button>().interactable = false;
+        SystemEnable = false;
+        UpdateInteractability();
 
         while (timePassed < SendPeriodSec)
         {

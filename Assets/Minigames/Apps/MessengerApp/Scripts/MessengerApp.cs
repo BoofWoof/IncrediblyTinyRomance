@@ -1,71 +1,282 @@
-using JetBrains.Annotations;
 using PixelCrushers.DialogueSystem;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 namespace DS
 {
+    public struct ChoicePair
+    {
+        public int SourceID;
+        public Response[] Choices;
+    }
+
     public class MessengerApp : AppScript
     {
+        [HideInInspector] private PixelCrushers.DialogueSystem.CharacterInfo CurrentCharacter;
+        [HideInInspector] public List<int> UncheckMessages = new List<int>();
+
+        public static MessengerApp instance;
+
+        public Sprite NotificationSprite;
+
         [Header("Objects")]
-        public GameObject message_box;
-        public GameObject message_options;
+        public ScrollRect targetScrollRect;
         public RectTransform content_rect;
-        public GameObject chat_break;
-        public GameObject audio_button_prefab;
+
+        [Header("Prefabs")]
+        public GameObject LeftMessagePrefab;
+        public GameObject RightMessagePrefab;
+        public GameObject OptionMessagePrefab;
+        public GameObject DivisionBarPrefab;
 
         [Header("Data")]
         private Dictionary<int, string> MessageHistorys = new Dictionary<int, string>();
-        public MessageBoxScript LastMessage = null;
-        public bool LastLeft = false;
 
-        public PixelCrushers.DialogueSystem.CharacterInfo CurrentCharacter;
-
-        public Response[] Choices;
-        public bool WaitingForChoice = false;
-
-        [Header("Tuning")]
-        public float message_buffer = 25;
-        public float start_buffer = 50;
-        public float end_buffer = 25;
-        public float left_buffer = 200;
-        public float right_buffer = 200;
-
-        private float conversation_height;
+        [HideInInspector] public ChoicePair Choices;
 
         [Header("NotificationSounds")]
         public AudioSource notification_source;
-        public AudioClip new_message_notification;
-
-        [Header("Voice")]
-        public AudioSource VoiceSource;
-
-        [Header("MouseData")]
-        public float LastMousePosition;
-        public bool PreviouslyHeld = false;
-        public float VerticalShift = 0f;
 
         public int ShowMessageHistory = 20;
 
-        public int AppSong = -1;
-        public bool SongLock = false;
+        private GameObject LastLeftMessage;
+        private bool DoubleMessage = false;
+        private bool NewObjectAdded = false;
+
+        [HideInInspector] public int AppSong = -1;
+        [HideInInspector] public bool SongLock = false;
 
         // Start is called before the first frame update
         void Awake()
         {
-            conversation_height = start_buffer;
-
+            instance = this;
             Lua.RegisterFunction("SetTextSong", this, SymbolExtensions.GetMethodInfo(() => SetTextSongLUA(0f)));
             Lua.RegisterFunction("LockInSong", this, SymbolExtensions.GetMethodInfo(() => LockInSong()));
             Lua.RegisterFunction("ReleaseSong", this, SymbolExtensions.GetMethodInfo(() => ReleaseSong()));
+
+            Choices = new ChoicePair
+            {
+                SourceID = -1,
+                Choices = null
+            };
         }
 
+        public void LateUpdate()
+        {
+            if (NewObjectAdded)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(content_rect.GetComponent<RectTransform>());
+                targetScrollRect.verticalNormalizedPosition = 0f;
+            }
+            NewObjectAdded = false;
+        }
+
+        public void SetCharacter(PixelCrushers.DialogueSystem.CharacterInfo newCharacter)
+        {
+            if (CurrentCharacter != null && newCharacter.id == CurrentCharacter.id) return;
+            CurrentCharacter = newCharacter;
+            RecreateFromText();
+        }
+        public void RecreateFromText()
+        {
+            ResetMessanger();
+            RecreateMessages(CurrentCharacter);
+        }
+        public void ResetMessanger()
+        {
+            foreach (Transform child in content_rect)
+            {
+                Destroy(child.gameObject);
+            }
+            DoubleMessage = false;
+        }
+        public void UpdateTextHistory(int targetCharacterID, string newText)
+        {
+            if (MessageHistorys == null) return;
+            if(!MessageHistorys.Keys.Contains(targetCharacterID)){
+                MessageHistorys.Add(targetCharacterID, "");
+            }
+            MessageHistorys[targetCharacterID] += newText;
+        }
+
+        public void AddUncheckedMessage(int speakerId)
+        {
+            if (!UncheckMessages.Contains(speakerId))
+            {
+                UncheckMessages.Add(speakerId);
+                NotificationMenuScript.SetNotification("Messenger", NotificationSprite);
+            }
+        }
+
+        public void ClearNotifications()
+        {
+            if (UncheckMessages == null || CurrentCharacter == null) return;
+            UncheckMessages.Remove(CurrentCharacter.id);
+            if (UncheckMessages.Count == 0)
+            {
+                NotificationMenuScript.ReleaseNotification("Messenger");
+            }
+        }
+
+        public void CheckNotifications()
+        {
+            if (UncheckMessages == null) return;
+            if (UncheckMessages.Count > 0  || Choices.SourceID != -1)
+            {
+                NotificationMenuScript.SetNotification("Messenger", NotificationSprite);
+            } else
+            {
+                NotificationMenuScript.ReleaseNotification("Messenger");
+            }
+        }
+
+        public void AddLeftMessage(int speakerId, string message_text)
+        {
+            UpdateTextHistory(speakerId, "<a>" + message_text + "\n");
+            if (CurrentCharacter != null && speakerId == CurrentCharacter.id) {
+                MakeLeftMessage(message_text);
+            }
+            else {
+                AddUncheckedMessage(speakerId);
+            };
+            if(!Active) AddUncheckedMessage(speakerId);
+            notification_source.Play();
+        }
+        private void MakeLeftMessage(string message_text)
+        {
+            GameObject newObject = AddObjectToContainer(LeftMessagePrefab);
+            newObject.GetComponent<MessageBoxScript>().SetText(message_text);
+            newObject.GetComponent<MessageBoxScript>().SetSprite(CurrentCharacter.portrait);
+
+            if(DoubleMessage) LastLeftMessage.GetComponent<MessageBoxScript>().ReplaceBox();
+            LastLeftMessage = newObject;
+
+            DoubleMessage = true;
+
+            NewObjectAdded = true;
+        }
+
+        private void AddRightMessage(int speakerId, string message_text)
+        {
+            UpdateTextHistory(speakerId, "<b>" + message_text + "\n");
+            if (CurrentCharacter != null && speakerId == CurrentCharacter.id) MakeRightMessage(message_text);
+        }
+
+        private void MakeRightMessage(string message_text)
+        {
+            GameObject newObject = AddObjectToContainer(RightMessagePrefab);
+            newObject.GetComponent<MessageBoxScript>().SetText(message_text);
+
+            DoubleMessage = false;
+
+            NewObjectAdded = true;
+        }
+        public void SendOptions(int speakerId, Response[] responseOptions)
+        {
+            if (MessagingVariables.ForceSelect)
+            {
+                (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(responseOptions[0]);
+                AddRightMessage(speakerId, responseOptions[0].formattedText.text);
+                return;
+            }
+            Choices = new ChoicePair
+            {
+                Choices = responseOptions,
+                SourceID = speakerId
+            };
+            if (CurrentCharacter != null && speakerId == CurrentCharacter.id)
+            {
+                ShowOptions();
+            }
+            else
+            {
+                if (!UncheckMessages.Contains(speakerId)) UncheckMessages.Add(speakerId);
+            };
+        }
+
+        public void ShowOptions()
+        {
+            GameObject newObject = AddObjectToContainer(OptionMessagePrefab);
+            newObject.GetComponent<MessageOptionsScript>().CreateButtons(Choices.Choices);
+
+            NewObjectAdded = true;
+        }
+
+        public void SelectOption(int optionIdx)
+        {
+            int targetID = Choices.SourceID;
+            Response[] targetOptions = Choices.Choices;
+            (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(targetOptions[optionIdx]);
+            AddRightMessage(targetID, targetOptions[optionIdx].formattedText.text);
+
+            Choices = new ChoicePair
+            {
+                SourceID = -1,
+                Choices = null
+            };
+        }
+
+        public void AddDivisionBar(int speakerId)
+        {
+            UpdateTextHistory(speakerId, "<c>" + "\n");
+            if (CurrentCharacter != null && speakerId == CurrentCharacter.id) MakeDivisionBar();
+        }
+
+        public void MakeDivisionBar()
+        {
+            AddObjectToContainer(DivisionBarPrefab);
+
+            DoubleMessage = false;
+
+            targetScrollRect.verticalNormalizedPosition = 1f;
+        }
+        public GameObject AddObjectToContainer(GameObject targetPrefab)
+        {
+            GameObject newObject = Instantiate(targetPrefab, content_rect);
+            newObject.transform.localScale = Vector3.one;
+            newObject.transform.localRotation = Quaternion.identity;
+            newObject.transform.localPosition = Vector3.zero;
+
+            return newObject;
+        }
+
+        private void RecreateMessages(PixelCrushers.DialogueSystem.CharacterInfo selectedCharacter)
+        {
+            if (!MessageHistorys.Keys.Contains(selectedCharacter.id)) return;
+
+            //Old version: MessageHistorys[selectedCharacter.id].Split("\n");
+            string[] messageHistory = Regex.Split(MessageHistorys[selectedCharacter.id], @"\n(?=<)");
+            messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - ShowMessageHistory)).ToArray();
+
+            foreach (string message in messageHistory)
+            {
+                string pattern = @"(?<=\<).*?(?=\>)";
+                string message_source = Regex.Match(message, pattern).Value;
+                if (message_source == "a")
+                {
+                    string trimmed_message = message.Substring(3);
+                    MakeLeftMessage(trimmed_message);
+                } else if (message_source == "b")
+                {
+                    string trimmed_message = message.Substring(3);
+                    MakeRightMessage(trimmed_message);
+                }
+                else if (message_source == "c")
+                {
+                    MakeDivisionBar();
+                }
+            }
+
+            if (Choices.SourceID == selectedCharacter.id) ShowOptions();
+        }
+
+        #region Song
         public void OnEnable()
         {
             OnShowApp += MusinOnAppShow;
@@ -77,8 +288,6 @@ namespace DS
             OnShowApp -= MusinOnAppShow;
             OnHideApp -= MusinOnAppHide;
         }
-
-        #region Song
         public void LockInSong()
         {
             SongLock = true;
@@ -94,7 +303,7 @@ namespace DS
         }
         public void SetTextSongLUA(float newAppSong)
         {
-            SetTextSong((int) newAppSong);
+            SetTextSong((int)newAppSong);
         }
         public void SetTextSong(int newAppSong)
         {
@@ -115,7 +324,7 @@ namespace DS
         {
             if (AppSong < 0) return;
             MusicSelectorScript.SetPhoneSong(AppSong);
-            if(SongLock) MusicSelectorScript.LockSong();
+            if (SongLock) MusicSelectorScript.LockSong();
         }
         public void MusinOnAppHide()
         {
@@ -123,237 +332,5 @@ namespace DS
         }
 
         #endregion
-
-        public void MakeAudioMessage(string audioFileName)
-        {
-            audioFileName = audioFileName.CleanResourcePath();
-            VoiceLineSO voiceLine = Resources.Load<VoiceLineSO>(audioFileName);
-
-            GameObject audioButton = Instantiate(audio_button_prefab, Vector2.zero, Quaternion.identity);
-
-            MessageAudioScript messageAudioScript = audioButton.GetComponent<MessageAudioScript>();
-            messageAudioScript.MessageAudioSource = VoiceSource;
-            messageAudioScript.VoiceLine = voiceLine;
-
-            audioButton.transform.parent = content_rect;
-            audioButton.transform.localScale = Vector3.one;
-            audioButton.transform.localRotation = Quaternion.identity;
-
-            float buttonHeight = audioButton.GetComponent<RectTransform>().rect.height;
-            float buttonWidth = audioButton.GetComponent<RectTransform>().rect.width;
-            audioButton.transform.localPosition = new Vector2(left_buffer + buttonWidth/2f, -conversation_height - 4 * message_buffer);
-            conversation_height += buttonHeight + message_buffer;
-
-            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-        }
-
-        public void Update()
-        {
-            if (!Active) return;
-            if (conversation_height < 900f) return;
-
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if(Mathf.Abs(scroll) > 0.01f) ShiftScreen(-scroll * 1000);
-
-            if (Input.GetMouseButton(0))
-            {
-
-                float thisPosition = Input.mousePosition.y;
-                if(PreviouslyHeld)
-                {
-                    float mouseDelta = thisPosition - LastMousePosition;
-                    ShiftScreen(mouseDelta);
-                }
-                LastMousePosition = thisPosition;
-                PreviouslyHeld = true;
-            } else
-            {
-                PreviouslyHeld = false;
-            }
-        }
-
-        public void ShiftScreen(float shiftAmount)
-        {
-            VerticalShift += shiftAmount;
-            VerticalShift = Mathf.Clamp(VerticalShift, -(conversation_height - 900f), 0);
-            content_rect.anchoredPosition = new Vector2(content_rect.anchoredPosition.x, VerticalShift + conversation_height - 900f + 100f);
-
-        }
-
-        public void SetTextChoices(Response[] responses)
-        {
-            WaitingForChoice = true;
-            Choices = responses;
-            LastLeft = false;
-        }
-
-        public void MakeDivisionBar()
-        {
-            conversation_height += 50;
-            GameObject breakBar = Instantiate(chat_break, Vector2.zero, Quaternion.identity);
-
-            breakBar.transform.parent = content_rect;
-            breakBar.transform.localScale = Vector3.one;
-            breakBar.transform.localRotation = Quaternion.identity;
-            breakBar.transform.localPosition = new Vector2(content_rect.rect.width/2f, -conversation_height);
-
-            conversation_height += breakBar.GetComponent<RectTransform>().rect.height + message_buffer;
-            conversation_height += 50;
-            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-            LastMessage = null;
-        }
-        public void ResetMessanger()
-        {
-            LastMessage = null;
-            foreach (Transform child in content_rect.transform)
-            {
-                // Destroy the child GameObject
-                Destroy(child.gameObject);
-            }
-            conversation_height = start_buffer;
-            VerticalShift = 0f;
-        }
-        public IEnumerator RevealOptions(int speakingCharacterID)
-        {
-            VerticalShift = 0f;
-
-            List<string> choiceText = new List<string>();
-            foreach (Response response in Choices)
-            {
-                choiceText.Add(response.formattedText.text);
-            }
-
-            GameObject option_message = Instantiate(message_options, content_rect);
-            Debug.Log(option_message);
-            option_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
-            option_message.transform.localScale = Vector3.one;
-            option_message.transform.localRotation = Quaternion.identity;
-            MessageOptionsScript messageOptionScript = option_message.GetComponent<MessageOptionsScript>();
-            messageOptionScript.options = choiceText;
-            messageOptionScript.CreateButtons();
-            conversation_height += messageOptionScript.height + message_buffer;
-            content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
-            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-
-            int choiceIdx = 0;
-            if (MessagingVariables.ForceSelect)
-            {
-                UpdateTextHistory(speakingCharacterID, "<b>" + choiceText[0] + "\n");
-            } else
-            {
-                yield return StartCoroutine(messageOptionScript.WaitForResponse());
-                choiceIdx = messageOptionScript.OptionIdx;
-                UpdateTextHistory(speakingCharacterID, "<b>" + messageOptionScript.message + "\n");
-            }
-            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-            WaitingForChoice = false;
-
-            RecreateFromText();
-            (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(Choices[choiceIdx]);
-        }
-
-        public void NotificationPing()
-        {
-            notification_source.clip = new_message_notification;
-            notification_source.Play();
-        }
-        public void UpdateTextHistory(int targetCharacterID, string newText)
-        {
-            if (MessageHistorys == null) return;
-            if(!MessageHistorys.Keys.Contains(targetCharacterID)){
-                MessageHistorys.Add(targetCharacterID, "");
-            }
-            MessageHistorys[targetCharacterID] += newText;
-        }
-
-        private MessageBoxScript MakeRightMessage(string message_text)
-        {
-            GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
-
-            MessageBoxScript message_info = new_message.GetComponent<MessageBoxScript>();
-
-            message_info.SwitchLeft();
-
-            new_message.transform.parent = content_rect;
-            new_message.transform.localPosition = new Vector2(content_rect.rect.width - right_buffer, -conversation_height);
-            new_message.transform.localScale = Vector3.one;
-            new_message.transform.localRotation = Quaternion.identity;
-
-            conversation_height += message_info.GetFinalHeight(message_text) + message_buffer;
-            content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
-            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-
-            LastLeft = false;
-            return message_info;
-        }
-
-        public MessageBoxScript MakeLeftMessage(string message_text)
-        {
-            GameObject new_message = Instantiate(message_box, Vector2.zero, Quaternion.identity);
-
-            MessageBoxScript message_info = new_message.GetComponent<MessageBoxScript>();
-
-            if (LastLeft && LastMessage != null)
-            {
-                conversation_height -= LastMessage.stem_height;
-                LastMessage.UseSecondaryBacking();
-                LastMessage.UpdateBackingSize();
-            }
-
-            new_message.transform.parent = content_rect;
-            new_message.transform.localScale = Vector3.one;
-            new_message.transform.localPosition = new Vector2(left_buffer, -conversation_height);
-            new_message.transform.localRotation = Quaternion.identity;
-
-            message_info.SetSprite(CurrentCharacter.portrait);
-            conversation_height += message_info.GetFinalHeight(message_text) + message_buffer;
-            content_rect.sizeDelta = new Vector2(content_rect.sizeDelta.x, conversation_height + end_buffer);
-            GetComponentInChildren<ScrollRect>(content_rect).verticalNormalizedPosition = 0f;
-
-            LastLeft = true;
-            LastMessage = message_info;
-            return message_info;
-        }
-
-        public void RecreateFromText()
-        {
-            ResetMessanger();
-            RecreateMessages(CurrentCharacter);
-        }
-
-        private void RecreateMessages(PixelCrushers.DialogueSystem.CharacterInfo selectedCharacter)
-        {
-            if (!MessageHistorys.Keys.Contains(selectedCharacter.id)) return;
-
-            //Old version: MessageHistorys[selectedCharacter.id].Split("\n");
-            string[] messageHistory = Regex.Split(MessageHistorys[selectedCharacter.id], @"\n(?=<)");
-            messageHistory = messageHistory.Skip(Math.Max(0, messageHistory.Length - ShowMessageHistory)).ToArray();
-
-            foreach (string message in messageHistory)
-            {
-                string pattern = @"(?<=\<).*?(?=\>)";
-                string message_source = Regex.Match(message, pattern).Value;
-                if (message_source == "a")
-                {
-                    string trimmed_message = message.Substring(3);
-                    MessageBoxScript message_info = MakeLeftMessage(trimmed_message);
-                    message_info.InstantComplete(trimmed_message);
-                } else if (message_source == "b")
-                {
-                    string trimmed_message = message.Substring(3);
-                    MessageBoxScript message_info = MakeRightMessage(trimmed_message);
-                    message_info.InstantComplete(trimmed_message);
-                }
-                else if (message_source == "c")
-                {
-                    MakeDivisionBar();
-                }
-                else if (message_source == "v")
-                {
-                    string trimmed_message = message.Substring(3);
-                    MakeAudioMessage(trimmed_message);
-                }
-            }
-        }
     }
 }

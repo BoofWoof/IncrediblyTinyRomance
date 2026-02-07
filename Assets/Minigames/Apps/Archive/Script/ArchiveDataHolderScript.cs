@@ -20,5 +20,7 @@ public class ArchiveDataHolderScript : MonoBehaviour
         if (Submitted) return;
         Submitted = true;
         ArchiveScript.AddArchiveStatic(ArchiveDatas, Priority);
+
+        if (!AutomaticallySubmitAtStart) ArchiveScript.instance.ShowNotification();
     }
 }

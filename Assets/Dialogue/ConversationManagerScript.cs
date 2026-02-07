@@ -55,7 +55,6 @@ public class ConversationManagerScript : MonoBehaviour
         else
         {
             PrayerScript.StoryMode = false;
-            ContactsScript.instance.messengerApp.NotificationPing();
         }
     }
     public void OnConversationEnd(Transform actor)

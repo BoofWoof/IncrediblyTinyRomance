@@ -115,11 +115,9 @@ public class CharacterSpeechScript : MonoBehaviour
     IEnumerator LoadConversationLine(string voiceFilePath)
     {
         ResourceRequest request = Resources.LoadAsync<VoiceLineSO>(voiceFilePath); // Replace GameObject with your asset type
-        while (!request.isDone)
-        {
-            // Update loading bar or display progress
-            yield return null;
-        }
+        
+        yield return request;
+
         VoiceLineSO voiceLine = request.asset as VoiceLineSO;
 
         if (voiceLine == null) yield break;

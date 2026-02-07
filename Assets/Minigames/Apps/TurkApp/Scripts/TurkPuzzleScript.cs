@@ -33,6 +33,7 @@ public class TurkPuzzleScript : MonoBehaviour
     public TMP_Text PuzzleName;
     public TMP_Text NewRecordText;
     public ParticleSystem NewRecordParticles;
+    public ParticleSystem NewRecordParticles2;
 
     public int RepeatsBannedFor = 3;
 
@@ -393,6 +394,7 @@ public class TurkPuzzleScript : MonoBehaviour
             NewRecordText.gameObject.SetActive(true);
             NewRecordSource.Play();
             NewRecordParticles.Play();
+            NewRecordParticles2.Play();
             yield return new WaitForSeconds(1.5f);
         }
 

@@ -27,5 +27,6 @@ public static class MessagingVariables
         TimeBetweenMessages = DefaultTimeBetweenMessages;
         TimePerCharacter = DefaultTimePerCharacter;
         DefaultForceSelect = ForceSelect;
+        ForceSelect = false;
     }
 }

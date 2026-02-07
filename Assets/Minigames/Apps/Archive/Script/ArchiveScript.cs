@@ -31,6 +31,8 @@ public class ArchiveScript : MonoBehaviour
 
     public List<ArchivePriorityData> SortedData = new List<ArchivePriorityData>();
 
+    public Sprite NotificationSprite;
+
     public void OnEnable()
     {
         instance = this;
@@ -123,5 +125,15 @@ public class ArchiveScript : MonoBehaviour
         }
 
         return newPArchiveList;
+    }
+
+    public void ShowNotification()
+    {
+        NotificationMenuScript.SetNotification("Archive", NotificationSprite);
+    }
+
+    public void HideNotification()
+    {
+        NotificationMenuScript.ReleaseNotification("Archive");
     }
 }

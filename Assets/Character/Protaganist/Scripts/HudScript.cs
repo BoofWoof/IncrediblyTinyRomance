@@ -20,17 +20,10 @@ public class HudScript : MonoBehaviour
     public int LastTutorialQuestIndex = 3;
     public Coroutine TutorialCoroutine;
 
-    public GameObject MessageNotification;
-
     public GameObject QuestPanel;
     public GameObject SubtitlePanel;
 
     public static HudScript instance;
-
-    public static void ShowMessageNotification(bool show)
-    {
-        instance.MessageNotification.SetActive(show);
-    }
 
     public static void SetQuestVisiblity(bool questVisible)
     {
@@ -49,7 +42,6 @@ public class HudScript : MonoBehaviour
     public void Awake()
     {
         instance = this;
-        MessageNotification.SetActive(false);
     }
 
     public void Start()

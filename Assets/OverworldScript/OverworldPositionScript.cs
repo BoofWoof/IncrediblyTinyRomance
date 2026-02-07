@@ -94,9 +94,14 @@ public class OverworldPositionScript : MonoBehaviour
 
     public static void StartWalkTo(string name, int CurrentStationIdx, float Wait = 0f)
     {
+        if ("MacroAries".ToLower() != name.ToLower() && "A".ToLower() != name.ToLower())
+        {
+            PrayerScript.instance.DeactivateJudgement();
+        }
+
         foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
         {
-            if (overworldPositionScript.CharacterName != name && overworldPositionScript.NameSource.NickName != name) continue;
+            if (overworldPositionScript.CharacterName.ToLower() != name.ToLower() && overworldPositionScript.NameSource.NickName.ToLower() != name.ToLower()) continue;
             overworldPositionScript.StartWalkTo(CurrentStationIdx, Wait);
         }
     }

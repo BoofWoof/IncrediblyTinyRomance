@@ -24,6 +24,8 @@ public class AchievementListScript : MonoBehaviour
 
     public static AchievementListScript instance;
 
+    public Sprite NotificationSprite;
+
     public void Awake()
     {
         instance = this;
@@ -97,5 +99,15 @@ public class AchievementListScript : MonoBehaviour
         CompletedAchievementNames.Add(AchievementName);
         instance.UnlockSound.Play();
         instance.AchievementParticles.Play();
+    }
+
+    public void ShowNotification()
+    {
+        NotificationMenuScript.SetNotification("Achievement", NotificationSprite);
+    }
+
+    public void HideNotification()
+    {
+        NotificationMenuScript.ReleaseNotification("Achievement");
     }
 }

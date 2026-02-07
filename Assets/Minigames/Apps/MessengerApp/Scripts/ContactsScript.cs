@@ -11,11 +11,9 @@ using UnityEngine.UI;
 public class ContactsScript : MonoBehaviour
 {
     public static ContactsScript instance;
-    public GameObject MessagingApp;
     public MessengerApp messengerApp;
 
     public PixelCrushers.DialogueSystem.CharacterInfo activeCharacter = null;
-    public int speakingCharacterId = -1;
 
     public Coroutine DialogueCoroutine = null;
 
@@ -27,22 +25,14 @@ public class ContactsScript : MonoBehaviour
     public GameObject ContactListCenter;
     private List<GameObject> ContactList = new List<GameObject>();
 
-    public List<int> UncheckedMessages;
-
-    private static bool QuickMessaging = false;
-
     public bool ConversationIsActive = false;
 
-    PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter;
+    public int speakingCharacterId = -1;
+    private PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter;
 
     public void Start()
     {
         instance = this;
-
-        messengerApp = MessagingApp.GetComponent<MessengerApp>();
-        GetComponent<AppScript>().OnShowApp += DeselectCharacter;
-
-        PhonePositionScript.PhoneToggled += OnPhoneRaise;
     }
 
     public void OnConversationLine(Subtitle subtitle)
@@ -67,140 +57,53 @@ public class ContactsScript : MonoBehaviour
             return;
         }
         tempSpeakingCharacter = subtitle.speakerInfo;
-
         if (tempSpeakingCharacter.Name == "Player") return;
-        if (speakingCharacterId != -1 && speakingCharacterId != tempSpeakingCharacter.id) {
-            AddEndBar();
-        }
 
         ConversationIsActive = true;
 
-        if (activeCharacter == null || (activeCharacter.id != tempSpeakingCharacter.id) || !messengerApp.Active || !PhonePositionScript.raised)
+        //End line if speaking character switches.
+        if (speakingCharacterId != -1 && speakingCharacterId != tempSpeakingCharacter.id)
         {
-            HudScript.ShowMessageNotification(true);
-            if (!UncheckedMessages.Contains(tempSpeakingCharacter.id))
-            {
-                UncheckedMessages.Add(tempSpeakingCharacter.id);
-            }
+            messengerApp.AddDivisionBar(tempSpeakingCharacter.id);
         }
+        speakingCharacterId = tempSpeakingCharacter.id;
 
         string messageText = string.Format(subtitle.formattedText.text);
+        StartCoroutine(SendSingleMessage(tempSpeakingCharacter, messageText));
 
-        Debug.Log("New message: " + messageText);
-
+        //Add contact if this is their first message.
         CheckContacts(tempSpeakingCharacter);
-
-        string voiceFilePath = subtitle.dialogueEntry.fields.Find(f => f.title == "VoiceLinesSO").value;
-        if (voiceFilePath.Length < 5)
-        {
-            StartCoroutine(SendSingleMessage(tempSpeakingCharacter, messageText));
-        } else
-        {
-            StartCoroutine(SendAudioMessage(tempSpeakingCharacter, voiceFilePath));
-        }
-
-        RebuildContacts();
-    }
-
-    public IEnumerator SendAudioMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string voiceFilePath)
-    {
-        yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
-        if (newSpeaker != null)
-        {
-            speakingCharacterId = newSpeaker.id;
-        }
-        if (activeCharacter != null && activeCharacter.id == speakingCharacterId)
-        {
-            messengerApp.NotificationPing();
-            messengerApp.RecreateFromText();
-
-            messengerApp.MakeAudioMessage(voiceFilePath);
-
-            messengerApp.UpdateTextHistory(speakingCharacterId, "<v>" + voiceFilePath + "\n");
-        }
-        else
-        {
-            messengerApp.UpdateTextHistory(speakingCharacterId, "<v>" + voiceFilePath + "\n");
-        }
-
-        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public IEnumerator SendSingleMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string message_text)
     {
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages + MessagingVariables.TimePerCharacter * message_text.Length);
-        if (newSpeaker != null)
-        {
-            speakingCharacterId = newSpeaker.id;
-        }
-        messengerApp.NotificationPing();
-        if (activeCharacter != null && activeCharacter.id == speakingCharacterId)
-        {
-            messengerApp.RecreateFromText();
-
-            MessageBoxScript message_info = messengerApp.MakeLeftMessage(message_text);
-
-            messengerApp.UpdateTextHistory(speakingCharacterId, "<a>" + message_text + "\n");
-
-            if (MessagingVariables.TimeBetweenMessages > 0)
-            {
-                DialogueCoroutine = StartCoroutine(message_info.CharacterProgression(message_text));
-            }
-            else
-            {
-                message_info.InstantComplete(message_text);
-            }
-            yield return DialogueCoroutine;
-        }
-        else
-        {
-            messengerApp.UpdateTextHistory(speakingCharacterId, "<a>" + message_text + "\n");
-        }
+        messengerApp.AddLeftMessage(newSpeaker.id, message_text);        
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public void OnConversationResponseMenu(Response[] responses)
     {
-
-        speakingCharacterId = responses[0].destinationEntry.ConversantID;
-
         if (DialogueManager.CurrentConversationState.subtitle.speakerInfo.GetFieldBool("IsRadio")) return;
         if (DialogueManager.CurrentConversationState.subtitle.speakerInfo.GetFieldBool("IsMacro")) return;
         if (ConversationManagerScript.isMacroConvo) return;
-        Debug.Log("Creating choices: " + responses.Length.ToString());
+        speakingCharacterId = responses[0].destinationEntry.ConversantID;
         StartCoroutine(SendChoicesMessage(responses));
 
-        RebuildContacts();
     }
 
     public IEnumerator SendChoicesMessage(Response[] responses)
     {
         yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
-        if(activeCharacter != null) Debug.Log(activeCharacter.id);
-        Debug.Log(speakingCharacterId);
-        messengerApp.SetTextChoices(responses);
-        if (activeCharacter != null && activeCharacter.id == speakingCharacterId)
-        {
-            DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter.id));
-        } else
-        {
-            if (messengerApp.WaitingForChoice) HudScript.ShowMessageNotification(true);
-        }
+        messengerApp.SendOptions(speakingCharacterId, responses);
     }
 
     public void OnConversationEnd(Transform actor)
     {
         if (!isActiveAndEnabled) return;
-        AddEndBar();
+        messengerApp.AddDivisionBar(speakingCharacterId);
         speakingCharacterId = -1;
         ConversationIsActive = false;
-        HudScript.ShowMessageNotification(false);
-    }
-
-    public void AddEndBar()
-    {
-        messengerApp.MakeDivisionBar();
-        messengerApp.UpdateTextHistory(speakingCharacterId, "<c>" + "\n");
     }
 
     public void InstantMessaging()
@@ -233,7 +136,7 @@ public class ContactsScript : MonoBehaviour
             newContactButton.transform.localScale = Vector3.one;
 
             newContactButton.transform.GetChild(0).GetComponent<Image>().sprite = characterInfo.portrait;
-            if (UncheckedMessages.Contains(characterInfo.id))
+            if (messengerApp.UncheckMessages.Contains(characterInfo.id))
             {
                 newContactButton.transform.GetChild(0).GetComponent<Image>().color = Color.white;
             } else
@@ -283,48 +186,17 @@ public class ContactsScript : MonoBehaviour
         DeleteContactButtons();
         MakeContactButtons();
     }
-    public void OnPhoneRaise(bool phoneRaised)
-    {
-        if (phoneRaised) return;
-        HudScript.ShowMessageNotification(ConversationIsActive);
-    }
-
-    public static void CheckShowMessageNotification()
-    {
-        HudScript.ShowMessageNotification(instance.UncheckedMessages.Count > 0);
-    }
 
     public void SwapToCharacterMessanger(PixelCrushers.DialogueSystem.CharacterInfo selectCharacter)
     {
-        if (DialogueCoroutine != null)
-        {
-            StopCoroutine(DialogueCoroutine);
-            DialogueCoroutine = null;
-        }
-
         activeCharacter = selectCharacter;
-        GetComponent<AppScript>().Swap(MessagingApp.GetComponent<AppScript>());
-
-        if (UncheckedMessages.Contains(activeCharacter.id))
-        {
-            UncheckedMessages.Remove(activeCharacter.id);
-        }
-        CheckShowMessageNotification();
-
-        messengerApp.CurrentCharacter = selectCharacter;
-        messengerApp.RecreateFromText();
-        if (activeCharacter != null && speakingCharacterId != -1 && activeCharacter.id == speakingCharacterId && messengerApp.WaitingForChoice)
-        {
-            DialogueCoroutine = StartCoroutine(messengerApp.RevealOptions(activeCharacter.id));
-        }
+        messengerApp.SetCharacter(selectCharacter);
+        GetComponent<AppScript>().Swap(messengerApp);
     }
 
     public void DeselectCharacter()
     {
         activeCharacter = null;
-        HudScript.ShowMessageNotification(ConversationIsActive);
-        if (messengerApp.WaitingForChoice) HudScript.ShowMessageNotification(true);
-
         RebuildContacts();
     }
 }

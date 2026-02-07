@@ -63,6 +63,9 @@ public class BalconyEventsScript : MonoBehaviour
     public void StartSystem()
     {
         if (BalconyActivated) return;
+
+        ActiveBroadcast.BroadcastActivation("PrayerArchive");
+
         BalconyActivated = true;
         if (OnBalcony && !Raised)
         {

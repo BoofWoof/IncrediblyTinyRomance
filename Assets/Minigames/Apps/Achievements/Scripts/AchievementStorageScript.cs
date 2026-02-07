@@ -26,6 +26,8 @@ public class AchievementStorageScript : MonoBehaviour
         AchievementListScript.AddAchievementsStatic(Achievements, Priority);
         Submitted = true;
 
+        if (!SubmitAtStart) AchievementListScript.instance.ShowNotification();
+
         MakeAnnouncement();
     }
 
