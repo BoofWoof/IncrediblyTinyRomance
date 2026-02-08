@@ -10,6 +10,8 @@ public class ArchiveDataHolderScript : MonoBehaviour
     public bool Submitted = false;
     public bool AutomaticallySubmitAtStart = false;
 
+    public string UnlockAnnouncement;
+
     public void Start()
     {
         if (AutomaticallySubmitAtStart) SubmitArchiveData();
@@ -20,6 +22,8 @@ public class ArchiveDataHolderScript : MonoBehaviour
         if (Submitted) return;
         Submitted = true;
         ArchiveScript.AddArchiveStatic(ArchiveDatas, Priority);
+
+        if (UnlockAnnouncement.Length > 0) AnnouncementScript.StartAnnouncement(UnlockAnnouncement);
 
         if (!AutomaticallySubmitAtStart) ArchiveScript.instance.ShowNotification();
     }

@@ -30598,7 +30598,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
-        value: 3
+        value: 8
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -30610,24 +30610,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 'Reminder!
-
-          -Connect the condensor vent to the purification
-          system.
-
-          -You can rotate any room with a rotation gear.
-
-          -Green
-          light means a vent is transporting gas with no leak.
-
-          -Red light
-          means a vent is transporting gas with a leak.
-
-          -And Grey light
-          means a pipe isn''t getting gas!
-
-
-          Good luck!'
+        value: 
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -30643,7 +30626,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("VentArchive")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -33346,8 +33329,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 4184.2197}
-    canvasZoom: 0.6
+    canvasScrollPosition: {x: 0, y: 5060.5693}
+    canvasZoom: 0.74999994
   - id: 20
     fields:
     - title: Title
@@ -33625,7 +33608,7 @@ MonoBehaviour:
       userScript: 'UnlockPortrait("Unanswered Prayers")
 
         RevealUpgrades("vision",
-        7)
+        8)
 
         IncrementQuest()
 

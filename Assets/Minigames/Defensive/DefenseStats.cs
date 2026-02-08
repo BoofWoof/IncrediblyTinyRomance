@@ -38,14 +38,14 @@ public class DefenseStats : MonoBehaviour
     }
     public static void DamageCity(float Damage)
     {
+        if (Damage <= 0 && CityEfficiencyHealth == instance.MaxHealth) return;
         if (instance.FirstDamage)
         {
             instance.FirstDamage = false;
-            AnnouncementScript.StartAnnouncement("Your city has been damaged. Your efficiency in minigames has dropped.");
-            AnnouncementScript.StartAnnouncement("This will heal with time as you rebuild and your efficiency will return.");
+            ActiveBroadcast.BroadcastActivation("DamageArchive");
         }
 
-        instance.DamageAudio.Play();
+        if(Damage > 0) instance.DamageAudio.Play();
         CityEfficiencyHealth -= Damage;
         if(CityEfficiencyHealth < MinimumHealth ) CityEfficiencyHealth = MinimumHealth;
     }
