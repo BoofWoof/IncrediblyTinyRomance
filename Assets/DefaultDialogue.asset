@@ -63093,7 +63093,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 25
+        originDialogueID: 1
+        destinationConversationID: 25
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: (Variable["SocialScore"] > Variable["WorkerScore"]) and (Variable["SocialScore"]
         > Variable["SpiritScore"])
       userScript: BroadcastActivate("VisionAd")
@@ -63147,7 +63153,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 25
+        originDialogueID: 2
+        destinationConversationID: 25
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: 'Variable["WorkerScore"] > Variable["SpiritScore"]'
       userScript: BroadcastActivate("VisionAd")
       onExecute:
@@ -63200,7 +63212,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 25
+        originDialogueID: 3
+        destinationConversationID: 25
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: BroadcastActivate("VisionAd")
       onExecute:
@@ -63210,6 +63228,59 @@ MonoBehaviour:
         serializedVersion: 2
         x: 508
         y: 201
+        width: 160
+        height: 30
+    - id: 4
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 8
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 11
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 25
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: BroadcastActivate("FlockSpam")
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 283
+        y: 332
         width: 160
         height: 30
     entryGroups: []
@@ -65433,7 +65504,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1432
-        y: 554
+        y: 552.5075
         width: 160
         height: 30
     - id: 8
@@ -65556,8 +65627,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 2992
-        y: 470
+        x: 2993.4924
+        y: 468.50745
         width: 160
         height: 30
     - id: 10
@@ -65675,7 +65746,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 2784
-        y: 638
+        y: 636.50745
         width: 160
         height: 30
     - id: 12
@@ -65786,7 +65857,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("DeimosScold")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -66034,7 +66105,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("DeimosScold")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -72366,7 +72437,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
+        x: 182.50745
         y: 6350
         width: 160
         height: 30
@@ -73080,7 +73151,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 7275.177
+        y: 7273.684
         width: 160
         height: 30
     - id: 137
@@ -73143,7 +73214,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 577.28796, y: 1690.9336}
+    canvasScrollPosition: {x: 1182.088, y: 199.99994}
     canvasZoom: 0.6700003
   - id: 31
     fields:

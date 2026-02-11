@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b8724cbf4a278488c1e98dffb1531d, type: 3}
+  m_Name: MediumLevels
+  m_EditorClassIdentifier: 
+  PuzzleSetName: Medium
+  Puzzles:
+  - {fileID: 11400000, guid: 1845b9754fd5cb84ca251304244e995c, type: 2}
+  - {fileID: 11400000, guid: 0557a8068f687c2408cd62e1da225d59, type: 2}
+  - {fileID: 11400000, guid: 0577850d86ed74d47a6e924a6c155c38, type: 2}
+  - {fileID: 11400000, guid: faa3d85625087b64bbe7e22d1561ec56, type: 2}
+  - {fileID: 11400000, guid: 0af73ca2b46a41143a4180592cfef34f, type: 2}
+  - {fileID: 11400000, guid: 91a72ca6564ad0d4c836361afc8bb61e, type: 2}
+  - {fileID: 11400000, guid: a1bd62d9494a5f04fb036248c5b29f22, type: 2}
+  - {fileID: 11400000, guid: f44553efe40805b4e8312f6f4d81b6e5, type: 2}
+  - {fileID: 11400000, guid: 998707bdb08df994886c3b3738237d9a, type: 2}
+  - {fileID: 11400000, guid: c6149ce37a2d6a14bacbee24bb353bac, type: 2}
+  - {fileID: 11400000, guid: 84c274c74faeffe45be0ffb3df1d7045, type: 2}
+  - {fileID: 11400000, guid: 55aaef284277e574e832326d203e9707, type: 2}
+  - {fileID: 11400000, guid: 37b59ee22450f314a848ee84602cee87, type: 2}
+  - {fileID: 11400000, guid: 1d590dad61ece41489058299fcf88fc1, type: 2}
+  - {fileID: 11400000, guid: 0ba42a6410c01744ab28b5850c167669, type: 2}
+  - {fileID: 11400000, guid: 04433e4d83ca50340acf16d28986e913, type: 2}
+  - {fileID: 11400000, guid: cf2755e0510d57d4da656b9d03118d7d, type: 2}
+  - {fileID: 11400000, guid: 646102afe0ed30245ad2e91f2d8a86e4, type: 2}
+  - {fileID: 11400000, guid: 3f63ee6efbace5c4e96562cb923b403c, type: 2}
+  - {fileID: 11400000, guid: e1454e75226eb494f955c1ee43e56ba7, type: 2}
+  - {fileID: 11400000, guid: b911919ad15cd7b41a49dd3601be73f2, type: 2}
+  - {fileID: 11400000, guid: e19eb5fc2ce84ec46afc6cfa03a60812, type: 2}
+  - {fileID: 11400000, guid: deaa368f7db32304e8fe72ead51863b9, type: 2}
+  - {fileID: 11400000, guid: 82a661511f5eba4418ba8cc87e9f589a, type: 2}
+  - {fileID: 11400000, guid: 5e9a86b4d7e6bcf4a91fedc44c5bead6, type: 2}
+  DarknessModifier: 0.8
+  OpennessModifier: 0.1
+  FalconSpeed: 25
+  MiloRecord: 10

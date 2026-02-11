@@ -2947,7 +2947,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: For traditions reasons, obviously. :3
+        value: For tradition reasons, obviously. :3
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3035,7 +3035,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 1478
+        y: 1476.5714
         width: 160
         height: 30
     - id: 26
@@ -3868,7 +3868,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1334.2854}
+    canvasScrollPosition: {x: 0, y: 1102.8567}
     canvasZoom: 0.70000035
   - id: 6
     fields:
@@ -6180,7 +6180,7 @@ MonoBehaviour:
         typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: And once the system was finished and turned online, he lasted a whole
-          three minutes 'till God smited him.
+          three minutes 'till God smote him.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -10004,7 +10004,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 230.90869, y: 1356.3435}
+    canvasScrollPosition: {x: 432.72656, y: 2319.9785}
     canvasZoom: 0.5500008
   - id: 8
     fields:
@@ -23393,8 +23393,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.7000002
+    canvasScrollPosition: {x: 0, y: 327.4271}
+    canvasZoom: 0.6100003
   - id: 14
     fields:
     - title: Title
@@ -29924,7 +29924,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: AriesBehavior("puff")
+      userScript: AriesWaitBehavior("puff", -1)
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -29990,7 +29990,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 4586
+        y: 4584.3335
         width: 160
         height: 30
     - id: 35
@@ -30598,7 +30598,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Files
       - title: Actor
-        value: 3
+        value: 8
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -30610,24 +30610,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: 'Reminder!
-
-          -Connect the condensor vent to the purification
-          system.
-
-          -You can rotate any room with a rotation gear.
-
-          -Green
-          light means a vent is transporting gas with no leak.
-
-          -Red light
-          means a vent is transporting gas with a leak.
-
-          -And Grey light
-          means a pipe isn''t getting gas!
-
-
-          Good luck!'
+        value: 
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -30643,7 +30626,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("VentArchive")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -33346,8 +33329,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 4890.4897}
-    canvasZoom: 0.63
+    canvasScrollPosition: {x: 0, y: 5060.5693}
+    canvasZoom: 0.74999994
   - id: 20
     fields:
     - title: Title
@@ -33625,7 +33608,7 @@ MonoBehaviour:
       userScript: 'UnlockPortrait("Unanswered Prayers")
 
         RevealUpgrades("vision",
-        7)
+        8)
 
         IncrementQuest()
 
@@ -46699,7 +46682,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 6152.7563}
+    canvasScrollPosition: {x: 0, y: 6083.6646}
     canvasZoom: 0.5500005
   - id: 22
     fields:
@@ -53182,13 +53165,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
+        x: 78.18182
         y: 6770
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 6416.265}
-    canvasZoom: 0.55000037
+    canvasScrollPosition: {x: 5.769226, y: 6051.8003}
+    canvasZoom: 0.5200004
   - id: 23
     fields:
     - title: Title
@@ -57998,11 +57981,11 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 274.74472
-        y: 3452.5867
+        y: 3451.3672
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 3047.5508}
+    canvasScrollPosition: {x: 10.975586, y: 2936.5747}
     canvasZoom: 0.82000005
   - id: 24
     fields:

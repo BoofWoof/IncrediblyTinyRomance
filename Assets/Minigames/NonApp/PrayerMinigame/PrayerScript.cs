@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
 using System.Linq;
+using UnityEngine.Events;
 
 public class PrayerScript : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public class PrayerScript : MonoBehaviour
 
     public SpecialPrayerData[] SetSpecialPrayers = new SpecialPrayerData[3];
 
+    public UnityEvent OnJudgementActivate;
+
     public void ActivateJudgement()
     {
         Debug.Log("Activating Judgement");
@@ -63,6 +66,8 @@ public class PrayerScript : MonoBehaviour
         BalconyEventsScript.instance.StartSystem();
 
         GenerateNewPrayers();
+
+        OnJudgementActivate?.Invoke();
     }
 
     public void DeactivateJudgement()

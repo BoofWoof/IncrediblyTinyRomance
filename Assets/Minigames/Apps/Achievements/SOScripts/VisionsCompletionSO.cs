@@ -9,4 +9,13 @@ public class VisionsCompletionSO : AchievementAbstractSO
     {
         return TurkPuzzleScript.isDifficultyCompleted(DifficultyCompletion);
     }
+
+    public override string ProgressText()
+    {
+        int TotalPuzzles = TurkPuzzleScript.instance.LevelSets[DifficultyCompletion].Puzzles.Count;
+        int Completed = 0;
+        if (TurkPuzzleScript.PuzzlesCompleted.ContainsKey(DifficultyCompletion)) Completed = TurkPuzzleScript.PuzzlesCompleted[DifficultyCompletion];
+        if (Completed > TotalPuzzles) Completed = TotalPuzzles;
+        return $" ({Completed}/{TotalPuzzles})";
+    }
 }

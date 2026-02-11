@@ -50,15 +50,7 @@ public class TurkPuzzleScript : MonoBehaviour
     public TMP_Text ArtistCredit;
 
     [Header("Grid Settings")]
-    public List<PuzzleShapeSO> VeryEasyPuzzles = new List<PuzzleShapeSO>();
-    public List<PuzzleShapeSO> EasyPuzzles = new List<PuzzleShapeSO>();
-    public List<PuzzleShapeSO> MediumPuzzles = new List<PuzzleShapeSO>();
-    public List<PuzzleShapeSO> HardPuzzles = new List<PuzzleShapeSO>();
-    public List<PuzzleShapeSO> VeryHardPuzzles = new List<PuzzleShapeSO>();
-    public List<PuzzleShapeSO> TitanPuzzles = new List<PuzzleShapeSO>();
-    public List<PuzzleShapeSO> GodPuzzles = new List<PuzzleShapeSO>();
-
-    public static List<List<PuzzleShapeSO>> PuzzlesList = new List<List<PuzzleShapeSO>>();
+    public List<VisionsDifficultySO> LevelSets;
 
     public List<Color> ColorsList = new List<Color>();
 
@@ -91,7 +83,6 @@ public class TurkPuzzleScript : MonoBehaviour
     private static ModifierMenuText.RewardModifier rewardBaseModifier;
 
     public Image CloudPanel;
-    public List<float> DifficultyOpenness;
     public static ModifierMenuText.RewardModifier RewardBaseModifier 
     { 
         get => rewardBaseModifier;
@@ -189,14 +180,6 @@ public class TurkPuzzleScript : MonoBehaviour
 
         PuzzleName.gameObject.SetActive(false);
 
-        PuzzlesList.Add(VeryEasyPuzzles);
-        PuzzlesList.Add(EasyPuzzles);
-        PuzzlesList.Add(MediumPuzzles);
-        PuzzlesList.Add(HardPuzzles);
-        PuzzlesList.Add(VeryHardPuzzles);
-        PuzzlesList.Add(TitanPuzzles);
-        PuzzlesList.Add(GodPuzzles);
-
         PuzzleCenter = gameObject;
         puzzleScript = this;
 
@@ -211,12 +194,12 @@ public class TurkPuzzleScript : MonoBehaviour
         DifficultyDecreaseButton.interactable = (CurrentDifficutly != 0);
         DifficultyIncreaseButton.interactable = !(CurrentDifficutly >= DifficultiesUnlocked - 1);
 
-        StartCoroutine(OpenSkyHole(DifficultyOpenness[CurrentDifficutly]));
+        StartCoroutine(OpenSkyHole(LevelSets[CurrentDifficutly].OpennessModifier));
     }
 
     public static PuzzleShapeSO SamplePuzzles()
     {
-        List<PuzzleShapeSO> PuzzleSamples = PuzzlesList[CurrentDifficutly];
+        List<PuzzleShapeSO> PuzzleSamples = instance.LevelSets[CurrentDifficutly].Puzzles;
 
         int puzzleIdx = 0;
         if (PuzzlesCompleted.ContainsKey(CurrentDifficutly))
@@ -235,7 +218,7 @@ public class TurkPuzzleScript : MonoBehaviour
         {
             puzzleIdx = PuzzlesCompleted[CurrentDifficutly];
         }
-        int maxLength = PuzzlesList[CurrentDifficutly].Count;
+        int maxLength = LevelSets[CurrentDifficutly].Puzzles.Count;
         if (puzzleIdx >= maxLength)
         {
             UniquePuzzlesSolvedText.color = Color.green;
@@ -336,21 +319,6 @@ public class TurkPuzzleScript : MonoBehaviour
         Win.Play();
 
         Debug.Log("Turk Puzzle Complete!");
-
-        //Puzzle Material Update
-        float timePass = 0f;
-        float transitionPeriod = 1.5f;
-        while (timePass < transitionPeriod)
-        {
-            timePass += Time.deltaTime;
-            Shader.SetGlobalFloat("_TurkCompletion", timePass/transitionPeriod);
-
-            yield return null;
-        }
-        Shader.SetGlobalFloat("_TurkCompletion", 1);
-
-        yield return new WaitForSeconds(0.2f);
-
         //Show Earnings
         PuzzleName.text = selectedGridData.Name;
         PuzzleName.gameObject.SetActive(true);
@@ -362,16 +330,21 @@ public class TurkPuzzleScript : MonoBehaviour
         PuzzleEarningsText.text = "+ <sprite index=1> ";
         string finalEarningText = reward.AllSignificantDigits(3);
 
-        timePass = 0f;
-        transitionPeriod = 0.2f;
+        //Puzzle Material Update
+        float timePass = 0f;
+        float transitionPeriod = 1.5f;
         while (timePass < transitionPeriod)
         {
             timePass += Time.deltaTime;
-            int showCharacters = (int)Mathf.Lerp(0, finalEarningText.Length, timePass / transitionPeriod);
+            float progress = timePass / transitionPeriod;
+            Shader.SetGlobalFloat("_TurkCompletion", progress);
+
+            int showCharacters = (int)Mathf.Lerp(0, finalEarningText.Length, progress);
             PuzzleEarningsText.text = "+ <sprite index=1> " + finalEarningText.Substring(0, showCharacters);
 
             yield return null;
         }
+        Shader.SetGlobalFloat("_TurkCompletion", 1);
         PuzzleEarningsText.text = "+ <sprite index=1> " + finalEarningText;
 
         //Show Multipliers
@@ -731,6 +704,6 @@ public class TurkPuzzleScript : MonoBehaviour
     public static bool isDifficultyCompleted(int difficultyLevel)
     {
         if (!PuzzlesCompleted.ContainsKey(difficultyLevel)) return false;
-        return PuzzlesCompleted[difficultyLevel] >= PuzzlesList[difficultyLevel].Count;
+        return PuzzlesCompleted[difficultyLevel] >= instance.LevelSets[difficultyLevel].Puzzles.Count;
     }
 }

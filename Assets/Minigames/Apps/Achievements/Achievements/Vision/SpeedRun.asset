@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af3482d2c76bd34c8ef7f1f22820aa8, type: 3}
+  m_Name: SpeedRun
+  m_EditorClassIdentifier: 
+  Title: Top Dog
+  Objective: Beat the first four <color=#D3AF37>Milo</color> speed records in <b>Vision</b>.
+  Flavor: He's actually pretty good at puzzles.
+  ButtonText: I AM THE BEST
+  OnBuyAnnouncement: A <color=#FFAAAA><b>grand poster</b></color> has been added
+    to your collection.
+  ActivationData:
+    BroadcastName: BigMiloPoster
+    UseValue: 0
+    BroadcastValue: 0
+    UseString: 0
+    BroadcastString: 
+  SpeedCompletions: 00000000010000000200000003000000

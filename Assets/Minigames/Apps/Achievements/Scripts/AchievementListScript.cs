@@ -29,6 +29,13 @@ public class AchievementListScript : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        PhonePositionScript.PhoneToggled += OnPhoneRaise;
+
+    }
+
+    public void OnPhoneRaise(bool raised)
+    {
+        UpdateList();
     }
 
     public void UpdateList()

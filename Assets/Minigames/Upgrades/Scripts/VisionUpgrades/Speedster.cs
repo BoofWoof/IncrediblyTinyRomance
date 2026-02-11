@@ -5,10 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Speedster", menuName = "Upgrades/Challenges/Speedster")]
 public class SpeedsterSO : ValueModifierAbstract
 {
-    public float SlowestTime;
     public float FastestTime;
-    public float MaxMultiplier;
     public float MinMultiplier;
+    public float MaxMultiplier;
 
     public Color DisplayColor = Color.green;
 
@@ -44,6 +43,7 @@ public class SpeedsterSO : ValueModifierAbstract
 
     public float CalculateSpeedMultiplier()
     {
+        float SlowestTime = TurkPuzzleScript.instance.LevelSets[TurkPuzzleScript.CurrentDifficutly].FalconSpeed;
         float timePassed = Time.time - TurkPuzzleScript.instance.StartingTime;
         float rawMultValue = (SlowestTime - timePassed) / (SlowestTime - FastestTime);
         float clampedMultValue = Mathf.Clamp01(rawMultValue);

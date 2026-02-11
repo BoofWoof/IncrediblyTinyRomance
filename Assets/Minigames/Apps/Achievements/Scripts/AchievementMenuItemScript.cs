@@ -26,7 +26,7 @@ public class AchievementMenuItemScript : MonoBehaviour
 
         ButtonText.text = AchievementData.ButtonText;
         TitleText.text = AchievementData.Title;
-        ObjectiveText.text = "<color=white><b>Objective:</b></color> " + AchievementData.Objective;
+        ObjectiveText.text = "<color=white><b>Objective:</b></color> " + AchievementData.Objective + $"   <color=grey>{AchievementData.ProgressText()}</color>";
         FlavorText.text = AchievementData.Flavor;
 
         SubmitAchievementButton.interactable = AchievementData.CheckCompletionCriteria();

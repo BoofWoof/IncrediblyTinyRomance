@@ -14,4 +14,9 @@ public abstract class AchievementAbstractSO : ScriptableObject
 
     public abstract bool CheckCompletionCriteria();
 
+    public virtual string ProgressText()
+    {
+        return "";
+    }
+
 }
