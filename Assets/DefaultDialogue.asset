@@ -74672,18 +74672,20 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: AriesWaitBehavior("card", 45)
+      userScript: 'AriesWaitBehavior("card", 45)
+
+        BroadcastActivate("ReKD")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 75.574844
-        y: 2008.7915
+        x: 81.25667
+        y: 1987.2004
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1262.5}
+    canvasScrollPosition: {x: 0, y: 1688.6364}
     canvasZoom: 0.8800002
   syncInfo:
     syncActors: 0
