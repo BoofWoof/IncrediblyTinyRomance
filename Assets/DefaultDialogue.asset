@@ -1167,6 +1167,36 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+  - id: 22
+    fields:
+    - title: Name
+      value: End Of Day
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Resume city lockdown to end the day.
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
   - id: 12
     fields:
     - title: Name
@@ -1738,8 +1768,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: My name's Milo! I'm from AR, although you've probably already heard
-          me talking over the radio a billion times already.
+        value: My name's Milo! I'm from AR, although you've probably heard me talking
+          over the radio a billion times already.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3868,7 +3898,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1102.8567}
+    canvasScrollPosition: {x: 135.71442, y: 0}
     canvasZoom: 0.70000035
   - id: 6
     fields:
@@ -27815,7 +27845,7 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'IncrementQuest()
 
-        RevealUpgrades("vision", 4)'
+        BroadcastActivate("VisionSet1")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -30633,7 +30663,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 5510
+        y: 5508.6665
         width: 160
         height: 30
     - id: 46
@@ -33607,8 +33637,7 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'UnlockPortrait("Unanswered Prayers")
 
-        RevealUpgrades("vision",
-        8)
+        BroadcastActivate("VisionSet2")
 
         IncrementQuest()
 
@@ -33787,7 +33816,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 'RevealUpgrades("vision", 6)
+      userScript: 'BroadcastActivate("VisionSet3")
 
         IncrementQuest()'
       onExecute:
@@ -33796,7 +33825,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 6854
+        y: 6852.5073
         width: 160
         height: 30
     - id: 2
@@ -46682,8 +46711,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 6083.6646}
-    canvasZoom: 0.5500005
+    canvasScrollPosition: {x: 0, y: 6331.1396}
+    canvasZoom: 0.6700004
   - id: 22
     fields:
     - title: Title
@@ -46840,7 +46869,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 'RevealUpgrades("vision", 6)
+      userScript: 'BroadcastActivate("VisionSet4")
 
         IncrementQuest()'
       onExecute:
@@ -53937,14 +53966,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: RevealUpgrades("vision", 1)
+      userScript: BroadcastActivate("VisionSet5")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 379
-        y: 575
+        y: 573.7805
         width: 160
         height: 30
     - id: 13
@@ -57973,19 +58002,20 @@ MonoBehaviour:
 
         SetTextSong(-1)
 
-        StartWalkTo("MacroAries",
-        12)'
+        UnlockPortrait("Burden")
+
+'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 274.74472
-        y: 3451.3672
+        x: 275.96423
+        y: 3466.0012
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 10.975586, y: 2936.5747}
+    canvasScrollPosition: {x: 37.80475, y: 331.6974}
     canvasZoom: 0.82000005
   - id: 24
     fields:
@@ -62912,7 +62942,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'SetSong(3)
 
-        ShowStats()'
+        IncrementQuest()
+
+        BroadcastActivate("AllowDayEnd")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []

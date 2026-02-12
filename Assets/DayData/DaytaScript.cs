@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public static class DayInfo
 {
     public static int CurrentDay = 0;
+    public static bool DayEndEnabled = false;
 }
 
 public class DaytaScript : MonoBehaviour
@@ -29,10 +30,15 @@ public class DaytaScript : MonoBehaviour
         SkipStart = SkipStartInit;
     }
 
+    public void AllowDayEnd()
+    {
+        DayInfo.DayEndEnabled = true;
+    }
+
     public void Start()
     {
         //SetupAudioForDay
-        MusicSelectorScript.SetOverworldSong(5);
+        MusicSelectorScript.SetOverworldSong(5, true); //Instantly switch;
         CrossfadeScript.ResumeMusic();
         CrossfadeScript.SetLowpassOn(true, true);
 

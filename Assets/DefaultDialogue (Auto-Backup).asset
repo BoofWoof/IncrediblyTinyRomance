@@ -1167,6 +1167,36 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+  - id: 22
+    fields:
+    - title: Name
+      value: End Of Day
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: Resume city lockdown to end the day.
+      type: 0
+      typeString: 
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: 
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: 
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Is Item
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
   - id: 12
     fields:
     - title: Name
@@ -27815,7 +27845,7 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'IncrementQuest()
 
-        RevealUpgrades("vision", 4)'
+        BroadcastActivate("VisionSet1")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -30633,7 +30663,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 5510
+        y: 5508.6665
         width: 160
         height: 30
     - id: 46
@@ -33607,8 +33637,7 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'UnlockPortrait("Unanswered Prayers")
 
-        RevealUpgrades("vision",
-        8)
+        BroadcastActivate("VisionSet2")
 
         IncrementQuest()
 
@@ -33787,7 +33816,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 'RevealUpgrades("vision", 6)
+      userScript: 'BroadcastActivate("VisionSet3")
 
         IncrementQuest()'
       onExecute:
@@ -33796,7 +33825,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 6854
+        y: 6852.5073
         width: 160
         height: 30
     - id: 2
@@ -46682,8 +46711,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 6083.6646}
-    canvasZoom: 0.5500005
+    canvasScrollPosition: {x: 0, y: 6331.1396}
+    canvasZoom: 0.6700004
   - id: 22
     fields:
     - title: Title
@@ -46840,7 +46869,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 'RevealUpgrades("vision", 6)
+      userScript: 'BroadcastActivate("VisionSet4")
 
         IncrementQuest()'
       onExecute:
@@ -53937,14 +53966,14 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: RevealUpgrades("vision", 1)
+      userScript: BroadcastActivate("VisionSet5")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 379
-        y: 575
+        y: 573.7805
         width: 160
         height: 30
     - id: 13
@@ -57973,19 +58002,20 @@ MonoBehaviour:
 
         SetTextSong(-1)
 
-        StartWalkTo("MacroAries",
-        12)'
+        UnlockPortrait("Burden")
+
+'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 274.74472
-        y: 3451.3672
+        x: 275.96423
+        y: 3466.0012
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 10.975586, y: 2936.5747}
+    canvasScrollPosition: {x: 37.80475, y: 331.6974}
     canvasZoom: 0.82000005
   - id: 24
     fields:
@@ -62912,7 +62942,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'SetSong(3)
 
-        ShowStats()'
+        IncrementQuest()
+
+        BroadcastActivate("AllowDayEnd")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63093,7 +63125,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 25
+        originDialogueID: 1
+        destinationConversationID: 25
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: (Variable["SocialScore"] > Variable["WorkerScore"]) and (Variable["SocialScore"]
         > Variable["SpiritScore"])
       userScript: BroadcastActivate("VisionAd")
@@ -63147,7 +63185,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 25
+        originDialogueID: 2
+        destinationConversationID: 25
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: 'Variable["WorkerScore"] > Variable["SpiritScore"]'
       userScript: BroadcastActivate("VisionAd")
       onExecute:
@@ -63200,7 +63244,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 25
+        originDialogueID: 3
+        destinationConversationID: 25
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: BroadcastActivate("VisionAd")
       onExecute:
@@ -63210,6 +63260,59 @@ MonoBehaviour:
         serializedVersion: 2
         x: 508
         y: 201
+        width: 160
+        height: 30
+    - id: 4
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 8
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 11
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 25
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: BroadcastActivate("FlockSpam")
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 283
+        y: 332
         width: 160
         height: 30
     entryGroups: []
@@ -65433,7 +65536,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 1432
-        y: 554
+        y: 552.5075
         width: 160
         height: 30
     - id: 8
@@ -65556,8 +65659,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 2992
-        y: 470
+        x: 2993.4924
+        y: 468.50745
         width: 160
         height: 30
     - id: 10
@@ -65675,7 +65778,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 2784
-        y: 638
+        y: 636.50745
         width: 160
         height: 30
     - id: 12
@@ -65786,7 +65889,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("DeimosScold")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -66034,7 +66137,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: BroadcastActivate("DeimosScold")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -72366,7 +72469,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
+        x: 182.50745
         y: 6350
         width: 160
         height: 30
@@ -73080,7 +73183,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 7275.177
+        y: 7273.684
         width: 160
         height: 30
     - id: 137
@@ -73143,7 +73246,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 577.28796, y: 1690.9336}
+    canvasScrollPosition: {x: 1182.088, y: 199.99994}
     canvasZoom: 0.6700003
   - id: 31
     fields:
@@ -74601,18 +74704,20 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: AriesWaitBehavior("card", 45)
+      userScript: 'AriesWaitBehavior("card", 45)
+
+        BroadcastActivate("ReKD")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 75.574844
-        y: 2008.7915
+        x: 81.25667
+        y: 1987.2004
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1262.5}
+    canvasScrollPosition: {x: 0, y: 1688.6364}
     canvasZoom: 0.8800002
   syncInfo:
     syncActors: 0

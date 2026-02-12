@@ -7,11 +7,11 @@ public class TrukAppScript : AppScript
 
     public void StartSong()
     {
-        MusicSelectorScript.SetPhoneSong(6);
+        MusicSelectorScript.SetPhoneSong(6, true);
     }
     public void EndSong()
     {
-        MusicSelectorScript.SetPhoneSong(MusicSelectorScript.instance.DefaultStartSongPhoneID);
+        MusicSelectorScript.SetPhoneSong(MusicSelectorScript.instance.DefaultStartSongPhoneID, true);
     }
 
     private void OnEnable()

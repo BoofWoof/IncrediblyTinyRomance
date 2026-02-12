@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public struct SecondaryMultiplier
@@ -15,6 +16,8 @@ public struct SecondaryMultiplier
 public class TurkPuzzleScript : MonoBehaviour
 {
     public static TurkPuzzleScript instance;
+
+    public UnityEvent OnPuzzleGenerate;
 
     private bool FirstOpen = true;
 
@@ -242,6 +245,8 @@ public class TurkPuzzleScript : MonoBehaviour
         ShowArtist();
         UpdateStatText();
         StartingTime = Time.time;
+
+        OnPuzzleGenerate?.Invoke();
     }
 
     public void ShowArtist()

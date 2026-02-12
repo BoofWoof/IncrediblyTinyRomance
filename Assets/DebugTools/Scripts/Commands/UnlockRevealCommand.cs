@@ -9,8 +9,7 @@ namespace DebugTools.DeveloperConsole.Commands
 
         public override bool Process(string[] args)
         {
-            UpgradeScreenScript.BroadcastUpgradeReveal(MinigameName, float.Parse(args[0]));
-
+            UpgradeHolder.UnlockAll(Minigame.Visions);
             return true;
         }
     }

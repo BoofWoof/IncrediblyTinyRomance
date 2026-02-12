@@ -115,6 +115,7 @@ public class ShutterScript : MonoBehaviour
     {
         if (!IsCoroutineRunning)
         {
+            if(DayInfo.DayEndEnabled) ActiveBroadcast.BroadcastActivation("ShowEndDayScreen");
             ShutterClose();
             ShudderAudioSource.clip = SudderDropClip;
             ShudderAudioSource.Play();

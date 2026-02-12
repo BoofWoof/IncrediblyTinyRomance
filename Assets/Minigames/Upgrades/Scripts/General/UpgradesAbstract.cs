@@ -11,7 +11,7 @@ public enum Minigame
 
 public abstract class UpgradesAbstract : ScriptableObject
 {
-    public int UpgradeID;
+    [HideInInspector] public int Prioirty;
 
     public string UpgradeName;
     public Sprite UpgradeIcon;
@@ -48,6 +48,7 @@ public abstract class UpgradesAbstract : ScriptableObject
     }
     public bool Buy(bool forceBuy = false)
     {
+        if (UpgradeBought) return false;
         bool canBuy = CanBuy();
         if (!canBuy && !forceBuy) return canBuy;
         UpgradeBought = true;

@@ -97,26 +97,74 @@ public class CrossfadeScript : MonoBehaviour
         MusicPaused = false;
     }
 
-    public static void InstantStartSong(int SongID)
+    public static void InstantStartSong(int SongID, bool TrulyInstant = false)
     {
         if (MusicSelectorScript.instance.SongList[SongID].Name == MusicPlayer.CurrentSong.Name) return;
 
         if (MusicPlayer.TransitionCoroutine != null) MusicPlayer.StopCoroutine(MusicPlayer.TransitionCoroutine);
 
-        MusicPlayer.oldTrack.volume = 0;
-
         MusicPlayer.CurrentSongID = SongID;
-
         MusicPlayer.CurrentSong = MusicSelectorScript.instance.SongList[SongID];
-        MusicPlayer.currentTrack.clip = MusicPlayer.CurrentSong.Song;
-        MusicPlayer.currentTrack.volume = MusicPlayer.CurrentSong.MaxVolume;
+        if (TrulyInstant)
+        {
+            MusicPlayer.oldTrack.volume = 0;
 
-        if(!MusicPaused) MusicPlayer.currentTrack.Play();
+            MusicPlayer.currentTrack.clip = MusicPlayer.CurrentSong.Song;
+            MusicPlayer.currentTrack.volume = MusicPlayer.CurrentSong.MaxVolume;
 
-        MusicPlayer.currentTrack.time = MusicPlayer.CurrentSong.StartTime;
+            if (!MusicPaused) MusicPlayer.currentTrack.Play();
+
+            MusicPlayer.currentTrack.time = MusicPlayer.CurrentSong.StartTime;
+            return;
+        }
+        Debug.Log("BBBBBBBBB");
+        MusicPlayer.TransitionCoroutine = MusicPlayer.StartCoroutine(MusicPlayer.FadeInAndOutTransition(MusicSelectorScript.instance.SongList[SongID]));
     }
 
-    public static void TransitionSong(int SongID)
+    public IEnumerator FadeInAndOutTransition(MusicDataStruct NewSong)
+    {
+        float timeElapsed = 0f;
+
+        AudioSource tempSource = MusicPlayer.oldTrack;
+        MusicPlayer.oldTrack = MusicPlayer.currentTrack;
+        MusicPlayer.currentTrack = tempSource;
+        MusicPlayer.currentTrack.clip = NewSong.Song;
+
+        MusicPlayer.currentTrack.time = MusicPlayer.oldTrack.time;
+
+        float currentTrackStartVolume = MusicPlayer.currentTrack.volume;
+        float oldTrackStartVolume = MusicPlayer.oldTrack.volume;
+
+        // Gradually crossfade over the fadeDuration
+        while (timeElapsed < MusicPlayer.fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            float progress = timeElapsed / MusicPlayer.fadeDuration;
+
+            MusicPlayer.oldTrack.volume = Mathf.Lerp(oldTrackStartVolume, 0, progress);
+
+            yield return null;
+        }
+        MusicPlayer.oldTrack.volume = 0f;
+
+        yield return new WaitForSeconds(1f);
+
+        MusicPlayer.currentTrack.Play();
+        timeElapsed = 0f;
+        // Gradually crossfade over the fadeDuration
+        while (timeElapsed < MusicPlayer.fadeDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            float progress = timeElapsed / MusicPlayer.fadeDuration;
+
+            MusicPlayer.currentTrack.volume = Mathf.Lerp(currentTrackStartVolume, NewSong.MaxVolume, progress);
+
+            yield return null;
+        }
+        MusicPlayer.currentTrack.volume = NewSong.MaxVolume;
+    }
+
+    public static void TransitionSong(int SongID, bool instant = false)
     {
         if (MusicSelectorScript.instance.SongList[SongID].Name == MusicPlayer.CurrentSong.Name) return;
 
@@ -128,7 +176,7 @@ public class CrossfadeScript : MonoBehaviour
 
         if (NewSong.GroupID != MusicPlayer.CurrentSong.GroupID)
         {
-            InstantStartSong(SongID);
+            InstantStartSong(SongID, instant);
             return;
         }
 

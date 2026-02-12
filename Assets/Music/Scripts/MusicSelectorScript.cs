@@ -63,11 +63,15 @@ public class MusicSelectorScript : MonoBehaviour
 
     public static void SetPhoneSong(double newSongID)
     {
+        SetPhoneSong(newSongID, false);
+    }
+    public static void SetPhoneSong(double newSongID, bool instant = false)
+    {
         if (SongLock) return;
         instance.PhoneMusicID = (int)newSongID;
         if (PhonePositionScript.raised)
         {
-            CrossfadeScript.TransitionSong(instance.PhoneMusicID);
+            CrossfadeScript.TransitionSong(instance.PhoneMusicID, instant);
         }
     }
     public static void RevertPhoneSong()
@@ -76,11 +80,15 @@ public class MusicSelectorScript : MonoBehaviour
     }
     public static void SetOverworldSong(double newSongID)
     {
+        SetOverworldSong(newSongID, false);
+    }
+    public static void SetOverworldSong(double newSongID, bool instant = false)
+    {
         if (SongLock) return;
         instance.OverworldSongID = (int)newSongID;
         if (!PhonePositionScript.raised)
         {
-            CrossfadeScript.TransitionSong(instance.OverworldSongID);
+            CrossfadeScript.TransitionSong(instance.OverworldSongID, instant);
         }
     }
     public static void RevertOverworldSong()

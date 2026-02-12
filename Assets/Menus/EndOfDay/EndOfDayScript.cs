@@ -1,5 +1,6 @@
 using PixelCrushers;
 using PixelCrushers.DialogueSystem;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class EndOfDayScript : MonoBehaviour
     public float StartingMiloLike;
     public float StartingAriesLike;
 
+    public AudioSource EndOfDaySound;
+
     public void Start()
     {
         StartingTime = Time.time;
@@ -19,8 +22,6 @@ public class EndOfDayScript : MonoBehaviour
         StartingAriesLike = DialogueLua.GetVariable("AriesLike").asFloat;
 
         StatScreen.SetActive(false);
-
-        Lua.RegisterFunction("ShowStats", this, SymbolExtensions.GetMethodInfo(() => ToggleStatActive()));
     }
 
     public void GoSceneNextDay()
@@ -39,10 +40,17 @@ public class EndOfDayScript : MonoBehaviour
 
     public void ToggleStatActive()
     {
+        StartCoroutine(BeginEndScreen());
+    }
+
+    public IEnumerator BeginEndScreen()
+    {
+        yield return new WaitForSeconds(2f);
+
+        EndOfDaySound.Play();
         PhonePositionScript.LockPhoneDown();
         StatScreen.SetActive(true);
         UpdateText();
-        PlayerCam.EnableCameraMovement = false;
         InputManager.GameEnd();
     }
 

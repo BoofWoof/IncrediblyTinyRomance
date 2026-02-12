@@ -9,6 +9,10 @@ using UnityEngine.Events;
 
 public class PrayerScript : MonoBehaviour
 {
+    public UnityEvent OnGoodPrayer;
+    public UnityEvent OnBadPrayer;
+    public UnityEvent OnPrayer;
+
     public static PrayerScript instance;
 
     public TextAsset GoodPrayers;
@@ -270,9 +274,13 @@ public class PrayerScript : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
+        OnPrayer?.Invoke();
+
         TotalPrayerCount += 1;
         if (GoodIdx == answerIdx || isSpecialPrayer)
         {
+            OnGoodPrayer?.Invoke();
+
             Debug.Log("A good prayer was sent.");
             RamAngyLevel -= AngerReduction;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
@@ -292,6 +300,8 @@ public class PrayerScript : MonoBehaviour
         }
         else
         {
+            OnBadPrayer?.Invoke();
+
             Debug.Log("Ram be angy! >:C");
             RamAngyLevel += AngerReduction * 2f / 3f;
             if (RamAngyLevel > AngerThreshold)
