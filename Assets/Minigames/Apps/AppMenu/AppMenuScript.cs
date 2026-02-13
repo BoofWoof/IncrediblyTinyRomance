@@ -26,6 +26,8 @@ public class AppMenuScript : AppScript
 
     public GameObject AppButtonPrefab;
 
+    public static bool FirstAppOpened = true;
+
     private void OnEnable()
     {
         NameToApp = new Dictionary<string, AppMenuObjectData>();
@@ -109,7 +111,9 @@ public class AppMenuScript : AppScript
         {
             eventID = EventTriggerType.PointerUp
         };
-        entry.callback.AddListener((eventData) => { 
+        entry.callback.AddListener((eventData) => {
+            if (FirstAppOpened) AnnouncementScript.StartAnnouncement("[RIGHT CLICK] to exit any app.");
+            FirstAppOpened = false;
             PointerEventData pointerData = (PointerEventData)eventData;
             if (pointerData.button != PointerEventData.InputButton.Left) return;
             OnAppRelease(appData); 

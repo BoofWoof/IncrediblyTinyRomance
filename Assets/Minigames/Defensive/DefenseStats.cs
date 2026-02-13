@@ -1,8 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DefenseStats : MonoBehaviour
 {
+    public UnityEvent<float> OnHealthChange;
+
     public static DefenseStats instance;
 
     public static float CityEfficiencyHealth = 100;
@@ -10,9 +13,6 @@ public class DefenseStats : MonoBehaviour
     public float HealRate = 0.1f;
     public static float MinimumHealth = 50f;
     public float MaxHealth = 100;
-
-    public GameObject HealthBar;
-    public TMP_Text HealthBarText;
 
     public AudioSource DamageAudio;
 
@@ -26,15 +26,8 @@ public class DefenseStats : MonoBehaviour
     {
         if(!ChannelChanger.DangerActive) CityEfficiencyHealth += Time.deltaTime * HealRate;
         if (CityEfficiencyHealth > MaxHealth ) CityEfficiencyHealth = MaxHealth;
-
-        if(CityEfficiencyHealth < MaxHealth)
-        {
-            HealthBar.SetActive(true);
-            HealthBarText.text = CityEfficiencyHealth.ToString("F0") + "%";
-        } else
-        {
-            HealthBar.SetActive(false);
-        }
+        
+        OnHealthChange?.Invoke(GetEfficiencyMultiplier());
     }
     public static void DamageCity(float Damage)
     {
@@ -51,6 +44,6 @@ public class DefenseStats : MonoBehaviour
     }
     public static float GetEfficiencyMultiplier()
     {
-        return CityEfficiencyHealth / 100f;
+        return CityEfficiencyHealth / instance.MaxHealth;
     }
 }
