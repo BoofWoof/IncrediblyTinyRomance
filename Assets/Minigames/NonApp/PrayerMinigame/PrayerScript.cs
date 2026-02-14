@@ -2,10 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using PixelCrushers.DialogueSystem;
 using System.Linq;
 using UnityEngine.Events;
+using static PixelCrushers.AnimatorSaver;
+
+public class PrayerResponse
+{
+    public int AssociatedIdx;
+    public string Prayer;
+    public string Author;
+    public bool GoodPrayer;
+    public bool SpecialPrayer;
+
+    public SpecialPrayerData AssociatedSpecialPrayerData;
+    public SpecialPrayerSetSO AssociatedSpecialPrayerSet;
+}
+
 
 public class PrayerScript : MonoBehaviour
 {
@@ -14,6 +27,8 @@ public class PrayerScript : MonoBehaviour
     public UnityEvent OnPrayer;
 
     public static PrayerScript instance;
+
+    public Dictionary<int, PrayerResponse> CurrentResponse;
 
     public TextAsset GoodPrayers;
     private string[] GoodLines = null;
@@ -56,8 +71,6 @@ public class PrayerScript : MonoBehaviour
     public List<VoiceLineSO> NegativeJudgementAudios;
     public List<int> LastNegativeJudgementIdxs;
     public int UniqueNegativesTillRepeatAllowed;
-
-    public SpecialPrayerData[] SetSpecialPrayers = new SpecialPrayerData[3];
 
     public UnityEvent OnJudgementActivate;
 
@@ -187,66 +200,92 @@ public class PrayerScript : MonoBehaviour
             SubmissionButtons[i].SetAuthorName("");
         }
 
-        List<string> stringResponse = new List<string>();
+        List<PrayerResponse> prayerResponses = new List<PrayerResponse>();
         foreach (Response response in responses)
         {
-            stringResponse.Add(response.formattedText.text);
+            PrayerResponse newResponse = new PrayerResponse
+            {
+                AssociatedIdx = -1,
+                Prayer = response.formattedText.text,
+                Author = "SozaPM",
+                GoodPrayer = true,
+                SpecialPrayer = false
+            };
+
+            prayerResponses.Add(newResponse);
         }
-        CreateVariableLenghtOptions(stringResponse);
+        CreateVariableLengthOptions(prayerResponses);
     }
 
-    public void CreateVariableLenghtOptions(List<string> responses, List<string> authors = null)
+    public void CreateVariableLengthOptions(List<PrayerResponse> responses)
     {
         if (responses.Count == 1)
         {
             SubmissionButtons[0].SetButtonText("");
             SubmissionButtons[0].SubmissionButton.interactable = false;
             SubmissionButtons[0].SetNormalResponse();
-            SubmissionButtons[1].SetButtonText(responses[0]);
+            SubmissionButtons[0].SetAuthorName("");
+
+            SubmissionButtons[1].SetButtonText(responses[0].Prayer);
             SubmissionButtons[1].SubmissionButton.interactable = true;
-            SubmissionButtons[1].SetSpecialResponse();
+            if (responses[0].SpecialPrayer) SubmissionButtons[1].SetSpecialResponse(responses[0].GoodPrayer);
+            else SubmissionButtons[1].SetNormalResponse();
+            SubmissionButtons[1].SetAuthorName(responses[0].Author);
+            responses[0].AssociatedIdx = 1;
+
             SubmissionButtons[2].SetButtonText("");
             SubmissionButtons[2].SubmissionButton.interactable = false;
             SubmissionButtons[2].SetNormalResponse();
-            if(authors != null)
-            {
-                SubmissionButtons[1].SetAuthorName(authors[0]);
-            }
+            SubmissionButtons[2].SetAuthorName("");
         }
         else if (responses.Count == 2)
         {
-            SubmissionButtons[0].SetButtonText(responses[0]);
+            SubmissionButtons[0].SetButtonText(responses[0].Prayer);
             SubmissionButtons[0].SubmissionButton.interactable = true;
-            SubmissionButtons[0].SetSpecialResponse();
+            if (responses[0].SpecialPrayer) SubmissionButtons[0].SetSpecialResponse(responses[0].GoodPrayer);
+            else SubmissionButtons[0].SetNormalResponse();
+            SubmissionButtons[0].SetAuthorName(responses[0].Author);
+            responses[0].AssociatedIdx = 0;
+
             SubmissionButtons[1].SetButtonText("");
             SubmissionButtons[1].SubmissionButton.interactable = false;
             SubmissionButtons[1].SetNormalResponse();
-            SubmissionButtons[2].SetButtonText(responses[1]);
+            SubmissionButtons[1].SetAuthorName("");
+
+            SubmissionButtons[2].SetButtonText(responses[1].Prayer);
             SubmissionButtons[2].SubmissionButton.interactable = true;
-            SubmissionButtons[2].SetSpecialResponse();
-            if (authors != null)
-            {
-                SubmissionButtons[0].SetAuthorName(authors[0]);
-                SubmissionButtons[2].SetAuthorName(authors[1]);
-            }
+            if (responses[1].SpecialPrayer) SubmissionButtons[2].SetSpecialResponse(responses[1].GoodPrayer);
+            else SubmissionButtons[2].SetNormalResponse();
+            SubmissionButtons[2].SetAuthorName(responses[1].Author);
+            responses[1].AssociatedIdx = 2;
         }
         else if (responses.Count == 3)
         {
-            SubmissionButtons[0].SetButtonText(responses[0]);
+            SubmissionButtons[0].SetButtonText(responses[0].Prayer);
             SubmissionButtons[0].SubmissionButton.interactable = true;
-            SubmissionButtons[0].SetSpecialResponse();
-            SubmissionButtons[1].SetButtonText(responses[1]);
+            if (responses[0].SpecialPrayer) SubmissionButtons[0].SetSpecialResponse(responses[0].GoodPrayer);
+            else SubmissionButtons[0].SetNormalResponse();
+            SubmissionButtons[0].SetAuthorName(responses[0].Author);
+            responses[0].AssociatedIdx = 0;
+
+            SubmissionButtons[1].SetButtonText(responses[1].Prayer);
             SubmissionButtons[1].SubmissionButton.interactable = true;
-            SubmissionButtons[1].SetSpecialResponse();
-            SubmissionButtons[2].SetButtonText(responses[2]);
+            if (responses[1].SpecialPrayer) SubmissionButtons[1].SetSpecialResponse(responses[1].GoodPrayer);
+            else SubmissionButtons[1].SetNormalResponse();
+            SubmissionButtons[1].SetAuthorName(responses[1].Author);
+            responses[1].AssociatedIdx = 1;
+
+            SubmissionButtons[2].SetButtonText(responses[2].Prayer);
             SubmissionButtons[2].SubmissionButton.interactable = true;
-            SubmissionButtons[2].SetSpecialResponse();
-            if (authors != null)
-            {
-                SubmissionButtons[0].SetAuthorName(authors[0]);
-                SubmissionButtons[1].SetAuthorName(authors[1]);
-                SubmissionButtons[2].SetAuthorName(authors[2]);
-            }
+            if (responses[2].SpecialPrayer) SubmissionButtons[2].SetSpecialResponse(responses[2].GoodPrayer);
+            else SubmissionButtons[2].SetNormalResponse();
+            SubmissionButtons[2].SetAuthorName(responses[2].Author);
+            responses[2].AssociatedIdx = 2;
+        }
+        CurrentResponse = new Dictionary<int, PrayerResponse>();
+        foreach (PrayerResponse response in responses)
+        {
+            CurrentResponse.Add(response.AssociatedIdx, response);
         }
     }
 
@@ -262,10 +301,10 @@ public class PrayerScript : MonoBehaviour
     #region MiniGame
     IEnumerator SubmitPrayer(int answerIdx)
     {
-        bool isSpecialPrayer = SubmissionButtons[answerIdx].IsSpecial;
+        bool isSpecialPrayer = CurrentResponse[answerIdx].SpecialPrayer;
 
         FireworkLauncher.ActivateMessage();
-        string answerText = SubmissionButtons[answerIdx].SubmissionButton.GetComponentInChildren<TMP_Text>().text;
+        string answerText = CurrentResponse[answerIdx].Prayer;
         PrayerFireworkTextScript.ActivateFirework(answerText);
 
         SubmissionButtons[answerIdx].SetButtonText("");
@@ -276,40 +315,46 @@ public class PrayerScript : MonoBehaviour
 
         OnPrayer?.Invoke();
 
-        TotalPrayerCount += 1;
-        if (GoodIdx == answerIdx || isSpecialPrayer)
+        if (CurrentResponse[answerIdx].GoodPrayer)
         {
+            GoodPrayerCount++;
             OnGoodPrayer?.Invoke();
+            PrayerSubmitted.Invoke(true);
+        } else
+        {
+            BadPrayerCount++;
+            OnBadPrayer?.Invoke();
+            PrayerSubmitted.Invoke(false);
+        }
 
-            Debug.Log("A good prayer was sent.");
+        if (isSpecialPrayer)
+        {
             RamAngyLevel -= AngerReduction;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
-            PrayerSubmitted.Invoke(true);
-            GoodPrayerCount++;
+
+            if (CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChain != null && CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChain.Count > 0)
+            {
+                if (CurrentResponse[answerIdx].AssociatedSpecialPrayerSet != null) SPrayerSubmissionScript.WaitingForcedPrayers.Remove(CurrentResponse[answerIdx].AssociatedSpecialPrayerSet);
+                else SPrayerSubmissionScript.WaitingSpecialPrayers.Remove(CurrentResponse[answerIdx].AssociatedSpecialPrayerData);
+                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChain);
+            }
+
+        } else if (GoodIdx == answerIdx)
+        {
+
+            RamAngyLevel -= AngerReduction;
+            if (RamAngyLevel < 0) RamAngyLevel = 0;
 
             int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
-
-            if(SetSpecialPrayers[answerIdx].SpecialResponseChain != null && SetSpecialPrayers[answerIdx].SpecialResponseChain.Count > 0)
-            {
-                SPrayerSubmissionScript.WaitingSpecialPrayers.Remove(SetSpecialPrayers[answerIdx]);
-                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", SetSpecialPrayers[answerIdx].SpecialResponseChain);
-            } else
-            {
-                if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
-            }
+            if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
         }
         else
         {
-            OnBadPrayer?.Invoke();
-
-            Debug.Log("Ram be angy! >:C");
             RamAngyLevel += AngerReduction * 2f / 3f;
             if (RamAngyLevel > AngerThreshold)
             {
                 yield break;
             }
-            PrayerSubmitted.Invoke(false);
-            BadPrayerCount++;
 
             int RandomIdx = Random.Range(0, NegativeJudgementAudios.Count);
             if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", NegativeJudgementAudios[RandomIdx]);
@@ -363,34 +408,27 @@ public class PrayerScript : MonoBehaviour
     {
         if (StoryMode) return;
 
-        SetSpecialPrayers = new SpecialPrayerData[3];
         if (SPrayerSubmissionScript.WaitingForcedPrayers.Count > 0)
         {
             SpecialPrayerSetSO targetPrayer = SPrayerSubmissionScript.WaitingForcedPrayers[0];
-            SPrayerSubmissionScript.WaitingForcedPrayers.Remove(targetPrayer);
 
-            List<string> PrayerText = new List<string>();
+            List<PrayerResponse> prayerResponsesSpecial = new List<PrayerResponse>();
             foreach(SpecialPrayerData prayerData in targetPrayer.PrayerOptions)
             {
-                PrayerText.Add(prayerData.Option);
-            }
-            CreateVariableLenghtOptions(PrayerText);
+                PrayerResponse newResponse = new PrayerResponse
+                {
+                    AssociatedIdx = -1,
+                    Prayer = prayerData.Option,
+                    Author = prayerData.AuthorName,
+                    GoodPrayer = prayerData.GoodPrayer,
+                    SpecialPrayer = true,
+                    AssociatedSpecialPrayerData = prayerData,
+                    AssociatedSpecialPrayerSet = targetPrayer
+                };
 
-            if (targetPrayer.PrayerOptions.Length == 1)
-            {
-                SetSpecialPrayers[1] = targetPrayer.PrayerOptions[0];
+                prayerResponsesSpecial.Add(newResponse);
             }
-            else if (targetPrayer.PrayerOptions.Length == 2)
-            {
-                SetSpecialPrayers[0] = targetPrayer.PrayerOptions[0];
-                SetSpecialPrayers[2] = targetPrayer.PrayerOptions[1];
-            }
-            else
-            {
-                SetSpecialPrayers[0] = targetPrayer.PrayerOptions[0];
-                SetSpecialPrayers[1] = targetPrayer.PrayerOptions[1];
-                SetSpecialPrayers[2] = targetPrayer.PrayerOptions[2];
-            }
+            CreateVariableLengthOptions(prayerResponsesSpecial);
 
             RestartMessages();
             return;
@@ -399,45 +437,71 @@ public class PrayerScript : MonoBehaviour
         List<string> selectedGoodLine = GetRandomUniqueLines(GoodLines, 1);
         List<string> selectedBadLines = GetRandomUniqueLines(BadLines, 2);
 
+        List<PrayerResponse> prayerResponses = new List<PrayerResponse>();
         GoodIdx = Random.Range(0, 3);
         int badCount = 0;
+        List<int> selectedSpecials = new List<int>();
         for (int i = 0; i < 3; i++)
         {
+            string[] split;
+            if (GoodIdx == i)
+            {
+                split = selectedGoodLine[0].Split(" @");
+                PrayerResponse newGoodResponse = new PrayerResponse
+                {
+                    AssociatedIdx = -1,
+                    Prayer = split[0],
+                    Author = split[1],
+                    GoodPrayer = true,
+                    SpecialPrayer = false
+                };
+
+                prayerResponses.Add(newGoodResponse);
+                continue;
+            }
+
             int SpecialPrayerCount = SPrayerSubmissionScript.WaitingSpecialPrayers.Count;
             if (SPrayerSubmissionScript.WaitingSpecialPrayers.Count > 0)
             {
-                if(Random.value < 1f/6f)
+                if (Random.value < 1f / 5f)
                 {
-                    SpecialPrayerData selectedPrayer = SPrayerSubmissionScript.WaitingSpecialPrayers[Random.Range(0, SpecialPrayerCount)];
+                    int selectedPrayerIdx = Random.Range(0, SpecialPrayerCount);
+                    SpecialPrayerData selectedPrayer = SPrayerSubmissionScript.WaitingSpecialPrayers[selectedPrayerIdx];
 
-                    if (!SetSpecialPrayers.Contains(selectedPrayer))
+                    if (!selectedSpecials.Contains(selectedPrayerIdx))
                     {
-                        SubmissionButtons[i].SetButtonText(selectedPrayer.Option);
-                        SubmissionButtons[i].SetAuthorName(selectedPrayer.AuthorName);
-                        SubmissionButtons[i].SetSpecialResponse();
-                        SetSpecialPrayers[i] = selectedPrayer;
+                        selectedSpecials.Add(selectedPrayerIdx);
+                        PrayerResponse newResponse = new PrayerResponse
+                        {
+                            AssociatedIdx = -1,
+                            Prayer = selectedPrayer.Option,
+                            Author = selectedPrayer.AuthorName,
+                            GoodPrayer = selectedPrayer.GoodPrayer,
+                            SpecialPrayer = true,
+                            AssociatedSpecialPrayerData = selectedPrayer
+                        };
 
+                        prayerResponses.Add(newResponse);
                         continue;
                     }
                 }
             }
 
-
-            string[] split;
-            if (GoodIdx == i)
-            {
-                split = selectedGoodLine[0].Split(" @");
-                SubmissionButtons[i].SetButtonText(split[0]);
-                SubmissionButtons[i].SetAuthorName(split[1]);
-                SubmissionButtons[i].SetNormalResponse();
-                continue;
-            }
             split = selectedBadLines[badCount].Split(" @");
-            SubmissionButtons[i].SetButtonText(split[0]);
-            SubmissionButtons[i].SetAuthorName(split[1]);
-            SubmissionButtons[i].SetNormalResponse();
+            PrayerResponse newBadResponse = new PrayerResponse
+            {
+                AssociatedIdx = -1,
+                Prayer = split[0],
+                Author = split[1],
+                GoodPrayer = false,
+                SpecialPrayer = false
+            };
+
+            prayerResponses.Add(newBadResponse);
             badCount++;
         }
+        CreateVariableLengthOptions(prayerResponses);
+
         RestartMessages();
     }
 

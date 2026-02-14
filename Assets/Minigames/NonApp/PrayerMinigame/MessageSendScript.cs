@@ -12,7 +12,9 @@ public class MessageSendScript : MonoBehaviour
 
     public Button SubmissionButton;
     public TMP_Text AuthorText;
+
     public GameObject SpecialReply;
+    public GameObject RageBaitReply;
 
     public bool IsSpecial = false;
 
@@ -38,7 +40,8 @@ public class MessageSendScript : MonoBehaviour
     public void Start()
     {
 
-        SpecialReply.SetActive(false);
+        SpecialReply?.SetActive(false);
+        RageBaitReply?.SetActive(false);
 
         backupPos = transform.localPosition;
 
@@ -62,12 +65,14 @@ public class MessageSendScript : MonoBehaviour
     public void SetNormalResponse()
     {
         SpecialReply.SetActive(false);
+        RageBaitReply?.SetActive(false);
         IsSpecial = false;
     }
 
-    public void SetSpecialResponse()
+    public void SetSpecialResponse(bool goodReply)
     {
-        SpecialReply.SetActive(true);
+        if(goodReply) SpecialReply.SetActive(true);
+        else RageBaitReply.SetActive(true);
         IsSpecial = true;
     }
 
