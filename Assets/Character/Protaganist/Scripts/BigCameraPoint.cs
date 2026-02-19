@@ -1,5 +1,6 @@
 using PixelCrushers.DialogueSystem;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class BigCameraPoint : MonoBehaviour
@@ -7,7 +8,20 @@ public class BigCameraPoint : MonoBehaviour
     public float MaxActivationDistance = 5f;
     private GameObject TargetActivationObject = null;
 
-    public static int QuestionsAvailable = 0;
+    private static int _QuestionsAvailable;
+    public static int QuestionsAvailable {
+        get
+        {
+            return _QuestionsAvailable;
+        }
+        set
+        {
+            _QuestionsAvailable = value;
+            instance.OnQuestionsAvailable?.Invoke(value > 0);
+        }
+    }
+
+    public UnityEvent<bool> OnQuestionsAvailable;
 
     public static BigCameraPoint instance;
 

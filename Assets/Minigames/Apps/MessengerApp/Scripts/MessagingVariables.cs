@@ -3,6 +3,7 @@ public static class MessagingVariables
 {
     public static float DefaultTimeBetweenMessages = 2f;
     public static float DefaultTimePerCharacter = 0.01f;
+    public static float SetTimeDivider = 1f;
     public static bool DefaultForceSelect = false;
 
     public static float TimeBetweenMessages = DefaultTimeBetweenMessages;

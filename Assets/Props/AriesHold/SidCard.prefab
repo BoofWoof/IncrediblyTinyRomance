@@ -74,13 +74,96 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
       insertIndex: 1
+      addedObject: {fileID: -8653882852690469372}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: -1778279599665101884}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 6700612225709345610}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
+      insertIndex: 4
       addedObject: {fileID: -1300418587205578460}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1242053533065299562}
   m_SourcePrefab: {fileID: 100100000, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
 --- !u!1 &6593500422370166462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f4530c98221b5404c9263d64ac41969c, type: 3}
   m_PrefabInstance: {fileID: 6287509288546876399}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8653882852690469372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593500422370166462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f6d3767371521419afc3d6268cf637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeDelay: 0
+  onActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1778279599665101884}
+        m_TargetAssemblyTypeName: SPrayerSubmissionScript, Assembly-CSharp
+        m_MethodName: SubmitPrayersToQueue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6700612225709345610}
+        m_TargetAssemblyTypeName: ActivateAnnouncement, Assembly-CSharp
+        m_MethodName: TriggerAnnouncement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ObjectEnabled: 1
+  OneTimeTrigger: 1
+--- !u!114 &-1778279599665101884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593500422370166462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e851cdd86ea9b74b9a65656063f8893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrayerToSubmit:
+  - {fileID: 11400000, guid: 3b852f8042ff03a4ebe331f7d25c4336, type: 2}
+  Submitted: 0
+--- !u!114 &6700612225709345610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593500422370166462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514c0450d57c4d340aefcbe369f2ebd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnnouncementText: Question <color=#FF0000><b>The Great Ram</b></color> at the Prayer
+    Station.
 --- !u!114 &-1300418587205578460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,3 +181,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   LightColor: {r: 0, g: 1, b: 0.97360396, a: 0}
+--- !u!65 &1242053533065299562
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593500422370166462}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020000009, y: 0.034988023, z: 0.0012225262}
+  m_Center: {x: -5.6634898e-11, y: 5.6634898e-11, z: -0.0005429577}

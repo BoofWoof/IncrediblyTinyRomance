@@ -1768,8 +1768,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: My name's Milo! I'm from AR, although you've probably already heard
-          me talking over the radio a billion times already.
+        value: My name's Milo! I'm from AR, although you've probably heard me talking
+          over the radio a billion times already.
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -3898,7 +3898,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1102.8567}
+    canvasScrollPosition: {x: 135.71442, y: 0}
     canvasZoom: 0.70000035
   - id: 6
     fields:
@@ -25405,7 +25405,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 7, y: 133}
+    canvasScrollPosition: {x: 12, y: 0}
     canvasZoom: 1
   - id: 17
     fields:
@@ -63078,8 +63078,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 265
-        y: 57
+        x: 270
+        y: 19
         width: 160
         height: 30
     - id: 1
@@ -63134,7 +63134,9 @@ MonoBehaviour:
         priority: 2
       conditionsString: (Variable["SocialScore"] > Variable["WorkerScore"]) and (Variable["SocialScore"]
         > Variable["SpiritScore"])
-      userScript: BroadcastActivate("VisionAd")
+      userScript: 'BroadcastActivate("VisionAd")
+
+        SetAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63193,7 +63195,9 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 'Variable["WorkerScore"] > Variable["SpiritScore"]'
-      userScript: BroadcastActivate("VisionAd")
+      userScript: 'BroadcastActivate("VisionAd")
+
+        SetAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63252,7 +63256,9 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: BroadcastActivate("VisionAd")
+      userScript: 'BroadcastActivate("VisionAd")
+
+        SetAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63305,7 +63311,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: BroadcastActivate("FlockSpam")
+      userScript: 'BroadcastActivate("FlockSpam")
+
+        ReleaseAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63539,7 +63547,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetAttention
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63590,7 +63598,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 26
+        originDialogueID: 3
+        destinationConversationID: 26
+        destinationDialogueID: 4
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -63600,6 +63614,59 @@ MonoBehaviour:
         serializedVersion: 2
         x: 187
         y: 284
+        width: 160
+        height: 30
+    - id: 4
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 8
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 26
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: ReleaseAttention()
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 193
+        y: 352
         width: 160
         height: 30
     entryGroups: []
@@ -63767,7 +63834,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetAttention()
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63818,7 +63885,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 27
+        originDialogueID: 2
+        destinationConversationID: 27
+        destinationDialogueID: 3
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -63827,7 +63900,60 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 162
-        y: 197
+        y: 196
+        width: 160
+        height: 30
+    - id: 3
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 8
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 7
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 27
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: ReleaseAttention()
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 168
+        y: 280
         width: 160
         height: 30
     entryGroups: []
@@ -64766,14 +64892,16 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'StartWalkTo("MacroAries", 11)
 
-        SetWaitStation(11)'
+        SetWaitStation(11)
+
+        SetAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 80
-        y: 134
+        y: 132.63013
         width: 160
         height: 30
     - id: 15
@@ -64819,7 +64947,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: AriesBehavior("judge")
+      userScript: 'AriesBehavior("judge")
+
+        ReleaseAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -64830,8 +64960,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 969.8625}
-    canvasZoom: 0.7300003
+    canvasScrollPosition: {x: 0, y: 723.3468}
+    canvasZoom: 0.6700004
   - id: 29
     fields:
     - title: Title
@@ -73410,7 +73540,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetAttention()
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -74706,7 +74836,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'AriesWaitBehavior("card", 45)
 
-        BroadcastActivate("ReKD")'
+        BroadcastActivate("ReKD")
+
+        ReleaseAttention()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -74717,7 +74849,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1688.6364}
+    canvasScrollPosition: {x: 0, y: 1642.0448}
     canvasZoom: 0.8800002
   syncInfo:
     syncActors: 0

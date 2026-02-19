@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fef4ccefb1dff5488338f22eca80251, type: 3}
+  m_Name: QFlock
+  m_EditorClassIdentifier: 
+  AudioData: {fileID: 8300000, guid: 0fb5ece616b75054da0094e9cc6226a9, type: 3}
+  PhenomeData: {fileID: 4900000, guid: 4bedf8c47a0162247bc742d80f972d84, type: 3}
+  SubtitleData: {fileID: 4900000, guid: a89dde94a30997c408c737dbccbc78ee, type: 3}
+  GestureData: {fileID: 0}
+  FocusLevel: 1
+  PauseBeforeStart: 0
+  PauseAfterEnd: 0
+  SpeakerOverride: 

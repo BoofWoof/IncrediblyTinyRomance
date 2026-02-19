@@ -9,6 +9,10 @@ public class SettingsMenuScript : MonoBehaviour
     {
         PlayerCam.SetMouseSensitivity(newSensitivity);
     }
+    public void SetTextSpeed(float textSpeed)
+    {
+        MessagingVariables.SetTimeDivider = textSpeed;
+    }
 
     public void SetVibrationIntensity(float newIntensity)
     {

@@ -77,7 +77,7 @@ public class ContactsScript : MonoBehaviour
 
     public IEnumerator SendSingleMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string message_text)
     {
-        yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages + MessagingVariables.TimePerCharacter * message_text.Length);
+        yield return new WaitForSeconds((MessagingVariables.TimeBetweenMessages + MessagingVariables.TimePerCharacter * message_text.Length) / MessagingVariables.SetTimeDivider);
         messengerApp.AddLeftMessage(newSpeaker.id, message_text);        
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
@@ -94,7 +94,7 @@ public class ContactsScript : MonoBehaviour
 
     public IEnumerator SendChoicesMessage(Response[] responses)
     {
-        yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages);
+        yield return new WaitForSeconds(MessagingVariables.TimeBetweenMessages / MessagingVariables.SetTimeDivider);
         messengerApp.SendOptions(speakingCharacterId, responses);
     }
 
