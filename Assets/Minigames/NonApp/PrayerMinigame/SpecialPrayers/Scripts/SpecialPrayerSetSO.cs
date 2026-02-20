@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct SpecialPrayerData
+public class SpecialPrayerData
 {
     public string Option;
     public string AuthorName;
@@ -11,6 +11,16 @@ public struct SpecialPrayerData
     public List<VoiceLineSO> SpecialResponseChain;
     public string TriggerDialogue;
     public string TriggerActivation;
+
+    public float GetChainTime()
+    {
+        float totaltime = 0f;
+        foreach (VoiceLineSO vo in SpecialResponseChain)
+        {
+            totaltime += vo.PauseBeforeStart + vo.PauseAfterEnd + vo.AudioData.length;
+        }
+        return totaltime;
+    }
 }
 
 [CreateAssetMenu(fileName = "SpecialPrayerSetSO", menuName = "SpecialPrayerSetSO")]

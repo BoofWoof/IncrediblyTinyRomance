@@ -23534,8 +23534,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 160
-        y: 30
+        x: 198
+        y: 32
         width: 160
         height: 30
     - id: 1
@@ -23587,8 +23587,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 169
-        y: 122
+        x: 216
+        y: 119
         width: 160
         height: 30
     entryGroups: []
@@ -27856,7 +27856,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 855.77014}
+    canvasScrollPosition: {x: 10.958923, y: 0}
     canvasZoom: 0.7300003
   - id: 19
     fields:
@@ -29954,7 +29954,10 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: AriesWaitBehavior("puff", -1)
+      userScript: 'AriesWaitBehavior("puff", -1)
+
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -30656,7 +30659,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: BroadcastActivate("VentArchive")
+      userScript: 'BroadcastActivate("VentArchive")
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -33359,8 +33364,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 5060.5693}
-    canvasZoom: 0.74999994
+    canvasScrollPosition: {x: 0, y: 4992.7485}
+    canvasZoom: 0.63000005
   - id: 20
     fields:
     - title: Title
@@ -33523,7 +33528,7 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: 
+      userScript: SetForceEvent()
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -33641,7 +33646,9 @@ MonoBehaviour:
 
         IncrementQuest()
 
-        AriesBehavior("judge")'
+        AriesBehavior("judge")
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -62955,7 +62962,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 3392.5554}
+    canvasScrollPosition: {x: 23.404297, y: 3175.5337}
     canvasZoom: 0.94000006
   - id: 25
     fields:
@@ -63136,7 +63143,9 @@ MonoBehaviour:
         > Variable["SpiritScore"])
       userScript: 'BroadcastActivate("VisionAd")
 
-        SetAttention()'
+        SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63197,7 +63206,9 @@ MonoBehaviour:
       conditionsString: 'Variable["WorkerScore"] > Variable["SpiritScore"]'
       userScript: 'BroadcastActivate("VisionAd")
 
-        SetAttention()'
+        SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63258,7 +63269,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'BroadcastActivate("VisionAd")
 
-        SetAttention()'
+        SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63313,18 +63326,20 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'BroadcastActivate("FlockSpam")
 
-        ReleaseAttention()'
+        ReleaseAttention()
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 283
-        y: 332
+        y: 331
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 22}
+    canvasScrollPosition: {x: 0, y: 0}
     canvasZoom: 1
   - id: 26
     fields:
@@ -63547,7 +63562,9 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: SetAttention()
+      userScript: 'SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63659,7 +63676,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: ReleaseAttention()
+      userScript: 'ReleaseAttention()
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63834,7 +63853,9 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: SetAttention()
+      userScript: 'SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -63946,7 +63967,9 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: ReleaseAttention()
+      userScript: 'ReleaseAttention()
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -64894,7 +64917,9 @@ MonoBehaviour:
 
         SetWaitStation(11)
 
-        SetAttention()'
+        SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -64949,7 +64974,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'AriesBehavior("judge")
 
-        ReleaseAttention()'
+        ReleaseAttention()
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -64960,8 +64987,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 5.970154, y: 0}
-    canvasZoom: 0.6700004
+    canvasScrollPosition: {x: 5.454529, y: 536.3631}
+    canvasZoom: 0.5500005
   - id: 29
     fields:
     - title: Title
@@ -65124,8 +65151,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 175
-        y: 178
+        x: 150
+        y: 179
         width: 160
         height: 30
     entryGroups: []
@@ -73376,7 +73403,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1182.088, y: 199.99994}
+    canvasScrollPosition: {x: 1177.6102, y: 0}
     canvasZoom: 0.6700003
   - id: 31
     fields:
@@ -73540,7 +73567,9 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: SetAttention()
+      userScript: 'SetAttention()
+
+        SetForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -74838,7 +74867,9 @@ MonoBehaviour:
 
         BroadcastActivate("ReKD")
 
-        ReleaseAttention()'
+        ReleaseAttention()
+
+        ReleaseForceEvent()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -74849,8 +74880,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 6.8181763, y: 0}
-    canvasZoom: 0.8800002
+    canvasScrollPosition: {x: 38.157898, y: 0}
+    canvasZoom: 0.7600003
   syncInfo:
     syncActors: 0
     syncItems: 0

@@ -23,6 +23,16 @@ public class InputManager : MonoBehaviour
     }
     public static void GameEnd()
     {
+        AllOff();
+    }
+    public static void AllOn()
+    {
+        PlayerInputs.Enable();
+        PlayerInputs.Overworld.Enable();
+        PlayerInputs.Phone.Enable();
+    }
+    public static void AllOff()
+    {
         PlayerInputs.Disable();
         PlayerInputs.Overworld.Disable();
         PlayerInputs.Phone.Disable();

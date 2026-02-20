@@ -89,6 +89,16 @@ public class MessageSendScript : MonoBehaviour
         StartCoroutine(SendMessage());
     }
 
+    public void DisableButton()
+    {
+        SubmissionButton.interactable = false;
+    }
+
+    public void EnableButton()
+    {
+        SubmissionButton.interactable = true;
+    }
+
     private void UpdateInteractability()
     {
         bool ButtonEnabled = SystemEnable && !PhoneEnabled;

@@ -7,7 +7,6 @@ public class ChannelChanger : MonoBehaviour
     public GameObject LockDefense;
 
     public static ChannelChanger ActiveChannelChanger;
-    public static bool DangerActive = false;
 
     public static ChannelChanger instance;
 
@@ -21,7 +20,7 @@ public class ChannelChanger : MonoBehaviour
 
     public void LockSwitch(bool PhoneUnlock = true)
     {
-        if (DangerActive) return;
+        if (GameStateMonitor.DangerActive) return;
         if (PhoneUnlock) PhonePositionScript.UnlockPhone();
 
         AerialDefense.SetActive(false);

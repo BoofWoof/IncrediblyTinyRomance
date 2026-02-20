@@ -54,8 +54,8 @@ public class AerialDefenseScript : MonoBehaviour
 
     public void StartWave()
     {
-        if (ChannelChanger.DangerActive) return;
-        ChannelChanger.DangerActive = true;
+        if (GameStateMonitor.DangerActive) return;
+        GameStateMonitor.DangerActive = true;
 
         if(threatSpawnerScript.threatWaveInfo.optionalVolume != null)
         {
@@ -85,7 +85,7 @@ public class AerialDefenseScript : MonoBehaviour
             StartCoroutine(StopVolume(threatSpawnerScript.threatWaveInfo.optionalVolume));
         }
 
-        ChannelChanger.DangerActive = false;
+        GameStateMonitor.DangerActive = false;
         ChannelChanger.ActiveChannelChanger.LockSwitch();
     }
 

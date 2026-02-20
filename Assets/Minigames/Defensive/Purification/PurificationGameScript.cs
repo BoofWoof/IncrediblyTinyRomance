@@ -68,7 +68,7 @@ public class PurificationGameScript : MonoBehaviour
         ChannelChanger.instance.StartCoroutine(VolumeFade(1f));
 
         ChannelChanger.ActiveChannelChanger.PuritySwitch();
-        ChannelChanger.DangerActive = true;
+        GameStateMonitor.DangerActive = true;
 
         StartingTime = Time.time;
 
@@ -311,7 +311,7 @@ public class PurificationGameScript : MonoBehaviour
             FogSource.Stop(false, ParticleSystemStopBehavior.StopEmitting);
             MusicSelectorScript.SetOverworldSong(1);
 
-            ChannelChanger.DangerActive = false;
+            GameStateMonitor.DangerActive = false;
             ChannelChanger.ActiveChannelChanger.LockSwitch();
 
             if (associatedLevelHolder != null && associatedLevelHolder.HallucinationResets.Count > 0)

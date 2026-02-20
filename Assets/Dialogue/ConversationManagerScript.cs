@@ -68,8 +68,8 @@ public class ConversationManagerScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f);
-            if (ChannelChanger.DangerActive) continue;
+            yield return new WaitForSeconds(1f);
+            if (GameStateMonitor.isEventActive()) continue;
             if (!ConversationOngoing && MessageQueue.GetQueueLength() > 0)
             {
                 Dialogue nextDialogue = MessageQueue.getNextDialogue();

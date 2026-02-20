@@ -31,6 +31,7 @@ public class MenuTrigger : MonoBehaviour
         CursorStateControl.PauseMenuToggle(false);
         HudScript.instance.ShowReticle(!ReticlePreviousShown);
         Time.timeScale = NormalTimescale;
+        InputManager.AllOn();
     }
 
     public void PauseGame()
@@ -41,5 +42,6 @@ public class MenuTrigger : MonoBehaviour
         HudScript.instance.ShowReticle(false);
         NormalTimescale = Time.timeScale;
         Time.timeScale = 0;
+        InputManager.AllOff();
     }
 }

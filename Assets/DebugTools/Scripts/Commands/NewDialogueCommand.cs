@@ -8,8 +8,8 @@ namespace DebugTools.DeveloperConsole.Commands
         public override bool Process(string[] args)
         {
             string dialogueName = string.Join(" ", args);
-
-            ConversationManagerScript.instance.StartDialogue(dialogueName);
+            MessageQueue.addDialogue(dialogueName);
+            //ConversationManagerScript.instance.StartDialogue(dialogueName);
 
             return true;
         }

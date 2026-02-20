@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: VendingObservation
   m_EditorClassIdentifier: 
   ID: 69878f2d-12c6-45df-bde5-0833d706dbcd
-  SetName: 
+  SetName: VendingMachine
   ForceSelection: 1
   PrayerOptions:
   - Option: What is that great pink venom box? What purpose does it serve.
     AuthorName: 
-    GoodPrayer: 0
+    GoodPrayer: 1
     SpecialResponseChain:
     - {fileID: 11400000, guid: 56363f9a8a5bd6441acc6bdfdca599ca, type: 2}
     TriggerDialogue: 

@@ -47,7 +47,7 @@ public class AriesOverworldBehavior : OverworldBehavior
     {
         if (wait >= 0) yield return WaitForDialogueToEnd();
 
-        ChannelChanger.DangerActive = true;
+        GameStateMonitor.DangerActive = true;
 
         yield return StartCoroutine(WalkToStation(0));
         thisAnimator.SetBool("Sitting", true);
@@ -122,7 +122,7 @@ public class AriesOverworldBehavior : OverworldBehavior
 
     public IEnumerator WaitForDialogueToEnd()
     {
-        while (DialogueManager.IsConversationActive)
+        while (GameStateMonitor.isEventActive())
         {
             yield return null;
         }

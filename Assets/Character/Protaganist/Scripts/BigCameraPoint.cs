@@ -1,7 +1,9 @@
 using PixelCrushers.DialogueSystem;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class BigCameraPoint : MonoBehaviour
 {
@@ -25,10 +27,21 @@ public class BigCameraPoint : MonoBehaviour
 
     public static BigCameraPoint instance;
 
+    public void OnEventStateChange(bool EventActive)
+    {
+        instance.OnQuestionsAvailable?.Invoke(_QuestionsAvailable > 0 && !EventActive);
+
+        if (EventActive)
+        {
+            Clear();
+        }
+    }
+
     public void OnEnable()
     {
         instance = this;
         Lua.RegisterFunction("AddQuestion", this, SymbolExtensions.GetMethodInfo(() => AddQuestion()));
+        GameStateMonitor.OnEventChange += OnEventStateChange;
     }
 
     public void ActivateObjects(InputAction.CallbackContext context)
@@ -61,6 +74,8 @@ public class BigCameraPoint : MonoBehaviour
     // Update is called once per frame
     public void ScanForTarget()
     {
+        if (GameStateMonitor.isEventActive()) return;
+
         if(QuestionsAvailable <= 0)
         {
             if (TargetActivationObject != null)

@@ -160,6 +160,8 @@ public class CharacterSpeechScript : MonoBehaviour
     }
     public IEnumerator SpeakNoDialogue(VoiceLineSO voiceLine)
     {
+        GameStateMonitor.AddSpeakingSource(this);
+
         //Update play speech to allow animations before and after start.
         yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
         PlaySpeech(voiceLine);
@@ -171,9 +173,13 @@ public class CharacterSpeechScript : MonoBehaviour
         }
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
+
+        GameStateMonitor.RemoveSpeakingSource(this);
     }
     public IEnumerator Speak(VoiceLineSO voiceLine)
     {
+        GameStateMonitor.AddSpeakingSource(this);
+
         //Update play speech to allow animations before and after start.
         yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
         PlaySpeech(voiceLine);
@@ -186,6 +192,8 @@ public class CharacterSpeechScript : MonoBehaviour
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+
+        GameStateMonitor.RemoveSpeakingSource(this);
     }
 
     public void PlaySpeech(VoiceLineSO voiceLine)

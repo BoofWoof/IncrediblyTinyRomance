@@ -24,7 +24,7 @@ public class DefenseStats : MonoBehaviour
 
     public void Update()
     {
-        if(!ChannelChanger.DangerActive) CityEfficiencyHealth += Time.deltaTime * HealRate;
+        if(!GameStateMonitor.DangerActive) CityEfficiencyHealth += Time.deltaTime * HealRate;
         if (CityEfficiencyHealth > MaxHealth ) CityEfficiencyHealth = MaxHealth;
         
         OnHealthChange?.Invoke(GetEfficiencyMultiplier());
