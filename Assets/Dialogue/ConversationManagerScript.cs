@@ -2,6 +2,7 @@ using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DS;
 
 public class ConversationManagerScript : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class ConversationManagerScript : MonoBehaviour
 
     public void StartDialogue(string newConversation)
     {
+        Debug.Log($"Conversation Starting {newConversation}");
 
         Conversation newConv = DialogueManager.masterDatabase.GetConversation(newConversation);
         bool allowRepeat = Field.LookupBool(newConv.fields, "AllowRepeat");
@@ -44,7 +46,7 @@ public class ConversationManagerScript : MonoBehaviour
 
         ConversationOngoing = true;
 
-        DialogueManager.StopAllConversations();
+        DialogueManager.StopConversation();
         DialogueManager.StartConversation(newConversation);
 
         if (isMacroConvo)
@@ -62,6 +64,10 @@ public class ConversationManagerScript : MonoBehaviour
         PrayerScript.StoryMode = false;
         ConversationOngoing = false;
         WaitingForEvent = false;
+
+        Debug.Log($"The conversation is now over.");
+
+        Resources.UnloadUnusedAssets();
     }
 
     public IEnumerator WaitForNextConversation()

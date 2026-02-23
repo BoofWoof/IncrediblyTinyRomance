@@ -37,6 +37,9 @@ public class ContactsScript : MonoBehaviour
 
     public void OnConversationLine(Subtitle subtitle)
     {
+        Debug.Log("AAAAAAAAAAAAAAAAAAAAA A NEW LINE IS HAPPENING AAAAA");
+        Debug.Log(subtitle.speakerInfo.Name);
+        Debug.Log(subtitle.speakerInfo.GetFieldBool("SkipThem"));
         if (subtitle.speakerInfo.GetFieldBool("WaitThem"))
         {
             ConversationManagerScript.WaitingForEvent = true;
@@ -44,6 +47,7 @@ public class ContactsScript : MonoBehaviour
         }
         if (subtitle.speakerInfo.GetFieldBool("SkipThem"))
         {
+            Debug.Log("Skipping Conversation Step");
             (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
             return;
         }

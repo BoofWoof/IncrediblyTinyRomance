@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
+  m_Name: PrayerRegret
+  m_EditorClassIdentifier: 
+  ID: 3733cab8-a2c1-42a8-8dda-9c1681a5287b
+  SetName: Regret
+  ForceSelection: 1
+  PrayerOptions:
+  - Option: We didn't deserve this...
+    AuthorName: OneOfTheFew
+    GoodPrayer: 1
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/CallAndResponse/DestructiveGuiltResponse/Silence1.asset
+    TriggerDialogue: 
+    TriggerActivation: 
+  - Option: We remaining few have learned our lesson and our faith will only be stronger
+      now... that's what you want to hear to spare us, right?
+    AuthorName: Alone01
+    GoodPrayer: 0
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/CallAndResponse/DestructiveGuiltResponse/Silence2.asset
+    TriggerDialogue: 
+    TriggerActivation: 

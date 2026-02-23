@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using PixelCrushers.DialogueSystem;
-using System.Linq;
 using UnityEngine.Events;
-using static PixelCrushers.AnimatorSaver;
 
 public class PrayerResponse
 {
@@ -14,6 +12,8 @@ public class PrayerResponse
     public string Author;
     public bool GoodPrayer;
     public bool SpecialPrayer;
+    
+    public Response AssociatedResponse;
 
     public SpecialPrayerData AssociatedSpecialPrayerData;
     public SpecialPrayerSetSO AssociatedSpecialPrayerSet;
@@ -74,8 +74,11 @@ public class PrayerScript : MonoBehaviour
 
     public UnityEvent OnJudgementActivate;
 
+    private bool _SpecialPrayerActive = false;
+
     public void ActivateJudgement()
     {
+        if (JudgementActive) return;
         Debug.Log("Activating Judgement");
         JudgementActive = true;
         RamAngyLevel = 0;
@@ -89,6 +92,7 @@ public class PrayerScript : MonoBehaviour
 
     public void DeactivateJudgement()
     {
+        if (!JudgementActive) return;
         Debug.Log("Deactivating Judgement");
         JudgementActive = false;
         JudgementFocus = false;
@@ -156,14 +160,12 @@ public class PrayerScript : MonoBehaviour
         DisableButtons();
         SubmissionButtons[answerIdx].SetAuthorName("");
 
-        int actualAnswerIdx = CurrentResponse[answerIdx].AssociatedIdx;
-
         FireworkLauncher.ActivateMessage();
-        string answerText = Responses[actualAnswerIdx].formattedText.text;
+        string answerText = CurrentResponse[answerIdx].AssociatedResponse.formattedText.text;
         PrayerFireworkTextScript.ActivateFirework(answerText);
 
         yield return new WaitForSeconds(WaitForNextPrayerSec + 3f);
-        (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(Responses[actualAnswerIdx]);
+        (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(CurrentResponse[answerIdx].AssociatedResponse);
     }
     public void OnConversationResponseMenu(Response[] responses)
     {
@@ -190,7 +192,8 @@ public class PrayerScript : MonoBehaviour
                 Prayer = response.formattedText.text,
                 Author = "SozaPM",
                 GoodPrayer = true,
-                SpecialPrayer = false
+                SpecialPrayer = false,
+                AssociatedResponse = response
             };
 
             prayerResponses.Add(newResponse);
@@ -305,10 +308,17 @@ public class PrayerScript : MonoBehaviour
         SubmissionButtons[answerIdx].SetAuthorName("");
         DisableButtons();
 
+
+        if (isSpecialPrayer)
+        {
+            CurrentResponse[answerIdx].AssociatedSpecialPrayerData.StartLoadResponseChain();
+        }
+
         yield return new WaitForSeconds(5f);
 
         OnPrayer?.Invoke();
 
+        TotalPrayerCount++;
         if (CurrentResponse[answerIdx].GoodPrayer)
         {
             GoodPrayerCount++;
@@ -326,13 +336,16 @@ public class PrayerScript : MonoBehaviour
             RamAngyLevel -= AngerReduction;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
 
-            if (CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChain != null && CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChain.Count > 0)
+            yield return instance.StartCoroutine(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.WaitLoadResponseChain());
+
+            if (CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChainVL != null && CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChainVL.Count > 0)
             {
                 if (CurrentResponse[answerIdx].AssociatedSpecialPrayerSet != null) SPrayerSubmissionScript.WaitingForcedPrayers.Remove(CurrentResponse[answerIdx].AssociatedSpecialPrayerSet);
                 else SPrayerSubmissionScript.WaitingSpecialPrayers.Remove(CurrentResponse[answerIdx].AssociatedSpecialPrayerData);
-                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChain);
 
-                yield return new WaitForSeconds(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.GetChainTime());
+                CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChainVL);
+
+                yield return new WaitForSeconds(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.GetChainTime() + 0.1f);
             }
 
         } else if (GoodIdx == answerIdx)
@@ -343,20 +356,22 @@ public class PrayerScript : MonoBehaviour
 
             int RandomIdx = Random.Range(0, PositiveJudgementAudios.Count);
             if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", PositiveJudgementAudios[RandomIdx]);
+            yield return new WaitForSeconds(PositiveJudgementAudios[RandomIdx].AudioData.length + 0.1f);
         }
         else
         {
             RamAngyLevel += AngerReduction * 2f / 3f;
             if (RamAngyLevel > AngerThreshold)
             {
+                GameStateMonitor.ActivePrayer = false;
                 yield break;
             }
 
             int RandomIdx = Random.Range(0, NegativeJudgementAudios.Count);
             if (JudgementActive) CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", NegativeJudgementAudios[RandomIdx]);
+            yield return new WaitForSeconds(NegativeJudgementAudios[RandomIdx].AudioData.length + 0.1f);
         }
 
-        yield return new WaitForSeconds(WaitForNextPrayerSec);
 
         GameStateMonitor.ActivePrayer = false;
         GenerateNewPrayers();
@@ -403,7 +418,12 @@ public class PrayerScript : MonoBehaviour
     }
     public void OnGameEventStateChange(bool EventActive)
     {
-        if (SPrayerSubmissionScript.WaitingForcedPrayers.Count > 0) GenerateNewPrayers();
+        if (SPrayerSubmissionScript.WaitingForcedPrayers.Count > 0 || _SpecialPrayerActive) GenerateNewPrayers();
+    }
+
+    public void ForcePrayerReferesh()
+    {
+        GenerateNewPrayers();
     }
 
     private void GenerateNewPrayers()
@@ -447,6 +467,8 @@ public class PrayerScript : MonoBehaviour
         GoodIdx = Random.Range(0, 3);
         int badCount = 0;
         List<int> selectedSpecials = new List<int>();
+
+        _SpecialPrayerActive = false;
         for (int i = 0; i < 3; i++)
         {
             string[] split;
@@ -469,13 +491,17 @@ public class PrayerScript : MonoBehaviour
             int SpecialPrayerCount = SPrayerSubmissionScript.WaitingSpecialPrayers.Count;
             if (SPrayerSubmissionScript.WaitingSpecialPrayers.Count > 0)
             {
-                if (Random.value < 1f / 5f && !GameStateMonitor.isEventActive())
+                Debug.Log("Testing for special prayers.");
+                if (Random.value < 0.2f && !GameStateMonitor.isEventActive())
                 {
+                    Debug.Log("Adding special prayer to mix.");
+
                     int selectedPrayerIdx = Random.Range(0, SpecialPrayerCount);
                     SpecialPrayerData selectedPrayer = SPrayerSubmissionScript.WaitingSpecialPrayers[selectedPrayerIdx];
 
                     if (!selectedSpecials.Contains(selectedPrayerIdx))
                     {
+                        _SpecialPrayerActive = true;
                         selectedSpecials.Add(selectedPrayerIdx);
                         PrayerResponse newResponse = new PrayerResponse
                         {

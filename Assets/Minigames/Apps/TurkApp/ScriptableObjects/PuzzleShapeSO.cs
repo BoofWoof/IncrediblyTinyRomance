@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "TurkGridData", menuName = "ScriptableObjects/TrukGridData", order = 1)]
 
@@ -16,7 +15,7 @@ public class PuzzleShapeSO : ScriptableObject
     private bool[] holeMap;
     private int width;
 
-    private void OnValidate()
+    private void OnEnable()
     {
         if (puzzleTexture == null)
             return;

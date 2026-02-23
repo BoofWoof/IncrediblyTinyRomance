@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
+  m_Name: SidCardResponse
+  m_EditorClassIdentifier: 
+  ID: a7bcc5b9-6167-41ff-b5e3-de245c5263c8
+  SetName: SidCardResponse
+  ForceSelection: 1
+  PrayerOptions:
+  - Option: That distant sound, so servile yet kind. Who was that?
+    AuthorName: AKindFuture
+    GoodPrayer: 1
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/CallAndResponse/SidCardResponse/Kobold.asset
+    TriggerDialogue: 
+    TriggerActivation: 
+  - Option: What was that voice that could command God?
+    AuthorName: ANewOrder
+    GoodPrayer: 0
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/CallAndResponse/SidCardResponse/Snake.asset
+    TriggerDialogue: 
+    TriggerActivation: 

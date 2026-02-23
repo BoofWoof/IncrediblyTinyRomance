@@ -166,11 +166,7 @@ public class CharacterSpeechScript : MonoBehaviour
         yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
         PlaySpeech(voiceLine);
         if (RadioSpeech) RadioObject.SetActive(true);
-        yield return null;
-        while (isSpeechPlaying())
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(voiceLine.AudioData.length + 0.05f);
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
 
@@ -184,13 +180,10 @@ public class CharacterSpeechScript : MonoBehaviour
         yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
         PlaySpeech(voiceLine);
         if (RadioSpeech) RadioObject.SetActive(true);
-        yield return null;
-        while (isSpeechPlaying())
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(voiceLine.AudioData.length + 0.05f);
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
+
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
 
         GameStateMonitor.RemoveSpeakingSource(this);

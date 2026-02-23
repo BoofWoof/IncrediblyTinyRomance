@@ -9,6 +9,11 @@ public class PrayerTutorialScript : MonoBehaviour
     public int BadPrayerCount = 0;
     public List<VoiceLineSO> BadPrayerResponses;
 
+    public void Start()
+    {
+        if(DayInfo.CurrentDay != 1) Destroy(gameObject);
+    }
+
     public void OnBadPrayer()
     {
         CharacterSpeechScript.BroadcastSpeechAttempt("RadioMilo", BadPrayerResponses[BadPrayerCount % BadPrayerResponses.Count]);

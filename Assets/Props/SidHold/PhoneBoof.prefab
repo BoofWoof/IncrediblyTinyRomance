@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: fffbdc4e5e870294c9ddecc645be9021, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0408
+      value: 0.1224
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fffbdc4e5e870294c9ddecc645be9021, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.0409601
+      value: 0.1228803
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fffbdc4e5e870294c9ddecc645be9021, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.07075076
+      value: 0.21225227
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fffbdc4e5e870294c9ddecc645be9021, type: 3}
       propertyPath: m_LocalPosition.x
@@ -89,3 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95ea3766da10cf43b1d207173360577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectName: 
+  ObjectActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  LightColor: {r: 0, g: 0, b: 0, a: 0}

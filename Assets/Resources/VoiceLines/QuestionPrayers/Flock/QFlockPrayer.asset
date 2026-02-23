@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
+  m_Name: QFlockPrayer
+  m_EditorClassIdentifier: 
+  ID: b296ca47-7e40-48d0-bef9-5f69914636f4
+  SetName: Flock
+  ForceSelection: 1
+  PrayerOptions:
+  - Option: What is the bird in that mural standing on and who are they?
+    AuthorName: PM
+    GoodPrayer: 1
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/QuestionPrayers/Flock/QFlock.asset
+    TriggerDialogue: 
+    TriggerActivation: 

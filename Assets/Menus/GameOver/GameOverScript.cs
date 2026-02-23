@@ -73,8 +73,12 @@ public class GameOverScript : MonoBehaviour
         CrossfadeScript.ResumeMusic();
         MusicSelectorScript.RevertOverworldSong();
 
+        ActiveBroadcast.BroadcastActivation("PrayerRegret");
+
         DefenseStats.DamageCity(35f);
         AnnouncementScript.StartAnnouncement("Your lands are in ruin. Your life was nearly lost.");
         AnnouncementScript.StartAnnouncement("The ram still waits...");
+
+        PrayerScript.instance.ForcePrayerReferesh();
     }
 }

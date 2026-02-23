@@ -19,7 +19,7 @@ public class BigCameraPoint : MonoBehaviour
         set
         {
             _QuestionsAvailable = value;
-            instance.OnQuestionsAvailable?.Invoke(value > 0);
+            instance.OnQuestionsAvailable?.Invoke(_QuestionsAvailable > 0 && !GameStateMonitor.isEventActive());
         }
     }
 

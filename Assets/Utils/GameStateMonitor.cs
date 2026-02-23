@@ -67,10 +67,16 @@ public static class GameStateMonitor
         if(NewEventActive != PrevEventActive) OnEventChange?.Invoke(NewEventActive);
 
         PrevEventActive = NewEventActive;
+        PrintGameState();
     }
 
     public static bool isEventActive()
     {
         return (ActiveSpeakingSource.Count > 0) || (ActivePrayer) || (DangerActive) || ForceEventActive;
+    }
+
+    public static void PrintGameState()
+    {
+        Debug.Log($"The following is the current game state. ForceEvent: {ForceEventActive} DangerActive: {DangerActive} ActivePrayer: {ActivePrayer} ActiveSpeakingSource: {ActiveSpeakingSource.Count}");
     }
 }

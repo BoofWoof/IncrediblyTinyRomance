@@ -3898,7 +3898,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 135.71442, y: 0}
+    canvasScrollPosition: {x: 140.00012, y: 261.42847}
     canvasZoom: 0.70000035
   - id: 6
     fields:
@@ -10034,7 +10034,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 432.72656, y: 2319.9785}
+    canvasScrollPosition: {x: 414.5448, y: 2570.8872}
     canvasZoom: 0.5500008
   - id: 8
     fields:
@@ -11703,16 +11703,14 @@ MonoBehaviour:
 
         AriesBehavior("judge")
 
-        RevertSong()
-
-        Continue()'
+        RevertSong()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 73.31578
-        y: 1865.0525
+        y: 1862.7797
         width: 160
         height: 30
     - id: 28
@@ -11956,7 +11954,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 1540.9064}
+    canvasScrollPosition: {x: 0, y: 1490.9064}
     canvasZoom: 0.88000023
   - id: 11
     fields:
@@ -23587,8 +23585,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 216
-        y: 119
+        x: 196
+        y: 117
         width: 160
         height: 30
     entryGroups: []
@@ -24941,7 +24939,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 25.609741, y: 1078.8982}
+    canvasScrollPosition: {x: 4.8780518, y: 1260.6055}
     canvasZoom: 0.8200002
   - id: 16
     fields:
@@ -27856,7 +27854,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 10.958923, y: 0}
+    canvasScrollPosition: {x: 0, y: 847.9448}
     canvasZoom: 0.7300003
   - id: 19
     fields:
@@ -53980,7 +53978,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 379
-        y: 573.7805
+        y: 572.352
         width: 160
         height: 30
     - id: 13
@@ -58022,8 +58020,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 37.80475, y: 331.6974}
-    canvasZoom: 0.82000005
+    canvasScrollPosition: {x: 18.571411, y: 187.6903}
+    canvasZoom: 0.70000017
   - id: 24
     fields:
     - title: Title
@@ -63300,7 +63298,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 11
+        value: 4
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -63450,8 +63448,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 160
-        y: 30
+        x: 182
+        y: 33
         width: 160
         height: 30
     - id: 1
@@ -63630,7 +63628,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 187
-        y: 284
+        y: 283
         width: 160
         height: 30
     - id: 4
@@ -63652,7 +63650,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 7
+        value: 4
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -63685,7 +63683,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 193
-        y: 352
+        y: 351
         width: 160
         height: 30
     entryGroups: []
@@ -63800,8 +63798,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 160
-        y: 30
+        x: 184
+        y: 50
         width: 160
         height: 30
     - id: 1
@@ -63861,8 +63859,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 166
-        y: 120
+        x: 184
+        y: 133
         width: 160
         height: 30
     - id: 2
@@ -63910,7 +63908,7 @@ MonoBehaviour:
       - originConversationID: 27
         originDialogueID: 2
         destinationConversationID: 27
-        destinationDialogueID: 3
+        destinationDialogueID: 9
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -63920,11 +63918,11 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 162
-        y: 196
+        x: 229
+        y: 223
         width: 160
         height: 30
-    - id: 3
+    - id: 9
       fields:
       - title: Title
         value: 
@@ -63943,7 +63941,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 7
+        value: 4
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -63969,14 +63967,16 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'ReleaseAttention()
 
-        ReleaseForceEvent()'
+        ReleaseForceEvent()
+
+        UnlockPortrait("DOGma")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 168
-        y: 280
+        x: 273
+        y: 332
         width: 160
         height: 30
     entryGroups: []
@@ -64976,7 +64976,9 @@ MonoBehaviour:
 
         ReleaseAttention()
 
-        ReleaseForceEvent()'
+        ReleaseForceEvent()
+
+        BroadcastActivate("PrayerAfterCall")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -64987,7 +64989,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 5.454529, y: 536.3631}
+    canvasScrollPosition: {x: 0, y: 718.18115}
     canvasZoom: 0.5500005
   - id: 29
     fields:
@@ -65151,8 +65153,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 150
-        y: 179
+        x: 168
+        y: 126
         width: 160
         height: 30
     entryGroups: []
@@ -73403,7 +73405,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 1177.6102, y: 0}
+    canvasScrollPosition: {x: 1289.5511, y: 1891.0437}
     canvasZoom: 0.6700003
   - id: 31
     fields:
@@ -74697,7 +74699,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 78.82353
-        y: 1899.2167
+        y: 1897.9009
         width: 160
         height: 30
     - id: 22
@@ -74863,9 +74865,11 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 'AriesWaitBehavior("card", 45)
+      userScript: 'AriesBehavior("card")
 
         BroadcastActivate("ReKD")
+
+        BroadcastActivate("PrayerSidCard")
 
         ReleaseAttention()
 
@@ -74880,7 +74884,7 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 38.157898, y: 0}
+    canvasScrollPosition: {x: 0, y: 1440.789}
     canvasZoom: 0.7600003
   syncInfo:
     syncActors: 0

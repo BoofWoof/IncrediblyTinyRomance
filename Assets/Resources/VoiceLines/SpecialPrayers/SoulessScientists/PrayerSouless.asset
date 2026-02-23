@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
+  m_Name: PrayerSouless
+  m_EditorClassIdentifier: 
+  ID: 7a32336d-2e17-4156-99d2-87a793f6fb51
+  SetName: SoulessScientists
+  ForceSelection: 0
+  PrayerOptions:
+  - Option: By far the hottest god we've had so far.
+    AuthorName: DownBaaaaad
+    GoodPrayer: 1
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/SpecialPrayers/SoulessScientists/SoulessVL.asset
+    TriggerDialogue: 
+    TriggerActivation: 

@@ -92,22 +92,22 @@ public class OverworldPositionScript : MonoBehaviour
         StartWalkTo(name, (int)CurrentStationIdx, Wait);
     }
 
-    public static void StartWalkTo(string name, int CurrentStationIdx, float Wait = 0f)
+    public static void StartWalkTo(string broadcastName, int CurrentStationIdx, float Wait = 0f)
     {
-        if ("MacroAries".ToLower() != name.ToLower() && "A".ToLower() != name.ToLower())
-        {
-            PrayerScript.instance.DeactivateJudgement();
-        }
-
         foreach (OverworldPositionScript overworldPositionScript in PositionScripts)
         {
-            if (overworldPositionScript.CharacterName.ToLower() != name.ToLower() && overworldPositionScript.NameSource.NickName.ToLower() != name.ToLower()) continue;
+            if (overworldPositionScript.CharacterName.ToLower() != broadcastName.ToLower() && overworldPositionScript.NameSource.NickName.ToLower() != broadcastName.ToLower()) continue;
             overworldPositionScript.StartWalkTo(CurrentStationIdx, Wait);
         }
     }
 
     public void StartWalkTo(int CurrentStationIdx, float Wait = 0f)
     {
+        if ("MacroAries".ToLower() == CharacterName.ToLower() || "A".ToLower() == CharacterName.ToLower())
+        {
+            PrayerScript.instance.DeactivateJudgement();
+        }
+
         WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx, Wait));
     }
     public IEnumerator FollowRouteTo(int CurrentStationIdx, float Wait = 0f)

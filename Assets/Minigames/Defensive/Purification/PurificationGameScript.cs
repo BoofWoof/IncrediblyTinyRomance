@@ -249,21 +249,6 @@ public class PurificationGameScript : MonoBehaviour
         {
             Win();
         }
-        if(PrevDeadEndExpansions != null)
-        {
-            foreach (WaitingExpansion prevDeadEnd in PrevDeadEndExpansions)
-            {
-                bool stillDeadEnd = false;
-                foreach (WaitingExpansion newDeadEnd in DeadEndExpansions)
-                {
-                    if(prevDeadEnd.sourceVent == newDeadEnd.sourceVent && prevDeadEnd.expansionDirection == newDeadEnd.expansionDirection)
-                    {
-                        stillDeadEnd = true;
-                        break;
-                    }
-                }
-            }
-        }
         PrevDeadEndExpansions = DeadEndExpansions;
 
 

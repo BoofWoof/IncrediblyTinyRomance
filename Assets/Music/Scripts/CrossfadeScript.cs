@@ -130,8 +130,6 @@ public class CrossfadeScript : MonoBehaviour
         MusicPlayer.currentTrack = tempSource;
         MusicPlayer.currentTrack.clip = NewSong.Song;
 
-        MusicPlayer.currentTrack.time = MusicPlayer.oldTrack.time;
-
         float currentTrackStartVolume = MusicPlayer.currentTrack.volume;
         float oldTrackStartVolume = MusicPlayer.oldTrack.volume;
 
@@ -146,6 +144,7 @@ public class CrossfadeScript : MonoBehaviour
             yield return null;
         }
         MusicPlayer.oldTrack.volume = 0f;
+        MusicPlayer.oldTrack.Stop();
 
         yield return new WaitForSeconds(1f);
 
