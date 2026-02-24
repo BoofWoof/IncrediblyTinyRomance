@@ -91,7 +91,6 @@ public class TurkPuzzleScript : MonoBehaviour
         get => rewardBaseModifier;
         set {
             rewardBaseModifier = value;
-            instance.ModifierUpdate();
         }
     }
     private static ModifierMenuText.RewardModifier rewardMultiplier;
@@ -101,7 +100,6 @@ public class TurkPuzzleScript : MonoBehaviour
         set
         {
             rewardMultiplier = value;
-            instance.ModifierUpdate();
         }
     }
 
@@ -142,17 +140,6 @@ public class TurkPuzzleScript : MonoBehaviour
         UpdateDifficultyButtons();
     }
 
-    public void ModifierUpdate()
-    {
-        modifierMenuText.ModifiersToList = new List<ModifierMenuText.RewardModifier>();
-        modifierMenuText.BaseValue = TurkData.CreditsPerPuzzle;
-        modifierMenuText.Units = "<sprite index=1>";
-        modifierMenuText.BaseText = "Base Earnings";
-        modifierMenuText.FinalText = "Earnings Per Puzzle";
-        if (rewardBaseModifier != null) modifierMenuText.ModifiersToList.Add(rewardBaseModifier);
-        if (rewardMultiplier != null) modifierMenuText.ModifiersToList.Add(rewardMultiplier);
-    }
-
     public void IncreaseDifficulty()
     {
         CurrentDifficutly++;
@@ -178,8 +165,6 @@ public class TurkPuzzleScript : MonoBehaviour
 
 
         ArtistCredit.text = "";
-
-        ModifierUpdate();
 
         PuzzleName.gameObject.SetActive(false);
 
