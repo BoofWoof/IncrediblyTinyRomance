@@ -18,6 +18,8 @@ public class TurkPuzzleScript : MonoBehaviour
     public static TurkPuzzleScript instance;
 
     public UnityEvent OnPuzzleGenerate;
+    public UnityEvent<int> OnDifficultyUp;
+    public UnityEvent<int> OnDifficultyDown;
 
     private bool FirstOpen = true;
 
@@ -31,6 +33,8 @@ public class TurkPuzzleScript : MonoBehaviour
     public TMP_Text PuzzleEarningsText;
     public TMP_Text UniquePuzzlesSolvedText;
     public TMP_Text ScoreMultiplierText;
+    public GameObject ClickToContinueText;
+    public GameObject InteractionBlocker;
 
     [Header("Objects")]
     public TMP_Text PuzzleName;
@@ -147,6 +151,7 @@ public class TurkPuzzleScript : MonoBehaviour
         puzzleScript.GeneratePuzzle();
 
         UpdateDifficultyButtons();
+        OnDifficultyUp?.Invoke(CurrentDifficutly);
     }
     public void DecreaseDifficulty()
     {
@@ -155,13 +160,18 @@ public class TurkPuzzleScript : MonoBehaviour
         puzzleScript.GeneratePuzzle();
 
         UpdateDifficultyButtons();
+        OnDifficultyDown?.Invoke(CurrentDifficutly);
     }
     void Awake()
     {
         instance = this;
 
+        Shader.SetGlobalFloat("_TurkCompletion", 0);
+
         NewRecordText.gameObject.SetActive(false);
         ScoreMultiplierText.gameObject.SetActive(false);
+        ClickToContinueText.SetActive(false);
+        InteractionBlocker.SetActive(false);
 
 
         ArtistCredit.text = "";
@@ -277,6 +287,9 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public IEnumerator WinCutscene()
     {
+        PieceHolder.gameObject.SetActive(false);
+        InteractionBlocker.SetActive(true);
+
         bool newBestTime = false;
         if (!PuzzlesCompleted.ContainsKey(CurrentDifficutly))
         {
@@ -351,6 +364,8 @@ public class TurkPuzzleScript : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
         }
 
+        CurrencyData.Credits += reward;
+        VisionMascotScript.SayText(selectedGridData.MascotStatement);
 
         if (newBestTime)
         {
@@ -361,9 +376,15 @@ public class TurkPuzzleScript : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
 
-        yield return new WaitForSeconds(1.5f);
+        ClickToContinueText.SetActive(true);
+        while (true)
+        {
+            yield return null;
+            if(Input.GetMouseButtonDown(0)) break;
+        }
+        ClickToContinueText.SetActive(false);
 
-        CurrencyData.Credits += reward;
+        VisionMascotScript.ClearText();
 
         ScoreMultiplierText.gameObject.SetActive(false);
 
@@ -373,6 +394,8 @@ public class TurkPuzzleScript : MonoBehaviour
         OnPuzzleComplete?.Invoke(TurkData.PuzzlesSolved, this);
         puzzleScript.GeneratePuzzle();
         TurkCubeScript.PickupEnabled = true;
+
+        InteractionBlocker.SetActive(false);
     }
 
     public float CalculateReward(int completitionDifficulty)
@@ -452,7 +475,8 @@ public class TurkPuzzleScript : MonoBehaviour
 
     private void GroupPuzzlePieces()
     {
-        float pieceCount = Random.Range(selectedGridData.min_pieces, selectedGridData.max_pieces + 1);
+        VisionsDifficultySO currentDifficulty = LevelSets[CurrentDifficutly];
+        float pieceCount = Random.Range(currentDifficulty.MinPieces, currentDifficulty.MaxPieces + 1);
 
         pieceCountModifier?.Invoke(ref pieceCount);
 

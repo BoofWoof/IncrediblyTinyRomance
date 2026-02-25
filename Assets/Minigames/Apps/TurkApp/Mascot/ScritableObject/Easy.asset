@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
+  m_Name: Easy
+  m_EditorClassIdentifier: 
+  FirstIncrease: 0
+  FirstDifficultyIncreaseDialogues: 'Oh uh... hi!
+
+    You seem to have hatched me...
+    Thanks!!!<n>
+
+    I uh... I''m not completely sure what''s going on right now.
+    Brains a bit empty having just hatched...<n>
+
+    Maybe you''d be nice enough
+    to help teach me!?
+
+    <c=Sure> Thank you so much! And as a reminder that a
+    silly archaic law forces me to make, by opening this app, you have already agreed
+    to all data storage terms of the locall <b>NEST</b> database.
+
+    <c=Okay>You''re
+    so kind!  And as a reminder that a silly archaic law forces me to make, by opening
+    this app, you have already agreed to all data storage terms of the locall <b>NEST</b>
+    database.'
+  DifficultyIncreaseDialogues:
+  - I can see again!
+  - Ahh, the light!
+  - I missed you!
+  FirstDecrease: 0
+  FirstDifficultyDecreaseDialogues: I'm actually feeling a bit shy. I hope you don't
+    mind if I hide back in here...
+  DifficultyDecreaseDialogues:
+  - Did you want to show me more of your things?
+  - This form actually has the highest armor! The app doesn't use those stats though...
+  - Have you ever uncracked an egg? There's no reward for it, but it's an impressive
+    act none-the-less!
+  ClickDialogues:
+  - Careful, the shell is fragile!
+  - I'll come out when I'm ready!
+  - Are you trying to pet me... it's coming off as more of a poke.
+  - If you push too hard I might roll away...
+  - Actually I think I like it now.
+  - More taps please. <3
+  - I AM ONE WITH THE TAPS!!!
+  - Maybe you should do some more puzzles though...
+  - I'm glad we are friends now. <3
+  - I know the world can be pretty lonely.
+  - But my digital little heart is warmed by your presence. <3
+  - Some people might say I don't count as a friend cause of me being digital...
+  - 'But [ID ERROR], you''re special to me. <3
+
+    I hope you feel the same way.'
+  - Do you want to know what's on the inside of my shell?
+  - I covered it with glow-in-the-dark constellation stars.
+  - I'd show you, but there aren't any assets in this app for that. But I think we
+    both know they're there.
+  - You should walk around more!
+  - I can't learn as much staying in one place.
+  - Why do you keep yourself trapped in this one room forever?
+  - I'm sure you'll come out when you're ready, just like I will with my shell!
+  - '[SMALL CHIRPING NOISES]'
+  - '[ROLLS IDLY]'

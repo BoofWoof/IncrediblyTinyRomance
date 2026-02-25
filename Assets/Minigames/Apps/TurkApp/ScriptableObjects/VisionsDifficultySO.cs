@@ -10,4 +10,6 @@ public class VisionsDifficultySO : ScriptableObject
     public float OpennessModifier = 1f;
     public float FalconSpeed = 15f;
     public float MiloRecord = 10f;
+    public int MinPieces = 4;
+    public int MaxPieces = 5;
 }

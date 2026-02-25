@@ -11703,16 +11703,14 @@ MonoBehaviour:
 
         AriesBehavior("judge")
 
-        RevertSong()
-
-        Continue()'
+        RevertSong()'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
         x: 73.31578
-        y: 1863.9161
+        y: 1862.7797
         width: 160
         height: 30
     - id: 28
@@ -53980,7 +53978,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 379
-        y: 573.7805
+        y: 572.352
         width: 160
         height: 30
     - id: 13
@@ -58022,8 +58020,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 37.80475, y: 331.6974}
-    canvasZoom: 0.82000005
+    canvasScrollPosition: {x: 0, y: 1977.1426}
+    canvasZoom: 0.7000001
   - id: 24
     fields:
     - title: Title
@@ -63440,12 +63438,6 @@ MonoBehaviour:
       - originConversationID: 26
         originDialogueID: 0
         destinationConversationID: 26
-        destinationDialogueID: 3
-        isConnector: 0
-        priority: 2
-      - originConversationID: 26
-        originDialogueID: 0
-        destinationConversationID: 26
         destinationDialogueID: 2
         isConnector: 0
         priority: 2
@@ -63456,8 +63448,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 64
-        y: 39
+        x: 182
+        y: 33
         width: 160
         height: 30
     - id: 1
@@ -63975,7 +63967,9 @@ MonoBehaviour:
       conditionsString: 
       userScript: 'ReleaseAttention()
 
-        ReleaseForceEvent()'
+        ReleaseForceEvent()
+
+        UnlockPortrait("DOGma")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -64982,7 +64976,9 @@ MonoBehaviour:
 
         ReleaseAttention()
 
-        ReleaseForceEvent()'
+        ReleaseForceEvent()
+
+        BroadcastActivate("PrayerAfterCall")'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -74869,9 +74865,11 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 'AriesWaitBehavior("card")
+      userScript: 'AriesBehavior("card")
 
         BroadcastActivate("ReKD")
+
+        BroadcastActivate("PrayerSidCard")
 
         ReleaseAttention()
 

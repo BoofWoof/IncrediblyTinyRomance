@@ -9,8 +9,7 @@ public class PuzzleShapeSO : ScriptableObject
 
     public Texture2D puzzleTexture;
 
-    public int min_pieces = 8;
-    public int max_pieces = 10;
+    [TextArea] public string MascotStatement;
 
     private bool[] holeMap;
     private int width;
