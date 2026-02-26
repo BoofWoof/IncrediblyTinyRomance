@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa6bb3e2c4f5b41a12f66407372851, type: 3}
   m_Name: 2 - Awakening
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 0
   UpgradeName: Awakening
   UpgradeIcon: {fileID: -632570387, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: V-Awakening
@@ -20,6 +20,7 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: The lies of the body have begun to crack. Each puzzle now earns
     you more credits.
+  MascotDialogue: 
   Credits: 0.00000075
   FlockRenown: 0
   FoundationRenown: 0
@@ -29,3 +30,4 @@ MonoBehaviour:
   AssociatedMinigame: 0
   AutoBuy: 0
   MultiplyReward: 5
+  DisplayColor: {r: 0, g: 1, b: 0, a: 1}

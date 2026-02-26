@@ -22,6 +22,8 @@ public abstract class UpgradesAbstract : ScriptableObject
 
     [TextArea]
     public string UpgradeDescription;
+    [TextArea]
+    public string MascotDialogue;
 
     [Header("Costs")]
     public float Credits;
@@ -60,6 +62,8 @@ public abstract class UpgradesAbstract : ScriptableObject
         CurrencyData.RenownRevolution -= RevolutionRenown;
 
         OnBuy();
+
+        VisionMascotScript.SayText(MascotDialogue);
 
         if (!forceBuy) UpgradeScreenScript.UpgradeBoughtEvent?.Invoke(AssociatedMinigame);
 

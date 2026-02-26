@@ -18,6 +18,7 @@ public class TurkPuzzleScript : MonoBehaviour
     public static TurkPuzzleScript instance;
 
     public UnityEvent OnPuzzleGenerate;
+    public UnityEvent OnPuzzleFinish;
     public UnityEvent<int> OnDifficultyUp;
     public UnityEvent<int> OnDifficultyDown;
 
@@ -290,6 +291,8 @@ public class TurkPuzzleScript : MonoBehaviour
         PieceHolder.gameObject.SetActive(false);
         InteractionBlocker.SetActive(true);
 
+        OnPuzzleFinish?.Invoke();
+
         bool newBestTime = false;
         if (!PuzzlesCompleted.ContainsKey(CurrentDifficutly))
         {
@@ -366,6 +369,9 @@ public class TurkPuzzleScript : MonoBehaviour
 
         CurrencyData.Credits += reward;
         VisionMascotScript.SayText(selectedGridData.MascotStatement);
+        VisionMascotScript.EnableProgress = false;
+
+        yield return new WaitForSeconds(0.5f);
 
         if (newBestTime)
         {
@@ -373,10 +379,12 @@ public class TurkPuzzleScript : MonoBehaviour
             NewRecordSource.Play();
             NewRecordParticles.Play();
             NewRecordParticles2.Play();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
         }
 
         ClickToContinueText.SetActive(true);
+        VisionMascotScript.EnableProgress = true;
+
         while (true)
         {
             yield return null;

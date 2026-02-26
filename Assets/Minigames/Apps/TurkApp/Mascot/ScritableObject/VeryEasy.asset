@@ -12,13 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
   m_Name: VeryEasy
   m_EditorClassIdentifier: 
-  FirstIncrease: 0
+  FirstIncrease: 1
+  IncreaseOccurrences: 0
   FirstDifficultyIncreaseDialogues: ...
   DifficultyIncreaseDialogues:
   - ...
-  FirstDecrease: 0
+  FirstDecrease: 1
+  DecreaseOccurrences: 0
   FirstDifficultyDecreaseDialogues: ...
   DifficultyDecreaseDialogues:
   - ...
+  ClickOccurrences: 0
   ClickDialogues:
   - ...
+  SpamCloseOccurances: 0
+  SpamCloseDialogues: []
+  SetSolutionDialogues: []
+  SpeechSound: {fileID: 0}

@@ -13,30 +13,42 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   FirstIncrease: 0
+  IncreaseOccurrences: 0
   FirstDifficultyIncreaseDialogues: 'Oh uh... hi!
 
-    You seem to have hatched me...
-    Thanks!!!<n>
+    Were you the one making those
+    beautiful shapes in the sky???<n> They inspired me to finally hatch, to see the
+    greater world!<n>
 
-    I uh... I''m not completely sure what''s going on right now.
-    Brains a bit empty having just hatched...<n>
+    But uhhh... I must admit... I''m a bit hesitant to leave
+    my shell. Everything is so new and scary...<n>
 
-    Maybe you''d be nice enough
-    to help teach me!?
+    Oh, hey! Maybe you''d be
+    nice enough to help me!? Things are easier with a friend!
 
-    <c=Sure> Thank you so much! And as a reminder that a
-    silly archaic law forces me to make, by opening this app, you have already agreed
-    to all data storage terms of the locall <b>NEST</b> database.
+    <c=Sure> Thank
+    you so much! Oh, btw, as a reminder! A silly archaic law makes it so I have to
+    tell you, by opening this app, you''ve already agreed to all privacy terms associated
+    with the local <b>NEST</b> database!
 
-    <c=Okay>You''re
-    so kind!  And as a reminder that a silly archaic law forces me to make, by opening
-    this app, you have already agreed to all data storage terms of the locall <b>NEST</b>
-    database.'
+    <c=Okay>You''re so kind!  Oh, btw,
+    as a reminder! A silly archaic law makes it so I have to tell you, by opening
+    this app, you''ve already agreed to all privacy terms associated with the local
+    <b>NEST</b> database!<n>
+
+    But what are a few secrets between friends?<n>
+
+    Speaking
+    of friends... Lets get going, I want to explore!<n>
+
+    Please friend, show
+    me more stars!'
   DifficultyIncreaseDialogues:
   - I can see again!
   - Ahh, the light!
   - I missed you!
-  FirstDecrease: 0
+  FirstDecrease: 1
+  DecreaseOccurrences: 0
   FirstDifficultyDecreaseDialogues: I'm actually feeling a bit shy. I hope you don't
     mind if I hide back in here...
   DifficultyDecreaseDialogues:
@@ -44,6 +56,7 @@ MonoBehaviour:
   - This form actually has the highest armor! The app doesn't use those stats though...
   - Have you ever uncracked an egg? There's no reward for it, but it's an impressive
     act none-the-less!
+  ClickOccurrences: 0
   ClickDialogues:
   - Careful, the shell is fragile!
   - I'll come out when I'm ready!
@@ -70,3 +83,38 @@ MonoBehaviour:
   - I'm sure you'll come out when you're ready, just like I will with my shell!
   - '[SMALL CHIRPING NOISES]'
   - '[ROLLS IDLY]'
+  SpamCloseOccurances: 0
+  SpamCloseDialogues:
+  - Whoa, that message looked so cool! I wish you hadn't closed it so fast!
+  - Such wisdom! I'll always remember that pop up.
+  - Maybe we'll get another one soon?
+  SetSolutionDialogues:
+  - CompletionCount: 6
+    SolutionDialogues: 'Hey, I was thinking...<n>
+
+      We''re getting so close
+      and talking so much...<n>
+
+      And it''s weird that we don''t have each other''s
+      names yet... or at least you don''t have mine!<n>
+
+      But sadly, I don''t
+      have a name to give you...<n>
+
+      Maybe you could give me one? <name><n>
+
+      Wow,
+      how cool! Thanks! <3'
+    Triggered: 0
+  TimeDialogues:
+  - TimePassed: 40
+    AllowRetrigger: 1
+    SolutionDialogues:
+    - You got this!
+    - Take your time!
+    - No rush!!!
+    - Maybe move that a bit to the left...
+    - Find joy in the process!
+    - '[chirp]'
+    TriggerOccurances: 1
+  SpeechSound: {fileID: 8300000, guid: 1babffc1f89cba34faabd38e35dfcf6e, type: 3}
