@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa6bb3e2c4f5b41a12f66407372851, type: 3}
   m_Name: 4 - Transcend
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 4
   UpgradeName: Transcend
   UpgradeIcon: {fileID: 2117758218, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: V-Transcend
@@ -20,6 +20,68 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: You're almost ready. Show patience with yourself.. Keep working.
     Trust in your brethern. Each puzzle now earns you more credits.
+  MascotDialogue: 'Came back for the rest of the story did you?
+
+    <c=Yes>I knew
+    it!
+
+    <c=Heck yeah!>Don''t get too excited!<n>
+
+    Alright, where was I...<n>
+
+    Oh
+    right, <color=#87F8FA>Arkae</color>''s final flight!<n>
+
+    You see, him and
+    his four closest students had created a ship made to travel to the edge of the
+    universe, to heaven!<n>
+
+    An accomplishment we can''t even recreate today!<n>
+
+    And
+    us mortals, trapped on this globe, only got to watch him soar, our wings too
+    useless to follow such glory...<n>
+
+    A month passed... and nothing changed.
+    There was no news, and many called him a suicidal billionare.<n>
+
+    And then...
+    one of his apprentices returned. He appeared as if from nowhere, crying tears
+    of joy!<n>
+
+    He announced that <color=#87F8FA>Arkae</color> had completed
+    his quest, that he had arrived in heaven and he had found it... lacking...<n>
+
+    The
+    afterlife was empty, nothing but lost souls, doomed to wander an empty mass of
+    void forever.<n>
+
+    And once more, <color=#87F8FA>Arkae</color> had a new
+    dream, a new goal.<n>
+
+    Him and three of his apprentices decided to stay
+    behind, to build a true heaven, a paradise.<n>
+
+    As for the one apprentice
+    sent back home, he was sent to recruit more to <color=#87F8FA>Arkae</color>''s
+    cause! Building an afterlife is no trivial task, possibly an infinite one, one
+    only possible with the leadership of our lord!<n>
+
+    As for now, the latest
+    of that line of apprentices, <color=#87F8FA>Saleos</color>, helps train us to
+    be worthy of working by <color=#87F8FA>Arkae</color>''s side!<n>
+
+    And now
+    for a secret!<n>
+
+    Me and my siblings are just one of <color=#87F8FA>Saleos</color>''s
+    many mouths and ears! And I''m more than happy to invite you to join us!<n>
+
+    A
+    nest is never far away... and we''d always be happy to have you!<n>
+
+    Come
+    check out the rest of our family, would you?'
   Credits: 0.000375
   FlockRenown: 0
   FoundationRenown: 0
@@ -29,3 +91,4 @@ MonoBehaviour:
   AssociatedMinigame: 0
   AutoBuy: 0
   MultiplyReward: 5
+  DisplayColor: {r: 0, g: 1, b: 0, a: 1}

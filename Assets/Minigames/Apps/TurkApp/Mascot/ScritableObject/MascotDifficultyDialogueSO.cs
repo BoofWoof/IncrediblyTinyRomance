@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 [Serializable]
 public class VisionCompletionMascotText
@@ -21,6 +22,11 @@ public class TimePassingDialogues
 [CreateAssetMenu(fileName = "MascotDifficultyDialogueSO", menuName = "Visions/MascotDifficultyDialogueSO")]
 public class MascotDifficultyDialogueSO : ScriptableObject
 {
+
+    [Header("Identity")]
+    public VideoClip CharacterVideo;
+    public AudioClip SpeechSound;
+
     [Header("Difficulty Increase")]
     [HideInInspector] public bool FirstIncrease = true;
     public int IncreaseOccurrences = 0;
@@ -47,9 +53,6 @@ public class MascotDifficultyDialogueSO : ScriptableObject
 
     [Header("Time")]
     public List<TimePassingDialogues> TimeDialogues;
-
-    [Header("Audio")]
-    public AudioClip SpeechSound;
 
     public void ResetData()
     {

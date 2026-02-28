@@ -345,7 +345,7 @@ public class PrayerScript : MonoBehaviour
 
                 CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChainVL);
 
-                yield return new WaitForSeconds(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.GetChainTime() + 0.1f);
+                yield return new WaitForSeconds(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.GetChainTime());
             }
 
         } else if (GoodIdx == answerIdx)
@@ -493,7 +493,7 @@ public class PrayerScript : MonoBehaviour
             {
                 Debug.Log("Testing for special prayers.");
                 if (Random.value < 0.2f && !GameStateMonitor.isEventActive())
-                {
+                    {
                     Debug.Log("Adding special prayer to mix.");
 
                     int selectedPrayerIdx = Random.Range(0, SpecialPrayerCount);

@@ -65,12 +65,13 @@ public class MessageSendScript : MonoBehaviour
     public void SetNormalResponse()
     {
         SpecialReply.SetActive(false);
-        RageBaitReply?.SetActive(false);
+        RageBaitReply.SetActive(false);
         IsSpecial = false;
     }
 
     public void SetSpecialResponse(bool goodReply)
     {
+        SetNormalResponse();
         if(goodReply) SpecialReply.SetActive(true);
         else RageBaitReply.SetActive(true);
         IsSpecial = true;

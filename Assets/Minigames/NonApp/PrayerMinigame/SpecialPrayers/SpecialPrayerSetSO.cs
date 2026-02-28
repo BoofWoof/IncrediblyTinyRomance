@@ -30,8 +30,6 @@ public class SpecialPrayerData
         if (_LoadedStarted) return;
         _LoadedStarted = true;
 
-        _TotalTime = 0;
-
         SpecialResponseChainRequests = new List<ResourceRequest>();
 
         foreach (string voPath in SpecialResponseChainString)
@@ -56,7 +54,7 @@ public class SpecialPrayerData
             VoiceLineSO vo = voRequest.asset as VoiceLineSO;
 
             SpecialResponseChainVL.Add(vo);
-            _TotalTime += vo.PauseBeforeStart + vo.PauseAfterEnd + vo.AudioData.length;
+            _TotalTime += vo.PauseBeforeStart + vo.PauseAfterEnd + vo.AudioData.length + 0.1f;
         }
     }
 }

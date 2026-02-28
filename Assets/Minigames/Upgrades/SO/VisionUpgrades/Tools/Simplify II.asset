@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526e60f8f5cf62b428d94d514dc2721f, type: 3}
   m_Name: Simplify II
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 3
   UpgradeName: Simple Mind II
   UpgradeIcon: {fileID: -691155298, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -21,6 +21,7 @@ MonoBehaviour:
   UpgradeDescription: Some struggle to see the forest for more than the trees, and
     in that way, thinking too much can poison the mind. (Creates a 10% chance for
     the puzzle to be two pieces simpler.)
+  MascotDialogue: Okay, maybe a lot more cpu access is what I need. <3
   Credits: 0.00000313
   FlockRenown: 0
   FoundationRenown: 0

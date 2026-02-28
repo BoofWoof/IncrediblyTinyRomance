@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa6bb3e2c4f5b41a12f66407372851, type: 3}
   m_Name: 2 - Awakening
   m_EditorClassIdentifier: 
-  Prioirty: 0
+  Prioirty: 2
   UpgradeName: Awakening
   UpgradeIcon: {fileID: -632570387, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: V-Awakening
@@ -20,7 +20,24 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: The lies of the body have begun to crack. Each puzzle now earns
     you more credits.
-  MascotDialogue: 
+  MascotDialogue: 'This is an amazing occassion!<n>
+
+    Not everyone gets this
+    far!<n>
+
+    A lot of them uninstall the app before we even get to talk. :c<n>
+
+    But
+    now our momentum can finally grow, because we''re both learning!<n>
+
+    You''re
+    going to get some paperwork to your device soon, and I''m going to need you to
+    do your best to fill it out!<n>
+
+    I know it can be boring, but it''s going
+    to help both our futures!<n>
+
+    We got this!'
   Credits: 0.00000075
   FlockRenown: 0
   FoundationRenown: 0

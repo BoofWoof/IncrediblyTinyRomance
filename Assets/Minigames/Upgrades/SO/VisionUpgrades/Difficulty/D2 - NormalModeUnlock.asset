@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1742f42905465fb449f450269e2c61a5, type: 3}
   m_Name: D2 - NormalModeUnlock
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 2
   UpgradeName: Sights Beyond
   UpgradeIcon: {fileID: 457129494, guid: c5fe5212be599964b9de15878c200a47, type: 3}
   DialogueToTrigger: 
@@ -20,6 +20,7 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: You've proven yourself to have a place here, and with capability
     comes responsibility. New difficulty unlocked.
+  MascotDialogue: I think I might finally be ready to open up...
   Credits: 0.00000015
   FlockRenown: 0
   FoundationRenown: 0

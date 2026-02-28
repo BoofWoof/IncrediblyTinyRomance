@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaee23ce4df6a2043874e3fee989029f, type: 3}
   m_Name: FearMotivates
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 4
   UpgradeName: Fear Motivates
   UpgradeIcon: {fileID: 1295698386, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -21,6 +21,15 @@ MonoBehaviour:
   UpgradeDescription: You finally deserve some leadership of your own, and the first
     rule of leadership is that FEAR MOTIVATES. (The higher the Ram's anger, the higher
     your earnings.)
+  MascotDialogue: 'Activating a new biometric sensor!<n>
+
+    Lets try switching
+    emotions based on what''s useful at the time!<n>
+
+    The more angry, the more
+    you''ll earn!<n>
+
+    Direct that anger toward productivity!!!'
   Credits: 0.0000938
   FlockRenown: 0
   FoundationRenown: 0
@@ -30,3 +39,4 @@ MonoBehaviour:
   AssociatedMinigame: 0
   AutoBuy: 0
   PointPerPoint: 30
+  DisplayColor: {r: 0, g: 1, b: 0, a: 1}

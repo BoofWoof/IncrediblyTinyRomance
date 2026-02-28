@@ -12,15 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad488c543c370a3488a35d815f9b4a4e, type: 3}
   m_Name: Falcon
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 2
   UpgradeName: Falcon
   UpgradeIcon: {fileID: -1538940867, guid: c5fe5212be599964b9de15878c200a47, type: 3}
   DialogueToTrigger: 
   CompleteQuest: 0
   ProgressQuest: 0
-  UpgradeDescription: Deligence and speed are important, like the hard working Falcon.
-    Gain more based on completion speed, starting at 20 seconds and increasing with
-    less time.
+  UpgradeDescription: Deligence and speed are important, be like the hard working
+    Falcon. (Gain more based on completion speed.)
+  MascotDialogue: '<color=blue>FLOCK</color> values speed in their workers.<n>
+
+    I
+    feel the same way!<n>
+
+    Lets work hard to ZOOM through our work together!<n>
+
+    I
+    hear there''s even a special bonus if you go fast enough!'
   Credits: 0.00000025
   FlockRenown: 0
   FoundationRenown: 0

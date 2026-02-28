@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b4ac61b1ea7d44295ac3c4b7a44807, type: 3}
   m_Name: BrighterLight II
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 4
   UpgradeName: Enlightened Soul III
   UpgradeIcon: {fileID: -1997820138, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -20,6 +20,7 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: Your soul is growing closer with the Flock. (Increase your
     cursor's vision range.)
+  MascotDialogue: Most brighterestest!
   Credits: 0.0000625
   FlockRenown: 0
   FoundationRenown: 0

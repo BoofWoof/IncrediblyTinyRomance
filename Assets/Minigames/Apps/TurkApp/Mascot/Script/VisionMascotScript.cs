@@ -5,12 +5,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Video;
 using static System.Net.Mime.MediaTypeNames;
 
 public class VisionMascotScript : MonoBehaviour
 {
     private static VisionMascotScript instance;
     public static bool EnableProgress = true;
+
+    public VideoPlayer CharacterVideo;
 
     public TMP_Text NameText;
 
@@ -208,6 +211,8 @@ public class VisionMascotScript : MonoBehaviour
 
     public void OnClick(InputAction.CallbackContext context)
     {
+        if (!AppScript.CheckIfActive("Visions") || Time.timeScale < 1f) return;
+
         if (!EnableProgress) return;
         if (!context.started) return;
 
@@ -259,7 +264,11 @@ public class VisionMascotScript : MonoBehaviour
         if (currentDifficulty >= DifficultyChangeMessages.Count) return;
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[currentDifficulty];
+
         SpeechAudioSource.clip = currentDifficultyDialogue.SpeechSound;
+        CharacterVideo.clip = currentDifficultyDialogue.CharacterVideo;
+
+
         if (currentDifficultyDialogue.FirstIncrease)
         {
             currentDifficultyDialogue.FirstIncrease = false;
@@ -275,7 +284,10 @@ public class VisionMascotScript : MonoBehaviour
         if (currentDifficulty >= DifficultyChangeMessages.Count) return;
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[currentDifficulty];
+
         SpeechAudioSource.clip = currentDifficultyDialogue.SpeechSound;
+        CharacterVideo.clip = currentDifficultyDialogue.CharacterVideo;
+
         if (currentDifficultyDialogue.FirstDecrease)
         {
             currentDifficultyDialogue.FirstDecrease = false;

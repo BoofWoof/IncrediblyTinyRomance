@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
+  m_Name: PSecondLanguage 1
+  m_EditorClassIdentifier: 
+  ID: 2a38cb63-4b60-45ae-8f61-62449f2401e0
+  SetName: SecondLanguage
+  ForceSelection: 0
+  PrayerOptions:
+  - Option: hei ur verr sexy i lov
+    AuthorName: Usernamehere
+    GoodPrayer: 0
+    SpecialResponseChainVL: []
+    SpecialResponseChainString:
+    - Assets/Resources/VoiceLines/RageBaitPrayers/SecondLanguage/SecondLanguage.asset
+    TriggerDialogue: 
+    TriggerActivation: 

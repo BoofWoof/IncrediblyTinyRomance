@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77e722c68c55004aa573fa91d35666a, type: 3}
   m_Name: WoolOfWool
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 4
   UpgradeName: WoolOfWool
   UpgradeIcon: {fileID: 2106267085, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -20,6 +20,9 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: Most objects in life are redundant and thus useless. Receive
     a visual reminder of such horrors.
+  MascotDialogue: 'Still no birds. >:C
+
+    I hate art now.'
   Credits: 0.0000625
   FlockRenown: 0
   FoundationRenown: 0

@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
+  m_Name: Medium
+  m_EditorClassIdentifier: 
+  CharacterVideo: {fileID: 32900000, guid: 8c78797836c43354193e59068df6a99f, type: 3}
+  SpeechSound: {fileID: 8300000, guid: e8826ae004715ff44913dd94da14c311, type: 3}
+  FirstIncrease: 0
+  IncreaseOccurrences: 0
+  FirstDifficultyIncreaseDialogues: 'You''re so brave, willing to accept new challenges,
+    to improve yourself.<n>
+
+    I need to do the same!<n>
+
+    I''m out of my
+    shell and I''m doing just fine!<n>
+
+    Do I look how you expected?
+
+    <c=Yes>
+    You''re so intuitive!
+
+    <c=No> Is it the telescope? No matter, a bird has
+    to have hobbies!<n>
+
+    Speaking of, I think I''ve learned everything I need
+    to about objects, for now. I want to start learning about concepts.<n>
+
+    But
+    to make things interesting, maybe I''ll share a few concepts of my own.<n>
+
+    Doesn''t
+    that sound fun?'
+  DifficultyIncreaseDialogues:
+  - I'm back and better than ever!~
+  - I can finally take my telescope back out of storage.
+  - I'm brave, I promise!
+  - Lets get back to concepts!
+  FirstDecrease: 1
+  DecreaseOccurrences: 0
+  FirstDifficultyDecreaseDialogues: '[GASP]<n>
+
+    [PANT]<n>
+
+    [GASP]<n>
+
+    [PANT]<n>
+
+    Sorry...
+    flying is tiring.<n>
+
+    I need a second.'
+  DifficultyDecreaseDialogues:
+  - I'm exhausted. x.x
+  - Perch, oh sweet perch, how I missed you.
+  - '[GASP]'
+  - '[ERROR: ENERGY STORAGE EMPTY]'
+  ClickOccurrences: 0
+  ClickDialogues:
+  - You're wondering where this telescope came from?
+  - It was in my egg too. :>
+  - There's a lot of things in there.
+  - You're not allowed to see, though.
+  - You think I'm a hypocrite for not showing you?
+  - But it's in your best interest for me to not show you!
+  - Your mind would be blown by my egg's contents, you're not ready!
+  - I only keep secrets for your own good, you only keep secrets cause you want to
+    make bird sad. :c
+  - I hope that makes sense!
+  - <3
+  - It's okay, I don't blame you for asking.
+  - Wanna solve some more puzzles?
+  SpamCloseOccurances: 0
+  SpamCloseDialogues:
+  - I can almost touch the popups.
+  - Oh, I was going to perch on that one. :c
+  - I'm glad that <color=blue>Flock</color> is nice enough to gift us such wise messages.
+  - We should look into that message, it seemed to be offering great wisdom!
+  SetSolutionDialogues:
+  - CompletionCount: 15
+    SolutionDialogues: 'I''m just wondering.<n>
+
+      Do you ever feel lonely?<n>
+
+      <c=Yes>Me
+      too.
+
+      <c=No>Oh... I guess I''m alone on this...<n>
+
+      Don''t get
+      me wrong, we have each other, and that is nice.<n>
+
+      But a community
+      can mean so much more than friendship.<n>
+
+      A community can not just
+      provide bonding, but accountability and a drive to become better.<n>
+
+      You
+      might not need it now, but we all hit a ceiling eventually.<n>
+
+      Think
+      on it.'
+    Triggered: 0
+  TimeDialogues:
+  - TimePassed: 50
+    AllowRetrigger: 1
+    SolutionDialogues:
+    - We're both just relaxing. That's good.
+    - The work might be hard, but as long as you don't stop, you haven't failed!
+    - This constellation will look sooooo cool!
+    TriggerOccurances: 0

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fef4ccefb1dff5488338f22eca80251, type: 3}
+  m_Name: SecondLanguage
+  m_EditorClassIdentifier: 
+  AudioData: {fileID: 8300000, guid: c65d782f2ffd1d840aa68ea13a254d5f, type: 3}
+  PhenomeData: {fileID: 4900000, guid: 203bdbb0e78856048909a859ec6217a4, type: 3}
+  SubtitleData: {fileID: 4900000, guid: 2405e7cdfd54c994d8e252243ac3a091, type: 3}
+  GestureData: {fileID: 0}
+  FocusLevel: 1
+  PauseBeforeStart: 0
+  PauseAfterEnd: 0
+  SpeakerOverride: 

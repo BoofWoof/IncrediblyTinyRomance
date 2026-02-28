@@ -3,6 +3,9 @@ using UnityEngine.Events;
 
 public class AppScript : MonoBehaviour
 {
+    public string AppName;
+    public static string ActiveAppName;
+
     public GameObject AppRoot;
     public GameObject PreviousApp;
 
@@ -24,6 +27,7 @@ public class AppScript : MonoBehaviour
             Hide(false);
             RegisterInputActions();
         }
+        ActiveAppName = "";
     }
 
     public void RegisterInputActions()
@@ -48,6 +52,8 @@ public class AppScript : MonoBehaviour
 
         OnActivateApp?.Invoke();
         OnShowApp?.Invoke();
+
+        ActiveAppName = AppName;
     }
 
     public void Hide(bool revealLast)
@@ -63,5 +69,10 @@ public class AppScript : MonoBehaviour
 
         OnDeactivateApp?.Invoke();
         OnHideApp?.Invoke();
+    }
+
+    public static bool CheckIfActive(string checkName)
+    {
+        return (checkName.ToLower() == ActiveAppName.ToLower() && PhonePositionScript.raised);
     }
 }

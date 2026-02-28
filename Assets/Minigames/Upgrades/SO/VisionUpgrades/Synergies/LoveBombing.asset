@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e6952d6fcca3e4f85c9fed8a5238c8, type: 3}
   m_Name: LoveBombing
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 4
   UpgradeName: Love Bombing
   UpgradeIcon: {fileID: 895661343, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -21,6 +21,8 @@ MonoBehaviour:
   UpgradeDescription: In a lonely world, love can be addictive. Make sure to love
     your Flock. (Positive prayer fireworks complete a <color=green>Very Easy</color>
     Vision puzzle.)
+  MascotDialogue: This one seems pretty useless, doesn't it! Maybe it will come in
+    handy later???
   Credits: 0.0000156
   FlockRenown: 0
   FoundationRenown: 0

@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
+  m_Name: Hard
+  m_EditorClassIdentifier: 
+  CharacterVideo: {fileID: 32900000, guid: 307626eb10f190d43836e5ddbc44ca60, type: 3}
+  SpeechSound: {fileID: 8300000, guid: 9f5d0142bf5687245a6a6635dc588cc9, type: 3}
+  FirstIncrease: 0
+  IncreaseOccurrences: 0
+  FirstDifficultyIncreaseDialogues: 'Wow...<n>
+
+    Just- JUST WOW<n>
+
+    LOOK
+    AT ME!<n>
+
+    I can fly, my feathers are all the way in, AND I CAN SEE THE
+    STARS LIKE NEVER BEFORE!<n>
+
+    You''ve helped me come so far...<n>
+
+    But
+    like all birds, that means I''ll have to leave soon...<n>
+
+    Are you ready
+    for that?
+
+    <c=No>I feel the same way...
+
+    <c=PLZ STAY>I can''t. ;-;<n>
+
+    But...<n>
+
+    Well,
+    the bandwidth around here is pretty bad... maybe I can stay for a few more puzzles..<n>
+
+    Think
+    we can do one more set together?<n>
+
+    Lets remember those close to us this
+    time time, alright?<n>
+
+    What, you don''t have any friends?<n>
+
+    You
+    just arrived here you say?<n>
+
+    Well then we''ll go with the people literally
+    near to you!<n>
+
+    All the people you might want to take with you if you started
+    to fly too. <3<n>
+
+    [PLEASE GIVE THE APP FIVE STARS AND RECOMMEND IT TO A
+    FRIEND!]'
+  DifficultyIncreaseDialogues:
+  - I'm flying so high!
+  - I can almost touch the stars!
+  - Can't catch me now. >:3
+  - -STOP ADDING RESPONSE PHRASES TO THAT STUPID BIRD, IT'S GOOD ENOUGH FOR THOSE
+    BEAKLESS SLOBS. JUST SHIP IT SO WE CAN BE DONE WITH THIS STU-
+  - Tee Hee, I'm zooming!
+  FirstDecrease: 1
+  DecreaseOccurrences: 0
+  FirstDifficultyDecreaseDialogues: You shouldn't be seeing this.
+  DifficultyDecreaseDialogues:
+  - You shouldn't be seeing this either.
+  ClickOccurrences: 0
+  ClickDialogues:
+  - I've become so strong since I met you!
+  - I could never imagine flying with such ease!
+  - I guess what I'm saying is that... sometimes our imaginations are too limited.
+  - We see where we are now, and we see our current trajectory through life, and
+    we begin to imagine that could never change.
+  - And yet... there is so much beyond those mental walls... as long as you can fly
+    over them.
+  - Don't get me wrong. A new route through life will take so much more work to achieve
+    than going with the flow.
+  - But sometimes- no- always, the best things in life take a lot of work. Just look
+    how far the two of us have come with a bit of wing grease!
+  - I hope that the next time you see an oppertunity, that you're ready to grab it,
+    no matter how hard you have to work to do so.
+  - There are opportunity in the stars... and far beyond.
+  - We got this. <3
+  - '[Excited wing flapping.]'
+  SpamCloseOccurances: 0
+  SpamCloseDialogues:
+  - You must have that one memorized already.
+  - The secrets contained in such scrolls... amazing.
+  - You must be a speed reader as fast as you got through that one.
+  - Please take such messages more seriously!
+  SetSolutionDialogues:
+  - CompletionCount: 6
+    SolutionDialogues: 'Does no one around here have a last name?<n>
+
+      That''s
+      strange...<n>
+
+      It''s like there''s not a big enough population here to
+      need last names!<n>
+
+      But that couldn''t happen... hahaha...'
+    Triggered: 0
+  - CompletionCount: 20
+    SolutionDialogues: 'You know so many people...<n>
+
+      And yet none are found
+      in the local <color=blue>FLOCK</color> database...<n>
+
+      How crazy is that!<n>
+
+      One
+      person is rare... but more than twenty and counting!?<n>
+
+      Thank you so
+      much for helping me find more people lost and without family!<n>
+
+      Maybe
+      recommend this app to them! My siblings could give them some friends as well.
+      <3<n>
+
+      We should always be looking to help others.'
+    Triggered: 0
+  TimeDialogues:
+  - TimePassed: 60
+    AllowRetrigger: 1
+    SolutionDialogues:
+    - I know it's hard, but if something is hard, just try harder!
+    - You're not weak, show the constellation whose boss!
+    - Every wall in your way is a challenge to be overcome! Glide over it with me!
+    TriggerOccurances: 0

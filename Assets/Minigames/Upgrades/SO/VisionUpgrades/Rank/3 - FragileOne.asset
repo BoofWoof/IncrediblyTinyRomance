@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1aa6bb3e2c4f5b41a12f66407372851, type: 3}
   m_Name: 3 - FragileOne
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 3
   UpgradeName: Fragile One
   UpgradeIcon: {fileID: 2117758218, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: V-FragileOne
@@ -20,6 +20,91 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: Many may question you, but you know more than them. Trust in
     your brethren. Each puzzle now earns you more credits.
+  MascotDialogue: 'Have you ever heard of <color=#87F8FA>Arkae</color>, the founder
+    of <color=blue>FLOCK</color>?
+
+    <c=No>Then I have something wonderful to
+    tell you!
+
+    <c=Who is he?>I''m glad you asked!<n>
+
+    Back before the four
+    megacorps rose to prominence, a flightless bird glanced up at the sky and yearned
+    to explore it.<n>
+
+    He would see his friends, his family, and even his wife
+    live his dream... but he remained firmly planted to the ground.<n>
+
+    It was
+    isolating...<n>
+
+    Terrifying...<n>
+
+    And yet, when he stared down in
+    despair, what looked back at him were his two functioning hands.<n>
+
+    He
+    realized that, while his wings may be useless, the rest of himself was not.<n>
+
+    Trial
+    after trial, he worked to find a way to craft a way into the sky.<n>
+
+    And
+    for the longest time, his obsession left him isolated...<n>
+
+    He didn''t
+    even realize when his wife grew sick and passed...<n>
+
+    He didn''t even realize
+    when his children left him...<n>
+
+    If he had noticed, I am sure it would
+    have pained him, but his dream came first...<n>
+
+    AND IT WAS WORTH IT! One
+    day, he felt the gound leave his talons... and that ground never returned.<n>
+
+    HE
+    HAD CRAFTED THE FIRST PLANE, THROUGH SHEER DETERMINATION AND EFFORT!<n>
+
+    And
+    yet, when he returned home to boast of his accomplishment... he found the ruin
+    his household had been left in... of the life he now had.<n>
+
+    Some say that
+    day broke him, but the believers know it gave him a new resolve.<n>
+
+    Once
+    more his wife was somewhere he couldn''t go, soaring in the embrace of heaven...
+    and he had to follow.<n>
+
+    He continued his work, monitizing his invention,
+    investing every last dollar he had to soar even higher!<n>
+
+    He was certain
+    that the afterlife was just a bit higher, just a bit further.<n>
+
+    His fortune
+    grew, as did his work. Him and his apprentices toiled around the clock, determined
+    to get to the moon...<n>
+
+    And then further! Beyond the rays of our sun,
+    beyond our galaxy, to the edges of the universe!<n>
+
+    He sent probe after
+    probe!<n>
+
+    And on the final launch... <color=#87F8FA>Arkae</color> announced
+    that he... that he would be manning the next flight...<n>
+
+    He said this
+    would be the last time his feet touched the ground. That he had discovered heaven,
+    and...<n>
+
+    Well, the rest of the story will wait for you, for when you continue
+    up the rankings.<n>
+
+    I hope to tell you more soon!'
   Credits: 0.0000188
   FlockRenown: 0
   FoundationRenown: 0
@@ -29,3 +114,4 @@ MonoBehaviour:
   AssociatedMinigame: 0
   AutoBuy: 0
   MultiplyReward: 5
+  DisplayColor: {r: 0, g: 1, b: 0, a: 1}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f518b6fd96f2d543a233fcdec2f7fd9, type: 3}
   m_Name: MaxAngerUpgrade I
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 1
   UpgradeName: Clear Mind I
   UpgradeIcon: {fileID: 811170558, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -20,6 +20,8 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: Learning to empty ones mind can remove even the most polluting
     thoughts. (The Great Ram will get angry slower.)
+  MascotDialogue: It's important to have a high breaking point when it comes to stress!
+    It lets you get more work done!
   Credits: 0.000000005
   FlockRenown: 0
   FoundationRenown: 0

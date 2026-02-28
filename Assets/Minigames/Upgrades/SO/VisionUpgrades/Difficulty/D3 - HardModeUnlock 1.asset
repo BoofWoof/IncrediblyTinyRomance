@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1742f42905465fb449f450269e2c61a5, type: 3}
   m_Name: D3 - HardModeUnlock 1
   m_EditorClassIdentifier: 
-  UpgradeID: 0
+  Prioirty: 3
   UpgradeName: Sights Beyond
   UpgradeIcon: {fileID: 309433619, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -20,6 +20,7 @@ MonoBehaviour:
   ProgressQuest: 0
   UpgradeDescription: You've proven yourself to have a place here, and with capability
     comes responsibility. New difficulty unlocked.
+  MascotDialogue: My wings are feeling so strong now!
   Credits: 0.00000375
   FlockRenown: 0
   FoundationRenown: 0
