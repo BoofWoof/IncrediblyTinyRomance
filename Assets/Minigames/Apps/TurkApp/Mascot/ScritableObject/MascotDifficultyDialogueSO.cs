@@ -54,6 +54,9 @@ public class MascotDifficultyDialogueSO : ScriptableObject
     [Header("Time")]
     public List<TimePassingDialogues> TimeDialogues;
 
+    [Header("DifficultyReminder")]
+    [TextArea] public string DifficultyReminder;
+
     public void ResetData()
     {
         FirstIncrease = true;

@@ -9,5 +9,6 @@ public class UnlockNewDifficultySO : UpgradesAbstract
     {
         TurkPuzzleScript.instance.UnlockNewDifficulty();
         ActiveBroadcast.BroadcastActivation("DifficultyGlow");
+        VisionMascotScript.OnNewDifficutlyUnlocked();
     }
 }

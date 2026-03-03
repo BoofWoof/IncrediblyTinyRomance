@@ -33,6 +33,7 @@ public class VisionMascotScript : MonoBehaviour
     private bool WaitForText = false;
     public bool WaitForInteraction = false;
     public bool SkipWait = false;
+    public static bool NewDifficultyUnlocked;
 
     public bool DialogueActive = false;
 
@@ -62,6 +63,8 @@ public class VisionMascotScript : MonoBehaviour
 
     private void MascotSayText(string SayText)
     {
+        if(DialogueActive) return;
+
         TextBox.gameObject.SetActive(true);
 
         string[] SplitText = SayText.Split("<n>");
@@ -161,12 +164,13 @@ public class VisionMascotScript : MonoBehaviour
 
         while (timePassed < timerDialogueData.TimePassed)
         {
-            if (!DialogueActive) timePassed += Time.deltaTime;
+            if (!DialogueActive && AppScript.CheckIfActive("Visions")) timePassed += Time.deltaTime;
             yield return null;
         }
 
         string dialogue = timerDialogueData.SolutionDialogues[timerDialogueData.TriggerOccurances%timerDialogueData.SolutionDialogues.Count];
 
+        if (DialogueActive) yield break;
         MascotSayText(dialogue);
 
         timerDialogueData.TriggerOccurances++;
@@ -174,6 +178,8 @@ public class VisionMascotScript : MonoBehaviour
 
     public void OnPuzzleGeneration()
     {
+        if (DialogueActive) return;
+
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[TurkPuzzleScript.CurrentDifficutly];
 
         WaitCoroutines = new List<Coroutine>();
@@ -182,15 +188,27 @@ public class VisionMascotScript : MonoBehaviour
             WaitCoroutines.Add(StartCoroutine(TimerDialogue(tpData)));
         }
 
-        if (!TurkPuzzleScript.PuzzlesCompleted.ContainsKey(TurkPuzzleScript.CurrentDifficutly)) return;
-        int puzzlesCompleted = TurkPuzzleScript.PuzzlesCompleted[TurkPuzzleScript.CurrentDifficutly];
-        if (!currentDifficultyDialogue.SolutionDialogues.ContainsKey(puzzlesCompleted)) return;
+        if (TurkPuzzleScript.PuzzlesCompleted.ContainsKey(TurkPuzzleScript.CurrentDifficutly))
+        {
+            int puzzlesCompleted = TurkPuzzleScript.PuzzlesCompleted[TurkPuzzleScript.CurrentDifficutly];
+            if (currentDifficultyDialogue.SolutionDialogues.ContainsKey(puzzlesCompleted))
+            {
+                VisionCompletionMascotText textData = currentDifficultyDialogue.SolutionDialogues[puzzlesCompleted];
 
-        VisionCompletionMascotText textData = currentDifficultyDialogue.SolutionDialogues[puzzlesCompleted];
+                if (!textData.Triggered)
+                {
+                    textData.Triggered = true;
+                    MascotSayText(textData.SolutionDialogues);
+                    return;
+                }
+            }
+        }
 
-        if (textData.Triggered) return;
-        textData.Triggered = true;
-        MascotSayText(textData.SolutionDialogues);
+        if (NewDifficultyUnlocked)
+        {
+            MascotSayText(currentDifficultyDialogue.DifficultyReminder);
+            NewDifficultyUnlocked = false;
+        }
     }
 
     public void OnPuzzleEnd()
@@ -229,6 +247,8 @@ public class VisionMascotScript : MonoBehaviour
 
     public void OnAdClose()
     {
+        if (DialogueActive) return;
+
         int currentDifficulty = TurkPuzzleScript.CurrentDifficutly;
         if (currentDifficulty >= DifficultyChangeMessages.Count) return;
 
@@ -261,7 +281,16 @@ public class VisionMascotScript : MonoBehaviour
 
     public void OnDifficultyIncrease(int currentDifficulty)
     {
+        if (DialogueActive) return;
+
         if (currentDifficulty >= DifficultyChangeMessages.Count) return;
+
+        if (currentDifficulty == TurkPuzzleScript.DifficultiesUnlocked) NewDifficultyUnlocked = false;
+
+        foreach (Coroutine c in WaitCoroutines)
+        {
+            if (c != null) StopCoroutine(c);
+        }
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[currentDifficulty];
 
@@ -281,7 +310,14 @@ public class VisionMascotScript : MonoBehaviour
 
     public void OnDifficultyDecrease(int currentDifficulty)
     {
+        if (DialogueActive) return;
+
         if (currentDifficulty >= DifficultyChangeMessages.Count) return;
+
+        foreach (Coroutine c in WaitCoroutines)
+        {
+            if (c != null) StopCoroutine(c);
+        }
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[currentDifficulty];
 
@@ -296,5 +332,10 @@ public class VisionMascotScript : MonoBehaviour
         }
         MascotSayText(currentDifficultyDialogue.DifficultyDecreaseDialogues[currentDifficultyDialogue.DecreaseOccurrences % currentDifficultyDialogue.DifficultyDecreaseDialogues.Count]);
         currentDifficultyDialogue.DecreaseOccurrences++;
+    }
+
+    public static void OnNewDifficutlyUnlocked()
+    {
+        NewDifficultyUnlocked = true;
     }
 }
