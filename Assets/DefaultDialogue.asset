@@ -8703,8 +8703,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 5088.182
+        x: 92.06894
+        y: 5333.0093
         width: 160
         height: 30
     - id: 80
@@ -8762,8 +8762,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4586
+        x: 92.06894
+        y: 4830.827
         width: 160
         height: 30
     - id: 81
@@ -8821,8 +8821,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4670
+        x: 92.06894
+        y: 4914.827
         width: 160
         height: 30
     - id: 82
@@ -8880,8 +8880,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4754
+        x: 92.06894
+        y: 4998.827
         width: 160
         height: 30
     - id: 83
@@ -8940,8 +8940,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4836.1816
+        x: 92.06894
+        y: 5081.009
         width: 160
         height: 30
     - id: 84
@@ -8999,8 +8999,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4922
+        x: 92.06894
+        y: 5166.827
         width: 160
         height: 30
     - id: 85
@@ -9058,8 +9058,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 5006
+        x: 92.06894
+        y: 5250.827
         width: 160
         height: 30
     - id: 86
@@ -9154,7 +9154,7 @@ MonoBehaviour:
           for his divine acts? That is also fine.
 
           Getting a bit too friendly?
-          That is sometimes okay, but can backfire if you go too far.'
+          That is sometimes okay, but will backfire if you go too far.'
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -9758,7 +9758,8 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: That's it for now.
+        value: Just that myself and the rest of the church have your back! We have
+          analysts watching and making recommendations!
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
@@ -9776,7 +9777,7 @@ MonoBehaviour:
       - originConversationID: 6
         originDialogueID: 97
         destinationConversationID: 6
-        destinationDialogueID: 98
+        destinationDialogueID: 102
         isConnector: 0
         priority: 2
       conditionsString: 
@@ -9817,7 +9818,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: However, feel free to experiment to learn what God likes. You can
+        value: Anyways, feel free to experiment to learn what God likes. You can
           get away with a few mistakes here and there.
         type: 0
         typeString: CustomFieldType_Text
@@ -9852,8 +9853,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 184
-        y: 4334
+        x: 181.4348
+        y: 4480.047
         width: 160
         height: 30
     - id: 99
@@ -9911,8 +9912,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4418
+        x: 92.06894
+        y: 4618.925
         width: 160
         height: 30
     - id: 100
@@ -9970,8 +9971,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 288
-        y: 4418
+        x: 333.07983
+        y: 4617.537
         width: 160
         height: 30
     - id: 101
@@ -10029,13 +10030,194 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 80
-        y: 4502
+        x: 92.06894
+        y: 4746.827
+        width: 160
+        height: 30
+    - id: 102
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: If you see stars or flames on a prayer, those are prayers that we
+          think will make a bigger impact on God!
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 6
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 6
+        originDialogueID: 102
+        destinationConversationID: 6
+        destinationDialogueID: 103
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 179.12196
+        y: 4313.4146
+        width: 160
+        height: 30
+    - id: 103
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Stars will likely leave a positive impact, while the flames will leave
+          a negative one, but both will lower his boredom!
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 6
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 6
+        originDialogueID: 103
+        destinationConversationID: 6
+        destinationDialogueID: 104
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 179.12196
+        y: 4370.732
+        width: 160
+        height: 30
+    - id: 104
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: VoiceLinesSO
+        value: 
+        type: 0
+        typeString: CustomFieldType_Files
+      - title: Actor
+        value: 3
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 4
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: Remember, it's nice for God to like you, but what we want the most
+          is to keep him entertained, so even some rage bait can be helpful in that
+          effort!
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 6
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks:
+      - originConversationID: 6
+        originDialogueID: 104
+        destinationConversationID: 6
+        destinationDialogueID: 98
+        isConnector: 0
+        priority: 2
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 179.12196
+        y: 4420.732
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 414.5448, y: 2570.8872}
-    canvasZoom: 0.5500008
+    canvasScrollPosition: {x: 0, y: 4310.5347}
+    canvasZoom: 0.82000047
   - id: 8
     fields:
     - title: Title

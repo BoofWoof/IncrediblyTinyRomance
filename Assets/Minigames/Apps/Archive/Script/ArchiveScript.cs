@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,8 @@ public class ArchiveScript : MonoBehaviour
 
     public Sprite NotificationSprite;
 
+    public static List<string> ReadDocuments = new List<string>();
+
     public void OnEnable()
     {
         instance = this;
@@ -46,6 +49,12 @@ public class ArchiveScript : MonoBehaviour
         SelectAnArchiveText.SetActive(true);
         TextBoxObject.SetActive(false);
     }
+
+    public static void AddDcoumentToRead(string newTitle)
+    {
+        if (ReadDocuments.Contains(newTitle)) return;
+        ReadDocuments.Add(newTitle);
+    } 
     public void UpdateList()
     {
         ClearList();
@@ -56,7 +65,9 @@ public class ArchiveScript : MonoBehaviour
             newButton.transform.localScale = Vector3.one;
             newButton.transform.localPosition = Vector3.zero;
 
-            newButton.GetComponent<ArchiveButtonScript>().SetArchiveData(archivePriorityData.Data);
+            bool newDocument = !ReadDocuments.Contains(archivePriorityData.Data.Title);
+
+            newButton.GetComponent<ArchiveButtonScript>().SetArchiveData(archivePriorityData.Data, newDocument);
         }
     }
 

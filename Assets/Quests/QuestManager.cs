@@ -54,6 +54,7 @@ public class QuestManager : MonoBehaviour
     {
         QuestLog.SetQuestState(questTitle, QuestState.Success);
         QuestText.color = Color.green;
+        QuestText.text = "Task Complete";
     }
 
     public static void ChangeQuest (string newQuestTitle)

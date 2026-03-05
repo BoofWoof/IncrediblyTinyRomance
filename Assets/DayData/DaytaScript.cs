@@ -57,6 +57,7 @@ public class DaytaScript : MonoBehaviour
         if (DayInfo.CurrentDay == 0)
         {
             EnableCharacter();
+            OverworldPositionScript.GoTo("A", 0);
         }
         if (DayInfo.CurrentDay == 1)
         {
