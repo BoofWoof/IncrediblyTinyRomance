@@ -24,8 +24,11 @@ public class LookScript : MonoBehaviour
     public float HeadLookWeight = 1f;
 
     public Transform EyeL;
+    public Transform TargetEyeL;
     public Transform EyeR;
+    public Transform TargetEyeR;
     public Transform Head;
+    public Transform TargetHead;
 
     public bool Flip = false;
 
@@ -46,6 +49,10 @@ public class LookScript : MonoBehaviour
 
     private void Start()
     {
+        TargetEyeL.transform.parent = EyeL;
+        TargetEyeR.transform.parent = EyeR;
+        TargetHead.transform.parent = Head;
+
         initialHeadLocalRotation = Head.localRotation;
         initialLEyeLocalRotation = EyeL.localRotation;
         initialREyeLocalRotation = EyeR.localRotation;

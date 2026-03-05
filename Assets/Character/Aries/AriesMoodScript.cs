@@ -27,8 +27,8 @@ public class AriesMoodScript : MoodInterface
 
         PointLight1.color = angerColor;
         PointLight2.color = angerColor;
-        TubeMaterial.SetColor("_EmissionColor", angerColor * 5f);
-        ArmMaterial.SetColor("_EmissionColor", angerColor * 5f);
+        if(TubeMaterial != null) TubeMaterial.SetColor("_EmissionColor", angerColor * 5f);
+        if (ArmMaterial != null) ArmMaterial.SetColor("_EmissionColor", angerColor * 5f);
 
         foreach (SkinnedMeshRenderer emotiveMesh in EmotiveMeshes)
         {
