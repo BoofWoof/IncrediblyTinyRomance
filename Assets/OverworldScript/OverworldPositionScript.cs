@@ -50,10 +50,17 @@ public class OverworldPositionScript : MonoBehaviour
         {
             if (overworldPositionScript.CurrentStation == WaitStation)
             {
+                Debug.Log("Skipping Wait");
                 WaitStation = -1;
-                (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+                overworldPositionScript.StartCoroutine(overworldPositionScript.DelayedContinue());
             }
         }
+    }
+
+    public IEnumerator DelayedContinue()
+    {
+        yield return null;
+        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public static void GoTo(string name, int CurrentStationIdx)
@@ -107,6 +114,8 @@ public class OverworldPositionScript : MonoBehaviour
         {
             PrayerScript.instance.DeactivateJudgement();
         }
+
+        if (CurrentStationIdx == CurrentStation) return;
 
         WalkToCoroutine = StartCoroutine(FollowRouteTo(CurrentStationIdx, Wait));
     }

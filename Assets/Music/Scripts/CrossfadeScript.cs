@@ -117,7 +117,6 @@ public class CrossfadeScript : MonoBehaviour
             MusicPlayer.currentTrack.time = MusicPlayer.CurrentSong.StartTime;
             return;
         }
-        Debug.Log("BBBBBBBBB");
         MusicPlayer.TransitionCoroutine = MusicPlayer.StartCoroutine(MusicPlayer.FadeInAndOutTransition(MusicSelectorScript.instance.SongList[SongID]));
     }
 

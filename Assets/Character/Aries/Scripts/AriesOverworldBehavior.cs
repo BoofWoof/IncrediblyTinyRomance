@@ -154,12 +154,40 @@ public class AriesOverworldBehavior : OverworldBehavior
         }
         yield return null;
     }
+    public IEnumerator PickupCity()
+    {
+        thisAnimator.SetBool("Sitting", true);
+        thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", true);
+        thisAnimator.SetBool("LeftGrab", true);
+
+        yield return null;
+    }
+    public IEnumerator DropCity()
+    {
+        thisAnimator.SetBool("Sitting", true);
+        thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", true);
+        thisAnimator.SetBool("LeftGrab", false);
+
+        yield return null;
+    }
 
     public override void ExecuteBehavior(string submitName, string behavior, float wait = 0f)
     {
         if (NameSource.SpeakerName.ToLower() != submitName.ToLower() && NameSource.NickName.ToLower() != submitName.ToLower()) return;
 
         PrayerScript.instance.DeactivateJudgement();
+
+
+        if (behavior.ToLower() == "grab")
+        {
+            StartCoroutine(PickupCity());
+        }
+        if (behavior.ToLower() == "drop")
+        {
+            StartCoroutine(DropCity());
+        }
 
         if (behavior.ToLower() == "soda")
         {

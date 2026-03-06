@@ -149,19 +149,19 @@ public class TurkPuzzleScript : MonoBehaviour
     {
         CurrentDifficutly++;
         if (CurrentDifficutly >= DifficultiesUnlocked - 1) CurrentDifficutly = DifficultiesUnlocked - 1;
+        OnDifficultyUp?.Invoke(CurrentDifficutly);
         puzzleScript.GeneratePuzzle();
 
         UpdateDifficultyButtons();
-        OnDifficultyUp?.Invoke(CurrentDifficutly);
     }
     public void DecreaseDifficulty()
     {
         CurrentDifficutly--;
         if (CurrentDifficutly < 0) CurrentDifficutly = 0;
+        OnDifficultyDown?.Invoke(CurrentDifficutly);
         puzzleScript.GeneratePuzzle();
 
         UpdateDifficultyButtons();
-        OnDifficultyDown?.Invoke(CurrentDifficutly);
     }
     void Awake()
     {
