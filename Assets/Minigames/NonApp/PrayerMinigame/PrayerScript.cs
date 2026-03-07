@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using PixelCrushers.DialogueSystem;
 using UnityEngine.Events;
+using static PixelCrushers.AnimatorSaver;
 
 public class PrayerResponse
 {
@@ -17,6 +18,8 @@ public class PrayerResponse
 
     public SpecialPrayerData AssociatedSpecialPrayerData;
     public SpecialPrayerSetSO AssociatedSpecialPrayerSet;
+
+    public Transform TopicTarget;
 }
 
 
@@ -345,7 +348,13 @@ public class PrayerScript : MonoBehaviour
 
                 CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChainVL);
 
+                Debug.Log("AAAAAAAAAAAAAAAAAA");
+                Debug.Log(CurrentResponse[answerIdx].TopicTarget);
+                LookScript.ExternalDistractionPoint = CurrentResponse[answerIdx].TopicTarget;
+
                 yield return new WaitForSeconds(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.GetChainTime());
+
+                LookScript.ExternalDistractionPoint = null;
             }
 
         } else if (GoodIdx == answerIdx)
@@ -439,6 +448,8 @@ public class PrayerScript : MonoBehaviour
             List<PrayerResponse> prayerResponsesSpecial = new List<PrayerResponse>();
             foreach(SpecialPrayerData prayerData in targetPrayer.PrayerOptions)
             {
+                Debug.Log("SETTING PRAYER 2");
+                Debug.Log(prayerData.TopicTarget);
                 PrayerResponse newResponse = new PrayerResponse
                 {
                     AssociatedIdx = -1,
@@ -447,7 +458,8 @@ public class PrayerScript : MonoBehaviour
                     GoodPrayer = prayerData.GoodPrayer,
                     SpecialPrayer = true,
                     AssociatedSpecialPrayerData = prayerData,
-                    AssociatedSpecialPrayerSet = targetPrayer
+                    AssociatedSpecialPrayerSet = targetPrayer,
+                    TopicTarget = prayerData.TopicTarget
                 };
 
                 prayerResponsesSpecial.Add(newResponse);
@@ -510,7 +522,8 @@ public class PrayerScript : MonoBehaviour
                             Author = selectedPrayer.AuthorName,
                             GoodPrayer = selectedPrayer.GoodPrayer,
                             SpecialPrayer = true,
-                            AssociatedSpecialPrayerData = selectedPrayer
+                            AssociatedSpecialPrayerData = selectedPrayer,
+                            TopicTarget = selectedPrayer.TopicTarget
                         };
 
                         prayerResponses.Add(newResponse);

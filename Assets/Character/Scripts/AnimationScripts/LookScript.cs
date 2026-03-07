@@ -55,6 +55,9 @@ public class LookScript : MonoBehaviour
 
     public List<Transform> DistractionPoints;
     private bool Distracted = false;
+    public bool ForceDistracted = false;
+    public static Transform ExternalDistractionPoint;
+    public static Transform PrevExternalDistractionPoint;
 
 
     private void Start()
@@ -74,20 +77,39 @@ public class LookScript : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(20, 30));
+            yield return new WaitForSeconds(Random.Range(30, 60));
             int distractionIndex = Random.Range(0, DistractionPoints.Count);
             Distracted = true;
             DistractionTarget = DistractionPoints[distractionIndex];
-            yield return new WaitForSeconds(Random.Range(2, 5));
-            DistractionTarget = null;
+            if (ExternalDistractionPoint != null) DistractionTarget = ExternalDistractionPoint;
+            yield return new WaitForSeconds(Random.Range(3, 5));
+            if (!ForceDistracted) DistractionTarget = null;
             yield return new WaitForSeconds(2f);
-            Distracted = false;
+            if (!ForceDistracted) Distracted = false;
         }
+    }
+    public IEnumerator ForceDistraction()
+    {
+        ForceDistracted = true;
+        yield return new WaitForSeconds(0.3f);
+        Distracted = true;
+        DistractionTarget = ExternalDistractionPoint;
+        yield return new WaitForSeconds(Random.Range(8, 12));
+        DistractionTarget = null;
+        yield return new WaitForSeconds(2f);
+        Distracted = false;
+        ForceDistracted = false;
     }
 
     void LateUpdate()
     {
         if (Target == null) return;
+        if (PrevExternalDistractionPoint != ExternalDistractionPoint)
+        {
+            PrevExternalDistractionPoint = ExternalDistractionPoint;
+            if(ExternalDistractionPoint != null) StartCoroutine(ForceDistraction());
+        }
+
         LookAt(Head, -5f, HeadRotLimits, initialHeadLocalRotation, true);
         LookAt(EyeL, 0f, LEyeRotLimits, initialLEyeLocalRotation);
         LookAt(EyeR, 0f, REyeRotLimits, initialREyeLocalRotation);

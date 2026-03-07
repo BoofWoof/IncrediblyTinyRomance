@@ -14,6 +14,8 @@ public class SPrayerSubmissionScript : MonoBehaviour
 
     public bool Submitted = false;
 
+    public bool SetSubmitterAsTopicTarget = false;
+
     public void Awake()
     {
         if (WaitingForcedPrayers == null) WaitingForcedPrayers = new List<SpecialPrayerSetSO>();
@@ -27,13 +29,23 @@ public class SPrayerSubmissionScript : MonoBehaviour
         foreach (SpecialPrayerSetSO prayerSet in PrayerToSubmit)
         {
             SpecialPrayerSetSO instantiatedPrayer = Instantiate(prayerSet);
+            if (SetSubmitterAsTopicTarget)
+            {
+                foreach (SpecialPrayerData specialPrayerData in instantiatedPrayer.PrayerOptions)
+                {
+                    Debug.Log("SETTING PRAYER");
+                    Debug.Log(transform);
+                    specialPrayerData.TopicTarget = transform;
+                }
+            }
+
             if (instantiatedPrayer.ForceSelection)
             {
                 WaitingForcedPrayers.Add(instantiatedPrayer);
                 OnNewForcedPrayers?.Invoke();
             } else
             {
-                foreach (SpecialPrayerData specialPrayerData in prayerSet.PrayerOptions)
+                foreach (SpecialPrayerData specialPrayerData in instantiatedPrayer.PrayerOptions)
                 {
                     WaitingSpecialPrayers.Add(specialPrayerData);
                 }

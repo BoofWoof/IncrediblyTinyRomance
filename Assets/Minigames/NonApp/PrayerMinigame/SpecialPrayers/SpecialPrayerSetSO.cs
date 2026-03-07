@@ -19,6 +19,8 @@ public class SpecialPrayerData
     private bool _LoadedStarted = false;
     private bool _Loaded = false;
 
+    public Transform TopicTarget;
+
     public float GetChainTime()
     {
         if (!_Loaded) Debug.LogError("Voice lines not loaded yet.");
