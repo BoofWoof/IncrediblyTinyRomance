@@ -29,6 +29,12 @@ public class OverworldPositionScript : MonoBehaviour
 
     public UnityEvent OnWalkStart;
 
+    public void Awake()
+    {
+        WaitStation = -1;
+        PositionScripts = new List<OverworldPositionScript>();
+    }
+
     public void Start()
     {
         CharacterName = NameSource.SpeakerName;

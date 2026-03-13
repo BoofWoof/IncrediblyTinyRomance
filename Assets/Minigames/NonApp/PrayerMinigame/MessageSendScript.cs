@@ -26,11 +26,6 @@ public class MessageSendScript : MonoBehaviour
 
     private Color OriginalColor = Color.white;
 
-    public void OnPhoneToggle(bool PhoneRaised)
-    {
-        PhoneEnabled = PhoneRaised;
-        UpdateInteractability();
-    }
 
     public void Awake()
     {
@@ -49,7 +44,21 @@ public class MessageSendScript : MonoBehaviour
 
         OriginalColor = MessageText.color;
 
+    }
+
+    public void OnEnable()
+    {
         PhonePositionScript.PhoneToggled += OnPhoneToggle;
+    }
+
+    public void OnDisable()
+    {
+        PhonePositionScript.PhoneToggled -= OnPhoneToggle;
+    }
+    public void OnPhoneToggle(bool PhoneRaised)
+    {
+        PhoneEnabled = PhoneRaised;
+        UpdateInteractability();
     }
 
     public void SetAuthorName(string newName)

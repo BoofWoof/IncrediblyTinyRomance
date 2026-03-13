@@ -1,9 +1,10 @@
-using JetBrains.Annotations;
+using PixelCrushers;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static PosterSaver;
 
 public struct ArchivePriorityData
 {
@@ -11,7 +12,7 @@ public struct ArchivePriorityData
     public ArchiveDataSO Data;
 }
 
-public class ArchiveScript : MonoBehaviour
+public class ArchiveScript : Saver
 {
     public static ArchiveScript instance;
 
@@ -36,9 +37,38 @@ public class ArchiveScript : MonoBehaviour
 
     public static List<string> ReadDocuments = new List<string>();
 
-    public void OnEnable()
+    #region SAVE
+    [Serializable]
+    public class ArchiveReadSaveData
     {
+        public List<string> ReadDocumentsSave;
+    }
+
+    public override string RecordData()
+    {
+        ArchiveReadSaveData newSaveData = new ArchiveReadSaveData()
+        {
+            ReadDocumentsSave = ReadDocuments
+        };
+        return SaveSystem.Serialize(newSaveData);
+    }
+
+    public override void ApplyData(string s)
+    {
+        ReadDocuments = SaveSystem.Deserialize<ArchiveReadSaveData>(s).ReadDocumentsSave;
+    }
+    #endregion
+
+    override public void Start()
+    {
+        base.Start();
         instance = this;
+        ReadDocuments = new List<string>();
+    }
+
+    override public void OnEnable()
+    {
+        base.OnEnable();
         ResetArchive();
     }
 

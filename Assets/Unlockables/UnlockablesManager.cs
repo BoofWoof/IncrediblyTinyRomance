@@ -19,7 +19,7 @@ public class UnlockablesManager: MonoBehaviour
     public List<OfficePoster> InitialPostersList;
     public static List<OfficePoster> PostersList;
     public static Dictionary<string, OfficePoster> PostersDict = new Dictionary<string, OfficePoster>();
-    public static Dictionary<string, bool> PostersUnlockDict = new Dictionary<string, bool>(); //For saving and loading.
+    public static List<string> UnlockedPostersList = new List<string>();
 
     public static UnlockablesManager instance;
 
@@ -36,19 +36,32 @@ public class UnlockablesManager: MonoBehaviour
 
         PostersList = InitialPostersList;
 
+        PostersDict = new Dictionary<string, OfficePoster>();
+
+        Lua.RegisterFunction("UnlockPortrait", null, SymbolExtensions.GetMethodInfo(() => UnlockPortrait("")));
+    }
+
+    public void Start()
+    {
         foreach (OfficePoster poster in PostersList)
         {
             PostersDict.Add(poster.Name, poster);
-            PostersUnlockDict.Add(poster.Name, poster.Unlocked);
         }
-
-        Lua.RegisterFunction("UnlockPortrait", null, SymbolExtensions.GetMethodInfo(() => UnlockPortrait("")));
     }
 
     public static void UnlockPortrait(string posterName)
     {
         UnlockPortrait(posterName, false);
     }
+
+    public static void LoadFromList(List<string> loadList)
+    {
+        foreach(string posterName in loadList)
+        {
+            UnlockPortrait(posterName, true);
+        }
+    }
+
     public static void UnlockPortrait(string posterName, bool skipAnimation = false)
     {
         if (!PostersDict.ContainsKey(posterName))
@@ -63,8 +76,8 @@ public class UnlockablesManager: MonoBehaviour
 
         Debug.Log("Unlocking: " + posterName);
 
-        PostersUnlockDict[posterName] = true;
         PostersDict[posterName].Unlocked = true;
+        UnlockedPostersList.Add(posterName);
 
         if (skipAnimation) return;
 
@@ -94,7 +107,7 @@ public class UnlockablesManager: MonoBehaviour
     {
         foreach (string posterName in PostersDict.Keys)
         {
-            UnlockPortrait(posterName, false);
+            UnlockPortrait(posterName, true);
         }
     }
 }

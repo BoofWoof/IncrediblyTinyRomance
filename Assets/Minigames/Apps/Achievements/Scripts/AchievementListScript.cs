@@ -1,13 +1,16 @@
+using PixelCrushers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static ArchiveScript;
 
 public struct PriorityAchievement {
     public int Priority;
     public AchievementAbstractSO Achievement;
 }
-public class AchievementListScript : MonoBehaviour
+public class AchievementListScript : Saver
 {
     public GameObject ContentTarget;
     public GameObject AchievementPrefab;
@@ -15,6 +18,7 @@ public class AchievementListScript : MonoBehaviour
     public List<PriorityAchievement> SortedAchievementList = new List<PriorityAchievement>();
 
     public static List<string> CompletedAchievementNames = new List<string>();
+    public static List<string> ActivatedAchievementNames = new List<string>();
 
     public GameObject EmptyQueueText;
 
@@ -26,11 +30,48 @@ public class AchievementListScript : MonoBehaviour
 
     public Sprite NotificationSprite;
 
-    public void Awake()
+    #region SAVE
+    [Serializable]
+    public class ArchievementSaveData
     {
-        instance = this;
-        PhonePositionScript.PhoneToggled += OnPhoneRaise;
+        public List<string> CompletedAchievementSaveData;
+    }
 
+    public override string RecordData()
+    {
+        ArchievementSaveData newSaveData = new ArchievementSaveData()
+        {
+            CompletedAchievementSaveData = CompletedAchievementNames
+        };
+        return SaveSystem.Serialize(newSaveData);
+    }
+
+    public override void ApplyData(string s)
+    {
+        CompletedAchievementNames = SaveSystem.Deserialize<ArchievementSaveData>(s).CompletedAchievementSaveData;
+        UpdateList();
+    }
+    #endregion
+
+    override public void Awake()
+    {
+        base.Awake();
+
+        instance = this;
+        CompletedAchievementNames = new List<string>();
+        ActivatedAchievementNames = new List<string>();
+    }
+
+    override public void OnEnable()
+    {
+        base.OnEnable();
+        PhonePositionScript.PhoneToggled += OnPhoneRaise;
+    }
+
+    override public void OnDisable()
+    {
+        base.OnDisable();
+        PhonePositionScript.PhoneToggled -= OnPhoneRaise;
     }
 
     public void OnPhoneRaise(bool raised)
@@ -43,7 +84,17 @@ public class AchievementListScript : MonoBehaviour
         ClearList();
         foreach (PriorityAchievement pAchievement in SortedAchievementList)
         {
-            if (CompletedAchievementNames.Contains(pAchievement.Achievement.Title)) continue;
+            string title = pAchievement.Achievement.Title;
+            if (CompletedAchievementNames.Contains(title))
+            {
+                if (!ActivatedAchievementNames.Contains(title))
+                {
+                    AddFinishedAchievement(title);
+                    ActiveBroadcast.BroadcastActivation(pAchievement.Achievement.ActivationData);
+                }
+
+                continue;
+            }
 
             GameObject newAchievementObject = Instantiate(AchievementPrefab);
             newAchievementObject.GetComponent<AchievementMenuItemScript>().AssignAchievementData(pAchievement.Achievement);
@@ -103,9 +154,13 @@ public class AchievementListScript : MonoBehaviour
 
     public static void AddFinishedAchievement(string AchievementName)
     {
-        CompletedAchievementNames.Add(AchievementName);
-        instance.UnlockSound.Play();
-        instance.AchievementParticles.Play();
+        if (!CompletedAchievementNames.Contains(AchievementName))
+        {
+            CompletedAchievementNames.Add(AchievementName);
+            instance.UnlockSound.Play();
+            instance.AchievementParticles.Play();
+        }
+        if(!ActivatedAchievementNames.Contains(AchievementName)) ActivatedAchievementNames.Add(AchievementName);
     }
 
     public void ShowNotification()

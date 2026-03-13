@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        PlayerInputs = new GameControls();
+        if(PlayerInputs == null) PlayerInputs = new GameControls();
         PlayerInputs.Disable();
         PlayerInputs.Overworld.Disable();
         PlayerInputs.Phone.Disable();

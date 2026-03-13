@@ -1,7 +1,5 @@
-using PixelCrushers.DialogueSystem;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PurificationHolderScript : MonoBehaviour
 {
@@ -14,7 +12,11 @@ public class PurificationHolderScript : MonoBehaviour
 
     private void Awake()
     {
-        if (LevelHolders == null) LevelHolders = new Dictionary<string, PurificationHolderScript>();
+        LevelHolders = new Dictionary<string, PurificationHolderScript>();
+    }
+
+    public void Start()
+    {
         LevelHolders.Add(SetName.ToLower(), this);
     }
 
