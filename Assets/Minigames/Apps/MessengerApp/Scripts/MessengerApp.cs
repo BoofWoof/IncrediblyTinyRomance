@@ -17,7 +17,7 @@ namespace DS
 
     public class MessengerApp : AppScript
     {
-        [HideInInspector] private PixelCrushers.DialogueSystem.CharacterInfo CurrentCharacter;
+        [HideInInspector] private LocalCharacterInfo CurrentCharacter;
         [HideInInspector] public List<int> UncheckMessages = new List<int>();
 
         public static MessengerApp instance;
@@ -35,7 +35,7 @@ namespace DS
         public GameObject DivisionBarPrefab;
 
         [Header("Data")]
-        private Dictionary<int, string> MessageHistorys = new Dictionary<int, string>();
+        public Dictionary<int, string> MessageHistorys = new Dictionary<int, string>();
 
         [HideInInspector] public ChoicePair Choices;
 
@@ -76,7 +76,7 @@ namespace DS
             NewObjectAdded = false;
         }
 
-        public void SetCharacter(PixelCrushers.DialogueSystem.CharacterInfo newCharacter)
+        public void SetCharacter(LocalCharacterInfo newCharacter)
         {
             if (CurrentCharacter != null && newCharacter.id == CurrentCharacter.id) return;
             CurrentCharacter = newCharacter;
@@ -245,7 +245,7 @@ namespace DS
             return newObject;
         }
 
-        private void RecreateMessages(PixelCrushers.DialogueSystem.CharacterInfo selectedCharacter)
+        private void RecreateMessages(LocalCharacterInfo selectedCharacter)
         {
             if (!MessageHistorys.Keys.Contains(selectedCharacter.id)) return;
 
@@ -282,8 +282,9 @@ namespace DS
             OnHideApp += MusinOnAppHide;
         }
 
-        public void OnDisable()
+        new public void OnDisable()
         {
+            base.OnDisable();
             OnShowApp -= MusinOnAppShow;
             OnHideApp -= MusinOnAppHide;
         }

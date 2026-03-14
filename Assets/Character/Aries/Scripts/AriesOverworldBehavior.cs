@@ -94,8 +94,6 @@ public class AriesOverworldBehavior : OverworldBehavior
         yield return StartCoroutine(WaitForAnimation("StandingIdle"));
 
         StartCoroutine(Judgement(0));
-
-        ActiveBroadcast.BroadcastActivation("AddQuestion");
     }
 
     public IEnumerator GrabSoda()

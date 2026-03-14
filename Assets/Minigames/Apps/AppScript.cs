@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class AppScript : MonoBehaviour
 {
@@ -28,11 +29,29 @@ public class AppScript : MonoBehaviour
             RegisterInputActions();
         }
         ActiveAppName = "";
+        OnHideApp = null;
+        OnShowApp = null;
+    }
+
+    public void OnDisable()
+    {
+        OnHideApp = null;
+        OnShowApp = null;
+    }
+
+    public void OnDestroy()
+    {
+        InputManager.PlayerInputs.Phone.AppReturn.performed -= HidePressed;
     }
 
     public void RegisterInputActions()
     {
-        InputManager.PlayerInputs.Phone.AppReturn.performed += context => Hide(true);
+        InputManager.PlayerInputs.Phone.AppReturn.performed += HidePressed;
+    }
+
+    public void HidePressed(InputAction.CallbackContext c)
+    {
+        Hide(true);
     }
 
     public void Swap(AppScript newApp)

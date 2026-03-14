@@ -1,4 +1,5 @@
 using DS;
+using PixelCrushers;
 using PixelCrushers.DialogueSystem;
 using System;
 using System.Collections;
@@ -8,19 +9,57 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ContactsScript : MonoBehaviour
+public class LocalCharacterInfo
+{
+    public Sprite portrait;
+    public string Name;
+    public int id;
+
+    public LocalCharacterInfo FromPCCharacterInfo(PixelCrushers.DialogueSystem.CharacterInfo characterInfo)
+    {
+        portrait = characterInfo.portrait;
+        Name = characterInfo.Name;
+        id = characterInfo.id;
+
+        return this;
+    }
+
+    public LocalCharacterInfo FromName(string characterName)
+    {
+        Name = characterName;
+
+        Actor actor = DialogueManager.masterDatabase.GetActor(characterName);
+        portrait = actor.spritePortrait;
+        id = actor.id;
+
+        return this;
+    }
+
+    public LocalCharacterInfo FromID(int characterID)
+    {
+        id = characterID;
+
+        Actor actor = DialogueManager.masterDatabase.GetActor(characterID);
+        Name = actor.Name;
+        portrait = actor.spritePortrait;
+
+        return this;
+    }
+}
+
+public class ContactsScript : Saver
 {
     public static ContactsScript instance;
     public MessengerApp messengerApp;
 
-    public PixelCrushers.DialogueSystem.CharacterInfo activeCharacter = null;
+    public LocalCharacterInfo activeCharacter = null;
 
     public Coroutine DialogueCoroutine = null;
 
     public Transform[] ContactPositions;
 
     public float SeparationDistance = 400f;
-    private Dictionary<int, PixelCrushers.DialogueSystem.CharacterInfo> ContactsFound = new Dictionary<int, PixelCrushers.DialogueSystem.CharacterInfo>();
+    private Dictionary<int, LocalCharacterInfo> ContactsFound = new Dictionary<int, LocalCharacterInfo>();
     public GameObject ContactButtonPrefab;
     public GameObject ContactListCenter;
     private List<GameObject> ContactList = new List<GameObject>();
@@ -28,18 +67,23 @@ public class ContactsScript : MonoBehaviour
     public bool ConversationIsActive = false;
 
     public int speakingCharacterId = -1;
-    private PixelCrushers.DialogueSystem.CharacterInfo tempSpeakingCharacter;
+    private LocalCharacterInfo tempSpeakingCharacter;
 
-    public void Start()
+    override public void Start()
     {
+        base.Start();
         instance = this;
+    }
+
+    public void SendMessageByName(string speakerName, string messageText)
+    {
+        LocalCharacterInfo character = new LocalCharacterInfo().FromName(speakerName);
+
+        StartCoroutine(SendSingleMessage(character, messageText, false));
     }
 
     public void OnConversationLine(Subtitle subtitle)
     {
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAA A NEW LINE IS HAPPENING AAAAA");
-        Debug.Log(subtitle.speakerInfo.Name);
-        Debug.Log(subtitle.speakerInfo.GetFieldBool("SkipThem"));
         if (subtitle.speakerInfo.GetFieldBool("WaitThem"))
         {
             ConversationManagerScript.WaitingForEvent = true;
@@ -60,7 +104,7 @@ public class ContactsScript : MonoBehaviour
             ConversationIsActive = false;
             return;
         }
-        tempSpeakingCharacter = subtitle.speakerInfo;
+        tempSpeakingCharacter = new LocalCharacterInfo().FromPCCharacterInfo(subtitle.speakerInfo);
         if (tempSpeakingCharacter.Name == "Player") return;
 
         ConversationIsActive = true;
@@ -74,16 +118,17 @@ public class ContactsScript : MonoBehaviour
 
         string messageText = string.Format(subtitle.formattedText.text);
         StartCoroutine(SendSingleMessage(tempSpeakingCharacter, messageText));
-
-        //Add contact if this is their first message.
-        CheckContacts(tempSpeakingCharacter);
     }
 
-    public IEnumerator SendSingleMessage(PixelCrushers.DialogueSystem.CharacterInfo newSpeaker, string message_text)
+    public IEnumerator SendSingleMessage(LocalCharacterInfo newSpeaker, string message_text, bool continueConversation = true)
     {
+        Debug.Log(newSpeaker.Name);
+        Debug.Log(newSpeaker.id);
+        Debug.Log(newSpeaker.portrait);
         yield return new WaitForSeconds((MessagingVariables.TimeBetweenMessages + MessagingVariables.TimePerCharacter * message_text.Length) / MessagingVariables.SetTimeDivider);
+        CheckContacts(newSpeaker);
         messengerApp.AddLeftMessage(newSpeaker.id, message_text);        
-        (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+        if(continueConversation) (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public void OnConversationResponseMenu(Response[] responses)
@@ -129,10 +174,9 @@ public class ContactsScript : MonoBehaviour
     public void MakeContactButtons()
     {
         int idx = 0;
-        foreach (PixelCrushers.DialogueSystem.CharacterInfo characterInfo in ContactsFound.Values)
+        foreach (LocalCharacterInfo characterInfo in ContactsFound.Values)
         {
             GameObject newContactButton = Instantiate(ContactButtonPrefab);
-
 
             newContactButton.transform.parent = ContactPositions[idx].parent;
             newContactButton.transform.localPosition = ContactPositions[idx].localPosition;
@@ -177,7 +221,7 @@ public class ContactsScript : MonoBehaviour
         }
         ContactList.Clear();
     }
-    public void CheckContacts(PixelCrushers.DialogueSystem.CharacterInfo contact)
+    public void CheckContacts(LocalCharacterInfo contact)
     {
         if (contact == null || ContactsFound.Keys.Contains(contact.id)) return;
 
@@ -189,9 +233,16 @@ public class ContactsScript : MonoBehaviour
     {
         DeleteContactButtons();
         MakeContactButtons();
+
+        Debug.Log("A");
+        foreach(KeyValuePair<int, LocalCharacterInfo> info in ContactsFound)
+        {
+            Debug.Log(info.Key);
+            Debug.Log(info.Value.Name);
+        }
     }
 
-    public void SwapToCharacterMessanger(PixelCrushers.DialogueSystem.CharacterInfo selectCharacter)
+    public void SwapToCharacterMessanger(LocalCharacterInfo selectCharacter)
     {
         activeCharacter = selectCharacter;
         messengerApp.SetCharacter(selectCharacter);
@@ -201,6 +252,59 @@ public class ContactsScript : MonoBehaviour
     public void DeselectCharacter()
     {
         activeCharacter = null;
+        RebuildContacts();
+    }
+
+    [Serializable]
+    public class ConversationSave
+    {
+        public List<string> MessageHistorys = new List<string>();
+        public List<int> MessageIDs = new List<int>();
+        public List<int> ContactsFoundID = new List<int>();
+        public void SetMessageHistory(Dictionary<int, string> messageHistory)
+        {
+            MessageHistorys = messageHistory.Values.ToList();
+            MessageIDs = messageHistory.Keys.ToList();
+        }
+        public void SetContactsFound(Dictionary<int, LocalCharacterInfo> contactsFound)
+        {
+            ContactsFoundID = contactsFound.Keys.ToList();
+        }
+        public Dictionary<int, string> GetMessageHistory()
+        {
+            Dictionary<int, string> messageHistory = new Dictionary<int, string>();
+            for (int i = 0; i < MessageIDs.Count; i++)
+            {
+                messageHistory[MessageIDs[i]] = MessageHistorys[i];
+            }
+            return messageHistory;
+        }
+        public Dictionary<int, LocalCharacterInfo> GetContactsFound()
+        {
+            Dictionary<int, LocalCharacterInfo> contactsFound = new Dictionary<int, LocalCharacterInfo>();
+            for (int i = 0; i < ContactsFoundID.Count; i++)
+            {
+                contactsFound[ContactsFoundID[i]] = new LocalCharacterInfo().FromID(ContactsFoundID[i]);
+            }
+            return contactsFound;
+        }
+    }
+
+    public override string RecordData()
+    {
+        ConversationSave newSaveData = new ConversationSave();
+
+        newSaveData.SetMessageHistory(messengerApp.MessageHistorys);
+        newSaveData.SetContactsFound(ContactsFound);
+
+        return SaveSystem.Serialize(newSaveData);
+    }
+
+    public override void ApplyData(string s)
+    {
+        ConversationSave saveData = SaveSystem.Deserialize<ConversationSave>(s);
+        ContactsFound = saveData.GetContactsFound();
+        messengerApp.MessageHistorys = saveData.GetMessageHistory();
         RebuildContacts();
     }
 }

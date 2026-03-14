@@ -41,6 +41,7 @@ public class BigCameraPoint : MonoBehaviour
     {
         instance = this;
         Lua.RegisterFunction("AddQuestion", this, SymbolExtensions.GetMethodInfo(() => AddQuestion()));
+        Lua.RegisterFunction("AddQuestionWithMessage", this, SymbolExtensions.GetMethodInfo(() => AddQuestionWithMessage("")));
         GameStateMonitor.OnEventChange += OnEventStateChange;
     }
 
@@ -60,6 +61,11 @@ public class BigCameraPoint : MonoBehaviour
     public void AddQuestion()
     {
         QuestionsAvailable++;
+    }
+    public void AddQuestionWithMessage(string Message)
+    {
+        AddQuestion();
+        ContactsScript.instance.SendMessageByName("Mo", Message);
     }
 
     public void Clear()

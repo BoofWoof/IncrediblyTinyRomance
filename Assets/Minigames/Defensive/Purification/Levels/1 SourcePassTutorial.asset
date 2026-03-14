@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e2b563fdec3184894eea8db8fdb6ba, type: 3}
   m_Name: 1 SourcePassTutorial
   m_EditorClassIdentifier: 
+  EnableTimer: 1
+  PuzzleTimeLimit: 30
   LevelName: 1 SourcePassTutorial
   LevelDescription: MakeMulipleSinkClear
   VentGridPos: {x: 0, y: 160, z: 0}
   SquareSize: 350
   HallucinationBroadcasts: []
+  VoiceLineTargetName: 
+  VoiceLine: {fileID: 0}
   ConnectedCutsceneName: 
   OnScreenData: {fileID: 4377608668749045318, guid: 3ed9468a7c98b1f43960380b39686f3b, type: 3}
   OnScreenDataPos: {x: 0, y: -389, z: 0}
