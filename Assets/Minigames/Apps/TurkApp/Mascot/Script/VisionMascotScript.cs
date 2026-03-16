@@ -179,6 +179,7 @@ public class VisionMascotScript : MonoBehaviour
     public void OnPuzzleGeneration()
     {
         if (DialogueActive) return;
+        if (!AppScript.CheckIfActive("Visions") || Time.timeScale < 1f) return;
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[TurkPuzzleScript.CurrentDifficutly];
 

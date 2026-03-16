@@ -69,9 +69,9 @@ public class VisionEvents : MonoBehaviour
         }
     }
 
-    public void OnUpgradeBought(Minigame minigame)
+    public void OnUpgradeBought(UpgradesAbstract upgrade)
     {
-        if (minigame != Minigame.Visions) return;
+        if (upgrade.AssociatedMinigame != Minigame.Visions) return;
         int allCount = DialogueLua.GetVariable("PuzzleUpgradesBought").asInt + 1;
         DialogueLua.SetVariable("PuzzleUpgradesBought", allCount);
 

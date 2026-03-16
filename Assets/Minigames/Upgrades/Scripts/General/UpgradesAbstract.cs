@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public enum Minigame
 public abstract class UpgradesAbstract : ScriptableObject
 {
     [HideInInspector] public int Prioirty;
+
+    public string UpgradeID;
 
     public string UpgradeName;
     public Sprite UpgradeIcon;
@@ -38,6 +41,16 @@ public abstract class UpgradesAbstract : ScriptableObject
 
     public bool AutoBuy = false;
 
+    public bool TriggerOnLoadBuy = true;
+
+    public void Awake() 
+    {
+        if (string.IsNullOrEmpty(UpgradeID) || UpgradeID.Length < 5)
+        {
+            UpgradeID = System.Guid.NewGuid().ToString();
+        }
+    }
+
     public bool CanBuy()
     {
         if (UpgradeBought) return false;
@@ -48,6 +61,14 @@ public abstract class UpgradesAbstract : ScriptableObject
         if (CurrencyData.RenownRevolution < RevolutionRenown) return false;
         return true;
     }
+
+    public void LoadBuy()
+    {
+        if (UpgradeBought) return;
+        if (TriggerOnLoadBuy) OnBuy();
+        UpgradeBought = true;
+    }
+
     public bool Buy(bool forceBuy = false)
     {
         if (UpgradeBought) return false;
@@ -65,7 +86,7 @@ public abstract class UpgradesAbstract : ScriptableObject
 
         VisionMascotScript.SayText(MascotDialogue);
 
-        if (!forceBuy) UpgradeScreenScript.UpgradeBoughtEvent?.Invoke(AssociatedMinigame);
+        if (!forceBuy) UpgradeScreenScript.UpgradeBoughtEvent?.Invoke(this);
 
         if(DialogueToTrigger.Length > 0) MessageQueue.addDialogue(DialogueToTrigger);
         if (CompleteQuest) QuestManager.CompleteQuest(QuestManager.currentQuest);
@@ -73,6 +94,8 @@ public abstract class UpgradesAbstract : ScriptableObject
 
         return canBuy;
     }
+
+    
 
     public string CostToText()
     {

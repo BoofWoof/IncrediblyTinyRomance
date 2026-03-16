@@ -27,7 +27,7 @@ public class UpgradeScreenScript : MonoBehaviour
 
     [HideInInspector] public int DisplayedUpgrades = 0;
 
-    public delegate void UpgradeBoughtDelegate(Minigame minigame);
+    public delegate void UpgradeBoughtDelegate(UpgradesAbstract upgrade);
     public static UpgradeBoughtDelegate UpgradeBoughtEvent;
 
     public static Dictionary<Minigame, UpgradeScreenScript> upgradeScreenScripts = new Dictionary<Minigame, UpgradeScreenScript>();
@@ -36,6 +36,8 @@ public class UpgradeScreenScript : MonoBehaviour
 
     public static bool WaitToOpen = false;
 
+    public List<string> PreboughtUpgradeIDs = new List<string>();
+
     public void Awake()
     {
         Lua.RegisterFunction("UpgradeWait", null, SymbolExtensions.GetMethodInfo(() => EnableWaitTrigger()));
@@ -43,6 +45,21 @@ public class UpgradeScreenScript : MonoBehaviour
         upgradeScreenScripts[AssociatedMinigame] = this;
 
         gameObject.SetActive(false);
+    }
+
+    public void PreBuyUpgrades(List<string> UpgradeIDList)
+    {
+        PreboughtUpgradeIDs = UpgradeIDList;
+        CheckForPrebought();
+    }
+
+    private void CheckForPrebought()
+    {
+        foreach (UpgradesAbstract upgrade in UpgradeClones)
+        {
+            if (upgrade.UpgradeBought) continue;
+            if (PreboughtUpgradeIDs.Contains(upgrade.UpgradeID)) upgrade.LoadBuy();
+        }
     }
 
     public void AddNewUpgrades(List<UpgradesAbstract> newUpgrades, bool showNotification = true)
@@ -68,6 +85,9 @@ public class UpgradeScreenScript : MonoBehaviour
             insertionIndex++;
         }
         UpgradeClones.InsertRange(insertionIndex, newUpgradeClones);
+
+        CheckForPrebought();
+
         Refresh();
     }
 
@@ -75,6 +95,7 @@ public class UpgradeScreenScript : MonoBehaviour
     {
         if(WaitToOpen) (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
         UpgradeBoughtEvent += UpgradeAudioPlay;
+        UpgradeBoughtEvent += RecordUpgradeBought;
         UpgradeItemScript.UpgradesAnimating = 0;
         Refresh();
 
@@ -83,6 +104,7 @@ public class UpgradeScreenScript : MonoBehaviour
     public void OnDisable()
     {
         UpgradeBoughtEvent -= UpgradeAudioPlay;
+        UpgradeBoughtEvent -= RecordUpgradeBought;
 
     }
 
@@ -91,10 +113,17 @@ public class UpgradeScreenScript : MonoBehaviour
         WaitToOpen = true;
     }
 
-    public void UpgradeAudioPlay(Minigame minigameUpgraded)
+    public void UpgradeAudioPlay(UpgradesAbstract upgrade)
     {
-        if (minigameUpgraded != AssociatedMinigame) return;
+        if (upgrade.AssociatedMinigame != AssociatedMinigame) return;
         UpgradeAudio.Play();
+    }
+
+    public void RecordUpgradeBought(UpgradesAbstract upgrade)
+    {
+        if (upgrade.AssociatedMinigame != AssociatedMinigame) return;
+        string newID = upgrade.UpgradeID;
+        if(!PreboughtUpgradeIDs.Contains(newID)) PreboughtUpgradeIDs.Add(newID);
     }
 
     public void FullGenerate()

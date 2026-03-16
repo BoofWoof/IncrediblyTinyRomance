@@ -1,3 +1,4 @@
+using PixelCrushers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static TurkPuzzleScript;
 
 public struct SecondaryMultiplier
 {
@@ -42,6 +44,8 @@ public class TurkPuzzleScript : MonoBehaviour
     public TMP_Text NewRecordText;
     public ParticleSystem NewRecordParticles;
     public ParticleSystem NewRecordParticles2;
+
+    public GameObject NewDifficultyUnlockGlow;
 
     public int RepeatsBannedFor = 3;
 
@@ -113,6 +117,50 @@ public class TurkPuzzleScript : MonoBehaviour
     public delegate void PuzzleCompleteCallback(int PuzzlesComplete, TurkPuzzleScript puzzleScript);
     public static PuzzleCompleteCallback OnPuzzleComplete;
 
+    void Awake()
+    {
+        instance = this;
+
+        TimeRecords = new Dictionary<int, float>();
+        PuzzlesCompleted = new Dictionary<int, int>();
+
+        pieceCountModifier = null;
+        secondaryMuliplierListModifier = null;
+        rewardBaseModifier = null;
+        OnPuzzleComplete = null;
+        OnPuzzleGenerate = null;
+
+        CurrentDifficutly = 0;
+        DifficultiesUnlocked = 1;
+
+        Shader.SetGlobalFloat("_TurkCompletion", 0);
+
+        NewRecordText.gameObject.SetActive(false);
+        ScoreMultiplierText.gameObject.SetActive(false);
+        ClickToContinueText.SetActive(false);
+        InteractionBlocker.SetActive(false);
+
+
+        ArtistCredit.text = "";
+
+        PuzzleName.gameObject.SetActive(false);
+
+        PuzzleCenter = gameObject;
+        puzzleScript = this;
+
+        GeneratePuzzle();
+
+        UpdateDifficultyButtons();
+
+    }
+
+    public void Update()
+    {
+        if (CurrentDifficutly >= DifficultiesUnlocked - 1)
+        {
+            NewDifficultyUnlockGlow.SetActive(false);
+        }
+    }
 
     public void OnAppOpen()
     {
@@ -163,30 +211,6 @@ public class TurkPuzzleScript : MonoBehaviour
 
         UpdateDifficultyButtons();
     }
-    void Awake()
-    {
-        instance = this;
-
-        Shader.SetGlobalFloat("_TurkCompletion", 0);
-
-        NewRecordText.gameObject.SetActive(false);
-        ScoreMultiplierText.gameObject.SetActive(false);
-        ClickToContinueText.SetActive(false);
-        InteractionBlocker.SetActive(false);
-
-
-        ArtistCredit.text = "";
-
-        PuzzleName.gameObject.SetActive(false);
-
-        PuzzleCenter = gameObject;
-        puzzleScript = this;
-
-        GeneratePuzzle();
-
-        UpdateDifficultyButtons();
-
-    }
 
     public void UpdateDifficultyButtons()
     {
@@ -226,7 +250,7 @@ public class TurkPuzzleScript : MonoBehaviour
         UniquePuzzlesSolvedText.text = puzzleIdx.ToString() + "/" + maxLength.ToString();
     }
 
-    private void GeneratePuzzle()
+    public void GeneratePuzzle()
     {
         PuzzleEarningsText.gameObject.SetActive(false);
         UpdatePuzzleIdx();
