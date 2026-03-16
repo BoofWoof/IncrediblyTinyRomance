@@ -234,7 +234,6 @@ public class ContactsScript : Saver
         DeleteContactButtons();
         MakeContactButtons();
 
-        Debug.Log("A");
         foreach(KeyValuePair<int, LocalCharacterInfo> info in ContactsFound)
         {
             Debug.Log(info.Key);

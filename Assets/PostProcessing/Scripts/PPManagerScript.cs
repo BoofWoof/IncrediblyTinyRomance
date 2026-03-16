@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 
 public class PPManagerScript : MonoBehaviour
 {
+    public static PPManagerScript instance;
+
     [Header("Emergency")]
     public Volume EmergencyPP;
     public float EmergencyFadePeriod = 2f;
@@ -19,6 +21,11 @@ public class PPManagerScript : MonoBehaviour
     public Volume StandardPP;
     public float StandardFadePeriod = 2f;
     private Coroutine StandardPPCoroutine;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -43,6 +50,19 @@ public class PPManagerScript : MonoBehaviour
         } else
         {
             EmergencyPPCoroutine = StartCoroutine(AdjustPPFilter(EmergencyPP, 1, EmergencyFadePeriod/2f));
+        }
+    }
+
+    public void ImmediateEmergencyPPFilter(bool raised)
+    {
+        if (EmergencyPPCoroutine != null) StopCoroutine(EmergencyPPCoroutine);
+        if (raised)
+        {
+            EmergencyPP.weight = 0f;
+        }
+        else
+        {
+            EmergencyPP.weight = 1f;
         }
     }
     private void AdjustPhonePPFilter(bool raised)

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShutterScript : MonoBehaviour
 {
+    public static ShutterScript instance;
+
     public List<GameObject> Shutters;
     public float RaisedHeight = 2.638f;
     public float LoweredHeight = 0;
@@ -12,9 +14,8 @@ public class ShutterScript : MonoBehaviour
     public float DropDuration = 0.3f;
 
     private bool IsCoroutineRunning = false;
-    private float CurrentHeight = 0;
 
-    public bool ShuttersLowered = true;
+    public static bool ShuttersLowered = true;
 
     public AudioSource ShudderAudioSource;
     public AudioClip ShudderRaiseClip;
@@ -27,9 +28,9 @@ public class ShutterScript : MonoBehaviour
 
     public AudioSource Siren;
 
-    public static ShutterScript instance;
-
     public bool ForceShutdown = false;
+
+    public GameObject PhoneToDelete;
 
     public void Awake()
     {
@@ -38,12 +39,42 @@ public class ShutterScript : MonoBehaviour
 
     public void Start()
     {
+        InstantClose();
+        //InstantOpen();
+    }
+
+    public void DestroyPhone()
+    {
+        if (PhoneToDelete != null) Destroy(PhoneToDelete);
+    }
+
+    public void InstantClose()
+    {
+        ShuttersLowered = true;
         foreach (GameObject shutter in Shutters)
         {
             Animator animator = shutter.GetComponent<Animator>();
+            animator.SetBool("Open", false);
             animator.Play(animator.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, 1f);
             animator.Update(0f); // Force immediate update
-        };
+        }
+        CrossfadeScript.SetLowpassOn(true);
+        MusicSelectorScript.SetOverworldSong(5, true);
+        PPManagerScript.instance.ImmediateEmergencyPPFilter(false);
+    }
+    public void InstantOpen()
+    {
+        ShuttersLowered = false;
+        foreach (GameObject shutter in Shutters)
+        {
+            Animator animator = shutter.GetComponent<Animator>();
+            animator.SetBool("Open", true);
+            animator.Play("Open", 0, 1f);
+            animator.Update(0f); // Force immediate update
+        }
+        CrossfadeScript.SetLowpassOn(false);
+        MusicSelectorScript.SetOverworldSong(1, true);
+        PPManagerScript.instance.ImmediateEmergencyPPFilter(true);
     }
 
     public void ForceShutterLockdownToggle()
@@ -68,6 +99,7 @@ public class ShutterScript : MonoBehaviour
             FirstRaise = false;
             HudScript.SetContinueTutorial();
             PhonePositionScript.AllowPhoneToggle = true;
+            DestroyPhone();
         }
 
         if (ShudderAudioSource.isPlaying) return;

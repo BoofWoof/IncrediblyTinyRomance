@@ -1,7 +1,9 @@
+using PixelCrushers;
 using PixelCrushers.DialogueSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UpgradeHolderSaver))]
 public class UpgradeHolder : ActiveBroadcast
 {
     public Minigame AssociatedMinigame;
@@ -10,7 +12,7 @@ public class UpgradeHolder : ActiveBroadcast
 
     public List<UpgradesAbstract> Upgrades;
 
-    private bool Submitted = false;
+    public bool Submitted = false;
 
     public static Dictionary<Minigame, List<UpgradeHolder>> AllUpgradeHolders = new Dictionary<Minigame, List<UpgradeHolder>>();
 

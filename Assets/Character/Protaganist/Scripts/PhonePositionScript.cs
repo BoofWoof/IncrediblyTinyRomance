@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 public class PhonePositionScript : MonoBehaviour
 {
@@ -88,7 +86,7 @@ public class PhonePositionScript : MonoBehaviour
             {
                 phone.localPosition = raised_transfom.localPosition;
             }
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         yield return new WaitForSeconds(0.2f);
         moving = false;
@@ -104,19 +102,27 @@ public class PhonePositionScript : MonoBehaviour
         moving = true;
         raised = false;
         yield return new WaitForSeconds(0.2f);
-        while (phone.localPosition != lowered_transform.localPosition || phone.localRotation != lowered_transform.localRotation)
+
+        bool reachedDestination = false;
+
+        while (!reachedDestination)
         {
+            // Move and Rotate
             phone.localRotation = Quaternion.RotateTowards(phone.localRotation, lowered_transform.localRotation, rotation_speed * Time.deltaTime);
-            if (Vector3.Distance(phone.localRotation.eulerAngles, lowered_transform.localRotation.eulerAngles) < 0.01f)
-            {
-                phone.localRotation = lowered_transform.localRotation;
-            }
             phone.localPosition = Vector3.MoveTowards(phone.localPosition, lowered_transform.localPosition, movement_speed * Time.deltaTime);
-            if (Vector3.Distance(phone.localPosition, lowered_transform.localPosition) < 0.001f)
+
+            // Check if we are "close enough" to snap and finish
+            float dist = Vector3.Distance(phone.localPosition, lowered_transform.localPosition);
+            float angle = Quaternion.Angle(phone.localRotation, lowered_transform.localRotation);
+
+            if (dist < 0.001f && angle < 0.05f)
             {
                 phone.localPosition = lowered_transform.localPosition;
+                phone.localRotation = lowered_transform.localRotation;
+                reachedDestination = true;
             }
-            yield return new WaitForEndOfFrame();
+
+            yield return null;
         }
         moving = false;
     }

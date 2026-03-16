@@ -28,6 +28,8 @@ public class AppMenuScript : AppScript
 
     public static bool FirstAppOpened = true;
 
+    [HideInInspector] public static List<string> UnlockedApps = new List<string>(); //ForSaving
+
     private void OnEnable()
     {
         NameToApp = new Dictionary<string, AppMenuObjectData>();
@@ -66,6 +68,8 @@ public class AppMenuScript : AppScript
 
     public static void RevealApp(string AppName)
     {
+        UnlockedApps.Add(AppName);
+
         Instance.ClearButtons();
         if (Instance.NameToApp.ContainsKey(AppName.ToLower()))
         {

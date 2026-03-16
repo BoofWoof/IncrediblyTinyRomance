@@ -11,7 +11,7 @@ namespace DebugTools.DeveloperConsole.Commands
 
             BalconyEventsScript.instance.StartSystem();
 
-            if (ShutterScript.instance.ShuttersLowered)
+            if (ShutterScript.ShuttersLowered)
             {
                 ShutterScript.instance.ActivateShutters();
             }
