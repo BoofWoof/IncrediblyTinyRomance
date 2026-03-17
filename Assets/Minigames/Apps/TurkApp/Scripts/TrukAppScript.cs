@@ -22,13 +22,13 @@ public class TrukAppScript : AppScript
 
     private void OnDisable()
     {
-
         OnShowApp -= StartSong;
         OnHideApp -= EndSong;
     }
 
-    private void Awake()
+    new private void Awake()
     {
+        base.Awake();
         PhoneScreenCanvas = phoneScreenCanvas;
         Hide(true);
         RegisterInputActions();

@@ -128,7 +128,6 @@ public class TurkPuzzleScript : MonoBehaviour
         secondaryMuliplierListModifier = null;
         rewardBaseModifier = null;
         OnPuzzleComplete = null;
-        OnPuzzleGenerate = null;
 
         CurrentDifficutly = 0;
         DifficultiesUnlocked = 1;

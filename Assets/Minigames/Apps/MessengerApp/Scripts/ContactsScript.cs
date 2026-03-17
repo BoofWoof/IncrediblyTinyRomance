@@ -233,12 +233,6 @@ public class ContactsScript : Saver
     {
         DeleteContactButtons();
         MakeContactButtons();
-
-        foreach(KeyValuePair<int, LocalCharacterInfo> info in ContactsFound)
-        {
-            Debug.Log(info.Key);
-            Debug.Log(info.Value.Name);
-        }
     }
 
     public void SwapToCharacterMessanger(LocalCharacterInfo selectCharacter)

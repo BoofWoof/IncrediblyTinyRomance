@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: 
+  DifficultyNames: Perched
   CharacterVideo: {fileID: 32900000, guid: 8c78797836c43354193e59068df6a99f, type: 3}
   SpeechSound: {fileID: 8300000, guid: e8826ae004715ff44913dd94da14c311, type: 3}
   FirstIncrease: 1
@@ -86,7 +87,8 @@ MonoBehaviour:
   - I'm glad that <color=blue>Flock</color> is nice enough to gift us such wise messages.
   - We should look into that message, it seemed to be offering great wisdom!
   SetSolutionDialogues:
-  - CompletionCount: 15
+  - CompletionName: Community
+    CompletionCount: 15
     SolutionDialogues: 'I''m just wondering.<n>
 
       Do you ever feel lonely?<n>
@@ -111,7 +113,8 @@ MonoBehaviour:
       Think on it.'
     Triggered: 0
   TimeDialogues:
-  - TimePassed: 50
+  - TimeName: YouGotThis
+    TimePassed: 50
     AllowRetrigger: 1
     SolutionDialogues:
     - We're both just relaxing. That's good.

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
   m_Name: Easy
   m_EditorClassIdentifier: 
+  DifficultyNames: Cracked
   CharacterVideo: {fileID: 32900000, guid: a7e4375d61e80aa4e854097096ae666d, type: 3}
   SpeechSound: {fileID: 8300000, guid: 1babffc1f89cba34faabd38e35dfcf6e, type: 3}
   FirstIncrease: 1
@@ -94,7 +95,8 @@ MonoBehaviour:
   - Such wisdom! I'll always remember that pop up.
   - Maybe we'll get another one soon?
   SetSolutionDialogues:
-  - CompletionCount: 6
+  - CompletionName: NameMe
+    CompletionCount: 6
     SolutionDialogues: 'Hey, I was thinking...<n>
 
       We''re getting so close
@@ -111,7 +113,8 @@ MonoBehaviour:
       Wow,
       how cool! Thanks! <3'
     Triggered: 0
-  - CompletionCount: 19
+  - CompletionName: Rename
+    CompletionCount: 19
     SolutionDialogues: 'Just because I''m nervous... you do like the name you gave
       me, right? If not, we could always change it.<n>
 
@@ -124,7 +127,8 @@ MonoBehaviour:
       you! It''s a good name!<n>'
     Triggered: 0
   TimeDialogues:
-  - TimePassed: 40
+  - TimeName: Supportive
+    TimePassed: 40
     AllowRetrigger: 1
     SolutionDialogues:
     - You got this!

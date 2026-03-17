@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b456d9b8036ccf47a609c1c0c153344, type: 3}
   m_Name: Hard
   m_EditorClassIdentifier: 
+  DifficultyNames: Fly
   CharacterVideo: {fileID: 32900000, guid: 307626eb10f190d43836e5ddbc44ca60, type: 3}
   SpeechSound: {fileID: 8300000, guid: 9f5d0142bf5687245a6a6635dc588cc9, type: 3}
   FirstIncrease: 1
@@ -98,7 +99,8 @@ MonoBehaviour:
   - You must be a speed reader as fast as you got through that one.
   - Please take such messages more seriously!
   SetSolutionDialogues:
-  - CompletionCount: 6
+  - CompletionName: LastNames
+    CompletionCount: 6
     SolutionDialogues: 'Does no one around here have a last name?<n>
 
       That''s
@@ -109,7 +111,8 @@ MonoBehaviour:
 
       But that couldn''t happen... hahaha...'
     Triggered: 0
-  - CompletionCount: 20
+  - CompletionName: ErrorIDNotFound
+    CompletionCount: 20
     SolutionDialogues: 'You know so many people...<n>
 
       And yet none are found
@@ -130,10 +133,12 @@ MonoBehaviour:
       We should always be looking to help others.'
     Triggered: 0
   TimeDialogues:
-  - TimePassed: 60
+  - TimeName: Supportive
+    TimePassed: 60
     AllowRetrigger: 1
     SolutionDialogues:
     - I know it's hard, but if something is hard, just try harder!
     - You're not weak, show the constellation whose boss!
     - Every wall in your way is a challenge to be overcome! Glide over it with me!
     TriggerOccurances: 0
+  DifficultyReminder: 

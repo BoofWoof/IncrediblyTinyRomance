@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class AppScript : MonoBehaviour
 {
     public string AppName;
-    public static string ActiveAppName;
+    public static string ActiveAppName = "";
 
     public GameObject AppRoot;
     public GameObject PreviousApp;
@@ -21,6 +21,12 @@ public class AppScript : MonoBehaviour
     public UnityEvent OnActivateApp;
     public UnityEvent OnDeactivateApp;
 
+    public void Awake()
+    {
+        ActiveAppName = "";
+        OnHideApp = null;
+        OnShowApp = null;
+    }
     public void Start()
     {
         if (HideOnStart)
@@ -28,20 +34,13 @@ public class AppScript : MonoBehaviour
             Hide(false);
             RegisterInputActions();
         }
-        ActiveAppName = "";
-        OnHideApp = null;
-        OnShowApp = null;
-    }
-
-    public void OnDisable()
-    {
-        OnHideApp = null;
-        OnShowApp = null;
     }
 
     public void OnDestroy()
     {
         InputManager.PlayerInputs.Phone.AppReturn.performed -= HidePressed;
+        OnHideApp = null;
+        OnShowApp = null;
     }
 
     public void RegisterInputActions()

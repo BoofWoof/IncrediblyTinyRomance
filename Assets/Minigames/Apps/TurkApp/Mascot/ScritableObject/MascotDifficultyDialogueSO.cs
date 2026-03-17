@@ -6,6 +6,7 @@ using UnityEngine.Video;
 [Serializable]
 public class VisionCompletionMascotText
 {
+    public string CompletionName;
     public int CompletionCount;
     [TextArea] public string SolutionDialogues;
     [HideInInspector] public bool Triggered;
@@ -13,6 +14,7 @@ public class VisionCompletionMascotText
 [Serializable]
 public class TimePassingDialogues
 {
+    public string TimeName;
     public float TimePassed;
     public bool AllowRetrigger;
     [TextArea] public List<string> SolutionDialogues;
@@ -22,6 +24,7 @@ public class TimePassingDialogues
 [CreateAssetMenu(fileName = "MascotDifficultyDialogueSO", menuName = "Visions/MascotDifficultyDialogueSO")]
 public class MascotDifficultyDialogueSO : ScriptableObject
 {
+    public string DifficultyNames;
 
     [Header("Identity")]
     public VideoClip CharacterVideo;

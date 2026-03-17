@@ -52,8 +52,9 @@ namespace DS
         [HideInInspector] public bool SongLock = false;
 
         // Start is called before the first frame update
-        void Awake()
+        new void Awake()
         {
+            base.Awake();
             instance = this;
             Lua.RegisterFunction("SetTextSong", this, SymbolExtensions.GetMethodInfo(() => SetTextSongLUA(0f)));
             Lua.RegisterFunction("LockInSong", this, SymbolExtensions.GetMethodInfo(() => LockInSong()));
@@ -282,9 +283,8 @@ namespace DS
             OnHideApp += MusinOnAppHide;
         }
 
-        new public void OnDisable()
+        public void OnDisable()
         {
-            base.OnDisable();
             OnShowApp -= MusinOnAppShow;
             OnHideApp -= MusinOnAppHide;
         }

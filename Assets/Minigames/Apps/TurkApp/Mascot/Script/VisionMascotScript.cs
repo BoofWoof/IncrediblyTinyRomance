@@ -15,6 +15,7 @@ public class VisionMascotScript : MonoBehaviour
 
     public VideoPlayer CharacterVideo;
 
+    public string MascotName = "";
     public TMP_Text NameText;
 
     public TMP_Text TextBoxText;
@@ -176,10 +177,12 @@ public class VisionMascotScript : MonoBehaviour
         timerDialogueData.TriggerOccurances++;
     }
 
-    public void OnPuzzleGeneration()
+    public IEnumerator DelayedOnPuzzleGeneration()
     {
-        if (DialogueActive) return;
-        if (!AppScript.CheckIfActive("Visions") || Time.timeScale < 1f) return;
+        yield return new WaitForSeconds(0.1f);
+
+        if (DialogueActive) yield break;
+        if (!AppScript.CheckIfActive("Visions") || Time.timeScale < 1f) yield break;
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[TurkPuzzleScript.CurrentDifficutly];
 
@@ -192,6 +195,7 @@ public class VisionMascotScript : MonoBehaviour
         if (TurkPuzzleScript.PuzzlesCompleted.ContainsKey(TurkPuzzleScript.CurrentDifficutly))
         {
             int puzzlesCompleted = TurkPuzzleScript.PuzzlesCompleted[TurkPuzzleScript.CurrentDifficutly];
+
             if (currentDifficultyDialogue.SolutionDialogues.ContainsKey(puzzlesCompleted))
             {
                 VisionCompletionMascotText textData = currentDifficultyDialogue.SolutionDialogues[puzzlesCompleted];
@@ -200,16 +204,21 @@ public class VisionMascotScript : MonoBehaviour
                 {
                     textData.Triggered = true;
                     MascotSayText(textData.SolutionDialogues);
-                    return;
+                    yield break;
                 }
             }
         }
 
+        if (TurkPuzzleScript.CurrentDifficutly == TurkPuzzleScript.DifficultiesUnlocked - 1) NewDifficultyUnlocked = false;
         if (NewDifficultyUnlocked)
         {
             MascotSayText(currentDifficultyDialogue.DifficultyReminder);
             NewDifficultyUnlocked = false;
         }
+    }
+    public void OnPuzzleGeneration()
+    {
+        StartCoroutine(DelayedOnPuzzleGeneration());
     }
 
     public void OnPuzzleEnd()
@@ -222,6 +231,7 @@ public class VisionMascotScript : MonoBehaviour
 
     public void OnNameSet(string newName)
     {
+        MascotName = newName;
         NameText.text = newName;
         WaitForInteraction = false;
         WaitForText = false;
@@ -280,13 +290,20 @@ public class VisionMascotScript : MonoBehaviour
         ShowText(text);
     }
 
+    public void UpdateCharacter()
+    {
+        MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[TurkPuzzleScript.CurrentDifficutly];
+        SpeechAudioSource.clip = currentDifficultyDialogue.SpeechSound;
+        CharacterVideo.clip = currentDifficultyDialogue.CharacterVideo;
+    }
+
     public void OnDifficultyIncrease(int currentDifficulty)
     {
+        if (currentDifficulty == TurkPuzzleScript.DifficultiesUnlocked-1) NewDifficultyUnlocked = false;
+
         if (DialogueActive) return;
 
         if (currentDifficulty >= DifficultyChangeMessages.Count) return;
-
-        if (currentDifficulty == TurkPuzzleScript.DifficultiesUnlocked) NewDifficultyUnlocked = false;
 
         foreach (Coroutine c in WaitCoroutines)
         {
@@ -295,9 +312,7 @@ public class VisionMascotScript : MonoBehaviour
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[currentDifficulty];
 
-        SpeechAudioSource.clip = currentDifficultyDialogue.SpeechSound;
-        CharacterVideo.clip = currentDifficultyDialogue.CharacterVideo;
-
+        UpdateCharacter();
 
         if (currentDifficultyDialogue.FirstIncrease)
         {
@@ -322,8 +337,7 @@ public class VisionMascotScript : MonoBehaviour
 
         MascotDifficultyDialogueSO currentDifficultyDialogue = DifficultyChangeMessages[currentDifficulty];
 
-        SpeechAudioSource.clip = currentDifficultyDialogue.SpeechSound;
-        CharacterVideo.clip = currentDifficultyDialogue.CharacterVideo;
+        UpdateCharacter();
 
         if (currentDifficultyDialogue.FirstDecrease)
         {
