@@ -16,6 +16,8 @@ public class QuestManager : MonoBehaviour
     public static QuestChangedDelegate NewQuest;
     public static QuestChangedDelegate CompletedQuest;
 
+    public bool WaitForNewQuest = false;
+
     public static QuestManager QuestManagerInstance;
 
     public float CharacterPeriod = 0.005f;
@@ -25,6 +27,9 @@ public class QuestManager : MonoBehaviour
     {
         QuestText = questText;
         currentQuestIndex = 0;
+
+        NewQuest = null;
+        CompletedQuest = null;
 
         QuestManagerInstance = this;
         transform.parent = DialogueManager.instance.transform;
@@ -53,19 +58,26 @@ public class QuestManager : MonoBehaviour
     public static void CompleteQuest(string questTitle)
     {
         QuestLog.SetQuestState(questTitle, QuestState.Success);
-        QuestText.color = Color.green;
-        QuestText.text = "Task Complete";
+        SetTextToWaiting();
+    }
+
+    public static void SetTextToWaiting()
+    {
+        QuestText.color = new Color(0f, 0.8f, 0f, 0.5f);
+        QuestText.text = "Task Complete: Look For A New Task";
+        QuestManagerInstance.WaitForNewQuest = true;
     }
 
     public static void ChangeQuest (string newQuestTitle)
     {
+        QuestManagerInstance.WaitForNewQuest = false;
+
         QuestText.color = Color.white;
         string[] QuestList = QuestLog.GetAllQuests(QuestState.Active | QuestState.Success | QuestState.Unassigned, false);
         currentQuestIndex = Array.IndexOf(QuestList, newQuestTitle);
 
-        QuestLog.SetQuestState(currentQuest, QuestState.Success);
+        if(! string.IsNullOrEmpty(currentQuest)) QuestLog.SetQuestState(currentQuest, QuestState.Success);
         QuestLog.SetQuestState(newQuestTitle, QuestState.Active);
-
 
         CompletedQuest?.Invoke(currentQuest);
 

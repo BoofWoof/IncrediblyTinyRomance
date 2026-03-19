@@ -10,7 +10,7 @@ public class NotificationMenuScript : MonoBehaviour
 
     private static Dictionary<string, Sprite> Notifications = new Dictionary<string, Sprite>();
 
-    public void Start()
+    public void Awake()
     {
         instance = this;
     }

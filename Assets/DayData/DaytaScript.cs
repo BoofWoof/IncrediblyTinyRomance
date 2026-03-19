@@ -67,7 +67,6 @@ public class DaytaScript : MonoBehaviour
 
     public IEnumerator StartDayOne()
     {
-        QuestManager.SetQuestByIndex(0);
         CharacterSpeechScript.BroadcastForceGesture("MacroAries", "BannEnterPuff");
 
         TitleCard.gameObject.SetActive(true);

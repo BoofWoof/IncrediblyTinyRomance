@@ -5,6 +5,10 @@ using UnityEngine;
 
 public abstract class EventAbstract : ScriptableObject
 {
+    public string EventID;
+
+    public static List<string> TriggeredEventIDs = new List<string>();
+
     private static bool ActivationOnHold = false;
     private static List<EventAbstract> WaitingEvents = new List<EventAbstract>();
 
@@ -17,6 +21,14 @@ public abstract class EventAbstract : ScriptableObject
     public float DialogueDelay = 0f;
 
     public List<BroadcastStruct> AdditionalActivations = new List<BroadcastStruct>();
+
+    public void Awake()
+    {
+        if(string.IsNullOrEmpty(EventID) || EventID.Length < 5)
+        {
+            EventID = System.Guid.NewGuid().ToString();
+        }
+    }
 
     public bool CheckIfValid(float Value)
     {
@@ -33,8 +45,10 @@ public abstract class EventAbstract : ScriptableObject
         }
 
 
-        if (HasBeenTriggered) return;
+        if (HasBeenTriggered || TriggeredEventIDs.Contains(EventID)) return;
         HasBeenTriggered = true;
+
+        TriggeredEventIDs.Add(EventID);
 
         ActivateAdditionalConnections();
         if (StartDialogue.Length > 0) MessageQueue.addDialogue(StartDialogue, DialogueDelay);

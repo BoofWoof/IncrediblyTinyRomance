@@ -24,12 +24,12 @@ public class MessageSendScript : MonoBehaviour
     public bool PhoneEnabled = false;
     public TMP_Text MessageText;
 
-    private Color OriginalColor = Color.white;
+    private Color OriginalColor = new Color(0.415f, 0.345f, 0.125f);
 
 
     public void Awake()
     {
-        OriginalColor = SubmissionButton.GetComponentInChildren<TMP_Text>().color;
+        OriginalColor = MessageText.color;
     }
 
     public void Start()
@@ -41,9 +41,6 @@ public class MessageSendScript : MonoBehaviour
         backupPos = transform.localPosition;
 
         IsSpecial = false;
-
-        OriginalColor = MessageText.color;
-
     }
 
     public void OnEnable()

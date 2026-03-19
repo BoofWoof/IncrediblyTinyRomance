@@ -42,21 +42,25 @@ public class HudScript : MonoBehaviour
     public void Awake()
     {
         instance = this;
+
+        MoveArrow.SetActive(false);
+        LookArrow.SetActive(false);
+        InteractArrow.SetActive(false);
+
+        Lua.RegisterFunction("MovementTutorial", this, SymbolExtensions.GetMethodInfo(() => ShowMoveTutorial()));
     }
 
-    public void Start()
+    public void OnEnable()
     {
         PhonePositionScript.PhoneToggled += ShowReticle;
-
-        if(DayInfo.CurrentDay == 1)
-        {
-            TutorialCoroutine = StartCoroutine(Tutorial());
-        }
     }
-
     public void OnDisable()
     {
         PhonePositionScript.PhoneToggled -= ShowReticle;
+    }
+    public void ShowMoveTutorial()
+    {
+        TutorialCoroutine = StartCoroutine(Tutorial());
     }
 
     public void ShowReticle(bool show)
@@ -102,6 +106,11 @@ public class HudScript : MonoBehaviour
 
     public IEnumerator Tutorial()
     {
+        ShutterButton.ObjectEnabled = false;
+        QuestManager.SetQuestByIndex(0);
+
+        MoveArrow.SetActive(true);
+
         LookArrow.SetActive(false);
 
         InteractArrow.SetActive(false);

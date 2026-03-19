@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShutterScript : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class ShutterScript : MonoBehaviour
     public bool ForceShutdown = false;
 
     public GameObject PhoneToDelete;
+
+    public ActivatableObjectScript ShutterButton;
 
     public void Awake()
     {

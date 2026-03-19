@@ -426,8 +426,8 @@ GameObject:
   - component: {fileID: 438522421279765838}
   - component: {fileID: 204096933836782239}
   - component: {fileID: 5810935538611232394}
+  - component: {fileID: 3274790786838760801}
   - component: {fileID: 372162510266199916}
-  - component: {fileID: 2909233312586975978}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -494,6 +494,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3274790786838760801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933285735622281994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2e4e042ad7f3c42812c42711e31c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_key: 
+  m_appendSaverTypeToKey: 0
+  m_saveAcrossSceneChanges: 1
+  m_restoreStateOnStart: 0
 --- !u!114 &372162510266199916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,25 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9156992dd3e2095419eda65d40b73901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2909233312586975978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3933285735622281994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86e4361f56649c48a778fe7a5d81b2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_key: 
-  m_appendSaverTypeToKey: 0
-  m_saveAcrossSceneChanges: 1
-  m_restoreStateOnStart: 0
-  m_mode: 1
-  m_destroyMode: 0
-  m_destroyedVersionPrefab: {fileID: 0}
+  CompletedTutorial: 0
 --- !u!1 &3948932091622416301
 GameObject:
   m_ObjectHideFlags: 0

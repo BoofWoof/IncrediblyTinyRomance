@@ -1,12 +1,16 @@
+using PixelCrushers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SPrayerSubmissionScript : MonoBehaviour
+public class SPrayerSubmissionScript : Saver
 {
     public List<SpecialPrayerSetSO> PrayerToSubmit;
 
     public static List<SpecialPrayerSetSO> WaitingForcedPrayers;
     public static List<SpecialPrayerData> WaitingSpecialPrayers;
+
+    public static List<string> SentPrayerIDs = new List<string>();
 
     public delegate void NewPrayerDelegate();
     public static NewPrayerDelegate OnNewForcedPrayers;
@@ -16,10 +20,12 @@ public class SPrayerSubmissionScript : MonoBehaviour
 
     public bool SetSubmitterAsTopicTarget = false;
 
-    public void Awake()
+    new public void Awake()
     {
-        if (WaitingForcedPrayers == null) WaitingForcedPrayers = new List<SpecialPrayerSetSO>();
-        if (WaitingSpecialPrayers == null) WaitingSpecialPrayers = new List<SpecialPrayerData>();
+        base.Awake();
+        WaitingForcedPrayers = new List<SpecialPrayerSetSO>();
+        WaitingSpecialPrayers = new List<SpecialPrayerData>();
+        SentPrayerIDs = new List<string>();
         Submitted = false;
     }
 
@@ -28,7 +34,15 @@ public class SPrayerSubmissionScript : MonoBehaviour
         if(Submitted) return;
         foreach (SpecialPrayerSetSO prayerSet in PrayerToSubmit)
         {
+            if (SentPrayerIDs.Contains(prayerSet.ID)) return;
+
             SpecialPrayerSetSO instantiatedPrayer = Instantiate(prayerSet);
+
+            foreach (SpecialPrayerData specialPrayerData in instantiatedPrayer.PrayerOptions)
+            {
+                specialPrayerData.ParentID = prayerSet.ID;
+            }
+
             if (SetSubmitterAsTopicTarget)
             {
                 foreach (SpecialPrayerData specialPrayerData in instantiatedPrayer.PrayerOptions)
@@ -53,5 +67,25 @@ public class SPrayerSubmissionScript : MonoBehaviour
             }
         }
         Submitted = true;
+    }
+
+    [Serializable]
+    public class PSubmissionSaveData
+    {
+        public bool Submitted = false;
+    }
+
+    public override string RecordData()
+    {
+        PSubmissionSaveData newSaveData = new PSubmissionSaveData()
+        {
+            Submitted = Submitted
+        };
+        return SaveSystem.Serialize(newSaveData);
+    }
+
+    public override void ApplyData(string s)
+    {
+        if (SaveSystem.Deserialize<PSubmissionSaveData>(s).Submitted) SubmitPrayersToQueue();
     }
 }

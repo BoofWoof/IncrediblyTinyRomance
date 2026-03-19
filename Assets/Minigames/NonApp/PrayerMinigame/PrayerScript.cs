@@ -8,6 +8,8 @@ using static PixelCrushers.AnimatorSaver;
 
 public class PrayerResponse
 {
+    public string AssociatedPrayerSetID;
+
     public int AssociatedIdx;
     public string Prayer;
     public string Author;
@@ -79,6 +81,34 @@ public class PrayerScript : MonoBehaviour
 
     private bool _SpecialPrayerActive = false;
 
+    public void Awake()
+    {
+        instance = this;
+
+        ProcessPrayers();
+        GenerateNewPrayers();
+
+        PrayerSubmitted = null;
+
+        GoodPrayerCount = 0;
+        BadPrayerCount = 0;
+        TotalPrayerCount = 0;
+
+        StoryMode = false;
+    }
+
+    public void OnEnable()
+    {
+        SPrayerSubmissionScript.OnNewForcedPrayers += OnNewForcedPrayer;
+        GameStateMonitor.OnEventChange += OnGameEventStateChange;
+    }
+
+    public void OnDisable()
+    {
+        SPrayerSubmissionScript.OnNewForcedPrayers -= OnNewForcedPrayer;
+        GameStateMonitor.OnEventChange -= OnGameEventStateChange;
+    }
+
     public void ActivateJudgement()
     {
         if (JudgementActive) return;
@@ -134,17 +164,6 @@ public class PrayerScript : MonoBehaviour
             RamAngyLevel = AngerThreshold;
             ActivateGameOver();
         }
-    }
-
-    private void Start()
-    {
-        instance = this;
-
-        ProcessPrayers();
-        GenerateNewPrayers();
-
-        SPrayerSubmissionScript.OnNewForcedPrayers += OnNewForcedPrayer;
-        GameStateMonitor.OnEventChange += OnGameEventStateChange;
     }
     public void SubmitAnswer(int answerIdx)
     {
@@ -336,6 +355,8 @@ public class PrayerScript : MonoBehaviour
 
         if (isSpecialPrayer)
         {
+            SPrayerSubmissionScript.SentPrayerIDs.Add(CurrentResponse[answerIdx].AssociatedPrayerSetID);
+
             RamAngyLevel -= AngerReduction;
             if (RamAngyLevel < 0) RamAngyLevel = 0;
 
@@ -348,8 +369,6 @@ public class PrayerScript : MonoBehaviour
 
                 CharacterSpeechScript.BroadcastSpeechAttempt("MacroAries", CurrentResponse[answerIdx].AssociatedSpecialPrayerData.SpecialResponseChainVL);
 
-                Debug.Log("AAAAAAAAAAAAAAAAAA");
-                Debug.Log(CurrentResponse[answerIdx].TopicTarget);
                 LookScript.ExternalDistractionPoint = CurrentResponse[answerIdx].TopicTarget;
 
                 yield return new WaitForSeconds(CurrentResponse[answerIdx].AssociatedSpecialPrayerData.GetChainTime());
@@ -452,6 +471,7 @@ public class PrayerScript : MonoBehaviour
                 Debug.Log(prayerData.TopicTarget);
                 PrayerResponse newResponse = new PrayerResponse
                 {
+                    AssociatedPrayerSetID = prayerData.ParentID,
                     AssociatedIdx = -1,
                     Prayer = prayerData.Option,
                     Author = prayerData.AuthorName,
@@ -517,6 +537,7 @@ public class PrayerScript : MonoBehaviour
                         selectedSpecials.Add(selectedPrayerIdx);
                         PrayerResponse newResponse = new PrayerResponse
                         {
+                            AssociatedPrayerSetID = selectedPrayer.ParentID,
                             AssociatedIdx = -1,
                             Prayer = selectedPrayer.Option,
                             Author = selectedPrayer.AuthorName,

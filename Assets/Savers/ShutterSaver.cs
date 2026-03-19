@@ -29,5 +29,6 @@ public class ShutterSaver : Saver
 
         PhonePositionScript.AllowPhoneToggle = true;
         ShutterScript.instance.DestroyPhone();
+        ShutterScript.instance.ShutterButton.ObjectEnabled = true;
     }
 }

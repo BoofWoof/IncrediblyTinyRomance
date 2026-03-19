@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class SpecialPrayerData
 {
+    public string ParentID;
+
     public string Option;
     public string AuthorName;
     public bool GoodPrayer;
