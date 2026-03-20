@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3651126869086201035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317177045429528257}
+  - component: {fileID: 2496955825329414836}
+  - component: {fileID: 5953692159428518341}
+  m_Layer: 0
+  m_Name: SidCardCarryable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1317177045429528257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3651126869086201035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000007450581, y: -0.000000014901161, z: -0.000000029802322, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1111111, y: 0.111111104, z: 0.11111112}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4746204463344955640}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2496955825329414836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3651126869086201035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95ea3766da10cf43b1d207173360577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentReleaseNode: {fileID: 0}
+  ObjectID: 0
+  ObjectName: SidCard
+  ObjectActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  City: 0
+  LightColor: {r: 0, g: 1, b: 0.97360396, a: 0}
+--- !u!114 &5953692159428518341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3651126869086201035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b53215ca8f81324a91d5cb66da8d6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Day0: 1
+  Day1: 0
+  Day2: 0
+  Day3: 0
+  Day4: 0
+  Day5: 0
+--- !u!1001 &1231425328128191740
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1317177045429528257}
+    m_Modifications:
+    - target: {fileID: -1778279599665101884, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_key
+      value: SidCard_1710
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -30.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593500422370166462, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_Name
+      value: SidCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593500422370166462, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -1300418587205578460, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+--- !u!4 &4746204463344955640 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5821748179710991364, guid: f755fee460262644c9d50cdc71a3c27a, type: 3}
+  m_PrefabInstance: {fileID: 1231425328128191740}
+  m_PrefabAsset: {fileID: 0}

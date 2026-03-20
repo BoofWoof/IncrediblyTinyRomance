@@ -19,7 +19,10 @@ public class ShutterSaver : Saver
     }
     public override void ApplyData(string s)
     {
-        if (SaveSystem.Deserialize<ShutterSave>(s).Open)
+        ShutterSave saveData = SaveSystem.Deserialize<ShutterSave>(s);
+        if (saveData == null) return;
+
+        if (saveData.Open)
         {
             ShutterScript.instance.InstantOpen();
         } else

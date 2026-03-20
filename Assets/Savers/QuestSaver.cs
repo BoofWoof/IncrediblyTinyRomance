@@ -24,6 +24,8 @@ public class QuestSaver : Saver
     {
         QuestSaveData saveData = SaveSystem.Deserialize<QuestSaveData>(s);
 
+        if (saveData == null) return;
+
         if (saveData.WaitingForNewQuest)
         {
             QuestManager.currentQuest = saveData.QuestName;

@@ -45,6 +45,8 @@ public class PrayerScript : MonoBehaviour
     public float AngerReduction = 50f;
     public float AngerThreshold = 180f;
 
+    public float ResumeAngerLevel = 0f;
+
     private int GoodIdx;
 
     public List<MessageSendScript> SubmissionButtons;
@@ -114,7 +116,10 @@ public class PrayerScript : MonoBehaviour
         if (JudgementActive) return;
         Debug.Log("Activating Judgement");
         JudgementActive = true;
-        RamAngyLevel = 0;
+
+        RamAngyLevel = ResumeAngerLevel;
+        ResumeAngerLevel = 0f;
+
         JudgementFocus = false;
         BalconyEventsScript.instance.StartSystem();
 

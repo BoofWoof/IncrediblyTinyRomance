@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ObjectNodeTracker : MonoBehaviour
 {
-    public List<CityNode> CityNodes = new List<CityNode>();
+    public List<ReleasePointNode> CityNodes = new List<ReleasePointNode>();
 
     public static ObjectNodeTracker Instance;
 

@@ -3,7 +3,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class HandScript : MonoBehaviour
 {
-    public GameObject[] PossibleObjects;
     public int ObjectIDToSpawn;
 
     public GameObject SpawnedObject;
@@ -16,22 +15,22 @@ public class HandScript : MonoBehaviour
 
     public void SpawnInHand(int ID)
     {
-        if (PossibleObjects == null || PossibleObjects.Length == 0)
+        if (PropManager.instance == null || PropManager.instance.PropList.Length == 0)
         {
             Debug.LogWarning("No possible objects assigned.");
             return;
         }
-        if (ObjectIDToSpawn < 0 || ObjectIDToSpawn >= PossibleObjects.Length)
+        if (ObjectIDToSpawn < 0 || ObjectIDToSpawn >= PropManager.instance.PropList.Length)
         {
             Debug.LogWarning("Invalid object ID.");
             return;
         }
 
-        SpawnedObject = Instantiate(PossibleObjects[ID]);
+        SpawnedObject = Instantiate(PropManager.instance.PropList[ID]);
+        SpawnedObject.transform.localScale = Vector3.one;
         SpawnedObject.transform.parent = transform;
         SpawnedObject.transform.localPosition = Vector3.zero;
         SpawnedObject.transform.localRotation = Quaternion.identity;
-        //newObject.transform.localScale = Vector3.one;
 
         #if UNITY_EDITOR
                 UnityEditor.Undo.RegisterCreatedObjectUndo(SpawnedObject, "Spawn Object In Hand");
@@ -57,9 +56,10 @@ public class HandScript : MonoBehaviour
     {
         CarryableObject getCarryable = CarryableObject.GetCarryableObject(objectName);
         if (getCarryable == null) {
-            Debug.Log("No carryable object with this name.");
+            Debug.Log($"No carryable object with this name:{objectName}");
             return;
         }
+        getCarryable.Release();
         SpawnedObject = getCarryable.gameObject;
 
         Debug.Log(SpawnedObject);

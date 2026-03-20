@@ -38,7 +38,6 @@ public class PlayerCam : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        EnableCameraMovement = false;
         PhonePositionScript.PhoneToggled += PhoneToggle;
         PhonePositionScript.PhoneToggled += ClearScreenPointSelection;
 

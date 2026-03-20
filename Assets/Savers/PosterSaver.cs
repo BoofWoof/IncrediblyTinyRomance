@@ -21,6 +21,10 @@ public class PosterSaver : Saver
 
     public override void ApplyData(string s)
     {
-        UnlockablesManager.LoadFromList(SaveSystem.Deserialize<PosterSaveData>(s).PosterData);
+        PosterSaveData saveData = SaveSystem.Deserialize<PosterSaveData>(s);
+
+        if (saveData == null) return;
+
+        UnlockablesManager.LoadFromList(saveData.PosterData);
     }
 }

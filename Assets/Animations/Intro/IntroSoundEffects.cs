@@ -16,7 +16,7 @@ public class IntroSoundEffects : MonoBehaviour
     {
         ThisAudioSource = GetComponent<AudioSource>();
 
-        if (DaytaScript.SkipStart)
+        if (DaytaScript.SkipStart || DaytaScript.ExternalSkipStart)
         {
             DaytaScript.StaticStartDay();
             Destroy(gameObject);

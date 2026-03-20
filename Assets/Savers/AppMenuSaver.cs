@@ -19,7 +19,11 @@ public class AppMenuSaver : Saver
     }
     public override void ApplyData(string s)
     {
-        List<string> unlockedApps = SaveSystem.Deserialize<AppMenuSaveData>(s).UnlockedApps;
+        AppMenuSaveData saveData = SaveSystem.Deserialize<AppMenuSaveData>(s);
+
+        if (saveData == null) return;
+
+        List<string> unlockedApps = saveData.UnlockedApps;
 
         foreach(string appName in unlockedApps)
         {

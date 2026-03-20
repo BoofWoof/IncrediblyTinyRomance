@@ -7,6 +7,14 @@ public class MenuTrigger : MonoBehaviour
     private static float NormalTimescale = 1f;
     private static bool ReticlePreviousShown = true;
 
+    public static void Reset()
+    {
+        MenuOpenCount = 0;
+
+        NormalTimescale = 1f;
+        ReticlePreviousShown = true;
+    }
+
     public void OnEnable()
     {
         if (MenuOpenCount == 0) PauseGame();

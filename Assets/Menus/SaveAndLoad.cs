@@ -38,6 +38,7 @@ public class SaveAndLoad : MonoBehaviour
 
     public void LoadGame()
     {
+        DaytaScript.ExternalSkipStart = true;
         SaveSystem.LoadFromSlot(SlotNumber);
     }
 }

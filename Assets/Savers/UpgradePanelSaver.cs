@@ -22,6 +22,10 @@ public class UpgradePanelSaver : Saver
     }
     public override void ApplyData(string s)
     {
-        TargetScreen.PreBuyUpgrades(SaveSystem.Deserialize<UpgradePanelSaveData>(s).PreboughtUpgradeIDs);
+        UpgradePanelSaveData saveData = SaveSystem.Deserialize<UpgradePanelSaveData>(s);
+
+        if (saveData == null) return;
+
+        TargetScreen.PreBuyUpgrades(saveData.PreboughtUpgradeIDs);
     }
 }

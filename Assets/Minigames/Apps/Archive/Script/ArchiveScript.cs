@@ -55,7 +55,11 @@ public class ArchiveScript : Saver
 
     public override void ApplyData(string s)
     {
-        ReadDocuments = SaveSystem.Deserialize<ArchiveReadSaveData>(s).ReadDocumentsSave;
+        ArchiveReadSaveData saveData = SaveSystem.Deserialize<ArchiveReadSaveData>(s);
+
+        if (saveData == null) return;
+
+        ReadDocuments = saveData.ReadDocumentsSave;
     }
     #endregion
 

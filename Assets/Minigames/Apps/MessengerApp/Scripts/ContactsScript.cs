@@ -296,6 +296,9 @@ public class ContactsScript : Saver
     public override void ApplyData(string s)
     {
         ConversationSave saveData = SaveSystem.Deserialize<ConversationSave>(s);
+
+        if (saveData == null) return;
+
         ContactsFound = saveData.GetContactsFound();
         messengerApp.MessageHistorys = saveData.GetMessageHistory();
         RebuildContacts();

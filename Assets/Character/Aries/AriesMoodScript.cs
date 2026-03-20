@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class AriesMoodScript : MoodInterface
 {
+    public static AriesMoodScript instance;
+
     [Header ("Aries Components")]
     public List<SkinnedMeshRenderer> EmotiveMeshes;
     public Material TubeMaterial;
@@ -11,6 +13,17 @@ public class AriesMoodScript : MoodInterface
     public Light PointLight2;
 
     public Gradient EmotionColors;
+
+    public void Awake()
+    {
+        instance = this;
+    }
+
+    public void InstantUpdateMood(float angerLevel)
+    {
+        Anger = angerLevel;
+        AngerTarget = angerLevel;
+    }
 
     public override void UpdateAnger()
     {

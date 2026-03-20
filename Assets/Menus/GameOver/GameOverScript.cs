@@ -61,15 +61,14 @@ public class GameOverScript : MonoBehaviour
         Text3.SetActive(true);
         yield return new WaitForSecondsRealtime(2f);
         Buttons.SetActive(true);
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1f);
         Explinations.SetActive(true);
     }
 
     public void ResumeGame()
     {
         ClearScreen();
-        CharacterSpeechScript.BroadcastForceGesture("A", "StandingIdle");
-        OverworldBehavior.BroadcastBehaviors("A", "judge");
+        OverworldBehavior.BroadcastBehaviors("A", "instant_judge");
         CrossfadeScript.ResumeMusic();
         MusicSelectorScript.RevertOverworldSong();
 

@@ -20,7 +20,11 @@ public class AchievementStorageScript : Saver
 
     public override void ApplyData(string s)
     {
-        if (SaveSystem.Deserialize<AchievementDiscoveredSaveData>(s).Saved) SubmitAchievementsToListWithAnnouncement(false);
+        AchievementDiscoveredSaveData saveData = SaveSystem.Deserialize<AchievementDiscoveredSaveData>(s);
+
+        if (saveData == null) return;
+
+        if (saveData.Saved) SubmitAchievementsToListWithAnnouncement(false);
     }
 
     public override string RecordData()

@@ -19,6 +19,10 @@ public class CurrencySaver : Saver
     }
     public override void ApplyData(string s)
     {
-        CurrencyData.Credits = SaveSystem.Deserialize<CurrencySaveData>(s).Credits;
+        CurrencySaveData saveData = SaveSystem.Deserialize<CurrencySaveData>(s);
+
+        if (saveData == null) return;
+
+        CurrencyData.Credits = saveData.Credits;
     }
 }

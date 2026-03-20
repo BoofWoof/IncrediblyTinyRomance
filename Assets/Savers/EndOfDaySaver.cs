@@ -44,6 +44,10 @@ public class EndOfDaySaver : Saver
 
     public override void ApplyData(string s)
     {
-        SaveSystem.Deserialize<EndOfDaySaveData>(s).LoadData(targetScript);
+        EndOfDaySaveData saveData = SaveSystem.Deserialize<EndOfDaySaveData>(s);
+
+        if (saveData == null) return;
+
+        saveData.LoadData(targetScript);
     }
 }

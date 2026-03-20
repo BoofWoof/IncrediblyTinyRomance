@@ -86,6 +86,8 @@ public class SPrayerSubmissionScript : Saver
 
     public override void ApplyData(string s)
     {
-        if (SaveSystem.Deserialize<PSubmissionSaveData>(s).Submitted) SubmitPrayersToQueue();
+        PSubmissionSaveData saveData = SaveSystem.Deserialize<PSubmissionSaveData>(s);
+        if (saveData == null) return;
+        if (saveData.Submitted) SubmitPrayersToQueue();
     }
 }

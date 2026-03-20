@@ -21,7 +21,11 @@ public class ArchiveDataHolderScript : Saver
 
     public override void ApplyData(string s)
     {
-        if(SaveSystem.Deserialize<ArchiveDiscoveredSaveData>(s).Saved) SubmitArchiveDataWithAnnouncement(false);
+        ArchiveDiscoveredSaveData saveData = SaveSystem.Deserialize<ArchiveDiscoveredSaveData>(s);
+
+        if (saveData == null) return;
+
+        if (saveData.Saved) SubmitArchiveDataWithAnnouncement(false);
     }
 
     public override string RecordData()

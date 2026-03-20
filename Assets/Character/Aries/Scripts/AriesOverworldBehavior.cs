@@ -73,6 +73,22 @@ public class AriesOverworldBehavior : OverworldBehavior
 
         PrayerScript.instance.ActivateJudgement();
     }
+    public IEnumerator InstantJudgement()
+    {
+        AriesLook.HeadLookWeight = 1;
+
+        OverworldPositionScript.GoTo("A", 0);
+
+        thisAnimator.SetBool("Sitting", true);
+        thisAnimator.SetBool("Looming", false);
+        thisAnimator.SetBool("SitForward", false);
+
+        yield return null;
+
+        thisAnimator.Play("FeetUpIdle", 0, 0f);
+        thisAnimator.Update(0f);
+        PrayerScript.instance.ActivateJudgement();
+    }
 
     public IEnumerator PlaceCard(float wait)
     {
@@ -195,6 +211,10 @@ public class AriesOverworldBehavior : OverworldBehavior
         if (behavior.ToLower() == "judge")
         {
             StartCoroutine(Judgement(wait));
+        }
+        if (behavior.ToLower() == "instant_judge")
+        {
+            StartCoroutine(InstantJudgement());
         }
 
         if (behavior.ToLower() == "puff")

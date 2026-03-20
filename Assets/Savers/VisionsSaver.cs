@@ -53,7 +53,11 @@ public class VisionsSaver : Saver
 
     public override void ApplyData(string s)
     {
-        SaveSystem.Deserialize<VisionSaveData>(s).SetScript();
+        VisionSaveData saveData = SaveSystem.Deserialize<VisionSaveData>(s);
+
+        if (saveData == null) return;
+
+        saveData.SetScript();
     }
 
 }

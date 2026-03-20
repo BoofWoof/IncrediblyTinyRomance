@@ -20,7 +20,11 @@ public class PhoneTutorialSaver : Saver
     }
     public override void ApplyData(string s)
     {
-        if (SaveSystem.Deserialize<PhoneTutorialSaveData>(s).Completed)
+        PhoneTutorialSaveData saveData = SaveSystem.Deserialize<PhoneTutorialSaveData>(s);
+
+        if (saveData == null) return;
+
+        if (saveData.Completed)
         {
             GetComponent<PhoneTutorialScript>().CompletedTutorial = true;
             GetComponent<PhoneTutorialScript>().HideTutorial();

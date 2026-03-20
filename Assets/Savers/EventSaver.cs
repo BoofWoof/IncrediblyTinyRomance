@@ -1,7 +1,6 @@
 using PixelCrushers;
 using System;
 using System.Collections.Generic;
-using UnityEngine.LightTransport;
 
 public class EventSaver : Saver
 {
@@ -20,6 +19,10 @@ public class EventSaver : Saver
     }
     public override void ApplyData(string s)
     {
-        EventAbstract.TriggeredEventIDs = SaveSystem.Deserialize<EventSaveData>(s).TriggeredEventIDs;
+        EventSaveData saveData = SaveSystem.Deserialize<EventSaveData>(s);
+
+        if (saveData == null) return;
+
+        EventAbstract.TriggeredEventIDs = saveData.TriggeredEventIDs;
     }
 }

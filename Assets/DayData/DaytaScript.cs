@@ -16,6 +16,9 @@ public class DaytaScript : MonoBehaviour
     public static bool SkipStart = false;
     public bool SkipStartInit = false;
 
+    public bool ExteriorDaySet = false;
+    public static bool ExternalSkipStart = false;
+
     public int DayInit = 0;
 
     public AudioSource AudioBoom;
@@ -26,8 +29,10 @@ public class DaytaScript : MonoBehaviour
     public void Awake()
     {
         instance = this;
-        DayInfo.CurrentDay = DayInit;
+        if(!ExteriorDaySet) DayInfo.CurrentDay = DayInit;
         SkipStart = SkipStartInit;
+
+        MenuTrigger.Reset();
     }
 
     public void AllowDayEnd()
@@ -43,8 +48,9 @@ public class DaytaScript : MonoBehaviour
         CrossfadeScript.SetLowpassOn(true, true);
 
 
-        if (SkipStart)
+        if (SkipStart || ExternalSkipStart)
         {
+            EnableCharacter();
             StartDay();
         }
     }
@@ -59,7 +65,7 @@ public class DaytaScript : MonoBehaviour
             EnableCharacter();
             OverworldPositionScript.GoTo("A", 0);
         }
-        if (DayInfo.CurrentDay == 1)
+        if (DayInfo.CurrentDay == 1 && !SkipStart && !ExternalSkipStart)
         {
             StartCoroutine(StartDayOne());
         }
@@ -67,6 +73,8 @@ public class DaytaScript : MonoBehaviour
 
     public IEnumerator StartDayOne()
     {
+        PlayerCam.EnableCameraMovement = false;
+
         CharacterSpeechScript.BroadcastForceGesture("MacroAries", "BannEnterPuff");
 
         TitleCard.gameObject.SetActive(true);

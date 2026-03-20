@@ -164,6 +164,10 @@ public class VMascotSaver : Saver
 
     public override void ApplyData(string s)
     {
-        SaveSystem.Deserialize<MascotSaveData>(s).UnloadData(targetScript);
+        MascotSaveData saveData = SaveSystem.Deserialize<MascotSaveData>(s);
+
+        if (saveData == null) return;
+
+        saveData.UnloadData(targetScript);
     }
 }

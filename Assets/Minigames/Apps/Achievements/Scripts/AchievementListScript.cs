@@ -48,7 +48,11 @@ public class AchievementListScript : Saver
 
     public override void ApplyData(string s)
     {
-        CompletedAchievementNames = SaveSystem.Deserialize<ArchievementSaveData>(s).CompletedAchievementSaveData;
+        ArchievementSaveData saveData = SaveSystem.Deserialize<ArchievementSaveData>(s);
+
+        if (saveData == null) return;
+
+        CompletedAchievementNames = saveData.CompletedAchievementSaveData;
         UpdateList();
     }
     #endregion

@@ -22,6 +22,10 @@ public class UpgradeHolderSaver : Saver
 
     public override void ApplyData(string s)
     {
-        if (SaveSystem.Deserialize<UpgradeHolderSaveData>(s).Submitted) GetComponent<UpgradeHolder>().SubmitUpgrades();
+        UpgradeHolderSaveData saveData = SaveSystem.Deserialize<UpgradeHolderSaveData>(s);
+
+        if (saveData == null) return;
+
+        if (saveData.Submitted) GetComponent<UpgradeHolder>().SubmitUpgrades();
     }
 }
