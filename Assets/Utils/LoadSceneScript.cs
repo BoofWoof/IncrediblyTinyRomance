@@ -13,7 +13,7 @@ public class LoadSceneScript : MonoBehaviour
 
     public void Update()
     {
-        LoadButton.interactable = SaveSystem.HasSavedGameInSlot(3);
+        if(LoadButton != null) LoadButton.interactable = SaveSystem.HasSavedGameInSlot(3);
     }
 
     public void LoadGame(int SlotIdx)
