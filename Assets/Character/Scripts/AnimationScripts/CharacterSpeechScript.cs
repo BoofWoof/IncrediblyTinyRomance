@@ -127,9 +127,12 @@ public class CharacterSpeechScript : MonoBehaviour
 
     public static void BroadcastSpeechAttempt(string name, VoiceLineSO voiceLine)
     {
+        Debug.Log(name);
+        Debug.Log(voiceLine);
+        Debug.Log(voiceLine.SpeakerOverride);
         foreach (CharacterSpeechScript c in CharacterSpeechInstances)
         {
-            if (voiceLine.SpeakerOverride.Length > 0) name = voiceLine.SpeakerOverride;
+            if (!string.IsNullOrEmpty(voiceLine.SpeakerOverride)) name = voiceLine.SpeakerOverride;
             c.PlaySpeech(name, voiceLine);
         }
     }

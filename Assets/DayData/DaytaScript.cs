@@ -32,6 +32,8 @@ public class DaytaScript : MonoBehaviour
         if(!ExteriorDaySet) DayInfo.CurrentDay = DayInit;
         SkipStart = SkipStartInit;
 
+        Physics.gravity = Vector3.down * 9.8f;
+
         MenuTrigger.Reset();
     }
 

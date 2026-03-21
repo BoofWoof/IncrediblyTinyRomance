@@ -60,6 +60,8 @@ public class ArchiveScript : Saver
         if (saveData == null) return;
 
         ReadDocuments = saveData.ReadDocumentsSave;
+
+        UpdateList();
     }
     #endregion
 
