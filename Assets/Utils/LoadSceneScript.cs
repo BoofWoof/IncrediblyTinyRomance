@@ -9,7 +9,6 @@ public class LoadSceneScript : MonoBehaviour
     public void LoadScene(string SceneName)
     {
         Physics.gravity = Vector3.down * 9.8f;
-        DaytaScript.ExternalSkipStart = true;
         SaveSystem.LoadScene(SceneName);
     }
 
@@ -31,6 +30,7 @@ public class LoadSceneScript : MonoBehaviour
             }
         }
         Physics.gravity = Vector3.down * 9.8f;
+        DaytaScript.ExternalSkipStart = true;
         SaveSystem.LoadFromSlot(SlotIdx);
     }
 }

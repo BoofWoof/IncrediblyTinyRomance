@@ -9,36 +9,44 @@ public class ShowOnDay : MonoBehaviour
     public bool Day4 = false;
     public bool Day5 = false;
 
+    public bool DeleteInsteadOfDisable = false;
+
     public void Awake()
     {
         if(DayInfo.CurrentDay == 0)
         {
-            gameObject.SetActive(Day0);
+            if(DeleteInsteadOfDisable && !Day0) Destroy(gameObject);
+            else gameObject.SetActive(Day0);
         }
         else
         if (DayInfo.CurrentDay == 1)
         {
-            gameObject.SetActive(Day1);
+            if (DeleteInsteadOfDisable && !Day1) Destroy(gameObject);
+            else gameObject.SetActive(Day1);
         }
         else
         if (DayInfo.CurrentDay == 2)
         {
-            gameObject.SetActive(Day2);
+            if (DeleteInsteadOfDisable && !Day2) Destroy(gameObject);
+            else gameObject.SetActive(Day2);
         }
         else
         if (DayInfo.CurrentDay == 3)
         {
-            gameObject.SetActive(Day3);
+            if (DeleteInsteadOfDisable && !Day3) Destroy(gameObject);
+            else gameObject.SetActive(Day3);
         }
         else
         if (DayInfo.CurrentDay == 4)
         {
-            gameObject.SetActive(Day4);
+            if (DeleteInsteadOfDisable && !Day4) Destroy(gameObject);
+            else gameObject.SetActive(Day4);
         }
         else
         if (DayInfo.CurrentDay == 5)
         {
-            gameObject.SetActive(Day5);
+            if (DeleteInsteadOfDisable && !Day5) Destroy(gameObject);
+            else gameObject.SetActive(Day5);
         }
     }
 }

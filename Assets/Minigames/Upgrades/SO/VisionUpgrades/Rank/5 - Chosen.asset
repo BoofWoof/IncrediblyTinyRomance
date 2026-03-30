@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5 - Chosen
   m_EditorClassIdentifier: 
   Prioirty: 0
-  UpgradeID: 
+  UpgradeID: 2f4fb71e-75e1-4f34-886f-0b3ce016affb
   UpgradeName: One of the Chosen
   UpgradeIcon: {fileID: -717910143, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: 
@@ -22,7 +22,7 @@ MonoBehaviour:
   UpgradeDescription: You are ready for a grand challenge. Trust in your brethern.
     Each puzzle now earns you more credits.
   MascotDialogue: 
-  Credits: 1
+  Credits: 0
   FlockRenown: 1
   FoundationRenown: 0
   AssscensssionRenown: 0
@@ -30,5 +30,6 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   MultiplyReward: 5
   DisplayColor: {r: 0, g: 1, b: 0, a: 1}

@@ -12,6 +12,7 @@ public class PrayerTutorialScript : MonoBehaviour
     public void Start()
     {
         if(DayInfo.CurrentDay != 1) Destroy(gameObject);
+        if(DaytaScript.ExternalSkipStart) Destroy(gameObject);
     }
 
     public void OnBadPrayer()

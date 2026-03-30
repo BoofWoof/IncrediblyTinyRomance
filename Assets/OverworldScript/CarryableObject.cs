@@ -18,7 +18,7 @@ public class CarryableObject : MonoBehaviour
     public Color LightColor;
     public void Start()
     {
-        if(!CarryableObjects.Contains(this)) CarryableObjects.Add(this);
+        CarryableObjects.Add(this);
 
         if (City) return;
         if (CurrentReleaseNode != null) CurrentReleaseNode.heldObject = this;
@@ -53,10 +53,6 @@ public class CarryableObject : MonoBehaviour
         CarryableObjects.Remove(this);
 
         Release();
-    }
-
-    public void OnDestroy()
-    {
     }
 
     public void Release()

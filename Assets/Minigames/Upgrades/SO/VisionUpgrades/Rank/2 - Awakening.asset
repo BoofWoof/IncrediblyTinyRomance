@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 2 - Awakening
   m_EditorClassIdentifier: 
   Prioirty: 2
+  UpgradeID: 35fc9793-6d57-4a3e-93fc-d21fa1ca8ea0
   UpgradeName: Awakening
   UpgradeIcon: {fileID: -632570387, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: V-Awakening
@@ -22,13 +23,13 @@ MonoBehaviour:
     you more credits.
   MascotDialogue: 'This is an amazing occassion!<n>
 
-    Not everyone gets this
-    far!<n>
+    Not everyone gets this far!<n>
 
-    A lot of them uninstall the app before we even get to talk. :c<n>
+    A
+    lot of them uninstall the app before we even get to talk. :c<n>
 
-    But
-    now our momentum can finally grow, because we''re both learning!<n>
+    But now
+    our momentum can finally grow, because we''re both learning!<n>
 
     You''re
     going to get some paperwork to your device soon, and I''m going to need you to
@@ -38,7 +39,7 @@ MonoBehaviour:
     to help both our futures!<n>
 
     We got this!'
-  Credits: 0.00000075
+  Credits: 0.000000375
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0
@@ -46,5 +47,6 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   MultiplyReward: 5
   DisplayColor: {r: 0, g: 1, b: 0, a: 1}
