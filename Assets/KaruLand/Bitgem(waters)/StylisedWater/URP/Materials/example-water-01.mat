@@ -75,16 +75,16 @@ Material:
     - Vector1_34CF798A: 1.75
     - Vector1_36E8227: 0.384
     - Vector1_3D886DA1: 0.1
-    - Vector1_46E42935: 0.305
+    - Vector1_46E42935: 0.251
     - Vector1_47683D42: 0.758
     - Vector1_A0EAD698: 0.65
     - Vector1_A6A0BC26: -1.03
-    - Vector1_B9F56378: 0.38
-    - Vector1_C360A163: 0.34
+    - Vector1_B9F56378: 0.14
+    - Vector1_C360A163: 0.46
     - Vector1_DF445019: 1.5
     - Vector1_E03AB928: 0.05
-    - Vector1_E5C51606: -0.21
-    - Vector1_F38B44AA: 0.16
+    - Vector1_E5C51606: -0.25
+    - Vector1_F38B44AA: 0.84
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -100,28 +100,29 @@ Material:
     - _QueueControl: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimFoamAmount: 0.45
-    - _RimFoamBiggening: 2.31
-    - _RimFoamCutout: 1.15
+    - _RimFoamAmount: 1.14
+    - _RimFoamBiggening: 13.48
+    - _RimFoamCutout: 1.08
     - _RimFoamSpeed: 0.1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _WaveFrequency: 0.3
-    - _WaveScale: 0.1
+    - _WaveFrequency: 0.16
+    - _WaveScale: 0.08
     - _WaveSpeed: 1.72
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_7D9A58EC: {r: 0.09019609, g: 0.39757207, b: 0.5372549, a: 1}
-    - Color_F01C36BF: {r: 0.098039195, g: 0.5882284, b: 0.65882355, a: 0.29803923}
+    - Color_7D9A58EC: {r: 0.016019935, g: 0.15898076, b: 0.2264151, a: 1}
+    - Color_F01C36BF: {r: 0.028880388, g: 0.33144176, b: 0.5566038, a: 0.29803923}
     - Vector2_37B21477: {r: 0.3, g: 0.3, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimFoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ScrollDirection: {r: -2.5, g: 5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
