@@ -7375,6 +7375,7 @@ GameObject:
   - component: {fileID: 944713227}
   - component: {fileID: 944713226}
   - component: {fileID: 944713225}
+  - component: {fileID: 944713228}
   m_Layer: 5
   m_Name: Load Game
   m_TagString: Untagged
@@ -7446,10 +7447,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1884429511}
-        m_TargetAssemblyTypeName: LoadSceneScript, Assembly-CSharp
-        m_MethodName: LoadGame
-        m_Mode: 3
+      - m_Target: {fileID: 944713228}
+        m_TargetAssemblyTypeName: SpawnPrefab, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7496,6 +7497,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944713223}
   m_CullTransparentMesh: 1
+--- !u!114 &944713228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944713223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2503d8215fa411343b8307588e232977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_parent: {fileID: 1449772187}
+  m_prefabs:
+  - {fileID: 8876096657595137611, guid: f3e70139cac53d04ebcaf678065c69d1, type: 3}
+  m_position: 0
 --- !u!1 &986618085
 GameObject:
   m_ObjectHideFlags: 0

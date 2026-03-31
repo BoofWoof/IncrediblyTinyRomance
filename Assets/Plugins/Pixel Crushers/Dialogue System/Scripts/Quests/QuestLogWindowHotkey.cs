@@ -26,22 +26,52 @@ namespace PixelCrushers.DialogueSystem
         {
             get
             {
-                if (questLogWindow == null) questLogWindow = GameObjectUtility.FindFirstObjectByType<QuestLogWindow>();
+                if (questLogWindow == null) questLogWindow = PixelCrushers.GameObjectUtility.FindFirstObjectByType<QuestLogWindow>();
                 return questLogWindow;
             }
         }
 
         private void Awake()
         {
-            if (questLogWindow == null) questLogWindow = GameObjectUtility.FindFirstObjectByType<QuestLogWindow>();
+            if (questLogWindow == null) questLogWindow = PixelCrushers.GameObjectUtility.FindFirstObjectByType<QuestLogWindow>();
         }
+
+#if USE_NEW_INPUT
+
+        public UnityEngine.InputSystem.InputActionReference inputAction;
+
+        protected virtual void OnEnable()
+        {
+            if (inputAction != null)
+            {
+                inputAction.action.Enable();
+                inputAction.action.performed += OnInputActionPerformed;
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (inputAction != null)
+            {
+                inputAction.action.performed -= OnInputActionPerformed;
+            }
+        }
+
+        private void OnInputActionPerformed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        {
+            if (runtimeQuestLogWindow == null) return;
+            if (DialogueManager.IsDialogueSystemInputDisabled()) return;
+            ToggleQuestLogWindow();
+        }
+
+#endif
 
         private void Update()
         {
-            if (key == KeyCode.None) return;
             if (runtimeQuestLogWindow == null) return;
             if (DialogueManager.IsDialogueSystemInputDisabled()) return;
-            if (InputDeviceManager.IsKeyDown(key) || (!string.IsNullOrEmpty(buttonName) && DialogueManager.getInputButtonDown(buttonName)))
+            if (InputDeviceManager.IsKeyDown(key) ||
+                (!string.IsNullOrEmpty(buttonName) && DialogueManager.getInputButtonDown(buttonName)))
             {
                 ToggleQuestLogWindow();
             }
@@ -49,6 +79,7 @@ namespace PixelCrushers.DialogueSystem
 
         public void ToggleQuestLogWindow()
         {
+            if (runtimeQuestLogWindow == null) return;
             if (runtimeQuestLogWindow.isOpen)
             {
                 runtimeQuestLogWindow.Close();

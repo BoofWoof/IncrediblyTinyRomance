@@ -9,8 +9,8 @@ public class EndOfDayScript : MonoBehaviour
     public GameObject StatScreen;
     public TMP_Text StatText;
 
-    public float SavedTime;
-    public float StartingTime;
+    public static float SavedTime = 0;
+    public static float StartingTime;
     public float StartingMiloLike;
     public float StartingAriesLike;
     public float StartingAriesDislike;
@@ -56,9 +56,14 @@ public class EndOfDayScript : MonoBehaviour
         InputManager.GameEnd();
     }
 
+    public static float GetTimePassed()
+    {
+        return (Time.time - StartingTime) + SavedTime;
+    }
+
     public void UpdateText()
     {
-        string totalDayTime = System.TimeSpan.FromSeconds((Time.time - StartingTime) + SavedTime).ToString("h\\:mm\\:ss");
+        string totalDayTime = System.TimeSpan.FromSeconds(GetTimePassed()).ToString("h\\:mm\\:ss");
 
         string totalVentTime = System.TimeSpan.FromSeconds(PurificationGameScript.TotalTime).ToString("m\\:ss");
 

@@ -17,7 +17,7 @@ public class EndOfDaySaver : Saver
 
         public EndOfDaySaveData FromEndOfDay(EndOfDayScript eofData)
         {
-            SavedTime = (Time.time - eofData.StartingTime) + eofData.SavedTime;
+            SavedTime = EndOfDayScript.GetTimePassed();
             StartingMiloLike = eofData.StartingMiloLike;
             StartingAriesLike = eofData.StartingAriesLike;
             StartingAriesDislike = eofData.StartingAriesDislike;
@@ -28,7 +28,7 @@ public class EndOfDaySaver : Saver
 
         public void LoadData(EndOfDayScript eofData)
         {
-            eofData.SavedTime = SavedTime;
+            EndOfDayScript.SavedTime = SavedTime;
             eofData.StartingMiloLike = StartingMiloLike;
             eofData.StartingAriesLike = StartingAriesLike;
             eofData.StartingAriesDislike = StartingAriesDislike;

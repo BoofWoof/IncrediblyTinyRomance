@@ -69,7 +69,20 @@ namespace PixelCrushers.DialogueSystem
         [Tooltip("Before showing PC subtitles, delay for this duration.")]
         public PreDelaySettings pcPreDelaySettings = new PreDelaySettings();
 
+        [Serializable]
+        public class ActorReference
+        {
+            [Tooltip("No pre-delay for this actor.")]
+            [ActorPopup] public string actor;
+        }
+
+        [Tooltip("No pre-delays for these actors.")]
+        public List<ActorReference> excludePreDelayForActors = new List<ActorReference>();
+
         [Header("Save/Load")]
+
+        [Tooltip("Resume conversation when restoring saved game data.")]
+        public bool resumeConversationOnApplyPersistentData = true;
 
         [Tooltip("Load the saved conversation specified in the Conversation variable.")]
         public bool useConversationVariable = false;
@@ -177,6 +190,8 @@ namespace PixelCrushers.DialogueSystem
             if (subtitle.dialogueEntry.id == 0) return; // Don't need to show START entry.
             if (string.IsNullOrEmpty(subtitle.formattedText.text)) return;
             var preDelay = subtitle.speakerInfo.IsNPC ? npcPreDelaySettings.GetDelayDuration(subtitle) : pcPreDelaySettings.GetDelayDuration(subtitle);
+            var isInExcludeList = excludePreDelayForActors.Find(x => x.actor == subtitle.speakerInfo.nameInDatabase) != null;
+            if (isInExcludeList) preDelay = 0;
             if (Mathf.Approximately(0, preDelay))
             {
                 AddMessage(subtitle);
@@ -241,7 +256,7 @@ namespace PixelCrushers.DialogueSystem
         {
             var panelNumber = (dialogueActor != null) ? dialogueActor.GetSubtitlePanelNumber() : SubtitlePanelNumber.Default;
             return (panelNumber == SubtitlePanelNumber.Default)
-                ? (subtitle.speakerInfo.IsNPC ? conversationUIElements.defaultNPCSubtitlePanel : conversationUIElements.defaultPCSubtitlePanel)
+                ? conversationUIElements.standardSubtitleControls.GetPanel(subtitle, out var dialogueActor2)
                 : conversationUIElements.subtitlePanels[PanelNumberUtility.GetSubtitlePanelIndex(panelNumber)];
         }
 
@@ -319,6 +334,7 @@ namespace PixelCrushers.DialogueSystem
         public override void OnContinueConversation()
         {
             if (continueButton != null) continueButton.gameObject.SetActive(false);
+            shouldShowContinueButton = false;
             base.OnContinueConversation();
         }
 
@@ -454,6 +470,7 @@ namespace PixelCrushers.DialogueSystem
         /// </summary>
         public virtual void OnApplyPersistentData()
         {
+            if (!resumeConversationOnApplyPersistentData) return;
             if (!string.IsNullOrEmpty(conversationVariableOverride))
             {
                 DialogueLua.SetVariable("Conversation", conversationVariableOverride);
@@ -619,7 +636,10 @@ namespace PixelCrushers.DialogueSystem
             }
             if (DialogueLua.DoesVariableExist(currentDialogueEntryRecords))
             {
+                var originalValue = resumeConversationOnApplyPersistentData;
+                resumeConversationOnApplyPersistentData = true;
                 OnApplyPersistentData();
+                resumeConversationOnApplyPersistentData = originalValue;
             }
             else
             {
