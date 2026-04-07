@@ -34,7 +34,7 @@ public class SPrayerSubmissionScript : Saver
         if(Submitted) return;
         foreach (SpecialPrayerSetSO prayerSet in PrayerToSubmit)
         {
-            if (SentPrayerIDs.Contains(prayerSet.ID)) return;
+            if (SentPrayerIDs.Contains(prayerSet.ID)) continue;
 
             SpecialPrayerSetSO instantiatedPrayer = Instantiate(prayerSet);
 

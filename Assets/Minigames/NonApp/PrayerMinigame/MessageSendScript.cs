@@ -46,11 +46,13 @@ public class MessageSendScript : MonoBehaviour
     public void OnEnable()
     {
         PhonePositionScript.PhoneToggled += OnPhoneToggle;
+        BalconyEventsScript.OnRaiseStatue += UpdateInteractability;
     }
 
     public void OnDisable()
     {
         PhonePositionScript.PhoneToggled -= OnPhoneToggle;
+        BalconyEventsScript.OnRaiseStatue -= UpdateInteractability;
     }
     public void OnPhoneToggle(bool PhoneRaised)
     {

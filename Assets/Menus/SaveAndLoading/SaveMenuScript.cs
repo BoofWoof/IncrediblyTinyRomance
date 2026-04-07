@@ -47,6 +47,8 @@ public class SaveMenuScript : MonoBehaviour
 
     public static List<SaveSlotScript> SaveSlotItems = new List<SaveSlotScript>();
 
+    public static bool ForceAllowSaves = false;
+
     [Serializable]
     public class SaveMetadata
     {
@@ -90,6 +92,13 @@ public class SaveMenuScript : MonoBehaviour
         {
             ErrorText.text = "";
             if (saveButton != null) saveButton.interactable = false;
+            return;
+        }
+
+        if (ForceAllowSaves)
+        {
+            ErrorText.text = "";
+            saveButton.interactable = true;
             return;
         }
 
@@ -259,5 +268,10 @@ public class SaveMenuScript : MonoBehaviour
         }
 
         Reset();
+    }
+
+    public static void ToggleForceAllowSaves()
+    {
+        ForceAllowSaves = !ForceAllowSaves;
     }
 }

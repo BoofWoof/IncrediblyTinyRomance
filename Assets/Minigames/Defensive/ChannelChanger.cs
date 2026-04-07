@@ -10,10 +10,15 @@ public class ChannelChanger : MonoBehaviour
 
     public static ChannelChanger instance;
 
-    public void Start()
+    public void Awake()
     {
         instance = this;
 
+        GameStateMonitor.DangerActive = false;
+    }
+
+    public void Start()
+    {
         ActiveChannelChanger = this;
         LockSwitch(false);
     }

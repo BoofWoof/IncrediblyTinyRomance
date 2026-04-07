@@ -1,4 +1,5 @@
 using PixelCrushers.DialogueSystem;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,11 +17,16 @@ public class BalconyEventsScript : MonoBehaviour
 
     public bool Raised = false;
 
+    public delegate void RaiseStatueEvents();
+    public static event RaiseStatueEvents OnRaiseStatue;
+
     public static BalconyEventsScript instance;
 
     private void Awake()
     {
         instance = this;
+
+        OnRaiseStatue = null;
     }
 
     private void Start()
@@ -83,6 +89,8 @@ public class BalconyEventsScript : MonoBehaviour
     }
     public void RaiseStatues()
     {
+        OnRaiseStatue?.Invoke();
+
         Raised = true;
         RaiseAudio.Stop();
         LowerAudio.Stop();

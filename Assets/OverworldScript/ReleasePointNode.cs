@@ -25,6 +25,7 @@ public class ReleasePointNode : Saver
 
         spawnedObject.GetComponent<CarryableObject>().CurrentReleaseNode = this;
         heldObject = spawnedObject.GetComponent<CarryableObject>();
+        spawnedObject.GetComponent<CarryableObject>().AddToCarryableObjects(true);
     }
 
     public override string RecordData()

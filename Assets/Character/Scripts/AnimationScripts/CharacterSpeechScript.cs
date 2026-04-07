@@ -1,10 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using PixelCrushers.DialogueSystem;
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
@@ -183,7 +180,16 @@ public class CharacterSpeechScript : MonoBehaviour
         yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
         PlaySpeech(voiceLine);
         if (RadioSpeech) RadioObject.SetActive(true);
-        yield return new WaitForSeconds(voiceLine.AudioData.length + 0.05f);
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        //yield return new WaitForSeconds(voiceLine.AudioData.length + 0.05f);
+        yield return null;
+        while (audioSource.isPlaying || Time.timeScale == 0)
+        {
+            yield return null;
+        }
+
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
 

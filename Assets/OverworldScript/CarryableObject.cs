@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,7 @@ public class CarryableObject : MonoBehaviour
     public int ObjectID = -1;
     public string ObjectName;
 
-    public static List<CarryableObject> CarryableObjects = new List<CarryableObject>();
+    public static Dictionary<string, CarryableObject> CarryableObjects = new Dictionary<string, CarryableObject>();
 
     public UnityEvent ObjectActivate;
 
@@ -18,12 +19,30 @@ public class CarryableObject : MonoBehaviour
     public Color LightColor;
     public void Start()
     {
-        CarryableObjects.Add(this);
+        AddToCarryableObjects(false);
 
         if (City) return;
         if (CurrentReleaseNode != null) CurrentReleaseNode.heldObject = this;
 
         ObjectID = PropManager.nameToID[ObjectName];
+    }
+
+    public void AddToCarryableObjects(bool replaceExisting)
+    {
+        string lowerCaseName = ObjectName.ToLower();
+
+        if (replaceExisting)
+        {
+            if (CarryableObjects.ContainsKey(lowerCaseName))
+            {
+                if(CarryableObjects[lowerCaseName] != this && CarryableObjects[lowerCaseName] != null) Destroy(CarryableObjects[lowerCaseName].gameObject);
+                CarryableObjects.Remove(lowerCaseName);
+            }
+        } else
+        {
+            if (CarryableObjects.ContainsKey(lowerCaseName)) return;
+        }
+        CarryableObjects.Add(lowerCaseName, this);
     }
 
     public void Activate()
@@ -34,23 +53,17 @@ public class CarryableObject : MonoBehaviour
 
     public static CarryableObject GetCarryableObject(string objectName)
     {
-        foreach (CarryableObject obj in CarryableObjects)
-        {
-            if (obj.ObjectName.ToLower() == objectName.ToLower())
-            {
-                return obj;
-            }
-        }
-        return null;
+        if (!CarryableObjects.ContainsKey(objectName.ToLower())) return null;
+        return CarryableObjects[objectName.ToLower()];
     }
 
     public void OnEnable()
     {
-        if (!CarryableObjects.Contains(this)) CarryableObjects.Add(this);
+        if (!CarryableObjects.ContainsKey(ObjectName.ToLower())) AddToCarryableObjects(false);
     }
     public void OnDisable()
     {
-        CarryableObjects.Remove(this);
+        if(CarryableObjects.ContainsValue(this)) CarryableObjects.Remove(ObjectName.ToLower());
 
         Release();
     }
@@ -59,6 +72,7 @@ public class CarryableObject : MonoBehaviour
     {
         if (City) return;
         if (CurrentReleaseNode == null) return;
+        if (CurrentReleaseNode.heldObject != this) return;
         CurrentReleaseNode.heldObject = null;
         CurrentReleaseNode = null;
     }
