@@ -41,7 +41,7 @@ public class MoveCamera : MonoBehaviour
         if (TargetMaintainRumble >= CurrentMaintainRumble) CurrentMaintainRumble = TargetMaintainRumble;
         else CurrentMaintainRumble = Mathf.MoveTowards(CurrentMaintainRumble, TargetMaintainRumble, Time.deltaTime * falloffRate);
 
-        TotalRumble = VibrationIntensity * (ImpactRumble + CurrentMaintainRumble + CurrentWordRumble);
+        TotalRumble = Time.timeScale * VibrationIntensity * (ImpactRumble + CurrentMaintainRumble + CurrentWordRumble);
         transform.position = cameraPosition.position + TotalRumble * Random.insideUnitSphere;
 
         float MaintainRumbles = CurrentMaintainRumble + CurrentWordRumble;

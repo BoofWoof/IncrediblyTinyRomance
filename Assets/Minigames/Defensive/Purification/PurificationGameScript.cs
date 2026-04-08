@@ -49,6 +49,11 @@ public class PurificationGameScript : MonoBehaviour
     public static float TotalTime = 0;
     public float StartingTime;
 
+    public void Awake()
+    {
+        PipeStackScript.VentRotationEvent = null;
+        PipeStackScript.VentRotationStartEvent = null;
+    }
     public void Start()
     {
         instance = this;

@@ -10,7 +10,7 @@ namespace PixelCrushers.DialogueSystem
 {
 
     [CustomEditor(typeof(DialogueSystemTrigger), true)]
-    public class DialogueSystemTriggerEditor : Editor
+    public class DialogueSystemTriggerEditor : UnityEditor.Editor
     {
 
         protected const string InspectorEditorPrefsKey = "PixelCrushers.DialogueSystem.DialogueSystemTriggerPrefs";
@@ -138,6 +138,14 @@ namespace PixelCrushers.DialogueSystem
             EditorGUILayout.PropertyField(triggerProperty, true);
 
             // HelpBox for OnTrigger/Collision:
+            var isStartTypeEvent =
+                triggerProperty.enumValueIndex == 4 || //DialogueSystemTriggerEvent.OnStart
+                triggerProperty.enumValueIndex == 6 || //DialogueSystemTriggerEvent.OnEnable
+                triggerProperty.enumValueIndex == 16;   //DialogueSystemTriggerEvent.OnSaveDataApplied
+            if (isStartTypeEvent)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("delayOneFrame"), true);
+            }
             var isPhysicsEvent =
                 triggerProperty.enumValueIndex == 3 || //DialogueSystemTriggerEvent.OnTriggerEnter
                 triggerProperty.enumValueIndex == 7 || //DialogueSystemTriggerEvent.OnTriggerExit
@@ -610,9 +618,6 @@ namespace PixelCrushers.DialogueSystem
                     }
                     else
                     {
-                        EditorGUILayout.PropertyField(serializedObject.FindProperty("conversationActor"), true);
-                        EditorGUILayout.PropertyField(serializedObject.FindProperty("conversationConversant"), true);
-
                         var entryIDProperty = serializedObject.FindProperty("startConversationEntryID");
                         var entryTitleProperty = serializedObject.FindProperty("startConversationEntryTitle");
                         var specifyEntryID = EditorGUILayout.Toggle(new GUIContent("Specify Starting Entry", "Start conversation at a specific entry ID."), (entryIDProperty.intValue != -1));
@@ -655,6 +660,12 @@ namespace PixelCrushers.DialogueSystem
                             entryIDProperty.intValue = -1;
                             entryTitleProperty.stringValue = string.Empty;
                         }
+
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("conversationActor"), true);
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("conversationConversant"), true);
+                        EditorGUI.indentLevel++;
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("additionalActorOverrides"), true);
+                        EditorGUI.indentLevel--;
 
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("overrideDialogueUI"), true);
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("exclusive"), true);

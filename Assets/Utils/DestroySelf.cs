@@ -10,6 +10,6 @@ public class DestroySelf : MonoBehaviour
 
     public void OnDisable()
     {
-        Destroy(gameObject);
+        if(DestroySelfOnDisable) Destroy(gameObject);
     }
 }
