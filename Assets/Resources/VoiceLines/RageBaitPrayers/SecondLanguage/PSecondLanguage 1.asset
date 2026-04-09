@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PSecondLanguage 1
   m_EditorClassIdentifier: 
-  ID: 2a38cb63-4b60-45ae-8f61-62449f2401e0
+  ID: 94d1ae1a060b0a647a1da395d2d02d9f
   SetName: SecondLanguage
   ForceSelection: 0
   PrayerOptions:
-  - Option: hei ur verr sexy i lov
+  - ParentID: 
+    Option: hei ur verr sexy i lov
     AuthorName: Usernamehere
     GoodPrayer: 0
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/SecondLanguage/SecondLanguage.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

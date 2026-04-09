@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: SidCardResponse
   m_EditorClassIdentifier: 
-  ID: a7bcc5b9-6167-41ff-b5e3-de245c5263c8
+  ID: 16c853dccc3a3fe43990c8a13fe0d289
   SetName: SidCardResponse
   ForceSelection: 1
   PrayerOptions:
-  - Option: That distant sound, so servile yet kind. Who was that?
+  - ParentID: 
+    Option: That distant sound, so servile yet kind. Who was that?
     AuthorName: AKindFuture
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,7 +25,9 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/CallAndResponse/SidCardResponse/Kobold.asset
     TriggerDialogue: 
     TriggerActivation: 
-  - Option: What was that voice that could command God?
+    TopicTarget: {fileID: 0}
+  - ParentID: 
+    Option: What was that voice that could command God?
     AuthorName: ANewOrder
     GoodPrayer: 0
     SpecialResponseChainVL: []
@@ -32,3 +35,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/CallAndResponse/SidCardResponse/Snake.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

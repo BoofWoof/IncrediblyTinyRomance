@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PImARam
   m_EditorClassIdentifier: 
-  ID: 895e1926-a160-4448-857f-3fa2bc3278b5
+  ID: 6d29a1b41906fa043a094fe14c0937d2
   SetName: ImARam
   ForceSelection: 0
   PrayerOptions:
-  - Option: What a cool goat!
+  - ParentID: 
+    Option: What a cool goat!
     AuthorName: ConfusedYouPiper
     GoodPrayer: 0
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/ImARam/ImARamVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

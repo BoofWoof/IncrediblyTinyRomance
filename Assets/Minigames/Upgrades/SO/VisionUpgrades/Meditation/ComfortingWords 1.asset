@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ComfortingWords 1
   m_EditorClassIdentifier: 
   Prioirty: 2
+  UpgradeID: 4eda240198cf3904fb432a2cef9003c7
   UpgradeName: Comforting Words I
   UpgradeIcon: {fileID: 1564960068, guid: c5fe5212be599964b9de15878c200a47, type: 3}
   DialogueToTrigger: 
@@ -30,4 +31,5 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   AngerReductionIncrease: 60

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PAndIDontSee
   m_EditorClassIdentifier: 
-  ID: 01dad002-2f70-4773-a4bf-b22ba7ffda47
+  ID: 5a67c4d4b43854e45ad8e22443e13130
   SetName: EveryFlaw
   ForceSelection: 0
   PrayerOptions:
-  - Option: I'm small enough to see every flaw you have. Isn't that neat?
+  - ParentID: 
+    Option: I'm small enough to see every flaw you have. Isn't that neat?
     AuthorName: Carrots
     GoodPrayer: 0
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/IDontSeeYouAtAll/AndIDontSeeYouVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

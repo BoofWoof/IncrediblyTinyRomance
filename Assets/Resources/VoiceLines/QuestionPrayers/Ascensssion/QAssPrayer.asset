@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: QAssPrayer
   m_EditorClassIdentifier: 
-  ID: b296ca47-7e40-48d0-bef9-5f69914636f4
+  ID: df48580e682d0ce4da4c9920281c1eaa
   SetName: Assscensssion
   ForceSelection: 1
   PrayerOptions:
-  - Option: The snake on the right, he looks like you. Is he the one who gifted you
+  - ParentID: 
+    Option: The snake on the right, he looks like you. Is he the one who gifted you
       your arm and eyes?
     AuthorName: PM
     GoodPrayer: 1
@@ -25,3 +26,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/QuestionPrayers/Ascensssion/QAssscensssion.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

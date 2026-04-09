@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using PixelCrushers.DialogueSystem;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class CharacterSpeechScript : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class CharacterSpeechScript : MonoBehaviour
     public void OnDisable()
     {
         CharacterSpeechInstances.Remove(this);
+
+        GameStateMonitor.RemoveSpeakingSource(this);
 
         if (ConversationManagerScript.instance != null)
         {
@@ -166,7 +169,17 @@ public class CharacterSpeechScript : MonoBehaviour
         yield return new WaitForSeconds(voiceLine.PauseBeforeStart);
         PlaySpeech(voiceLine);
         if (RadioSpeech) RadioObject.SetActive(true);
-        yield return new WaitForSeconds(voiceLine.AudioData.length + 0.05f);
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        yield return null;
+        while (audioSource.isPlaying || Time.timeScale == 0)
+        {
+            yield return null;
+        }
+
+        SpeechCleanup();
+
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
 
@@ -190,12 +203,22 @@ public class CharacterSpeechScript : MonoBehaviour
             yield return null;
         }
 
+        SpeechCleanup();
+
         yield return new WaitForSeconds(voiceLine.PauseAfterEnd);
         if (RadioSpeech) RadioObject.SetActive(false);
 
         (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
 
         GameStateMonitor.RemoveSpeakingSource(this);
+    }
+
+    public void SpeechCleanup()
+    {
+        if (LipSync != null)
+        {
+            LipSync.EndSpeechCleanup();
+        }
     }
 
     public void PlaySpeech(VoiceLineSO voiceLine)

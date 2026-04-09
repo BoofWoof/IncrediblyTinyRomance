@@ -451,7 +451,7 @@ public class PrayerScript : MonoBehaviour
     }
     public void OnGameEventStateChange(bool EventActive)
     {
-        if (SPrayerSubmissionScript.WaitingForcedPrayers.Count > 0 || _SpecialPrayerActive) GenerateNewPrayers();
+        if (_SpecialPrayerActive) GenerateNewPrayers();
     }
 
     public void ForcePrayerReferesh()
@@ -464,9 +464,10 @@ public class PrayerScript : MonoBehaviour
         if (StoryMode) return;
         if (GameStateMonitor.ActivePrayer) return;
 
+        _SpecialPrayerActive = false;
+
         if (SPrayerSubmissionScript.WaitingForcedPrayers.Count > 0 && !GameStateMonitor.isEventActive())
         {
-            Debug.Log("Generating Special Prayer Set");
             SpecialPrayerSetSO targetPrayer = SPrayerSubmissionScript.WaitingForcedPrayers[0];
 
             List<PrayerResponse> prayerResponsesSpecial = new List<PrayerResponse>();
@@ -489,6 +490,7 @@ public class PrayerScript : MonoBehaviour
 
                 prayerResponsesSpecial.Add(newResponse);
             }
+            _SpecialPrayerActive = true;
             CreateVariableLengthOptions(prayerResponsesSpecial);
 
             RestartMessages();
@@ -505,7 +507,6 @@ public class PrayerScript : MonoBehaviour
         int badCount = 0;
         List<int> selectedSpecials = new List<int>();
 
-        _SpecialPrayerActive = false;
         for (int i = 0; i < 3; i++)
         {
             string[] split;

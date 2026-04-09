@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: D1 - EasyModeUnlock
   m_EditorClassIdentifier: 
   Prioirty: 1
+  UpgradeID: 8897932af6cfb134b9fcb4d5a3ced3e9
   UpgradeName: Sights Beyond
   UpgradeIcon: {fileID: 2059918034, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
   CompleteQuest: 0
   ProgressQuest: 0
   UpgradeDescription: You've proven yourself to have a place here, and with capability
-    comes responsibility. Access higher difficulties for more earnings!
+    comes responsibility. Access higher difficulties for more earnings! (Recommend
+    Purchase)
   MascotDialogue: 
   Credits: 0.000000004
   FlockRenown: 0
@@ -29,3 +31,4 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1

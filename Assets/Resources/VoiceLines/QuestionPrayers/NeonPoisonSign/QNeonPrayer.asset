@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: QNeonPrayer
   m_EditorClassIdentifier: 
-  ID: b296ca47-7e40-48d0-bef9-5f69914636f4
+  ID: 55a0362052c504948942a6ee68f2d81d
   SetName: NeonSign
   ForceSelection: 1
   PrayerOptions:
-  - Option: What's that bright shiny thing on the wall?
+  - ParentID: 
+    Option: What's that bright shiny thing on the wall?
     AuthorName: 
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/QuestionPrayers/NeonPoisonSign/QNeon.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

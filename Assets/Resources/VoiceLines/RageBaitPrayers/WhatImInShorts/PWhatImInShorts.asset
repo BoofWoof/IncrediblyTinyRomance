@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PWhatImInShorts
   m_EditorClassIdentifier: 
-  ID: 62619d4f-ca74-468b-84fe-1628e3f8346a
+  ID: d2d0e1e272bd38249a5d1ca8a54b759f
   SetName: WhatImIn
   ForceSelection: 0
   PrayerOptions:
-  - Option: Why are you so overly sexualized?
+  - ParentID: 
+    Option: Why are you so overly sexualized?
     AuthorName: PrudeYoupiper
     GoodPrayer: 0
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/WhatImInShorts/WhatImInShorts.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

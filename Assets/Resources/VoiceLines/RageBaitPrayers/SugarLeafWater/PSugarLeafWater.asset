@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PSugarLeafWater
   m_EditorClassIdentifier: 
-  ID: b4fd2660-61e3-4358-bbca-945a22ca458c
+  ID: fcec6a797f8fd0b43b79a0e3376d8603
   SetName: SugarTea
   ForceSelection: 0
   PrayerOptions:
-  - Option: You crushed my favorite boba tea place. Life now sucks even more.
+  - ParentID: 
+    Option: You crushed my favorite boba tea place. Life now sucks even more.
     AuthorName: TsundererDeerer
     GoodPrayer: 0
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/SugarLeafWater/SugarLeafWaterVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: QFoundationPrayer
   m_EditorClassIdentifier: 
-  ID: b296ca47-7e40-48d0-bef9-5f69914636f4
+  ID: e0f2eaf67f3c7454aa8f5cfaf794762a
   SetName: Foundation
   ForceSelection: 1
   PrayerOptions:
-  - Option: Does that picture on the wall there depict the titan who owns your city?
+  - ParentID: 
+    Option: Does that picture on the wall there depict the titan who owns your city?
     AuthorName: 
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/QuestionPrayers/Foundation/QFoundation.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

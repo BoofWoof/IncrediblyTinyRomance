@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PMissYou
   m_EditorClassIdentifier: 
-  ID: dd7b96ba-dfaa-4a95-8aae-2ca3372d70ed
+  ID: 63be4578ca237744ca79ddb1f8ad6380
   SetName: MissYou
   ForceSelection: 0
   PrayerOptions:
-  - Option: "You didn\u2019t even crush a shitty part of the city, can you do anything
+  - ParentID: 
+    Option: "You didn\u2019t even crush a shitty part of the city, can you do anything
       right? "
     AuthorName: BeMineErmine
     GoodPrayer: 0
@@ -25,3 +26,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/MissYou/MissYouVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

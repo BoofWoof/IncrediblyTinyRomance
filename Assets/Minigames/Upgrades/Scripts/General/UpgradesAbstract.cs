@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum Minigame
@@ -43,13 +41,25 @@ public abstract class UpgradesAbstract : ScriptableObject
 
     public bool TriggerOnLoadBuy = true;
 
-    public void Awake() 
+
+#if UNITY_EDITOR
+    public void OnValidate()
+    {
+        EnsureID();
+    }
+
+    [ContextMenu("Force Regenerate ID")]
+    private void EnsureID()
     {
         if (string.IsNullOrEmpty(UpgradeID) || UpgradeID.Length < 5)
         {
-            UpgradeID = System.Guid.NewGuid().ToString();
+            // Gets the internal Unity GUID for this specific file
+            string assetPath = UnityEditor.AssetDatabase.GetAssetPath(this);
+            UpgradeID = UnityEditor.AssetDatabase.AssetPathToGUID(assetPath);
+            UnityEditor.EditorUtility.SetDirty(this);
         }
     }
+#endif
 
     public bool CanBuy()
     {

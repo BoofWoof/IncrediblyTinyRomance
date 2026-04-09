@@ -192,6 +192,24 @@ public class VisionMascotScript : MonoBehaviour
             WaitCoroutines.Add(StartCoroutine(TimerDialogue(tpData)));
         }
 
+        foreach(int triggerValue in currentDifficultyDialogue.SolutionDialogues.Keys)
+        {
+            int puzzlesCompleted = TurkPuzzleScript.PuzzlesCompleted[TurkPuzzleScript.CurrentDifficutly];
+
+            if (triggerValue <= puzzlesCompleted)
+            {
+                VisionCompletionMascotText textData = currentDifficultyDialogue.SolutionDialogues[triggerValue];
+
+                if (!textData.Triggered)
+                {
+                    textData.Triggered = true;
+                    MascotSayText(textData.SolutionDialogues);
+                    yield break;
+                }
+            }
+        }
+
+        /*
         if (TurkPuzzleScript.PuzzlesCompleted.ContainsKey(TurkPuzzleScript.CurrentDifficutly))
         {
             int puzzlesCompleted = TurkPuzzleScript.PuzzlesCompleted[TurkPuzzleScript.CurrentDifficutly];
@@ -208,6 +226,7 @@ public class VisionMascotScript : MonoBehaviour
                 }
             }
         }
+        */
 
         if (TurkPuzzleScript.CurrentDifficutly == TurkPuzzleScript.DifficultiesUnlocked - 1) NewDifficultyUnlocked = false;
         if (NewDifficultyUnlocked)

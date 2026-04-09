@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SoulLight
   m_EditorClassIdentifier: 
   Prioirty: 1
+  UpgradeID: 71c5377763abc3f43822f50d7c2ce638
   UpgradeName: Calm Soul
   UpgradeIcon: {fileID: 1451810913, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -43,4 +44,5 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   LightIncrease: 0.8

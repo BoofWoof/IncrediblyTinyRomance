@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerWeirdThing
   m_EditorClassIdentifier: 
-  ID: 0501be67-82b3-435a-a173-3cb3c44fca68
+  ID: 4f9f3832e4574974ba5a2915ddf815ce
   SetName: WeirdThing
   ForceSelection: 0
   PrayerOptions:
-  - Option: It would be an honor to be a fraction of a calorie to you!
+  - ParentID: 
+    Option: It would be an honor to be a fraction of a calorie to you!
     AuthorName: SnaccFen
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/WeirdThing/WeiirdThingVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DamageProductionReduction
   m_EditorClassIdentifier: 
   Prioirty: 0
-  UpgradeID: 
+  UpgradeID: b9d74e6ea96118f48865817a74158bdb
   UpgradeName: Low Productivity
   UpgradeIcon: {fileID: 540152914, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
   DialogueToTrigger: 
@@ -29,4 +29,5 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 1
+  TriggerOnLoadBuy: 1
   DisplayColor: {r: 1, g: 0, b: 0, a: 1}

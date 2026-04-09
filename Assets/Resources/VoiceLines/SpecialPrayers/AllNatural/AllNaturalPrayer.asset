@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: AllNaturalPrayer
   m_EditorClassIdentifier: 
-  ID: 693f9f01-b4dd-4eff-9779-e078c3f3dc2f
+  ID: 30a5a8a1632338c4cab701c7eda7063e
   SetName: Natural
   ForceSelection: 0
   PrayerOptions:
-  - Option: How do you get your wool looking so soft?
+  - ParentID: 
+    Option: How do you get your wool looking so soft?
     AuthorName: Ramdy
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/AllNatural/AllNaturalVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

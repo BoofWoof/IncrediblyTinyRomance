@@ -37,6 +37,21 @@ public class LipSyncScript : MonoBehaviour
         SpeechCoroutine = StartCoroutine(PlaySpeechCoroutine());
     }
 
+    public void EndSpeechCleanup()
+    {
+        if (!(SpeechCoroutine is null)) StopCoroutine(SpeechCoroutine);
+
+        foreach (PhenomeTypes phenomeType in Enum.GetValues(typeof(PhenomeTypes)).Cast<PhenomeTypes>())
+        {
+            int blendShapeIndex = TargetMesh.sharedMesh.GetBlendShapeIndex(phenomeType.ToString());
+            if (blendShapeIndex == -1) continue; //Skip a blend shape if it doesn't exit.
+
+            float phenomeWeight = 0;
+            TargetMesh.SetBlendShapeWeight(blendShapeIndex, phenomeWeight * 100f);
+        }
+
+    }
+
     private IEnumerator PlaySpeechCoroutine()
     {
         ProcessAudio();

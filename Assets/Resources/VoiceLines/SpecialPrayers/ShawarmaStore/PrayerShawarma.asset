@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerShawarma
   m_EditorClassIdentifier: 
-  ID: 90308251-17fd-4477-b89b-0290af1c584b
+  ID: 646120b45b4d2b140a2536436701c9a6
   SetName: JoesRamen
   ForceSelection: 0
   PrayerOptions:
-  - Option: You ate my ramen store! I am honored to have fed you my lord!
+  - ParentID: 
+    Option: You ate my ramen store! I am honored to have fed you my lord!
     AuthorName: "Joe\u2019sRamenOfficial"
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/ShawarmaStore/ShawarmaVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

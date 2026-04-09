@@ -79,5 +79,7 @@ public class GameOverScript : MonoBehaviour
         AnnouncementScript.StartAnnouncement("The ram still waits...");
 
         PrayerScript.instance.ForcePrayerReferesh();
+
+        ActiveBroadcast.BroadcastActivation("ResetDisaster");
     }
 }
