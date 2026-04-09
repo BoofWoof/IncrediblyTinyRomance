@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Simplify II
   m_EditorClassIdentifier: 
   Prioirty: 3
+  UpgradeID: dd071b9dc270c314bbf1c7850b1723f3
   UpgradeName: Simple Mind II
   UpgradeIcon: {fileID: -691155298, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -30,6 +31,7 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   MaxPieceReduction: 2
   MinPieceReduction: 0
   Chance: 0.1

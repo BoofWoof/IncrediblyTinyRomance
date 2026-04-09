@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: VendingObservation
   m_EditorClassIdentifier: 
-  ID: 69878f2d-12c6-45df-bde5-0833d706dbcd
+  ID: 06a0024316ed86740be290c94f77a16b
   SetName: VendingMachine
   ForceSelection: 1
   PrayerOptions:
-  - Option: What is that great pink venom box? What purpose does it serve.
+  - ParentID: 
+    Option: What is that great pink venom box? What purpose does it serve.
     AuthorName: 
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/QuestionPrayers/VendingMachine/VendingMachine.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

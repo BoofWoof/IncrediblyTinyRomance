@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PButYoureNot
   m_EditorClassIdentifier: 
-  ID: 6f6d07d0-3063-4bf9-bfcf-eeb662e1a470
+  ID: be6febd34768b384582754b68c460ba5
   SetName: ButYoureNot
   ForceSelection: 0
   PrayerOptions:
-  - Option: I could kick your ass if I was you size.
+  - ParentID: 
+    Option: I could kick your ass if I was you size.
     AuthorName: BullYou
     GoodPrayer: 0
     SpecialResponseChainVL:
@@ -25,3 +26,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/ButYoureNot/ButYoureNotVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

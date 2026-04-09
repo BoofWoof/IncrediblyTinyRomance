@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PAsItIsAbove
   m_EditorClassIdentifier: 
-  ID: 4ca3866a-5f6a-48b1-ac39-88620b6ba71e
+  ID: 6acc701a95cebdf4fba18567f5765647
   SetName: AsItIsAbove
   ForceSelection: 0
   PrayerOptions:
-  - Option: I had a lottery ticket in my apartment you swallowed that had a 12 million
+  - ParentID: 
+    Option: I had a lottery ticket in my apartment you swallowed that had a 12 million
       Krona jackpot on it. So you owe me 12 million Krona, asshole!
     AuthorName: WouldBeMilletionare
     GoodPrayer: 0
@@ -25,3 +26,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/RageBaitPrayers/AsItIsAbove/AsItIsAboveVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

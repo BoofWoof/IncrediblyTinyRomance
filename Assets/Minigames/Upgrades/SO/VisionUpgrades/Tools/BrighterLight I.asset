@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BrighterLight I
   m_EditorClassIdentifier: 
   Prioirty: 3
+  UpgradeID: 9c18a19814458a4428d0f929a4330a75
   UpgradeName: Enlightened Soul II
   UpgradeIcon: {fileID: -1997820138, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -29,4 +30,5 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   LightIncrease: 0.15

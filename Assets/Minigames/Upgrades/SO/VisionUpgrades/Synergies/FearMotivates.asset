@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FearMotivates
   m_EditorClassIdentifier: 
   Prioirty: 4
+  UpgradeID: e584c4c7b5673eb49b3641b6d722a2d1
   UpgradeName: Fear Motivates
   UpgradeIcon: {fileID: 1295698386, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -30,7 +31,7 @@ MonoBehaviour:
     you''ll earn!<n>
 
     Direct that anger toward productivity!!!'
-  Credits: 0.0000938
+  Credits: 0.0000625
   FlockRenown: 0
   FoundationRenown: 0
   AssscensssionRenown: 0
@@ -38,5 +39,6 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   PointPerPoint: 30
   DisplayColor: {r: 0, g: 1, b: 0, a: 1}

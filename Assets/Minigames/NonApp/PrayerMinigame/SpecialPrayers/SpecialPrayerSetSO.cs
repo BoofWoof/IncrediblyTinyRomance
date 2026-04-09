@@ -71,8 +71,22 @@ public class SpecialPrayerSetSO : ScriptableObject
     public bool ForceSelection;
     public SpecialPrayerData[] PrayerOptions = new SpecialPrayerData[3];
 
-    public void Awake()
+#if UNITY_EDITOR
+    public void OnValidate()
     {
-        if(ID == null) ID = System.Guid.NewGuid().ToString();
+        EnsureID();
     }
+
+    [ContextMenu("Force Regenerate ID")]
+    private void EnsureID()
+    {
+        if (string.IsNullOrEmpty(ID) || ID.Length < 5)
+        {
+            // Gets the internal Unity GUID for this specific file
+            string assetPath = UnityEditor.AssetDatabase.GetAssetPath(this);
+            ID = UnityEditor.AssetDatabase.AssetPathToGUID(assetPath);
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+#endif
 }

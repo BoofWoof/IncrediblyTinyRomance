@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerAfterCall
   m_EditorClassIdentifier: 
-  ID: 8b8e4bff-d058-4287-be97-9ce929c6f8df
+  ID: 8099d72d0bd4b9b4badf0cca09691808
   SetName: AfterCall
   ForceSelection: 1
   PrayerOptions:
-  - Option: Is God's hand a phone?
+  - ParentID: 
+    Option: Is God's hand a phone?
     AuthorName: GiveMeARing
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,7 +25,9 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/CallAndResponse/LiteralCallResponse/MyArm.asset
     TriggerDialogue: 
     TriggerActivation: 
-  - Option: I think our Lord has finally gone insane... more insane. He's talking
+    TopicTarget: {fileID: 0}
+  - ParentID: 
+    Option: I think our Lord has finally gone insane... more insane. He's talking
       to the air now.
     AuthorName: QuietDown
     GoodPrayer: 0
@@ -33,3 +36,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/CallAndResponse/LiteralCallResponse/YouHave.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

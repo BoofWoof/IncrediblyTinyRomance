@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PowerOutages
   m_EditorClassIdentifier: 
-  ID: 96baecfe-34c2-44f9-b244-3af98fe0b423
+  ID: ddc74f8aa7a996e4f81509ae9fbc3897
   SetName: PowerOutages
   ForceSelection: 0
   PrayerOptions:
-  - Option: We keep having power outages, could you provide us some of your holy
+  - ParentID: 
+    Option: We keep having power outages, could you provide us some of your holy
       energy?
     AuthorName: nEEd
     GoodPrayer: 1
@@ -26,3 +27,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/BlackoutResponse/MyBad.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

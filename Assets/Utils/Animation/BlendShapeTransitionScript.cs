@@ -39,4 +39,9 @@ public class BlendShapeTransitionScript : MonoBehaviour
         }
         targetSkinnedMesh.SetBlendShapeWeight(ShapekeyIdx, EndingValue);
     }
+
+    public void ResetValue()
+    {
+        targetSkinnedMesh.SetBlendShapeWeight(ShapekeyIdx, StartingValue);
+    }
 }

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerSchad
   m_EditorClassIdentifier: 
-  ID: 338afd55-48be-4921-8e22-9ef7392401ac
+  ID: d6b31a13b9368d743b93a291ae09f268
   SetName: Schadenfreude
   ForceSelection: 0
   PrayerOptions:
-  - Option: I thought I had hit rock bottom, but when you crushed my neighbor's house,
+  - ParentID: 
+    Option: I thought I had hit rock bottom, but when you crushed my neighbor's house,
       it reminded me that things can always get worse. Thank you Lord Aries!
     AuthorName: Bibmuth
     GoodPrayer: 1
@@ -25,3 +26,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/Schadenfreude/SchadVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Falcon
   m_EditorClassIdentifier: 
   Prioirty: 2
+  UpgradeID: 25ef69827139cf64f871ea99034edb5a
   UpgradeName: Falcon
   UpgradeIcon: {fileID: -1538940867, guid: c5fe5212be599964b9de15878c200a47, type: 3}
   DialogueToTrigger: 
@@ -37,6 +38,7 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   FastestTime: 5
   MinMultiplier: 1
   MaxMultiplier: 1.5

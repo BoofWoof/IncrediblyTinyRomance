@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerRegret
   m_EditorClassIdentifier: 
-  ID: 3733cab8-a2c1-42a8-8dda-9c1681a5287b
+  ID: c5c1e1cc12caa6c46a14cda5a697bb31
   SetName: Regret
   ForceSelection: 1
   PrayerOptions:
-  - Option: We didn't deserve this...
+  - ParentID: 
+    Option: We didn't deserve this...
     AuthorName: OneOfTheFew
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,7 +25,9 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/CallAndResponse/DestructiveGuiltResponse/Silence1.asset
     TriggerDialogue: 
     TriggerActivation: 
-  - Option: We remaining few have learned our lesson and our faith will only be stronger
+    TopicTarget: {fileID: 0}
+  - ParentID: 
+    Option: We remaining few have learned our lesson and our faith will only be stronger
       now... that's what you want to hear to spare us, right?
     AuthorName: Alone01
     GoodPrayer: 0
@@ -33,3 +36,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/CallAndResponse/DestructiveGuiltResponse/Silence2.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

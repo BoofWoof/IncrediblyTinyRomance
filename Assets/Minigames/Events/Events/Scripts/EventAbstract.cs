@@ -22,13 +22,24 @@ public abstract class EventAbstract : ScriptableObject
 
     public List<BroadcastStruct> AdditionalActivations = new List<BroadcastStruct>();
 
-    public void Awake()
+#if UNITY_EDITOR
+    public void OnValidate()
     {
-        if(string.IsNullOrEmpty(EventID) || EventID.Length < 5)
+        EnsureID();
+    }
+
+    [ContextMenu("Force Regenerate ID")]
+    private void EnsureID()
+    {
+        if (string.IsNullOrEmpty(EventID) || EventID.Length < 5)
         {
-            EventID = System.Guid.NewGuid().ToString();
+            // Gets the internal Unity GUID for this specific file
+            string assetPath = UnityEditor.AssetDatabase.GetAssetPath(this);
+            EventID = UnityEditor.AssetDatabase.AssetPathToGUID(assetPath);
+            UnityEditor.EditorUtility.SetDirty(this);
         }
     }
+#endif
 
     public bool CheckIfValid(float Value)
     {

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerTasteIn
   m_EditorClassIdentifier: 
-  ID: 199401ed-c25d-4b0b-838e-66596c7e0756
+  ID: f06b09bec9ecaba4cb2591355805232a
   SetName: TasteInGames
   ForceSelection: 0
   PrayerOptions:
-  - Option: "If you were a character in a dating simulator I\u2019d romance you exclusively,
+  - ParentID: 
+    Option: "If you were a character in a dating simulator I\u2019d romance you exclusively,
       no contest."
     AuthorName: HeaverHeather
     GoodPrayer: 1
@@ -25,3 +26,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/TasteInGames/TasteInVL.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

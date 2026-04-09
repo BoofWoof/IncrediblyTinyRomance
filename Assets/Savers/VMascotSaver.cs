@@ -169,5 +169,6 @@ public class VMascotSaver : Saver
         if (saveData == null) return;
 
         saveData.UnloadData(targetScript);
+        targetScript.UpdateCharacter();
     }
 }

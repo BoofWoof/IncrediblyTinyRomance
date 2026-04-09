@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MaxAngerUpgrade I
   m_EditorClassIdentifier: 
   Prioirty: 1
+  UpgradeID: afe28bcbf0e6e57489098ae4908b87f9
   UpgradeName: Clear Mind I
   UpgradeIcon: {fileID: 811170558, guid: 330a92ca238066f4f838d09a403f771a, type: 3}
   DialogueToTrigger: 
@@ -30,4 +31,5 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 0
+  TriggerOnLoadBuy: 1
   MaxAngerIncrease: 60

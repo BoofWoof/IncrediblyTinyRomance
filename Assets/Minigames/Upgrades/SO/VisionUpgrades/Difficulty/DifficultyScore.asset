@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bab46c538027064dac956ae0eed192e, type: 3}
   m_Name: DifficultyScore
   m_EditorClassIdentifier: 
+  Prioirty: 0
+  UpgradeID: b1197392e0ff09e49bf3f82fc230956d
   UpgradeName: Difficulty Funds
   UpgradeIcon: {fileID: 540152914, guid: d819fb2037a677d4a9e3a91a7d9ceba8, type: 3}
+  DialogueToTrigger: 
+  CompleteQuest: 0
+  ProgressQuest: 0
   UpgradeDescription: The higher the difficulty, the more you gain.
+  MascotDialogue: 
   Credits: 0
   FlockRenown: 0
   FoundationRenown: 0
@@ -23,4 +29,6 @@ MonoBehaviour:
   UpgradeBought: 0
   AssociatedMinigame: 0
   AutoBuy: 1
+  TriggerOnLoadBuy: 1
   BasePower: 5
+  DisplayColor: {r: 0, g: 1, b: 0, a: 1}

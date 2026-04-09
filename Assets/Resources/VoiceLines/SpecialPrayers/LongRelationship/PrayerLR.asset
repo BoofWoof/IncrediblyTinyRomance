@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: PrayerLR
   m_EditorClassIdentifier: 
-  ID: 35d938d7-7226-4d80-a766-ed283e5e7902
+  ID: 0ab481ddd2451db468ad9d942f289afd
   SetName: LongRelationship
   ForceSelection: 0
   PrayerOptions:
-  - Option: "You\u2019ve ruined dating for me since nobody here compares to you!"
+  - ParentID: 
+    Option: "You\u2019ve ruined dating for me since nobody here compares to you!"
     AuthorName: EenieMeenieGoat
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/SpecialPrayers/LongRelationship/LongRelationship.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

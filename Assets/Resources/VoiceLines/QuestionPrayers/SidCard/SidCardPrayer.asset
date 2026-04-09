@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d46e34a99873a94eb00a30085e018fe, type: 3}
   m_Name: SidCardPrayer
   m_EditorClassIdentifier: 
-  ID: b296ca47-7e40-48d0-bef9-5f69914636f4
+  ID: 3b852f8042ff03a4ebe331f7d25c4336
   SetName: SidCard
   ForceSelection: 1
   PrayerOptions:
-  - Option: That monument with the fearsome reptile... What does it mean?
+  - ParentID: 
+    Option: That monument with the fearsome reptile... What does it mean?
     AuthorName: 
     GoodPrayer: 1
     SpecialResponseChainVL: []
@@ -24,3 +25,4 @@ MonoBehaviour:
     - Assets/Resources/VoiceLines/QuestionPrayers/SidCard/QSidCard.asset
     TriggerDialogue: 
     TriggerActivation: 
+    TopicTarget: {fileID: 0}

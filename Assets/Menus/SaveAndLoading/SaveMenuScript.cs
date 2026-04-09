@@ -182,8 +182,6 @@ public class SaveMenuScript : MonoBehaviour
             newSlot.transform.localScale = Vector3.one;
 
             newSlot.GetComponent<SaveSlotScript>().SetNewSaveSlot(EmptySlot);
-
-            newSlot.transform.SetAsFirstSibling();
         }
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(
