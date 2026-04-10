@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurkHoleScript : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class TurkHoleScript : MonoBehaviour
 
     public bool isFilled()
     {
-        return (filledWith != null);
+        bool filled = filledWith != null;
+        if (filled) {
+            Image img = filledWith.GetComponent<Image>();
+            img.material = TurkPuzzleScript.instance.ActiveConstMat;
+        } 
+        return filled;
     }
 }

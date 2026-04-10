@@ -19,6 +19,8 @@ public class TurkPuzzleScript : MonoBehaviour
 {
     public static TurkPuzzleScript instance;
 
+    public TrukAppScript AssociatedApp;
+
     public UnityEvent OnPuzzleGenerate;
     public UnityEvent OnPuzzleFinish;
     public UnityEvent<int> OnDifficultyUp;
@@ -59,6 +61,7 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public GameObject EmptyTile;
     public Material ConstMat;
+    public Material ActiveConstMat;
 
     public TMP_Text ArtistCredit;
 
@@ -117,6 +120,8 @@ public class TurkPuzzleScript : MonoBehaviour
     public RectTransform PieceHolder;
     public delegate void PuzzleCompleteCallback(int PuzzlesComplete, TurkPuzzleScript puzzleScript);
     public static PuzzleCompleteCallback OnPuzzleComplete;
+
+    public Material EmptyStars;
 
     void Awake()
     {
@@ -218,6 +223,13 @@ public class TurkPuzzleScript : MonoBehaviour
         DifficultyIncreaseButton.interactable = !(CurrentDifficutly >= DifficultiesUnlocked - 1);
 
         StartCoroutine(OpenSkyHole(LevelSets[CurrentDifficutly].OpennessModifier));
+
+        int newSongIdx = 9 + CurrentDifficutly;
+        if (newSongIdx != AssociatedApp.StartSongInt)
+        {
+            AssociatedApp.StartSongInt = newSongIdx;
+            MusicSelectorScript.SetPhoneSong(newSongIdx);
+        }
     }
 
     public static PuzzleShapeSO SamplePuzzles()
@@ -267,6 +279,29 @@ public class TurkPuzzleScript : MonoBehaviour
         StartingTime = Time.time;
 
         OnPuzzleGenerate?.Invoke();
+
+        StartCoroutine(GraphicScan());
+    }
+
+    public IEnumerator GraphicScan()
+    {
+        Shader.SetGlobalFloat("_RevealScanValue", 0);
+
+        float timePassed = 0f;
+        float transitionPeriod = 2.5f;
+
+        while (timePassed < transitionPeriod)
+        {
+            timePassed += Time.deltaTime;
+            float progress = timePassed / transitionPeriod;
+            Shader.SetGlobalFloat("_RevealScanValue", Mathf.Lerp(0, 1, progress));
+
+            yield return null;
+        }
+
+        Shader.SetGlobalFloat("_RevealScanValue", 5);
+
+        yield return null;
     }
 
     public void ShowArtist()
@@ -301,10 +336,12 @@ public class TurkPuzzleScript : MonoBehaviour
 
     public static bool CheckWin()
     {
+        bool failedCheck = false;
         foreach(GameObject gridSquare in gridSquares)
         {
-            if(!gridSquare.GetComponent<TurkHoleScript>().isFilled()) return false;
+            if (!gridSquare.GetComponent<TurkHoleScript>().isFilled()) failedCheck = true;
         }
+        if (failedCheck) return false;
 
         instance.StartCoroutine(instance.WinCutscene());
         return true;
@@ -648,7 +685,7 @@ public class TurkPuzzleScript : MonoBehaviour
             imageComponent.sprite = constallationTiles.GetSprite(true, true, true, true);
             imageComponent.color = Color.white;
             imageComponent.material = ConstMat;
-            imageComponent.material.SetTexture("_MainTex", imageComponent.sprite.ExtractSpriteTexture());
+            //imageComponent.material.SetTexture("_MainTex", imageComponent.sprite.ExtractSpriteTexture());
 
             TurkCubeScript turkCubeScript = newSquare.AddComponent<TurkCubeScript>();
             turkCubeScript.cord = hole.GetComponent<TurkHoleScript>().cord;

@@ -27,6 +27,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MainTex_ST:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,6 +48,7 @@ Material:
     - _ColorMask: 15
     - _FullAlpha: 1
     - _MinAlpha: 1
+    - _PlacedCorrectly: 0
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -54,6 +59,6 @@ Material:
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _CompletionColor: {r: 1.1603774, g: 2, b: 1.9343603, a: 0}
-    - _Tint: {r: 0.7783019, g: 0.8275682, b: 1, a: 1}
+    - _Tint: {r: 0.6848757, g: 0.990566, b: 0.60275006, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

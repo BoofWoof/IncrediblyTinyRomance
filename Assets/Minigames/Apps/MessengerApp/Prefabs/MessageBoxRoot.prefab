@@ -521,6 +521,8 @@ MonoBehaviour:
   minimum_width: 50
   secondary_backing: {fileID: 1508669238, guid: 1784f5a2dd2ca574382a82f393c3a6c8, type: 3}
   emotionParticle: {fileID: 226433051001237541}
+  emotiveMaterial: {fileID: 2100000, guid: c0c5ce45ae7733b4abd15c38a1b8f43c, type: 2}
+  uiParticle: {fileID: 2356299066042643583}
 --- !u!114 &3569586136096234790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,7 +555,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 6
-  m_Spacing: 10
+  m_Spacing: 2
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -620,7 +622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -1516.4, y: -4.0400085}
+  m_AnchoredPosition: {x: -1532.4, y: -4.0400085}
   m_SizeDelta: {x: 1100, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5419704009643616125
@@ -1853,7 +1855,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.707695
           inSlope: 2
           outSlope: 2
           tangentMode: 0
@@ -1863,11 +1865,11 @@ ParticleSystem:
         - serializedVersion: 3
           time: 1
           value: 0.07692337
-          inSlope: -5.2495666
-          outSlope: -5.2495666
+          inSlope: -1.8396314
+          outSlope: -1.8396314
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.10843378
+          inWeight: 0.14216876
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -2190,7 +2192,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 0
+        atime0: 55898
         atime1: 65535
         atime2: 0
         atime3: 0
@@ -5646,7 +5648,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c0c5ce45ae7733b4abd15c38a1b8f43c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

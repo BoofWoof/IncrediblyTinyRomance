@@ -5,9 +5,11 @@ public class TrukAppScript : AppScript
     public static Canvas PhoneScreenCanvas;
     public Canvas phoneScreenCanvas;
 
+    public int StartSongInt;
+
     public void StartSong()
     {
-        MusicSelectorScript.SetPhoneSong(6, true);
+        MusicSelectorScript.SetPhoneSong(StartSongInt, true);
     }
     public void EndSong()
     {

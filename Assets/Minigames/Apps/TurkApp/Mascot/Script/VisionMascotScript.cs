@@ -40,6 +40,8 @@ public class VisionMascotScript : MonoBehaviour
 
     private List<Coroutine> WaitCoroutines = new List<Coroutine>();
 
+    public Animator MessageBoxAnimator;
+
     void Awake()
     {
         instance = this;
@@ -67,6 +69,8 @@ public class VisionMascotScript : MonoBehaviour
         if(DialogueActive) return;
 
         TextBox.gameObject.SetActive(true);
+
+        MessageBoxAnimator.Play("Wobble");
 
         string[] SplitText = SayText.Split("<n>");
         if(SplitText.Length > 0)
@@ -138,6 +142,9 @@ public class VisionMascotScript : MonoBehaviour
             if (!SkipWait) yield return new WaitForSeconds(1f);
             WaitForText = true;
             if (!SkipWait) while (WaitForText) { yield return null; }
+
+            MessageBoxAnimator.Play("Wiggle");
+
             SkipWait = false;
         }
         TextChainActive = false;

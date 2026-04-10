@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -136,6 +137,22 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         return new Vector2((min.x + max.x)/2f, (min.y + max.y) / 2f);
     }
 
+    public void ClearMat()
+    {
+        Image img = GetComponent<Image>();
+        img.material = TurkPuzzleScript.instance.ConstMat;
+    }
+
+    public void ClearAllMat()
+    {
+        ClearMat();
+
+        foreach (RectTransform child in transform)
+        {
+            child.GetComponent<TurkCubeScript>().ClearMat();
+        }
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!PickupEnabled) return;
@@ -159,6 +176,8 @@ public class TurkCubeScript : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             rootPiece = transform.parent.gameObject;
         }
+
+        rootPiece.GetComponent<TurkCubeScript>().ClearAllMat();
 
         rootPiece.transform.parent = TurkPuzzleScript.puzzleScript.transform;
 

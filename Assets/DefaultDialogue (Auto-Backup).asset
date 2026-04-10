@@ -1540,7 +1540,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       conversationID: 5
-      isRoot: 0
+      isRoot: 1
       isGroup: 0
       nodeColor: 
       delaySimStatus: 0
@@ -1804,7 +1804,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 496
+        x: 494.5714
         y: 386
         width: 160
         height: 30
@@ -2072,7 +2072,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Dialogue Text
-        value: The pleasure's all mine!
+        value: The pleasure's all mine!<smile>
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence

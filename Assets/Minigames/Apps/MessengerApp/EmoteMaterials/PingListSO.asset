@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be17e2aeaf8a01a4999bdefe2afc335f, type: 3}
+  m_Name: PingListSO
+  m_EditorClassIdentifier: 
+  DefaultPing:
+    PingKey: 
+    PingSound: {fileID: 8300000, guid: 90a72398a77e7874f8db8bc19776b64e, type: 3}
+    PingTexture: {fileID: 0}
+  PingOptions:
+  - PingKey: smile
+    PingSound: {fileID: 8300000, guid: c2b7dcaf77d8aec43b73abb76c99de58, type: 3}
+    PingTexture: {fileID: 2800000, guid: e63e37292be2e1f47b8b48876ad316f7, type: 3}
+  - PingKey: peace
+    PingSound: {fileID: 0}
+    PingTexture: {fileID: 2800000, guid: 84f4afb0bb423a340a5d7a535396b6eb, type: 3}
+  - PingKey: laughing
+    PingSound: {fileID: 8300000, guid: 26d7734758f7c2c48b938a208d8ce95f, type: 3}
+    PingTexture: {fileID: 2800000, guid: aa033d258948aaf43ba7f46e174a4f1b, type: 3}
+  - PingKey: upset
+    PingSound: {fileID: 8300000, guid: 63adc67da90db954b8f2fcc08297e330, type: 3}
+    PingTexture: {fileID: 2800000, guid: fe8a2dc1ab5c6a147877859d8a8289eb, type: 3}
+  - PingKey: sad
+    PingSound: {fileID: 8300000, guid: b6b7decbdeea389418c67142351511ef, type: 3}
+    PingTexture: {fileID: 2800000, guid: 26975fe26fb03ac46b2f74cd0ca747de, type: 3}
+  - PingKey: confused
+    PingSound: {fileID: 0}
+    PingTexture: {fileID: 2800000, guid: f15d28d84292b004798c34527d2ccb77, type: 3}
+  - PingKey: defeated
+    PingSound: {fileID: 0}
+    PingTexture: {fileID: 2800000, guid: 0f66ae6112aa3ce498761106ad314ec0, type: 3}

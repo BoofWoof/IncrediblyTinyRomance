@@ -1,6 +1,11 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Net.NetworkInformation;
+using DS;
+using Coffee.UIExtensions;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class MessageBoxScript : MonoBehaviour
 {
@@ -19,6 +24,9 @@ public class MessageBoxScript : MonoBehaviour
     public Sprite secondary_backing;
 
     public ParticleSystem emotionParticle;
+
+    public Material emotiveMaterial;
+    public UIParticle uiParticle;
 
     public void ReplaceBox()
     {
@@ -46,12 +54,20 @@ public class MessageBoxScript : MonoBehaviour
     {
         string nextTextAltered = newText;
 
-        if (transform.parent.childCount - transform.GetSiblingIndex() <= 5)
+        foreach (PingData pData in MessengerApp.instance.PingOptions.PingOptions)
         {
-            if (newText.ToLower().Contains("<smile>"))
+            string checkText = $"<{pData.PingKey.ToLower()}>";
+            if (nextTextAltered.ToLower().Contains(checkText))
             {
-                nextTextAltered = nextTextAltered.Replace("<smile>", "");
+                nextTextAltered = nextTextAltered.Replace(checkText, "");
+
+                ParticleSystemRenderer psr = emotionParticle.GetComponent<ParticleSystemRenderer>();
+                emotiveMaterial.SetTexture("_MainTex", pData.PingTexture);
+                psr.material = emotiveMaterial;
+                uiParticle.RefreshParticles();
+
                 emotionParticle?.Play();
+                break;
             }
         }
 

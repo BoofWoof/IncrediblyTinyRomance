@@ -67269,7 +67269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000014003975, y: -0.0043460056}
+  m_AnchoredPosition: {x: 0.000014003975, y: -0.0039387005}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &317103764
@@ -69130,7 +69130,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 73381321}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999285
+  m_Size: 0.9999973
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -70237,7 +70237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0025694687, y: -0.0025312651}
+  m_AnchoredPosition: {x: -0.0025694687, y: -0.004545017}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &365299641
@@ -107950,7 +107950,7 @@ RectTransform:
   - {fileID: 811653499}
   - {fileID: 484893191}
   - {fileID: 1010697360}
-  - {fileID: 1592391256}
+  - {fileID: 861295712}
   m_Father: {fileID: 751259684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -107987,6 +107987,7 @@ MonoBehaviour:
   WaitForInteraction: 0
   SkipWait: 0
   DialogueActive: 0
+  MessageBoxAnimator: {fileID: 861295713}
 --- !u!114 &579924324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108068,6 +108069,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c49d4384-508c-4ab2-a08e-fd6cef168bd3
     m_ActionName: 'Debug/Submit Command[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3d44b9b2-a6d2-4103-8e6f-a0fc98748ab8
+    m_ActionName: 'Phone/Click[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Overworld
@@ -129968,11 +129973,11 @@ RectTransform:
   - {fileID: 1230561333}
   - {fileID: 429089203}
   - {fileID: 732417504}
-  - {fileID: 751259684}
   - {fileID: 115505493}
   - {fileID: 1652974314}
   - {fileID: 1743962852}
   - {fileID: 214898237}
+  - {fileID: 751259684}
   - {fileID: 1270578893}
   m_Father: {fileID: 2020742435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -146201,6 +146206,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   phoneScreenCanvas: {fileID: 2020742438}
+  StartSongInt: 9
 --- !u!1001 &754002890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157995,7 +158001,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -174741,6 +174747,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858295596}
   m_CullTransparentMesh: 1
+--- !u!1 &861295711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861295712}
+  - component: {fileID: 861295713}
+  m_Layer: 15
+  m_Name: SpeechBubblePivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &861295712
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861295711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1592391256}
+  m_Father: {fileID: 579924322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -235, y: 72}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &861295713
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861295711}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f77938a277c5bd045bd25c9b65efd6a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &861583437
 GameObject:
   m_ObjectHideFlags: 0
@@ -223824,6 +223889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d76efa746cbc2f44a6e22a099796713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AssociatedApp: {fileID: 751259685}
   OnPuzzleGenerate:
     m_PersistentCalls:
       m_Calls:
@@ -223919,6 +223985,7 @@ MonoBehaviour:
   NewPuzzleSound: {fileID: 1840116744}
   EmptyTile: {fileID: 1806149971238923378, guid: c52085f0337e57442b0d9ca50ba07fbf, type: 3}
   ConstMat: {fileID: 2100000, guid: df71dec2a105ff2428b8741c63bc415b, type: 2}
+  ActiveConstMat: {fileID: 2100000, guid: 8a201e3d3eea43442a6ed85a440da301, type: 2}
   ArtistCredit: {fileID: 632524837}
   LevelSets:
   - {fileID: 11400000, guid: 33005276596ed074090f8d9dea208458, type: 2}
@@ -223945,6 +224012,7 @@ MonoBehaviour:
   modifierMenuText: {fileID: 0}
   CloudPanel: {fileID: 1604337062}
   PieceHolder: {fileID: 525351698}
+  EmptyStars: {fileID: 2100000, guid: 4d6614ded4cc76047a67fdb1c417c525, type: 2}
 --- !u!114 &1119053493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229303,7 +229371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 449.99893}
+  m_AnchoredPosition: {x: 0, y: 449.9996}
   m_SizeDelta: {x: 1580, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1131732431
@@ -338406,6 +338474,26 @@ MonoBehaviour:
     MaxVolume: 1
     GroupID: -1
     StartTime: 0
+  - Song: {fileID: 8300000, guid: b063984c45385cb42afeb8e0e74519c4, type: 3}
+    Name: VisionsVeryEasy
+    MaxVolume: 1
+    GroupID: 2
+    StartTime: 0
+  - Song: {fileID: 8300000, guid: 96a823e20d97b884888d58d1ef7395c6, type: 3}
+    Name: VisionsEasy
+    MaxVolume: 0.8
+    GroupID: 2
+    StartTime: 0
+  - Song: {fileID: 8300000, guid: 05e52cadf0b09fb438a7d01e7989981e, type: 3}
+    Name: VisionsNormal
+    MaxVolume: 0.65
+    GroupID: 2
+    StartTime: 0
+  - Song: {fileID: 8300000, guid: 93ae6cd6f6a8a93458463dd91ccefac4, type: 3}
+    Name: VisionsHard
+    MaxVolume: 0.65
+    GroupID: 2
+    StartTime: 0
 --- !u!1 &1569300422
 GameObject:
   m_ObjectHideFlags: 0
@@ -344699,18 +344787,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592391255}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1518459307}
   - {fileID: 1178393194}
-  m_Father: {fileID: 579924322}
+  m_Father: {fileID: 861295712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -231, y: -2}
+  m_AnchoredPosition: {x: 4.0009155, y: -73.99805}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1592391257
@@ -369720,7 +369808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000014003975, y: -0.007988422}
+  m_AnchoredPosition: {x: 0.000014003975, y: -0.009233191}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1711894208
@@ -382366,7 +382454,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1976616869}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999978
+  m_Size: 0.9999938
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
