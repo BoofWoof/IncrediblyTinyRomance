@@ -122,7 +122,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""name"": ""ActivateObject"",
                     ""type"": ""Button"",
                     ""id"": ""62673f5b-582d-4d17-9d62-9ea5eb760216"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -370,6 +370,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d44b9b2-a6d2-4103-8e6f-a0fc98748ab8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""TogglePhone"",
                     ""type"": ""Button"",
                     ""id"": ""061e7963-dbb9-4400-adad-d074155f92bb"",
@@ -399,6 +408,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AppReturn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8119537e-2046-41f5-a54e-24e0b746e6b7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -489,6 +509,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         // Phone
         m_Phone = asset.FindActionMap("Phone", throwIfNotFound: true);
         m_Phone_AppReturn = m_Phone.FindAction("AppReturn", throwIfNotFound: true);
+        m_Phone_Click = m_Phone.FindAction("Click", throwIfNotFound: true);
         m_Phone_TogglePhone = m_Phone.FindAction("TogglePhone", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
@@ -739,6 +760,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Phone;
     private List<IPhoneActions> m_PhoneActionsCallbackInterfaces = new List<IPhoneActions>();
     private readonly InputAction m_Phone_AppReturn;
+    private readonly InputAction m_Phone_Click;
     private readonly InputAction m_Phone_TogglePhone;
     /// <summary>
     /// Provides access to input actions defined in input action map "Phone".
@@ -755,6 +777,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Phone/AppReturn".
         /// </summary>
         public InputAction @AppReturn => m_Wrapper.m_Phone_AppReturn;
+        /// <summary>
+        /// Provides access to the underlying input action "Phone/Click".
+        /// </summary>
+        public InputAction @Click => m_Wrapper.m_Phone_Click;
         /// <summary>
         /// Provides access to the underlying input action "Phone/TogglePhone".
         /// </summary>
@@ -788,6 +814,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @AppReturn.started += instance.OnAppReturn;
             @AppReturn.performed += instance.OnAppReturn;
             @AppReturn.canceled += instance.OnAppReturn;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
             @TogglePhone.started += instance.OnTogglePhone;
             @TogglePhone.performed += instance.OnTogglePhone;
             @TogglePhone.canceled += instance.OnTogglePhone;
@@ -805,6 +834,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @AppReturn.started -= instance.OnAppReturn;
             @AppReturn.performed -= instance.OnAppReturn;
             @AppReturn.canceled -= instance.OnAppReturn;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
             @TogglePhone.started -= instance.OnTogglePhone;
             @TogglePhone.performed -= instance.OnTogglePhone;
             @TogglePhone.canceled -= instance.OnTogglePhone;
@@ -1019,6 +1051,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAppReturn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Click" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClick(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "TogglePhone" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

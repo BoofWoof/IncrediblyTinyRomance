@@ -28,6 +28,8 @@ public class AppMenuScript : AppScript
 
     public static bool FirstAppOpened = true;
 
+    public AudioSource ClickSound;
+
     [HideInInspector] public static List<string> UnlockedApps = new List<string>(); //ForSaving
 
     private void OnEnable()
@@ -120,7 +122,8 @@ public class AppMenuScript : AppScript
             FirstAppOpened = false;
             PointerEventData pointerData = (PointerEventData)eventData;
             if (pointerData.button != PointerEventData.InputButton.Left) return;
-            OnAppRelease(appData); 
+            ClickSound.Play();
+            OnAppRelease(appData);
         });
         eventTrigger.triggers.Add(entry);
 

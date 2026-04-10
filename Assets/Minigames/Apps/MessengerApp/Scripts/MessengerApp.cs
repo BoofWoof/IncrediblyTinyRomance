@@ -24,6 +24,8 @@ namespace DS
 
         public Sprite NotificationSprite;
 
+        public AudioSource OptionSelectedAudio;
+
         [Header("Objects")]
         public ScrollRect targetScrollRect;
         public RectTransform content_rect;
@@ -41,6 +43,7 @@ namespace DS
 
         [Header("NotificationSounds")]
         public AudioSource notification_source;
+        public PingListSO PingOptions;
 
         public int ShowMessageHistory = 20;
 
@@ -146,6 +149,17 @@ namespace DS
                 AddUncheckedMessage(speakerId);
             };
             if(!Active) AddUncheckedMessage(speakerId);
+
+            notification_source.clip = PingOptions.DefaultPing.PingSound;
+            foreach (PingData pData in PingOptions.PingOptions)
+            {
+                if (message_text.ToLower().Contains($"<{pData.PingKey.ToLower()}>"))
+                {
+                    notification_source.clip = pData.PingSound;
+                    break;
+                }
+            }
+
             notification_source.Play();
         }
         private void MakeLeftMessage(string message_text)
@@ -214,6 +228,8 @@ namespace DS
             Response[] targetOptions = Choices.Choices;
             (DialogueManager.dialogueUI as AbstractDialogueUI).OnClick(targetOptions[optionIdx]);
             AddRightMessage(targetID, targetOptions[optionIdx].formattedText.text);
+
+            OptionSelectedAudio.Play();
 
             Choices = new ChoicePair
             {

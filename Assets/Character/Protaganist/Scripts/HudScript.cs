@@ -1,11 +1,15 @@
 using PixelCrushers.DialogueSystem;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class HudScript : MonoBehaviour
 {
+    [Header("Cursors")]
+    public Texture2D DefaultCursor;
+    public Texture2D ClickCursor;
+
     [Header("General Hud")]
     public GameObject Reticle;
 
@@ -24,6 +28,21 @@ public class HudScript : MonoBehaviour
     public GameObject SubtitlePanel;
 
     public static HudScript instance;
+
+    public void OnClick(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Triggered");
+        if(ctx.phase == InputActionPhase.Started)
+        {
+            Cursor.SetCursor(ClickCursor, new Vector2(0.1f, 0.9f), CursorMode.Auto);
+            Debug.Log("Start");
+        }
+        if (ctx.phase == InputActionPhase.Canceled)
+        {
+            Cursor.SetCursor(DefaultCursor, new Vector2(0.1f, 0.9f), CursorMode.Auto);
+            Debug.Log("End");
+        }
+    }
 
     public static void SetQuestVisiblity(bool questVisible)
     {

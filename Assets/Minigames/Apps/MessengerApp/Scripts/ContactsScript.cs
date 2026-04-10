@@ -69,6 +69,8 @@ public class ContactsScript : Saver
     public int speakingCharacterId = -1;
     private LocalCharacterInfo tempSpeakingCharacter;
 
+    public AudioSource SelectionSound;
+
     override public void Start()
     {
         base.Start();
@@ -125,10 +127,16 @@ public class ContactsScript : Saver
         Debug.Log(newSpeaker.Name);
         Debug.Log(newSpeaker.id);
         Debug.Log(newSpeaker.portrait);
+
         yield return new WaitForSeconds((MessagingVariables.TimeBetweenMessages + MessagingVariables.TimePerCharacter * message_text.Length) / MessagingVariables.SetTimeDivider);
         CheckContacts(newSpeaker);
-        messengerApp.AddLeftMessage(newSpeaker.id, message_text);        
-        if(continueConversation) (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
+        messengerApp.AddLeftMessage(newSpeaker.id, message_text);
+
+        if (messengerApp.PingOptions.ContainsKey(message_text))
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        if (continueConversation) (DialogueManager.dialogueUI as AbstractDialogueUI).OnContinueConversation();
     }
 
     public void OnConversationResponseMenu(Response[] responses)
@@ -237,6 +245,8 @@ public class ContactsScript : Saver
 
     public void SwapToCharacterMessanger(LocalCharacterInfo selectCharacter)
     {
+        SelectionSound.Play();
+
         activeCharacter = selectCharacter;
         messengerApp.SetCharacter(selectCharacter);
         GetComponent<AppScript>().Swap(messengerApp);

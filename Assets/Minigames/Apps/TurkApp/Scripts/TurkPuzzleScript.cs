@@ -55,6 +55,7 @@ public class TurkPuzzleScript : MonoBehaviour
     public AudioSource Pickup;
     public AudioSource Drop;
     public AudioSource DropBad;
+    public AudioSource NewPuzzleSound;
 
     public GameObject EmptyTile;
     public Material ConstMat;
@@ -413,6 +414,7 @@ public class TurkPuzzleScript : MonoBehaviour
             yield return null;
             if(Input.GetMouseButtonDown(0)) break;
         }
+        NewPuzzleSound.Play();
         ClickToContinueText.SetActive(false);
 
         VisionMascotScript.ClearText();

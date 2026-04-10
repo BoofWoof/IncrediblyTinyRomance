@@ -18,6 +18,8 @@ public class MessageBoxScript : MonoBehaviour
 
     public Sprite secondary_backing;
 
+    public ParticleSystem emotionParticle;
+
     public void ReplaceBox()
     {
         int index = transform.GetSiblingIndex();
@@ -42,7 +44,18 @@ public class MessageBoxScript : MonoBehaviour
 
     public void SetText(string newText)
     {
-        text_object.text = newText;
+        string nextTextAltered = newText;
+
+        if (transform.parent.childCount - transform.GetSiblingIndex() <= 5)
+        {
+            if (newText.ToLower().Contains("<smile>"))
+            {
+                nextTextAltered = nextTextAltered.Replace("<smile>", "");
+                emotionParticle?.Play();
+            }
+        }
+
+        text_object.text = nextTextAltered;
         UpdateWidth();
     }
 
