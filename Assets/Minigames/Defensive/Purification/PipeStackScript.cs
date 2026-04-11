@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -88,6 +89,9 @@ public class PipeStackScript : MonoBehaviour
     public Sprite DisconnectedLight;
     public Sprite InUseLight;
 
+    [Header("Sound")]
+    public AudioSource ClickIntoPlace;
+
     public delegate void VentRotation();
     public static VentRotation VentRotationEvent;
     public static VentRotation VentRotationStartEvent;
@@ -100,6 +104,69 @@ public class PipeStackScript : MonoBehaviour
     };
 
     public static bool GlobalRotationAllowed = false;
+
+
+    public void Start()
+    {
+        InstantRotation();
+
+        StartCoroutine(SlideIn());
+    }
+
+    public IEnumerator SlideIn()
+    {
+        Vector3 FinalPosition = transform.localPosition;
+        Vector3 StartPosition = FinalPosition + Vector3.right * 1920f;
+
+        transform.localPosition = StartPosition;
+
+        float waitTime = UnityEngine.Random.Range(0, 0.1f);
+        yield return new WaitForSeconds(waitTime + transform.localPosition.x/3000f);
+
+        float timePassed = 0f;
+        float period = 1f;
+
+        while(timePassed < period)
+        {
+            timePassed += Time.deltaTime;
+            float progress = timePassed / period;
+            transform.localPosition = Vector3.Lerp(StartPosition, FinalPosition, progress);
+            yield return null;
+        }
+
+        ClickIntoPlace.Play();
+        transform.localPosition = FinalPosition;
+    }
+
+    public void Cleanup()
+    {
+        StartCoroutine(SlideOut());
+    }
+
+    public IEnumerator SlideOut()
+    {
+        Vector3 StartPosition = transform.localPosition;
+        Vector3 FinalPosition = StartPosition + Vector3.left * 1920f;
+
+        transform.localPosition = StartPosition;
+
+        float waitTime = UnityEngine.Random.Range(0, 0.1f);
+        yield return new WaitForSeconds(2f + waitTime + transform.localPosition.x / 3000f);
+        ClickIntoPlace.Play();
+
+        float timePassed = 0f;
+        float period = 1f;
+
+        while (timePassed < period)
+        {
+            timePassed += Time.deltaTime;
+            float progress = timePassed / period;
+            transform.localPosition = Vector3.Lerp(StartPosition, FinalPosition, progress);
+            yield return null;
+        }
+
+        transform.localPosition = FinalPosition;
+    }
 
     public void SetSource()
     {
@@ -401,12 +468,6 @@ public class PipeStackScript : MonoBehaviour
     {
         ResetParticleBools();
         UpdateParticleLeaks();
-    }
-
-    public void Start()
-    {
-        InstantRotation();
-        //SetPipeType(PipeTypeIdx);
     }
 
     public void RotateCW()

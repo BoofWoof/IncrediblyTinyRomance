@@ -24,8 +24,12 @@ public class PurificationGameScript : MonoBehaviour
     public static PurificationGameScript instance;
     public static PurificationHolderScript associatedLevelHolder;
 
+    [Header("Level Data")]
     public PurificationLevelPacksSO CurrentLevelPack;
     public int CurrentLevelInPack = 0;
+
+    [Header("Explination Data")]
+    public TMP_Text ExplanationText;
 
     public VentGridScript VentGridData;
     private List<WaitingExpansion> PrevDeadEndExpansions;
@@ -250,6 +254,17 @@ public class PurificationGameScript : MonoBehaviour
             if (!ventRoute.GoalFound) ventRoute.SourceVent.SetLightLeaking();
         }
 
+        if (DeadPipesFound)
+        {
+            ExplanationText.text = "The miasma leaks from one of your pipes! Seal it before it floods your citizens!";
+        } else if(GoalsMissing)
+        {
+            ExplanationText.text = "A miasma intake isn't making it to a purifier! Remember, even if intakes share a square, they are <b>NOT</b> connected, and each one needs to reach a purifier.";
+        } else
+        {
+            ExplanationText.text = "The system is operational! Great work!";
+        }
+
         if(!GoalsMissing && !DeadPipesFound)
         {
             Win();
@@ -271,6 +286,12 @@ public class PurificationGameScript : MonoBehaviour
         Debug.Log("Purification: YOUWIN");
         PipeStackScript.GlobalRotationAllowed = false;
         SpawnWinScreen();
+        foreach(GameObject pipe in VentGridData.PipeStacks)
+        {
+            pipe.GetComponent<PipeStackScript>().Cleanup();
+        }
+        TimerEnabled = false;
+
         WinAS.Play();
     }
 
